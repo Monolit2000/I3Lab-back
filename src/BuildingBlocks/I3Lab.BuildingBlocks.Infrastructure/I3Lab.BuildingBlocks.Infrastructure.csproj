@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\I3Lab.BuildingBlocks.Application\I3Lab.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\I3Lab.BuildingBlocks.Domain\I3Lab.BuildingBlocks.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
