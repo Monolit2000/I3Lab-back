@@ -37,7 +37,6 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Domain
             var entities = context.ChangeTracker
                 .Entries<Entity>()
                 .Where(e => e.Entity.DomainEvents.Any())
-                //.Where(e => e.Entity != null && e.Entity.DomainEvents.Any())
                 .Select(e => e.Entity);
 
             var domainEvents = entities
