@@ -8,13 +8,13 @@ namespace I3Lab.Work.Domain.WorkCommentsAggregate
 {
     public class WorkComment
     {
-        public Guid Id { get; private set; }
+        public WorkCommentId Id { get; private set; }
         public Guid WorkId { get; private set; }
         public string Text { get; private set; }
 
-        public WorkComment(Guid id, Guid workId, string text)
+        public WorkComment(WorkCommentId id, Guid workId, string text)
         {
-            Id = id;
+            Id = new WorkCommentId(Guid.NewGuid());
             WorkId = workId;
             Text = text;
         }

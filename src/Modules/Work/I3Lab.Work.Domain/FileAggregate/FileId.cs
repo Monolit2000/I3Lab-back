@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkCommentsAggregate
+namespace I3Lab.Work.Domain.FileAggregate
 {
-    public class WorkCommentId : TypedIdValueBase
+    public class FileId : TypedIdValueBase
     {
-        public WorkCommentId(Guid value) 
+        public FileId(Guid value) 
             : base(value)
         {
         }

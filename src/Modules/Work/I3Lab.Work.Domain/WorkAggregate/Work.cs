@@ -15,12 +15,12 @@ namespace I3Lab.Work.Domain.WorkAggregate
         public Guid Accessibility { get; private set; }
         public Guid DetailId { get; private set; }
 
-        public Work(WorkId id, Guid customerId, Guid? fileId, WorkStatus status, Guid accessibility, Guid detailId)
+        public Work(WorkId id, Guid customerId, Guid? fileId, Guid accessibility, Guid detailId)
         {
             Id = new WorkId(Guid.NewGuid());
             CustomerId = customerId;
             FileId = fileId;
-            Status = status;
+            Status = WorkStatus.Pending;
             Accessibility = accessibility;
             DetailId = detailId;
         }
