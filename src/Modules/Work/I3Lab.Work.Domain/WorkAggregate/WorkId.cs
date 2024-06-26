@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.WorkAggregate
 {
-    internal class WorkId : TypedIdValueBase
+    public class WorkId : TypedIdValueBase
     {
         public WorkId(Guid value) 
             : base(value)

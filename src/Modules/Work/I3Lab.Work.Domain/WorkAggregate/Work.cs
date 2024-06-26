@@ -8,16 +8,16 @@ namespace I3Lab.Work.Domain.WorkAggregate
 {
     public class Work
     {
-        public long Id { get; private set; }
+        public WorkId Id { get; private set; }
         public Guid CustomerId { get; private set; }
         public Guid? FileId { get; private set; }
         public WorkStatus Status { get; private set; }
         public Guid Accessibility { get; private set; }
         public Guid DetailId { get; private set; }
 
-        public Work(long id, Guid customerId, Guid? fileId, WorkStatus status, Guid accessibility, Guid detailId)
+        public Work(WorkId id, Guid customerId, Guid? fileId, WorkStatus status, Guid accessibility, Guid detailId)
         {
-            Id = id;
+            Id = new WorkId(Guid.NewGuid());
             CustomerId = customerId;
             FileId = fileId;
             Status = status;
