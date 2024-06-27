@@ -18,5 +18,7 @@ namespace I3Lab.Work.Domain.WorkAccebility
         public readonly List<WorkMember> WorkMembers = [];
 
 
+
+
     }
 }
