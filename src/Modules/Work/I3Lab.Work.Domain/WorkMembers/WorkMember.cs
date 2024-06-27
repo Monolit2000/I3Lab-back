@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.File;
+using I3Lab.Work.Domain.WorkMembers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace I3Lab.Work.Domain.Member
     {
         public WorkMemberId Id { get; private set; }
 
+        public WorkMemberRole WorkMemberRole { get; private set; }
+
         public string Login { get; private set; }
 
         public string Email { get; private set; }
@@ -19,9 +22,6 @@ namespace I3Lab.Work.Domain.Member
         public string FirstName { get; private set; }
 
         public string LastName { get; private set; }
-
-
-
 
         private WorkMember()
         {
@@ -42,7 +42,21 @@ namespace I3Lab.Work.Domain.Member
             LastName = lastName;
         }
 
-        public static 
+        public static WorkMember CreateNewWorkMember(
+            WorkMemberId id,
+            string login,
+            string email,
+            string firstName,
+            string lastName)
+        {
+            return new WorkMember(
+                id, 
+                login, 
+                email, 
+                firstName, 
+                lastName);
+        }
+
 
     }
 
