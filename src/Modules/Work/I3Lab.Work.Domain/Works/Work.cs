@@ -1,4 +1,5 @@
-﻿using I3Lab.Work.Domain.WorkComments;
+﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Work.Domain.WorkComments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.Work
 {
-    public class Work
+    public class Work : Entity, IAggregateRoot
     {
         public WorkId Id { get; private set; }
         public Guid CustomerId { get; private set; }

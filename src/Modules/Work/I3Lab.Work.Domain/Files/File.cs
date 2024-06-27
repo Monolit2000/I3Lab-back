@@ -1,8 +1,9 @@
-﻿using I3Lab.Work.Domain.Work;
+﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Work.Domain.Work;
 
 namespace I3Lab.Work.Domain.File
 {
-    public class File
+    public class File : Entity, IAggregateRoot
     {
         public FileId Id { get; private set; }
         public WorkId WorkId { get; private set; }  

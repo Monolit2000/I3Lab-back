@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.BuildingBlocks.Domain
 {
-    internal interface IAggregateRoot
+    public interface IAggregateRoot
     {
     }
 }
