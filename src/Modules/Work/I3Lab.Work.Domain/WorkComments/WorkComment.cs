@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkComment
+namespace I3Lab.Work.Domain.WorkComments
 {
     public class WorkComment
     {
         public WorkCommentId Id { get; private set; }
+
+        public Guid AuthorId { get; private set; }  
+
         public Guid WorkId { get; private set; }
         public string Text { get; private set; }
 

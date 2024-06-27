@@ -1,11 +1,4 @@
-﻿using I3Lab.Work.Domain.WorkAggregate;
-using I3Lab.Work.Domain.WorkCommentsAggregate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using I3Lab.Work.Domain.Work;
 
 namespace I3Lab.Work.Domain.File
 {
@@ -31,10 +24,17 @@ namespace I3Lab.Work.Domain.File
             Path = path;
         }
 
-        //internal static File CreateFiel()
-        //{
+        public static File CreateNewFile(WorkId workId, string name, FileType type, string path)
+        {
+            var newFile = new File(
+                workId,
+                name, 
+                type,
+                path);
 
-        //}
+            return newFile;
+        }
+     
     }
 
   

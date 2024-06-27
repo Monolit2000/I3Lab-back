@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkComment
+namespace I3Lab.Work.Domain.WorkComments
 {
     internal interface IWorkCommentRepository
     {

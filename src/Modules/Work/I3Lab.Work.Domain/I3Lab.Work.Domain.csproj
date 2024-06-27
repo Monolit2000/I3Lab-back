@@ -11,10 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Files\Events\" />
-    <Folder Include="Master\" />
     <Folder Include="Works\Events\" />
-    <Folder Include="WorkComment\Events\" />
+    <Folder Include="WorkComments\Events\" />
   </ItemGroup>
 
 </Project>
