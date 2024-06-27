@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.File;
+using I3Lab.Work.Domain.Work;
 using I3Lab.Work.Domain.WorkMembers;
 using System;
 using System.Collections.Generic;
