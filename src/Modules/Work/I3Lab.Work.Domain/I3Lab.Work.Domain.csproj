@@ -11,9 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FileAggregate\Events\" />
-    <Folder Include="WorkAggregate\Events\" />
-    <Folder Include="WorkCommentsAggregate\Events\" />
+    <Folder Include="Files\Events\" />
+    <Folder Include="Master\" />
+    <Folder Include="Works\Events\" />
+    <Folder Include="WorkComment\Events\" />
   </ItemGroup>
 
 </Project>

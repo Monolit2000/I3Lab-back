@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.FileAggregate
+namespace I3Lab.Work.Domain.WorkComment
 {
-    public interface IFileRepository
+    internal interface IWorkCommentRepository
     {
     }
 }

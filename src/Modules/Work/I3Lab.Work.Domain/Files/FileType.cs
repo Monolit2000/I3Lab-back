@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.FileAggregate
+namespace I3Lab.Work.Domain.File
 {
     public class FileType : ValueObject
     {

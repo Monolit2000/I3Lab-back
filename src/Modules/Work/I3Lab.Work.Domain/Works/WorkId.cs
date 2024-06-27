@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkCommentsAggregate
+namespace I3Lab.Work.Domain.Work
 {
-    public class WorkCommentId : TypedIdValueBase
+    public class WorkId : TypedIdValueBase
     {
-        public WorkCommentId(Guid value) 
+        public WorkId(Guid value) 
             : base(value)
-        {
+        { 
         }
     }
 }

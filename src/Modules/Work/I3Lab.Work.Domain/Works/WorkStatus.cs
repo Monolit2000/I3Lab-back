@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkAggregate
+namespace I3Lab.Work.Domain.Work
 {
     public class WorkStatus : ValueObject
     {

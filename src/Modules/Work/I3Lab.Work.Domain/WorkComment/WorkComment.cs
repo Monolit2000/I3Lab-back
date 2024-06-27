@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkCommentsAggregate
+namespace I3Lab.Work.Domain.WorkComment
 {
     public class WorkComment
     {

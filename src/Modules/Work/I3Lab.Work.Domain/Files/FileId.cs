@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkAggregate
+namespace I3Lab.Work.Domain.File
 {
-    public class WorkId : TypedIdValueBase
+    public class FileId : TypedIdValueBase
     {
-        public WorkId(Guid value) 
+        public FileId(Guid value) 
             : base(value)
-        { 
+        {
         }
     }
 }

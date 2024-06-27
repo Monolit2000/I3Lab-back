@@ -1,18 +1,18 @@
-﻿using I3Lab.Work.Domain.WorkCommentsAggregate;
+﻿using I3Lab.Work.Domain.WorkAggregate;
+using I3Lab.Work.Domain.WorkCommentsAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.FileAggregate
+namespace I3Lab.Work.Domain.File
 {
     public class File
     {
         public FileId Id { get; private set; }
-
-        
-
+        public WorkId WorkId { get; private set; }  
         public string Name { get; private set; }
         public FileType Type { get; private set; }
         public string Path { get; private set; }
@@ -22,13 +22,19 @@ namespace I3Lab.Work.Domain.FileAggregate
                 
         }
 
-        public File(string name, FileType type, string path)
+        private File(WorkId workId, string name, FileType type, string path)
         {
-            Id = new FileId(Guid.NewGuid()); 
+            Id = new FileId(Guid.NewGuid());
+            WorkId = workId;
             Name = name;
             Type = type;
             Path = path;
         }
+
+        //internal static File CreateFiel()
+        //{
+
+        //}
     }
 
   
