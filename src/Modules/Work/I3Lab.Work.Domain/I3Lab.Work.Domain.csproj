@@ -10,9 +10,4 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Domain\I3Lab.BuildingBlocks.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Members\Events\" />
-    <Folder Include="WorkComments\Events\" />
-  </ItemGroup>
-
 </Project>

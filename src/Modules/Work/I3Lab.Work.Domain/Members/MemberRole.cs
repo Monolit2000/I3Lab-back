@@ -15,6 +15,8 @@ namespace I3Lab.Work.Domain.Members
         internal static MemberRole Artisan => new MemberRole(nameof(Artisan));
         internal static MemberRole Admin => new MemberRole(nameof(Admin));
 
+        internal static MemberRole Customer => new MemberRole(nameof(Customer));
+
         private MemberRole(string value)
         {
             Value = value;
