@@ -12,7 +12,7 @@ namespace I3Lab.Work.Domain.File
         public string Value { get; }
 
         internal static FileType Document => new FileType(nameof(Document));
-        internal static FileType Image => new FileType(nameof(Image));
+        internal static FileType Detail => new FileType(nameof(Detail));
         internal static FileType Video => new FileType(nameof(Video));
         internal static FileType Audio => new FileType(nameof(Audio));
 

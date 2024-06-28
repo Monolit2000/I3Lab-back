@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.Member
+namespace I3Lab.Work.Domain.Members
 {
-    public class WorkMemberId : TypedIdValueBase
+    public class MemberId : TypedIdValueBase
     {
-        public WorkMemberId(Guid value) 
+        public MemberId(Guid value) 
             : base(value)
         {
         }

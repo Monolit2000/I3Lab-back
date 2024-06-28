@@ -1,20 +1,20 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.File;
 using I3Lab.Work.Domain.Work;
-using I3Lab.Work.Domain.WorkMembers;
+using I3Lab.Work.Domain.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.Member
+namespace I3Lab.Work.Domain.Members
 {
-    public class WorkMember : Entity, IAggregateRoot
+    public class Member : Entity, IAggregateRoot
     {
-        public WorkMemberId Id { get; private set; }
+        public MemberId Id { get; private set; }
 
-        public WorkMemberRole WorkMemberRole { get; private set; }
+        public MemberRole WorkMemberRole { get; private set; }
 
         public string Login { get; private set; }
 
@@ -24,13 +24,13 @@ namespace I3Lab.Work.Domain.Member
 
         public string LastName { get; private set; }
 
-        private WorkMember()
+        private Member()
         {
             // For EF Core
         }
 
-        private WorkMember(
-            WorkMemberId id,
+        private Member(
+            MemberId id,
             string login,
             string email, 
             string firstName,
@@ -43,14 +43,14 @@ namespace I3Lab.Work.Domain.Member
             LastName = lastName;
         }
 
-        public static WorkMember CreateNewWorkMember(
-            WorkMemberId id,
+        public static Member CreateNewWorkMember(
+            MemberId id,
             string login,
             string email,
             string firstName,
             string lastName)
         {
-            return new WorkMember(
+            return new Member(
                 id, 
                 login, 
                 email, 

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkAccebility
+namespace I3Lab.Work.Domain.WorkAccebilitys
 {
-    public class AccebilityType : ValueObject
+    public class WorkAccebilityType : ValueObject
     {
     }
 }

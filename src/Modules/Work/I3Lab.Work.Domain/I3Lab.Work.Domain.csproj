@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="WorkMembers\Events\" />
+    <Folder Include="Members\Events\" />
     <Folder Include="Works\Events\" />
     <Folder Include="WorkComments\Events\" />
   </ItemGroup>
