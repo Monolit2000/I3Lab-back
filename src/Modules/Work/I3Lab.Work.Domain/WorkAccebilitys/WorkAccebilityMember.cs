@@ -9,7 +9,7 @@ namespace I3Lab.Work.Domain.WorkAccebilitys
 {
     public class WorkAccebilityMember
     {
-
+        public WorkAccebilityId WorkAccebilityId { get; private set; }
         public MemberId MemberId { get; private set; }
 
     }

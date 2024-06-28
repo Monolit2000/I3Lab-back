@@ -36,6 +36,5 @@ namespace I3Lab.Work.Domain.WorkAccebilitys
         {
            
         }
-
     }
 }

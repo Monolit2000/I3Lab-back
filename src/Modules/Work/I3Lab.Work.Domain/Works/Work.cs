@@ -21,9 +21,7 @@ namespace I3Lab.Work.Domain.Work
         public MemberId CustomerId { get; private set; }
         public WorkStatus Status { get; private set; }
         public WorkAccebility Accessibility { get; private set; }
-
         public MemberId CreatorId { get; private set; }
-
         public Guid DetailId { get; private set; }
 
         private Work()
