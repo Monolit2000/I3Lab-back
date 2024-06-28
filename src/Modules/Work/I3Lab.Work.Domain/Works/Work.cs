@@ -39,5 +39,10 @@ namespace I3Lab.Work.Domain.Work
 
             return newWork;
         }
+
+        public void AddWorkFile()
+        {
+            
+        }
     }
 }

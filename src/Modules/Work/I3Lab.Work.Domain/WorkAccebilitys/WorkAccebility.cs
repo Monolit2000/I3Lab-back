@@ -34,7 +34,7 @@ namespace I3Lab.Work.Domain.WorkAccebilitys
 
         public void JoinToWorkAccebility(MemberId memberId)
         {
-
+           
         }
 
     }

@@ -43,7 +43,7 @@ namespace I3Lab.Work.Domain.Members
             LastName = lastName;
         }
 
-        public static Member CreateNewWorkMember(
+        public static Member CreateNewr(
             MemberId id,
             string login,
             string email,
