@@ -1,6 +1,7 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Members;
 using I3Lab.Work.Domain.Work;
+using I3Lab.Work.Domain.Works;
 using System;
 using System.Collections.Generic;
 using System.Linq;

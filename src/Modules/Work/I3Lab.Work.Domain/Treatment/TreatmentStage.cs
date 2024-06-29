@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Work;
+using I3Lab.Work.Domain.Works;
 using System.Diagnostics;
 
 namespace I3Lab.Work.Domain.Treatment
