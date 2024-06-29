@@ -14,25 +14,25 @@ namespace I3Lab.Work.Domain.WorkComments
         public WorkCommentId Id { get; private set; }
         public MemberId AuthorId { get; private set; }  
         public WorkId WorkId { get; private set; }
-        public string Text { get; private set; }
+        public string Content { get; private set; }
 
         private WorkComment()
         {
         }
-        private WorkComment( WorkId workId, MemberId authorId, string text)
+        private WorkComment( WorkId workId, MemberId authorId, string content)
         {
             Id = new WorkCommentId(Guid.NewGuid());
             WorkId = workId;
             AuthorId = authorId;
-            Text = text;
+            Content = content;
         }
 
-        internal static WorkComment CreateNew(WorkId workId, MemberId authorId, string text) 
+        internal static WorkComment CreateNew(WorkId workId, MemberId authorId, string content) 
         { 
             return new WorkComment(
                 workId,
                 authorId,
-                text); 
+                content); 
         }
     }
 }

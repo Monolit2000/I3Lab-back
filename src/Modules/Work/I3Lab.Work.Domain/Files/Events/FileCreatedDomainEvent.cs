@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.Files.Events
 {
-    internal class FileCreatedDomainEvent : DomainEventBase
+    public class FileCreatedDomainEvent : DomainEventBase
     {
     }
 }

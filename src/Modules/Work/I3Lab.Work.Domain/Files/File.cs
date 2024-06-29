@@ -1,4 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Work.Domain.Files.Events;
 using I3Lab.Work.Domain.Work;
 
 namespace I3Lab.Work.Domain.Files
@@ -20,6 +21,8 @@ namespace I3Lab.Work.Domain.Files
             FileName = fileName;
             Type = type;
             BlobPath = blobPath;
+
+            AddDomainEvent(new FileCreatedDomainEvent());
         }
 
         public static File CreateNewFile( string fileName, FileType type, string path)

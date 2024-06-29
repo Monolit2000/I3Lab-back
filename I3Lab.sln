@@ -85,15 +85,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CD76A713
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Administration", "Administration", "{325393D9-C800-47CD-B9D0-1393231A7753}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.Administration.Application", "src\Modules\Administration\I3Lab.Administration.Application\I3Lab.Administration.Application.csproj", "{FDA840C1-35BC-4550-8E44-37B1E4D3006E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.Application", "src\Modules\Administration\I3Lab.Administration.Application\I3Lab.Administration.Application.csproj", "{FDA840C1-35BC-4550-8E44-37B1E4D3006E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.Administration.Domain", "src\Modules\Administration\I3Lab.Administration.Domain\I3Lab.Administration.Domain.csproj", "{3504DB94-30FE-4B0A-8BC4-F5CC92FC6815}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.Domain", "src\Modules\Administration\I3Lab.Administration.Domain\I3Lab.Administration.Domain.csproj", "{3504DB94-30FE-4B0A-8BC4-F5CC92FC6815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.Administration.Infrastructure", "src\Modules\Administration\I3Lab.Administration.Infrastructure\I3Lab.Administration.Infrastructure.csproj", "{B0B9B46E-5A9C-4B5D-8A7D-E6864E080A72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.Infrastructure", "src\Modules\Administration\I3Lab.Administration.Infrastructure\I3Lab.Administration.Infrastructure.csproj", "{B0B9B46E-5A9C-4B5D-8A7D-E6864E080A72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.Administration.IntegrationEvents", "src\Modules\Administration\I3Lab.Administration.IntegrationEvents\I3Lab.Administration.IntegrationEvents.csproj", "{CC2A7A69-AD56-447C-BDDB-497BA2F4ED55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.IntegrationEvents", "src\Modules\Administration\I3Lab.Administration.IntegrationEvents\I3Lab.Administration.IntegrationEvents.csproj", "{CC2A7A69-AD56-447C-BDDB-497BA2F4ED55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.Administration.Api", "src\Modules\Administration\I3Lab.Administration.Api\I3Lab.Administration.Api.csproj", "{C6C5552C-B4B6-46A0-B2A5-C5EB538FB283}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.Api", "src\Modules\Administration\I3Lab.Administration.Api\I3Lab.Administration.Api.csproj", "{C6C5552C-B4B6-46A0-B2A5-C5EB538FB283}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

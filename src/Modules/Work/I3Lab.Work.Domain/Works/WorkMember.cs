@@ -24,7 +24,6 @@ namespace I3Lab.Work.Domain.Works
         {
             WorkId = workId;
             MemberId = memberId;
-            
             JoinDate = DateTime.UtcNow;
         }
 

@@ -1,5 +1,4 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.File;
 using I3Lab.Work.Domain.Work;
 using I3Lab.Work.Domain.Members;
 using System;
@@ -14,7 +13,7 @@ namespace I3Lab.Work.Domain.Members
     {
         public MemberId Id { get; private set; }
 
-        public MemberRole WorkMemberRole { get; private set; }
+        public MemberRole MemberRole { get; private set; }
 
         public string Login { get; private set; }
 
