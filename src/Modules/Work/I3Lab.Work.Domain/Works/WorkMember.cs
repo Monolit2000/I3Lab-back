@@ -26,7 +26,12 @@ namespace I3Lab.Work.Domain.Works
             MemberId = memberId;
             
             JoinDate = DateTime.UtcNow;
-        } 
+        }
+
+        public static WorkMember CreateNew(WorkId workId, MemberId memberId)
+        {
+            return new WorkMember(workId, memberId);
+        }
 
     }
 }

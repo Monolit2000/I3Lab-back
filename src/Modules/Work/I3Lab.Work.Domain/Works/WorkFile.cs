@@ -17,7 +17,6 @@ namespace I3Lab.Work.Domain.Works
 
         private WorkFile()
         {
-                
         }
 
         private WorkFile(WorkId workId, FileId fileId)
@@ -26,7 +25,6 @@ namespace I3Lab.Work.Domain.Works
             FileId = fileId;    
 
             CreateDate = DateTime.UtcNow;
-
         }
 
         internal static WorkFile CreateNew(WorkId workId, FileId fileId)

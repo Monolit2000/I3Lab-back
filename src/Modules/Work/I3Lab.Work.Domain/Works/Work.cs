@@ -13,32 +13,35 @@ namespace I3Lab.Work.Domain.Work
 {
     public class Work : Entity, IAggregateRoot
     {
+        public WorkAccebilityId WorkAccebilityId { get; private set; }
+
         public readonly List<WorkFile> WorkFiles = [];
 
         public readonly List<WorkMember> WorkMembers = [];
 
         public WorkId Id { get; private set; }
+        public WorkFile WorkAvatarImage  { get; private set; }
         public MemberId CustomerId { get; private set; }
         public WorkStatus Status { get; private set; }
-        public WorkAccebility Accessibility { get; private set; }
         public MemberId CreatorId { get; private set; }
-        public Guid DetailId { get; private set; }
+        public DateTime WorkStarted { get; private set; }   
 
         private Work()
         {
             //Ef core
         }
-        private Work(Guid detailId)
+        private Work(MemberId creatorId, WorkAccebilityId workAccebilityId)
         {
             Id = new WorkId(Guid.NewGuid());
             Status = WorkStatus.Pending;
-            DetailId = detailId;
-            Accessibility = WorkAccebility.CreateNew(this.Id);
+            CreatorId = creatorId;
+            WorkAccebilityId = workAccebilityId;
+            WorkStarted = DateTime.UtcNow;
         }
 
-        public static Work CreateNewWork(Guid detailId)
+        public static Work CreateNewWork(MemberId creatorId, WorkAccebilityId workAccebilityId)
         {
-            var newWork = new Work(detailId);
+            var newWork = new Work(creatorId, workAccebilityId);
 
             return newWork;
         }

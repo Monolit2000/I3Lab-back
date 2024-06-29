@@ -1,32 +1,31 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Work;
 
-namespace I3Lab.Work.Domain.File
+namespace I3Lab.Work.Domain.Files
 {
     public class File : Entity, IAggregateRoot
     {
         public FileId Id { get; private set; }
         public FileType Type { get; private set; }
-        public string Name { get; private set; }
-        public string Path { get; private set; }
+        public string FileName { get; private set; }
+        public string BlobPath { get; private set; }
 
         private File()
         {
-                
         }
 
-        private File(string name, FileType type, string path)
+        private File(string fileName, FileType type, string blobPath)
         {
             Id = new FileId(Guid.NewGuid());
-            Name = name;
+            FileName = fileName;
             Type = type;
-            Path = path;
+            BlobPath = blobPath;
         }
 
-        public static File CreateNewFile( string name, FileType type, string path)
+        public static File CreateNewFile( string fileName, FileType type, string path)
         {
             var newFile = new File(
-                name, 
+                fileName, 
                 type,
                 path);
 
