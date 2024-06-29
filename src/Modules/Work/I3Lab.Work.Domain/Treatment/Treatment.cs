@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Members;
+using I3Lab.Work.Domain.Work;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,11 @@ namespace I3Lab.Work.Domain.Treatment
         internal static Treatment CreateNew(MemberId creatorId)
         {
             return new Treatment(creatorId); 
+        }
+
+        internal static Treatment AddWork(MemberId creatorId, WorkId workId)
+        {
+            return new Treatment(creatorId);
         }
     }
 }

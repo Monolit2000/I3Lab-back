@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.Works.Events
 {
-    public class WorkCreatedDomainEvent : DomainEventBase
+    public class WorkStatusChangedDomainEvent : DomainEventBase
     {
-        public WorkId WorkId { get; }
+        public WorkId WorkId{ get; }
+        public WorkStatus NewStatus { get; }
 
-        public WorkCreatedDomainEvent(WorkId workId)
+        public WorkStatusChangedDomainEvent(WorkId workId, WorkStatus newStatus)
         {
             WorkId = workId;
+            NewStatus = newStatus;
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.Work
+namespace I3Lab.Work.Domain.Works
 {
     public class WorkId : TypedIdValueBase
     {

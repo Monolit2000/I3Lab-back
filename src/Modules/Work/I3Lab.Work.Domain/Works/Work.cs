@@ -12,13 +12,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.Work
+namespace I3Lab.Work.Domain.Works
 {
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
         public WorkAccebilityId WorkAccebilityId { get; private set; }
         public WorkCatalogId WorkCatalogId { get; private set; }
+
         public readonly List<WorkFile> WorkFiles = [];
 
         public WorkId Id { get; private set; }
@@ -44,7 +45,7 @@ namespace I3Lab.Work.Domain.Work
             WorkAccebilityId = workAccebilityId;
             WorkStartedDate = DateTime.UtcNow;
 
-            AddDomainEvent(new WorkCreatedDomainEvent());
+            AddDomainEvent(new WorkCreatedDomainEvent(Id));
         }
 
         public static Work CreateNewWork(
@@ -66,18 +67,18 @@ namespace I3Lab.Work.Domain.Work
         public void SetWorkAvatarImage(WorkFile workFile)
         {
             WorkAvatarImage = workFile;
+            AddDomainEvent(new WorkAvatarImageSetDomainEvent(workFile));
         }
 
-        public void SetCustomerId(MemberId customerId)
+        public void AddCustomerId(MemberId customerId)
         {
             CustomerId = customerId;
+            AddDomainEvent(new CustomerAddedDomainEvent(customerId));
         }
 
         public void ChangeStatus(WorkStatus newStatus)
         {
             Status = newStatus;
         }
-
-
     }
 }

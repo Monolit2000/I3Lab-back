@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.Works.Events
 {
-    public class WorkCreatedDomainEvent : DomainEventBase
+    public class WorkFileAddedDomainEvent : DomainEventBase
     {
-        public WorkId WorkId { get; }
+        public WorkFile WorkFile { get; }
 
-        public WorkCreatedDomainEvent(WorkId workId)
+        public WorkFileAddedDomainEvent(WorkFile workFile)
         {
-            WorkId = workId;
+            WorkFile = workFile;
         }
     }
 }
