@@ -8,16 +8,13 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.WorkComments.Events
 {
-    public class WorkCommentEditedDomainEvent : DomainEventBase
+    public class WorkCommentRemovedDomainEvent : DomainEventBase
     {
         public WorkCommentId WorkCommentId { get; }
 
-        public string EditedComment { get; }
-
-        public WorkCommentEditedDomainEvent(WorkCommentId workCommentId, string editedComment)
+        public WorkCommentRemovedDomainEvent(WorkCommentId workCommentId)
         {
             WorkCommentId = workCommentId;
-            EditedComment = editedComment;
         }
     }
 }
