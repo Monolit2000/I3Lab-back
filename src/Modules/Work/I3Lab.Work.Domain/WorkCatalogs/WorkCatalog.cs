@@ -99,12 +99,12 @@ namespace I3Lab.Work.Domain.WorkCatalogs
             BlobCatalogPath = newBlobCatalogPath;
         }
 
-        public File FindFile3DById(Guid fileId)
+        public File? FindFile3DById(FileId fileId)
         {
-            return Files3Ds.FirstOrDefault(f => f. == fileId);
+            return Files3Ds.FirstOrDefault(f => f.Id == fileId);
         }
 
-        public File FindOtherFileById(Guid fileId)
+        public File? FindOtherFileById(FileId fileId)
         {
             return OtherFiles.FirstOrDefault(f => f.Id == fileId);
         }
