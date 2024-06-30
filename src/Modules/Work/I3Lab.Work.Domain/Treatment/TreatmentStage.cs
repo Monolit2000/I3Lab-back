@@ -21,13 +21,13 @@ namespace I3Lab.Work.Domain.Treatment
             WorkId = workId;    
         }
 
-        internal static TreatmentStage CreateNew(
-            TreatmentId treatmentId, 
-            WorkId workId) 
-        { 
+        public static TreatmentStage CreateNew(
+            TreatmentId treatmentId,
+            WorkId workId)
+        {
             return new TreatmentStage(
-                treatmentId, 
-                workId); 
-        } 
+                treatmentId,
+                workId);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Members;
 using I3Lab.Work.Domain.Treatment;
+using I3Lab.Work.Domain.Work;
 using I3Lab.Work.Domain.WorkAccebilitys;
 using I3Lab.Work.Domain.WorkCatalogs;
 using I3Lab.Work.Domain.WorkComments;

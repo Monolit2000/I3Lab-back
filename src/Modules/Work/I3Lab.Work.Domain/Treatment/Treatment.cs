@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Members;
+using I3Lab.Work.Domain.Treatment.Events;
 using I3Lab.Work.Domain.Work;
 using I3Lab.Work.Domain.Works;
 using System;
@@ -13,12 +14,12 @@ namespace I3Lab.Work.Domain.Treatment
 {
     public class Treatment : Entity, IAggregateRoot
     {
-        public MemberId CreatorId { get; private set; }  
-
-        public List<TreatmentStage> TreatmentStage = [];
+        public MemberId CustomerId { get; private set; }    
 
         public TreatmentId Id { get; private set; }
+        public MemberId CreatorId { get; private set; }  
 
+        public List<TreatmentStage> TreatmentStages = [];
         public DateTime CreateDate { get; private set; }
 
         private Treatment() { } // For Ef Core
@@ -28,6 +29,8 @@ namespace I3Lab.Work.Domain.Treatment
             Id = new TreatmentId(Guid.NewGuid());
             CreatorId = creatorId;
             CreateDate = DateTime.UtcNow;
+
+            AddDomainEvent(new NewTreatmentStageCreatedDomainEvent());
         }
 
         internal static Treatment CreateNew(MemberId creatorId)
@@ -35,9 +38,28 @@ namespace I3Lab.Work.Domain.Treatment
             return new Treatment(creatorId); 
         }
 
-        internal static Treatment AddWork(MemberId creatorId, WorkId workId)
+        public void CreateNewTreatmentStage(MemberId creatorId, WorkId workId)
         {
-            return new Treatment(creatorId);
+            var newTreatmentStage = TreatmentStage.CreateNew(this.Id, workId);
+            TreatmentStages.Add(newTreatmentStage);
+
+            AddDomainEvent(new NewTreatmentStageCreatedDomainEvent());
+        }
+
+        public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)
+        {
+            var Work = TreatmentStages.FirstOrDefault(ts => ts.WorkId == workId);
+            if (Work == null) 
+                throw new InvalidOperationException("Member not found.");
+
+            TreatmentStages.Remove(Work);
+            AddDomainEvent(new TreatmentRemuveWorkDomainEvent());
+        }
+
+        public void AddCustomer(MemberId customerId)
+        {
+            CustomerId = customerId;
+            AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
         }
     }
 }
