@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Work.Domain.Members.Events
 {
-    internal class FileName
+    internal class MemberCreatedDomainEvent
     {
     }
 }

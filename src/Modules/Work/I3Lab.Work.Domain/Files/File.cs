@@ -8,6 +8,7 @@ namespace I3Lab.Work.Domain.Files
     {
         public FileId Id { get; private set; }
         public FileType Type { get; private set; }
+        public Accessibilitylevel Accessibilitylevel { get; private set; }
         public string FileName { get; private set; }
         public string BlobPath { get; private set; }
 
