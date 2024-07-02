@@ -14,9 +14,7 @@ namespace I3Lab.Work.Domain.WorkCatalogs
 
         public FileId FileId { get; private set; }
 
-        public WorkCatalogFile()
-        {
-        }
+        public WorkCatalogFile() { } // For EF Core
 
         public WorkCatalogFile(
             WorkCatalogId workCatalogId,
