@@ -1,18 +1,15 @@
-﻿using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Work;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Work.Domain.Members;
+using I3Lab.Work.Domain.Works.Events;
+
 
 namespace I3Lab.Work.Domain.Works
 {
-    public class WorkMember
+    public class WorkMember : Entity
     {
-        public WorkId WorkId { get; private set; }  
-        public MemberId MemberId { get; private set; }  
+        public WorkId WorkId { get; private set; }
+        public MemberId MemberId { get; private set; }
+        public MemberAccessibilityType AccessibilityType { get; private set; }
 
         public DateTime JoinDate { get; private set; }
 
@@ -30,6 +27,11 @@ namespace I3Lab.Work.Domain.Works
         public static WorkMember CreateNew(WorkId workId, MemberId memberId)
         {
             return new WorkMember(workId, memberId);
+        }
+
+        public void ChangeAccessibilityType()
+        {
+            AddDomainEvent(new MemberAccessibilityTypeChengedDomainEvent());
         }
 
     }

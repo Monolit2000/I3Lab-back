@@ -1,11 +1,21 @@
-﻿using I3Lab.Work.Domain.Members;
+﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Work.Domain.Members;
+using I3Lab.Work.Domain.Treatment;
+using I3Lab.Work.Domain.WorkAccebilitys.Events;
+using System.Security.Cryptography.X509Certificates;
 
 namespace I3Lab.Work.Domain.WorkAccebilitys
 {
-    public class WorkAccebilityMember
+    public class WorkAccebilityMember : Entity
     {
         public WorkAccebilityId WorkAccebilityId { get; private set; }
         public MemberId MemberId { get; private set; }
+
+        public AccessibilityType AccessibilityType { get; private set; }
+
+        public DateTime JoinDate { get; private set; }
+
+        public DateTime? LiveDate { get; private set; }
 
         private WorkAccebilityMember() { } //For Ef core 
         
@@ -15,6 +25,10 @@ namespace I3Lab.Work.Domain.WorkAccebilitys
         {
             WorkAccebilityId = workAccebilityId;
             MemberId = memberId;
+            AccessibilityType = AccessibilityType.Edit;
+            JoinDate = DateTime.Now;
+
+            AddDomainEvent(new WorkAccebilityMemberAddedDomainEvent());
         }
 
         internal static WorkAccebilityMember CreateNew (
@@ -24,6 +38,11 @@ namespace I3Lab.Work.Domain.WorkAccebilitys
             return new WorkAccebilityMember(
                 workAccebilityId, 
                 memberId);
+        }
+
+        public void Leave(string reason = "")
+        {
+            LiveDate = DateTime.UtcNow;
         }
     }
 }

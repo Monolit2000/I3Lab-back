@@ -12,7 +12,7 @@ namespace I3Lab.Work.Domain.Works
         public string Value { get; }
 
         internal static WorkStatus Pending => new WorkStatus(nameof(Pending));
-        internal static WorkStatus InProgress => new WorkStatus(nameof(InProgress));
+        internal static WorkStatus Active => new WorkStatus(nameof(Active));
         internal static WorkStatus Completed => new WorkStatus(nameof(Completed));
 
         public WorkStatus(string value)

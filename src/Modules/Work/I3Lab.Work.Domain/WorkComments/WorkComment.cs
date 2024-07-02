@@ -1,12 +1,7 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Work;
 using I3Lab.Work.Domain.Works;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using I3Lab.Work.Domain.WorkCatalogs;
 
 namespace I3Lab.Work.Domain.WorkComments
 {
@@ -16,6 +11,12 @@ namespace I3Lab.Work.Domain.WorkComments
         public MemberId AuthorId { get; private set; }  
         public WorkId WorkId { get; private set; }
         public string Content { get; private set; }
+        public List<PinedFile> PinedFiles { get; private set; }
+        public WorkCommentId? InReplyToCommentId { get; private set; }
+
+        public DateTime CreateDate { get; private set; }
+
+        public DateTime? EditDate { get; private set; }
 
         private WorkComment()
         {
@@ -26,6 +27,7 @@ namespace I3Lab.Work.Domain.WorkComments
             WorkId = workId;
             AuthorId = authorId;
             Content = content;
+            CreateDate = DateTime.UtcNow;  
         }
 
         internal static WorkComment CreateNew(WorkId workId, MemberId authorId, string content) 
@@ -35,5 +37,11 @@ namespace I3Lab.Work.Domain.WorkComments
                 authorId,
                 content); 
         }
+
+        public void PinFile(PinedFile pinFile)
+        {
+            PinedFiles.Add(pinFile);   
+        }
+
     }
 }

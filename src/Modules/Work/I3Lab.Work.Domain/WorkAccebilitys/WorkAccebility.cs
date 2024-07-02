@@ -39,6 +39,7 @@ namespace I3Lab.Work.Domain.WorkAccebilitys
             if (member == null)
                 throw new InvalidOperationException("Member not found.");
 
+            member.Leave();
             WorkMembers.Remove(member);
         }
     }

@@ -18,10 +18,12 @@ namespace I3Lab.Work.Domain.Works
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
-        public WorkAccebilityId WorkAccebilityId { get; private set; }
-        public WorkCatalogId WorkCatalogId { get; private set; }
+        public WorkAccebility WorkAccebilityId { get; private set; }
+        public WorkCatalog WorkCatalog { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
+
+        public readonly List<WorkMember> WorkMembers = [];
 
         public WorkId Id { get; private set; }
         public WorkFile WorkAvatarImage  { get; private set; }
@@ -30,14 +32,12 @@ namespace I3Lab.Work.Domain.Works
         public MemberId CreatorId { get; private set; }
         public DateTime WorkStartedDate { get; private set; }   
 
-        private Work()
-        {
-            //Ef core
-        }
+        private Work() { } //for Ef core
+
         private Work(
             MemberId creatorId,
             TreatmentId treatmentId,
-            WorkAccebilityId workAccebilityId)
+            WorkAccebility workAccebilityId)
         {
             Id = new WorkId(Guid.NewGuid());
             Status = WorkStatus.Pending;
@@ -51,16 +51,17 @@ namespace I3Lab.Work.Domain.Works
 
         public static Work CreateNewWork(
             MemberId creatorId, 
-            TreatmentId treatmentId, 
-            WorkAccebilityId workAccebilityId)
+            TreatmentId treatmentId,
+            WorkAccebility workAccebilityId)
         {
             return new Work(
                 creatorId, 
                 treatmentId, 
                 workAccebilityId);
         }
+        
 
-        public void AddWorkFile(WorkFile workFile)
+        public void AddFile(WorkFile workFile)
         {
             WorkFiles.Add(workFile);
         }
@@ -77,9 +78,15 @@ namespace I3Lab.Work.Domain.Works
             AddDomainEvent(new CustomerAddedDomainEvent(customerId));
         }
 
-        public void ChangeStatus(WorkStatus newStatus)
+        public void ChangeWorkStatus(WorkStatus newStatus)
         {
             Status = newStatus;
+            AddDomainEvent(new WorkStatusChangedDomainEvent(this.Id, newStatus));
+        }
+
+        public void MarkAsActive()
+        {
+
         }
     }
 }
