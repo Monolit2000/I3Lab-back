@@ -3,10 +3,11 @@ using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Files.Events;
 using I3Lab.Work.Domain.Treatment;
 using I3Lab.Work.Domain.Work;
+using I3Lab.Work.Domain.WorkCatalogs.Files.Events;
 
 namespace I3Lab.Work.Domain.Files
 {
-    public class File : Entity, IAggregateRoot
+    public class File : Entity
     {
         public FileId Id { get; private set; }
         public FileType Type { get; private set; }
@@ -15,10 +16,7 @@ namespace I3Lab.Work.Domain.Files
         public string FileName { get; private set; }
         public string BlobPath { get; private set; }
 
-
-        private File()
-        {
-        }
+        private File() { } //For EF core 
 
         private File(string fileName, FileType type, string blobPath, string blobName)
         {
@@ -27,14 +25,25 @@ namespace I3Lab.Work.Domain.Files
             Type = type;
             BlobPath = blobPath;
             BlobName = blobName;
-
+            Accessibilitylevel = Accessibilitylevel.Hot;
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
-        public static File CreateNewFile( string fileName, FileType type, string path, string blobName)
+        private File(string fileName, FileType type, string blobPath, string blobName, Accessibilitylevel accessibilitylevel)
+        {
+            Id = new FileId(Guid.NewGuid());
+            FileName = fileName;
+            Type = type;
+            BlobPath = blobPath;
+            BlobName = blobName;
+            Accessibilitylevel = accessibilitylevel;
+            AddDomainEvent(new FileCreatedDomainEvent());
+        }
+
+        public static File CreateNewFile(string fileName, FileType type, string path, string blobName)
         {
             var newFile = new File(
-                fileName, 
+                fileName,
                 type,
                 path,
                 blobName);
@@ -73,5 +82,5 @@ namespace I3Lab.Work.Domain.Files
 
     }
 
-  
+
 }

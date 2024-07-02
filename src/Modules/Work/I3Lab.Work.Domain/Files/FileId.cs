@@ -9,7 +9,7 @@ namespace I3Lab.Work.Domain.Files
 {
     public class FileId : TypedIdValueBase
     {
-        public FileId(Guid value) 
+        public FileId(Guid value)
             : base(value)
         {
         }

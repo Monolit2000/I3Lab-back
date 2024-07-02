@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Application.Members
+namespace I3Lab.Work.Application.WorkComments
 {
-    internal class FileName
+    internal class AddWorkCommentCommand
     {
     }
 }
