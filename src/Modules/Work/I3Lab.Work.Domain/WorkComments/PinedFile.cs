@@ -18,12 +18,23 @@ namespace I3Lab.Work.Domain.WorkCatalogs
 
         public PinedFile() { } // For EF Core 
 
-        private PinedFile(WorkCommentId workCommentId, FileId fileId)
+        private PinedFile(
+            WorkCommentId workCommentId,
+            FileId fileId)
         {
             WorkCommentId = workCommentId;
             FileId = fileId;
 
             AddDomainEvent(new FilePinedDomainEvent());
+        }
+
+        public static PinedFile CreatePinedFile(
+            WorkCommentId workCommentId, 
+            FileId fileId)
+        {
+            return new PinedFile(
+                workCommentId, 
+                fileId);
         }
     }
 }

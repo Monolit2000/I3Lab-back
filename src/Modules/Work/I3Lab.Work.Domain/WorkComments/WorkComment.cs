@@ -2,6 +2,7 @@
 using I3Lab.Work.Domain.Members;
 using I3Lab.Work.Domain.Works;
 using I3Lab.Work.Domain.WorkCatalogs;
+using I3Lab.Work.Domain.Files;
 
 namespace I3Lab.Work.Domain.WorkComments
 {
@@ -38,9 +39,11 @@ namespace I3Lab.Work.Domain.WorkComments
                 content); 
         }
 
-        public void PinFile(PinedFile pinFile)
+        public void PinFile(WorkCommentId workCommentId, FileId fileId)
         {
-            PinedFiles.Add(pinFile);   
+            var newPineFile = PinedFile.CreatePinedFile(workCommentId, fileId);    
+
+            PinedFiles.Add(newPineFile);   
         }
 
     }

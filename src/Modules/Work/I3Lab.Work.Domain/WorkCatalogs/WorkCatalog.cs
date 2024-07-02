@@ -51,14 +51,6 @@ namespace I3Lab.Work.Domain.WorkCatalogs
             Files3Ds.Add(file);
         }
 
-        public void AddFile(File file)
-        {
-            if (file == null)
-                throw new ArgumentNullException(nameof(file));
-
-            Files3Ds.Add(file);
-        }
-
         public void RemoveFile3D(File file)
         {
             if (file == null)
