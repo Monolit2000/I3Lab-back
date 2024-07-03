@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Infrastructure.Domain.WorkCatalogs
+namespace I3Lab.Works.Domain.WorkCatalogs.Events
 {
-    internal class WorkCatalogRepository
+    internal class WorkCatalogRemovedDomainEvent
     {
     }
 }

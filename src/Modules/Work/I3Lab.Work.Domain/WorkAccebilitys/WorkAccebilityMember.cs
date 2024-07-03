@@ -1,10 +1,10 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Treatment;
-using I3Lab.Work.Domain.WorkAccebilitys.Events;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.WorkAccebilitys.Events;
 using System.Security.Cryptography.X509Certificates;
 
-namespace I3Lab.Work.Domain.WorkAccebilitys
+namespace I3Lab.Works.Domain.WorkAccebilitys
 {
     public class WorkAccebilityMember : Entity
     {

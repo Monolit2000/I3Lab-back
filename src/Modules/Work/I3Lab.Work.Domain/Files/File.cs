@@ -1,13 +1,13 @@
-﻿using FluentResults;
-using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Files.Events;
-using I3Lab.Work.Domain.Treatment;
-using I3Lab.Work.Domain.Work;
+﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Works.Domain.Files.Events;
+using I3Lab.Works.Domain.WorkDirectorys;
 
-namespace I3Lab.Work.Domain.Files
+namespace I3Lab.Works.Domain.Files
 {
     public class File : Entity
     {
+        public WorkDirectoryId WorkDirectoryId { get; private set; }
+
         public FileId Id { get; private set; }
         public FileType Type { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
@@ -28,6 +28,16 @@ namespace I3Lab.Work.Domain.Files
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
+        private File(string fileName, FileType type, string blobPath)
+        {
+            Id = new FileId(Guid.NewGuid());
+            FileName = fileName;
+            Type = type;
+            BlobPath = blobPath;
+            Accessibilitylevel = Accessibilitylevel.Hot;
+            AddDomainEvent(new FileCreatedDomainEvent());
+        }
+
         private File(string fileName, FileType type, string blobPath, string blobName, Accessibilitylevel accessibilitylevel)
         {
             Id = new FileId(Guid.NewGuid());
@@ -39,13 +49,12 @@ namespace I3Lab.Work.Domain.Files
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
-        public static File CreateNewFile(string fileName, FileType type, string path, string blobName)
+        public static File CreateNew(string fileName, FileType type, string path)
         {
             var newFile = new File(
                 fileName,
                 type,
-                path,
-                blobName);
+                path);
 
             return newFile;
         }

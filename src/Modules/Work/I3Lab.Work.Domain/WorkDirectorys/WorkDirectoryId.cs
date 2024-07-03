@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkCatalogs
+namespace I3Lab.Works.Domain.WorkDirectorys
 {
-    public class WorkCatalogId : TypedIdValueBase
+    public class WorkDirectoryId : TypedIdValueBase
     {
-        public WorkCatalogId(Guid value)
+        public WorkDirectoryId(Guid value)
             : base(value)
         {
         }

@@ -1,10 +1,10 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Works;
-using I3Lab.Work.Domain.WorkCatalogs;
-using I3Lab.Work.Domain.Files;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Works;
+using I3Lab.Works.Domain.WorkCatalogs;
+using I3Lab.Works.Domain.Files;
 
-namespace I3Lab.Work.Domain.WorkComments
+namespace I3Lab.Works.Domain.WorkComments
 {
     public class WorkComment : Entity, IAggregateRoot
     {

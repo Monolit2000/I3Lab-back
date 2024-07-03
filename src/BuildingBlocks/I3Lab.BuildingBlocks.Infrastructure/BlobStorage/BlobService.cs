@@ -2,6 +2,7 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,16 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
     {
         public BlobServiceClient _blobServiceClient;
 
+        public IConfiguration _configuration;
+
         private const string ContainerName = "files";
 
-        public BlobService(BlobServiceClient blobServiceClient)
+        public BlobService(
+            BlobServiceClient blobServiceClient,
+            IConfiguration configuration)
         {
             _blobServiceClient = blobServiceClient;
+            _configuration = configuration;
         }
         public async Task<Guid> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default)
         {

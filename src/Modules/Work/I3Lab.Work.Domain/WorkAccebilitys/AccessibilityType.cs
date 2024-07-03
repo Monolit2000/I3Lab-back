@@ -1,6 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 
-namespace I3Lab.Work.Domain.WorkAccebilitys
+namespace I3Lab.Works.Domain.WorkAccebilitys
 {
     public class AccessibilityType : ValueObject
     {

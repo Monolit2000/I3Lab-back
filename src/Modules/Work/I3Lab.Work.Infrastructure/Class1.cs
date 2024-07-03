@@ -1,4 +1,4 @@
-﻿namespace I3Lab.Work.Infrastructure;
+﻿namespace I3Lab.Works.Infrastructure;
 
 public class Class1
 {

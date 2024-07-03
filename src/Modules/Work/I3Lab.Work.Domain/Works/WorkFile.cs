@@ -1,18 +1,15 @@
-﻿using I3Lab.Work.Domain.Files;
-using I3Lab.Work.Domain.Work;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
+﻿using I3Lab.Works.Domain.Files;
 
-namespace I3Lab.Work.Domain.Works
+
+namespace I3Lab.Works.Domain.Works
 {
     public class WorkFile
     {
         public WorkId WorkId { get; private set; }
         public FileId FileId { get; private set; }
+        public string DirectoryName { get; private set; }   
+        public string ContainerName { get; private set; }   
+
         public DateTime CreateDate { get; private set; }
 
         private WorkFile()
@@ -30,6 +27,11 @@ namespace I3Lab.Work.Domain.Works
         internal static WorkFile CreateNew(WorkId workId, FileId fileId)
         {
             return new WorkFile(workId, fileId);
+        }
+
+        public void SetContainerName(string conteinerName)
+        {
+            ContainerName = conteinerName;  
         }
 
     }

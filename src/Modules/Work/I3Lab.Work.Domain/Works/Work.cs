@@ -1,25 +1,18 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Treatment;
-using I3Lab.Work.Domain.Work;
-using I3Lab.Work.Domain.WorkAccebilitys;
-using I3Lab.Work.Domain.WorkCatalogs;
-using I3Lab.Work.Domain.WorkComments;
-using I3Lab.Work.Domain.Works;
-using I3Lab.Work.Domain.Works.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.WorkAccebilitys;
+using I3Lab.Works.Domain.WorkDirectorys;
+using I3Lab.Works.Domain.Works.Events;
+using File = I3Lab.Works.Domain.Files.File;
 
-namespace I3Lab.Work.Domain.Works
+namespace I3Lab.Works.Domain.Works
 {
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
         public WorkAccebility WorkAccebilityId { get; private set; }
-        public WorkCatalog WorkCatalog { get; private set; }
+        public WorkDirectoryId WorkCatalogId { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
 

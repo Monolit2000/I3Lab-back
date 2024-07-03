@@ -14,13 +14,12 @@ namespace I3Lab.BuildingBlocks.Infrastructure.StartUp
     public static class BuildingBlocksStartUp
     {
         public static IServiceCollection AddBuildingBlocksModule(
-     this IServiceCollection services, IConfiguration configuration)
+            this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("");
-
             services.AddSingleton<IBlobService, BlobService>();
 
             services.AddSingleton(_ => new BlobServiceClient(configuration.GetConnectionString("BlobStorage")));
+
             return services;
         }
     }

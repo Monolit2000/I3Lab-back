@@ -1,8 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Work;
 
-
-namespace I3Lab.Work.Domain.Works.Events
+namespace I3Lab.Works.Domain.Works.Events
 {
     public class WorkStatusChangedDomainEvent : DomainEventBase
     {

@@ -1,23 +1,23 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Files;
+using I3Lab.Works.Domain.Files;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkCatalogs
+namespace I3Lab.Works.Domain.WorkDirectorys
 {
     public class WorkCatalogFile : Entity
     {
-        public WorkCatalogId WorkCatalogId { get; private set; }
+        public WorkDirectoryId WorkCatalogId { get; private set; }
 
         public FileId FileId { get; private set; }
 
         public WorkCatalogFile() { } // For EF Core
 
         public WorkCatalogFile(
-            WorkCatalogId workCatalogId,
+            WorkDirectoryId workCatalogId,
             FileId fileId)
         {
             WorkCatalogId = workCatalogId; 
@@ -25,7 +25,7 @@ namespace I3Lab.Work.Domain.WorkCatalogs
         }
 
         internal static WorkCatalogFile CreateNew(
-            WorkCatalogId workCatalogId,
+            WorkDirectoryId workCatalogId,
             FileId fileId)
         {
             return new WorkCatalogFile(

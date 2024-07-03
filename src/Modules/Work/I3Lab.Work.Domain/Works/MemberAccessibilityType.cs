@@ -1,7 +1,7 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Files;
+using I3Lab.Works.Domain.Files;
 
-namespace I3Lab.Work.Domain.Works
+namespace I3Lab.Works.Domain.Works
 {
     public class MemberAccessibilityType : ValueObject
     {

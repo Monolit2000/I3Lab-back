@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.Files
+namespace I3Lab.Works.Domain.Files
 {
     public interface IFileRepository
     {

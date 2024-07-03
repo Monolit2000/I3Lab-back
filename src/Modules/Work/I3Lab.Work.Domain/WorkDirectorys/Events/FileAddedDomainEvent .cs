@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Infrastructure.Startup
+namespace I3Lab.Works.Domain.WorkCatalogs.Events
 {
-    internal class FileName
+    internal class FileAddedDomainEvent
     {
     }
 }

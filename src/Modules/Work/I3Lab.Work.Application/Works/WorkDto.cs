@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Application.Works
+namespace I3Lab.Works.Application.Works
 {
     internal class WorkDto
     {

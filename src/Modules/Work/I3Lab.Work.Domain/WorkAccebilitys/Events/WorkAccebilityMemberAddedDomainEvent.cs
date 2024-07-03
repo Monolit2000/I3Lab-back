@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkAccebilitys.Events
+namespace I3Lab.Works.Domain.WorkAccebilitys.Events
 {
     public class WorkAccebilityMemberAddedDomainEvent : DomainEventBase
     {

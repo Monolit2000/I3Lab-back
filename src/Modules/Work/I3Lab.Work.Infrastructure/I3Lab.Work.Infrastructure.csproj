@@ -10,4 +10,12 @@
     <ProjectReference Include="..\I3Lab.Work.Application\I3Lab.Work.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Startup\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+  </ItemGroup>
+
 </Project>

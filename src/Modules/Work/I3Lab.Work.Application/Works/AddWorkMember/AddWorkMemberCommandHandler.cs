@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Application.Works.AddWorkMember
+namespace I3Lab.Works.Application.Works.AddWorkMember
 {
     public class AddWorkMemberCommandHandler : IRequestHandler<AddWorkMemberCommand, Result<WorkMemberDto>>
     {

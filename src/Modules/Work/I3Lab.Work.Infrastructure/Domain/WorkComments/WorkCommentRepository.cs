@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Infrastructure.Domain.WorkComments
+namespace I3Lab.Works.Infrastructure.Domain.WorkComments
 {
-    internal class WorkCommentRepository
+    public class WorkCommentRepository
     {
     }
 }

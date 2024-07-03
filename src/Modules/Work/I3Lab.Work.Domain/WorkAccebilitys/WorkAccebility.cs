@@ -1,8 +1,8 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Works;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Works;
 
-namespace I3Lab.Work.Domain.WorkAccebilitys
+namespace I3Lab.Works.Domain.WorkAccebilitys
 {
     public class WorkAccebility : Entity, IAggregateRoot
     {

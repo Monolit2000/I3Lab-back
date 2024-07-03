@@ -1,10 +1,10 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Files;
-using I3Lab.Work.Domain.Members;
-using I3Lab.Work.Domain.Treatment.Events;
-using I3Lab.Work.Domain.Works;
+using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Treatment.Events;
+using I3Lab.Works.Domain.Works;
 
-namespace I3Lab.Work.Domain.Treatment
+namespace I3Lab.Works.Domain.Treatment
 {
     public class Treatment : Entity, IAggregateRoot
     {

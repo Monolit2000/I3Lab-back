@@ -1,17 +1,16 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Treatment.Events;
-using I3Lab.Work.Domain.Work;
-using I3Lab.Work.Domain.Works;
+using I3Lab.Works.Domain.Work;
+using I3Lab.Works.Domain.Works;
 using System.Diagnostics;
 
-namespace I3Lab.Work.Domain.Treatment
+namespace I3Lab.Works.Domain.Treatment
 {
     public class TreatmentStage : Entity
     {
         public TreatmentId TreatmentId {  get; private set; }   
+
         public WorkId WorkId { get; private set; }  
 
-        public DateTime CreateDate { get; private set; }
         private TreatmentStage() { } //For Ef core
 
         private TreatmentStage(
@@ -19,9 +18,7 @@ namespace I3Lab.Work.Domain.Treatment
             WorkId workId)
         {
             TreatmentId = treatmentId;
-            WorkId = workId;
-
-            AddDomainEvent(new TreatmentStageCreatedDomainEvent());
+            WorkId = workId;    
         }
 
         public static TreatmentStage CreateNew(

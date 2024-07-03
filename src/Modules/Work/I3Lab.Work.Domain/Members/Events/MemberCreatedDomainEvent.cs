@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.Members.Events
+namespace I3Lab.Works.Domain.Members.Events
 {
     internal class MemberCreatedDomainEvent
     {

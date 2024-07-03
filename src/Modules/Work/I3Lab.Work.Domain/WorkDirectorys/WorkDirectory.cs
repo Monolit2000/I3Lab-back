@@ -1,18 +1,12 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Files;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using File = I3Lab.Work.Domain.Files.File;
+using I3Lab.Works.Domain.Files;
+using File = I3Lab.Works.Domain.Files.File;
 
-namespace I3Lab.Work.Domain.WorkCatalogs
+namespace I3Lab.Works.Domain.WorkDirectorys
 {
-    public class WorkCatalog : Entity, IAggregateRoot
+    public class WorkDirectory : Entity, IAggregateRoot
     {
-        public WorkCatalogId Id { get; private set; }
+        public WorkDirectoryId Id { get; private set; }
 
         public readonly List<File> Files3Ds = [];
 
@@ -24,22 +18,22 @@ namespace I3Lab.Work.Domain.WorkCatalogs
 
         public string BlobCatalogPath { get; private set; }
 
-        private WorkCatalog()
+        private WorkDirectory()
         {
                 
         }
 
-        private WorkCatalog(string blobName, string blobCatalogName, string blobCatalogPath)
+        private WorkDirectory(string blobName, string blobCatalogName, string blobCatalogPath)
         {
-            Id = new WorkCatalogId(Guid.NewGuid());
+            Id = new WorkDirectoryId(Guid.NewGuid());
             BlobName = blobName;
             BlobCatalogName = blobCatalogName;
             BlobCatalogPath = blobCatalogPath;  
         }
 
-        internal static WorkCatalog CreateNew(string blobName, string blobCatalogName, string blobCatalogPath)
+        internal static WorkDirectory CreateNew(string blobName, string blobCatalogName, string blobCatalogPath)
         {
-            return new WorkCatalog(blobName, blobCatalogPath, blobCatalogName);
+            return new WorkDirectory(blobName, blobCatalogPath, blobCatalogName);
         }
 
 

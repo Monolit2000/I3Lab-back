@@ -1,15 +1,15 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Work.Domain.Files;
-using I3Lab.Work.Domain.WorkComments;
-using I3Lab.Work.Domain.WorkComments.Events;
+using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.WorkComments;
+using I3Lab.Works.Domain.WorkComments.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using File = I3Lab.Work.Domain.Files.File;
+using File = I3Lab.Works.Domain.Files.File;
 
-namespace I3Lab.Work.Domain.WorkCatalogs
+namespace I3Lab.Works.Domain.WorkCatalogs
 {
     public class PinedFile : Entity
     {

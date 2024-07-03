@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Domain.WorkCatalogs.Events
+namespace I3Lab.Works.Application.Works.AddWorkFile
 {
-    internal class BlobCatalogNameUpdatedDomainEvent
+    public class WorkFileDto
     {
     }
 }

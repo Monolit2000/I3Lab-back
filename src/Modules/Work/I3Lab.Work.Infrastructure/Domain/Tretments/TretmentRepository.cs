@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Work.Infrastructure.Domain.Tretment
+namespace I3Lab.Works.Infrastructure.Domain.Tretment
 {
     internal class TretmentRepository
     {

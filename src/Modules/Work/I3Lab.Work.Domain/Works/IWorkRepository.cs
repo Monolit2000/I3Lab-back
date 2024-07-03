@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Treatment;
 
-namespace I3Lab.Work.Domain.Work
+namespace I3Lab.Works.Domain.Works
 {
-    internal interface IWorkRepository
+    public interface IWorkRepository
     {
+        Task<Work> GetByIdAsync(WorkId id);
+        Task<IEnumerable<Work>> GetAllAsync();
+        Task<IEnumerable<Work>> GetAllByMemberIdAsync(MemberId id);
+        Task<IEnumerable<Work>> GetAllByTreatmentIdAsync(TreatmentId id);
+        Task AddAsync(Work work);
+        Task UpdateAsync(Work work);
+        Task DeleteAsync(WorkId id);
     }
 }
