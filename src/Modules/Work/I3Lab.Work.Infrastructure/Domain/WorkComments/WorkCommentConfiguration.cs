@@ -21,7 +21,6 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkComments
             builder.HasMany(e => e.PinedFiles) 
                    .WithOne() 
                    .HasForeignKey(e => e.WorkCommentId); 
-
         }
     }
 }

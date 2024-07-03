@@ -1,4 +1,5 @@
-﻿using I3Lab.Works.Domain.WorkComments;
+﻿using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.WorkComments;
 using I3Lab.Works.Domain.WorkDirectorys;
 using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Infrastructure.Domain.WorkDirectorys;
@@ -14,6 +15,8 @@ namespace I3Lab.Works.Infrastructure.Persistence
         public DbSet<Work> Works { get; set; }
 
         public DbSet<WorkComment> WorkComments { get; set; }
+
+        public DbSet<Treatment> Treatments { get; set; }
 
         public WorkDbContext(DbContextOptions<WorkDbContext> options) : base(options)
         {

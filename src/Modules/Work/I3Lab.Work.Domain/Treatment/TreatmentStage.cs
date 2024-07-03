@@ -1,5 +1,4 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Work;
 using I3Lab.Works.Domain.Works;
 using System.Diagnostics;
 
