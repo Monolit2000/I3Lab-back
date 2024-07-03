@@ -1,5 +1,4 @@
-﻿
-using I3Lab.Works.Domain.Members;
+﻿using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 
 namespace I3Lab.Works.Domain.Works

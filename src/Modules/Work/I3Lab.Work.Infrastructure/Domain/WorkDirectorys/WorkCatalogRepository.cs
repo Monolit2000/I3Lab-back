@@ -1,11 +1,6 @@
 ﻿using I3Lab.Works.Domain.WorkDirectorys;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Infrastructure.Domain.WorkDirectorys
 {
@@ -20,10 +15,12 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkDirectorys
 
         public async Task<WorkDirectory> GetByIdAsync(WorkDirectoryId id)
         {
-            return await _context.WorkDirectories
+            var workDirectory = await _context.WorkDirectories
                 .Include(wd => wd.Files3Ds)
                 .Include(wd => wd.OtherFiles)
                 .FirstOrDefaultAsync(wd => wd.Id == id);
+
+            return workDirectory;
         }
 
         public async Task AddAsync(WorkDirectory workDirectory)

@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FF06
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Works", "Works", "{0C0A4377-DB8C-458C-932F-171B01FAA904}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Work.Application", "src\Modules\Work\I3Lab.Work.Application\I3Lab.Work.Application.csproj", "{90909718-3854-4591-8BC0-D676B5C148D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Application", "src\Modules\Work\I3Lab.Work.Application\I3Lab.Works.Application.csproj", "{90909718-3854-4591-8BC0-D676B5C148D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Work.Domain", "src\Modules\Work\I3Lab.Work.Domain\I3Lab.Work.Domain.csproj", "{A26BB184-5F06-40D3-908E-FDB8F501D420}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Domain", "src\Modules\Work\I3Lab.Work.Domain\I3Lab.Works.Domain.csproj", "{A26BB184-5F06-40D3-908E-FDB8F501D420}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Work.Infrastructure", "src\Modules\Work\I3Lab.Work.Infrastructure\I3Lab.Work.Infrastructure.csproj", "{83E9475B-C79B-49DE-A3D6-CD51FB333F38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Infrastructure", "src\Modules\Work\I3Lab.Work.Infrastructure\I3Lab.Works.Infrastructure.csproj", "{83E9475B-C79B-49DE-A3D6-CD51FB333F38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Work.IntegrationEvents", "src\Modules\Work\I3Lab.Work.IntegrationEvents\I3Lab.Work.IntegrationEvents.csproj", "{1E8185E6-CD85-4850-A25A-94238456BE69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.IntegrationEvents", "src\Modules\Work\I3Lab.Work.IntegrationEvents\I3Lab.Works.IntegrationEvents.csproj", "{1E8185E6-CD85-4850-A25A-94238456BE69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Work.Api", "src\Modules\Work\I3Lab.Work.Api\I3Lab.Work.Api.csproj", "{A2D08E4C-9DD8-4EA3-94CC-B91F94F8EECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Api", "src\Modules\Work\I3Lab.Work.Api\I3Lab.Works.Api.csproj", "{A2D08E4C-9DD8-4EA3-94CC-B91F94F8EECA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patient", "Patient", "{591BC963-3557-452B-BD4D-4600BFE2849A}"
 EndProject
@@ -107,13 +107,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinic.IntegrationEve
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccess", "UserAccess", "{8D41ACB8-B0F6-49E1-ACC2-3685FD72A6C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.UserAccess.Application", "src\Modules\UserAccess\I3Lab.UserAccess.Application\I3Lab.UserAccess.Application.csproj", "{D1B9DAC9-E36A-4F61-9225-667B0234A157}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.Application", "src\Modules\UserAccess\I3Lab.UserAccess.Application\I3Lab.UserAccess.Application.csproj", "{D1B9DAC9-E36A-4F61-9225-667B0234A157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.UserAccess.Domain", "src\Modules\UserAccess\I3Lab.UserAccess.Domain\I3Lab.UserAccess.Domain.csproj", "{7F4C8808-31CA-46DA-9C9D-DB6F150B4143}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.Domain", "src\Modules\UserAccess\I3Lab.UserAccess.Domain\I3Lab.UserAccess.Domain.csproj", "{7F4C8808-31CA-46DA-9C9D-DB6F150B4143}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.UserAccess.Infrastructure", "src\Modules\UserAccess\I3Lab.UserAccess.Infrastructure\I3Lab.UserAccess.Infrastructure.csproj", "{F361F46B-6172-440F-8BDA-87E0E35A24A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.Infrastructure", "src\Modules\UserAccess\I3Lab.UserAccess.Infrastructure\I3Lab.UserAccess.Infrastructure.csproj", "{F361F46B-6172-440F-8BDA-87E0E35A24A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.UserAccess.IntegrationEvents", "src\Modules\UserAccess\I3Lab.UserAccess.IntegrationEvents\I3Lab.UserAccess.IntegrationEvents.csproj", "{B72C2EAF-C55C-4989-8C85-E37155936B04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.IntegrationEvents", "src\Modules\UserAccess\I3Lab.UserAccess.IntegrationEvents\I3Lab.UserAccess.IntegrationEvents.csproj", "{B72C2EAF-C55C-4989-8C85-E37155936B04}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9749CEEB-D2AE-4363-A3AD-4F66EE2B0CC9}"
 EndProject

@@ -4,7 +4,6 @@ using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
 using I3Lab.Works.Domain.WorkDirectorys;
 using I3Lab.Works.Domain.Works.Events;
-using File = I3Lab.Works.Domain.Files.File;
 
 namespace I3Lab.Works.Domain.Works
 {

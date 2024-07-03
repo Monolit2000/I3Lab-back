@@ -4,7 +4,6 @@ using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace I3Lab.Works.Infrastructure.Domain.Works
 {
     public class WorkRepository : IWorkRepository
@@ -18,10 +17,12 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 
         public async Task<Work> GetByIdAsync(WorkId id)
         {
-            return await _context.Works
+            var work = await _context.Works
                 .Include(w => w.WorkFiles)
                 .Include(w => w.WorkMembers)
                 .FirstOrDefaultAsync(w => w.Id == id);
+
+            return work;
         }
 
         public async Task<IEnumerable<Work>> GetAllAsync()
@@ -71,6 +72,5 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
                 await _context.SaveChangesAsync();
             }
         }
-
     }
 }

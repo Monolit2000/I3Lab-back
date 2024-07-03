@@ -16,8 +16,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Work\I3Lab.Work.Application\I3Lab.Work.Application.csproj" />
-  </ItemGroup>
-
 </Project>
