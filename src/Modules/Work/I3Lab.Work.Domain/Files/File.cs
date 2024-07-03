@@ -3,7 +3,6 @@ using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Work.Domain.Files.Events;
 using I3Lab.Work.Domain.Treatment;
 using I3Lab.Work.Domain.Work;
-using I3Lab.Work.Domain.WorkCatalogs.Files.Events;
 
 namespace I3Lab.Work.Domain.Files
 {
