@@ -1,5 +1,8 @@
-﻿using I3Lab.Works.Domain.WorkDirectorys;
+﻿using I3Lab.Works.Domain.WorkComments;
+using I3Lab.Works.Domain.WorkDirectorys;
 using I3Lab.Works.Domain.Works;
+using I3Lab.Works.Infrastructure.Domain.WorkDirectorys;
+using I3Lab.Works.Infrastructure.Domain.Works;
 using Microsoft.EntityFrameworkCore;
 
 namespace I3Lab.Works.Infrastructure.Persistence
@@ -10,6 +13,8 @@ namespace I3Lab.Works.Infrastructure.Persistence
 
         public DbSet<Work> Works { get; set; }
 
+        public DbSet<WorkComment> WorkComments { get; set; }
+
         public WorkDbContext(DbContextOptions<WorkDbContext> options) : base(options)
         {
         }
@@ -18,19 +23,11 @@ namespace I3Lab.Works.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<WorkDirectory>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasMany(e => e.Files3Ds).WithOne().HasForeignKey(f => f.WorkDirectoryId);
-                entity.HasMany(e => e.OtherFiles).WithOne().HasForeignKey(f => f.WorkDirectoryId);
-            });
+            modelBuilder.ApplyConfiguration(new WorkDirectoryConfiguration());
 
-            modelBuilder.Entity<Work>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.HasMany(e => e.WorkFiles).WithOne().HasForeignKey(f => f.WorkId);
-                entity.HasMany(e => e.WorkMembers).WithOne().HasForeignKey(m => m.WorkId);
-            });
+            modelBuilder.ApplyConfiguration(new WorkEntityTypeConfiguration());
+
+         
         }
     }
 }

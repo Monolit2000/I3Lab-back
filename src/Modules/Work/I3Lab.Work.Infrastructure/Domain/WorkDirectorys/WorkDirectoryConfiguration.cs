@@ -9,8 +9,14 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkDirectorys
         public void Configure(EntityTypeBuilder<WorkDirectory> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.HasMany(e => e.Files3Ds).WithOne().HasForeignKey(f => f.WorkDirectoryId);
-            builder.HasMany(e => e.OtherFiles).WithOne().HasForeignKey(f => f.WorkDirectoryId);
+
+            builder.HasMany(e => e.Files3Ds)
+                .WithOne()
+                .HasForeignKey(f => f.WorkDirectoryId);
+
+            builder.HasMany(e => e.OtherFiles)
+                .WithOne()
+                .HasForeignKey(f => f.WorkDirectoryId);
         }
     }
 }
