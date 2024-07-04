@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace I3Lab.Works.Infrastructure.Domain.Tretment
+namespace I3Lab.Works.Infrastructure.Domain.Treatments
 {
     public class TretmentRepository : ITretmentRepository
     {
