@@ -54,4 +54,4 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
         }
     }
 }
-}
+
