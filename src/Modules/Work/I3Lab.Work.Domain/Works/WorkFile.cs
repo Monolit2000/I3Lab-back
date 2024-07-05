@@ -7,19 +7,17 @@ namespace I3Lab.Works.Domain.Works
     {
         public WorkId WorkId { get; private set; }
         public FileId FileId { get; private set; }
-        public string DirectoryName { get; private set; }   
         public string ContainerName { get; private set; }   
 
         public DateTime CreateDate { get; private set; }
 
-        private WorkFile()
-        {
-        }
+        private WorkFile() { } //For EF CORE 
 
         private WorkFile(WorkId workId, FileId fileId)
         {
             WorkId = workId;    
-            FileId = fileId;    
+            FileId = fileId;
+            ContainerName = workId.ToString();
 
             CreateDate = DateTime.UtcNow;
         }
@@ -28,11 +26,5 @@ namespace I3Lab.Works.Domain.Works
         {
             return new WorkFile(workId, fileId);
         }
-
-        public void SetContainerName(string conteinerName)
-        {
-            ContainerName = conteinerName;  
-        }
-
     }
 }
