@@ -76,10 +76,12 @@ namespace I3Lab.Works.Domain.Works
             AddDomainEvent(new WorkStatusChangedDomainEvent(this.Id, newStatus));
         }
 
-        public void MarkAsActive()
-        {
-            WorkStatus = WorkStatus.Active;
-            AddDomainEvent(new Set);
-        }
+        //public void MarkAsActive()
+        //{
+        //    WorkStatus = WorkStatus.Active;
+        //    AddDomainEvent(new Set);
+        //}
+
+        
     }
 }
