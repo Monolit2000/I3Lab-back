@@ -20,7 +20,7 @@ namespace I3Lab.Works.Domain.Works
         public WorkId Id { get; private set; }
         public WorkFile WorkAvatarImage  { get; private set; }
         public MemberId CustomerId { get; private set; }
-        public WorkStatus Status { get; private set; }
+        public WorkStatus WorkStatus { get; private set; }
         public MemberId CreatorId { get; private set; }
         public DateTime WorkStartedDate { get; private set; }   
 
@@ -32,7 +32,7 @@ namespace I3Lab.Works.Domain.Works
             WorkAccebility workAccebilityId)
         {
             Id = new WorkId(Guid.NewGuid());
-            Status = WorkStatus.Pending;
+            WorkStatus = WorkStatus.Pending;
             CreatorId = creatorId;
             TreatmentId = treatmentId;  
             WorkAccebilityId = workAccebilityId;
@@ -72,13 +72,14 @@ namespace I3Lab.Works.Domain.Works
 
         public void ChangeWorkStatus(WorkStatus newStatus)
         {
-            Status = newStatus;
+            WorkStatus = newStatus;
             AddDomainEvent(new WorkStatusChangedDomainEvent(this.Id, newStatus));
         }
 
         public void MarkAsActive()
         {
-
+            WorkStatus = WorkStatus.Active;
+            AddDomainEvent(new Set);
         }
     }
 }

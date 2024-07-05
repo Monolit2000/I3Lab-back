@@ -6,8 +6,8 @@ namespace I3Lab.Works.Domain.WorkAccebilitys
 {
     public class WorkAccebility : Entity, IAggregateRoot
     {
-        public WorkAccebilityId Id { get; private set; }
         public WorkId WorkId { get; private set; }
+        public WorkAccebilityId Id { get; private set; }
 
         public readonly List<WorkAccebilityMember> WorkMembers = [];
 

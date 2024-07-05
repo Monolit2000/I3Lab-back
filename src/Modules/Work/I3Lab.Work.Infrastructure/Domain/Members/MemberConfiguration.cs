@@ -17,9 +17,14 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
             builder.Property(e => e.Email)
                 .IsRequired();
 
-            builder.OwnsOne(o => o.MemberRole, roleBuilder =>
+            //builder.OwnsOne(o => o.MemberRole, roleBuilder =>
+            //{
+            //    roleBuilder.Property(r => r.Value).HasColumnName("MemberRole").IsRequired();
+            //});
+
+            builder.ComplexProperty(o => o.MemberRole, roleBuilder =>
             {
-                roleBuilder.Property(r => r.Value).HasColumnName("Role").IsRequired();
+                roleBuilder.Property(p => p.Value).HasColumnName("MemberRole");
             });
 
             builder.Property(e => e.FirstName)

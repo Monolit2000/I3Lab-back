@@ -1,14 +1,8 @@
-﻿using Azure.Core;
-using Azure.Storage.Blobs;
+﻿using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+
 
 namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 {
@@ -41,6 +35,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 
             return fileId;
         }
+
         public async Task<FileResponce> DownloadAsync(Guid fileId, CancellationToken cancellationToken = default)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
@@ -50,15 +45,24 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
             BlobDownloadResult responce = await blobClient.DownloadContentAsync(cancellationToken: cancellationToken);
 
             return new FileResponce(responce.Content.ToStream(), responce.Details.ContentType);
-        }   
+        }
 
-        public async Task DeleateAsync(Guid fileId, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(Guid fileId, CancellationToken cancellationToken = default)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
 
             BlobClient blobClient = containerClient.GetBlobClient(fileId.ToString());
 
             await blobClient.DeleteIfExistsAsync(cancellationToken: cancellationToken);
+        }
+
+        public async Task SetAccessTierAsync(Guid fileId, AccessTier accessTier, CancellationToken cancellationToken = default)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            BlobClient blobClient = containerClient.GetBlobClient(fileId.ToString());
+
+            await blobClient.SetAccessTierAsync(accessTier, cancellationToken: cancellationToken);
         }
 
 

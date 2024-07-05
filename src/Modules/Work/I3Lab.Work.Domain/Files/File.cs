@@ -14,6 +14,7 @@ namespace I3Lab.Works.Domain.Files
         public string BlobName { get; private set; }
         public string FileName { get; private set; }
         public string BlobPath { get; private set; }
+        public DateTime CreateDate { get; private set; }
 
         private File() { } //For EF core 
 
@@ -25,6 +26,7 @@ namespace I3Lab.Works.Domain.Files
             BlobPath = blobPath;
             BlobName = blobName;
             Accessibilitylevel = Accessibilitylevel.Hot;
+            CreateDate = DateTime.UtcNow;
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
@@ -58,6 +60,17 @@ namespace I3Lab.Works.Domain.Files
 
             return newFile;
         }
+
+        public static File CreateNew3DFile(string fileName, string path)
+        {
+            var newFile = new File(
+                fileName,
+                FileType.File3D,
+                path);
+
+            return newFile;
+        }
+
 
         public void RestoreToHotAccessibilitylevel()
         {
