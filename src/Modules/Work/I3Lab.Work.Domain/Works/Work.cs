@@ -1,4 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
@@ -9,7 +10,7 @@ namespace I3Lab.Works.Domain.Works
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
-        public WorkAccebility WorkAccebilityId { get; private set; }
+        //public WorkAccebility WorkAccebilityId { get; private set; }
         public WorkDirectory WorkDirectory { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
@@ -27,14 +28,14 @@ namespace I3Lab.Works.Domain.Works
 
         private Work(
             MemberId creatorId,
-            TreatmentId treatmentId,
-            WorkAccebility workAccebilityId)
+            TreatmentId treatmentId
+            /*WorkAccebility workAccebilityId*/)
         {
             Id = new WorkId(Guid.NewGuid());
             WorkStatus = WorkStatus.Pending;
             CreatorId = creatorId;
             TreatmentId = treatmentId;  
-            WorkAccebilityId = workAccebilityId;
+           // WorkAccebilityId = workAccebilityId;
             WorkStartedDate = DateTime.UtcNow;
 
             AddDomainEvent(new WorkCreatedDomainEvent(Id));
@@ -46,11 +47,23 @@ namespace I3Lab.Works.Domain.Works
             WorkAccebility workAccebilityId)
         {
             return new Work(
-                creatorId, 
-                treatmentId, 
-                workAccebilityId);
+                creatorId,
+                treatmentId);
+                //workAccebilityId);
         }
         
+        public Result AddWorkMember(WorkId workId, MemberId memberId, MemberId addedBy)
+        {
+            var addeder = WorkMembers.FirstOrDefault(a => a.MemberId == addedBy);
+
+            if (addeder != null)
+                return Result.Fail("The member adding the new work member is not present in the work members list");
+
+            var newWorkMember = WorkMember.CreateNew(workId, memberId, addedBy);
+
+            WorkMembers.Add(newWorkMember);
+            return Result.Ok();
+        }
 
         public void AddFile(WorkFile workFile)
         {

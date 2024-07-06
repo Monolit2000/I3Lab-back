@@ -12,5 +12,7 @@ namespace I3Lab.Works.Domain.Works
         Task AddAsync(Work work);
         Task UpdateAsync(Work work);
         Task DeleteAsync(WorkId id);
+
+        Task SaveChangesAsync();
     }
 }
