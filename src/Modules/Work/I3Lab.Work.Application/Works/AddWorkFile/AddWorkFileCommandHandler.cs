@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using I3Lab.Works.Domain.Works;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,12 @@ namespace I3Lab.Works.Application.Works.AddWorkFile
 {
     public class AddWorkFileCommandHandler : IRequestHandler<AddWorkFileCommand, Result<WorkFileDto>>
     {
+        private IWorkRepository _workRepository;
+
+        public AddWorkFileCommandHandler(IWorkRepository workRepository)
+        {
+            _workRepository = workRepository;
+        }
 
         public Task<Result<WorkFileDto>> Handle(AddWorkFileCommand request, CancellationToken cancellationToken)
         {

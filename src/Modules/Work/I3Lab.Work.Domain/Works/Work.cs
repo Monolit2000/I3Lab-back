@@ -2,7 +2,6 @@
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
-using I3Lab.Works.Domain.WorkDirectorys;
 using I3Lab.Works.Domain.Works.Events;
 
 namespace I3Lab.Works.Domain.Works
@@ -11,7 +10,7 @@ namespace I3Lab.Works.Domain.Works
     {
         public TreatmentId TreatmentId { get; private set; }
         public WorkAccebility WorkAccebilityId { get; private set; }
-        public WorkDirectoryId WorkCatalogId { get; private set; }
+        public WorkDirectory WorkDirectory { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
 

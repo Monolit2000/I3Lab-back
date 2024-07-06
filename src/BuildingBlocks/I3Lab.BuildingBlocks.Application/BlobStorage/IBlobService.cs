@@ -12,6 +12,6 @@ namespace I3Lab.BuildingBlocks.Application.BlobStorage
 
         Task<FileResponce> DownloadAsync(Guid fileId, CancellationToken cancellationToken = default);
 
-        Task DeleateAsync(Guid fileId, CancellationToken cancellationToken = default);
+        Task DeleteAsync(Guid fileId, CancellationToken cancellationToken = default);
     }
 }
