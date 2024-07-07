@@ -1,15 +1,18 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
 using I3Lab.Works.Domain.Works.Events;
+using System.Net.WebSockets;
 
 namespace I3Lab.Works.Domain.Works
 {
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
+
         //public WorkAccebility WorkAccebilityId { get; private set; }
         public WorkDirectory WorkDirectory { get; private set; }
 
@@ -65,9 +68,11 @@ namespace I3Lab.Works.Domain.Works
             return Result.Ok();
         }
 
-        public void AddFile(WorkFile workFile)
+        public void AddWorkFile(WorkId workId, BlobFileId fileId)
         {
-            WorkFiles.Add(workFile);
+            var newWorkFile = WorkFile.CreateNew(workId, fileId);
+
+            WorkFiles.Add(newWorkFile);
         }
 
         public void SetWorkAvatarImage(WorkFile workFile)

@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment.Events;
 using I3Lab.Works.Domain.Works;
@@ -65,7 +65,7 @@ namespace I3Lab.Works.Domain.Treatment
             AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
         }
 
-        public void AddPreview(FileId fileId)
+        public void AddPreview(BlobFileId fileId)
         {
             var treatmentPreview = TreatmentPreview.CreateNew(this.Id, fileId);
 

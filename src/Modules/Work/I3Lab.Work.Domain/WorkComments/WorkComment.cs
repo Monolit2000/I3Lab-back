@@ -2,7 +2,7 @@
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Domain.WorkCatalogs;
-using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.BlobFiles;
 
 namespace I3Lab.Works.Domain.WorkComments
 {
@@ -13,7 +13,7 @@ namespace I3Lab.Works.Domain.WorkComments
         public WorkId WorkId { get; private set; }
         public string Content { get; private set; }
         public List<PinedFile> PinedFiles { get; private set; }
-        public WorkCommentId? InReplyToCommentId { get; private set; }
+        public WorkCommentId InReplyToCommentId { get; private set; }
 
         public DateTime CreateDate { get; private set; }
 
@@ -39,7 +39,7 @@ namespace I3Lab.Works.Domain.WorkComments
                 content); 
         }
 
-        public void PinFile(WorkCommentId workCommentId, FileId fileId)
+        public void PinFile(WorkCommentId workCommentId, BlobFileId fileId)
         {
             var newPineFile = PinedFile.CreatePinedFile(workCommentId, fileId);    
 

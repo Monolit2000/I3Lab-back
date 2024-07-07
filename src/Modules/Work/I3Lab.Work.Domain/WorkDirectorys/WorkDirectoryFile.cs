@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.BlobFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,27 +8,27 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Works.Domain.WorkDirectorys
 {
-    public class WorkCatalogFile : Entity
+    public class WorkDirectoryFile : Entity
     {
         public WorkDirectoryId WorkCatalogId { get; private set; }
 
-        public FileId FileId { get; private set; }
+        public BlobFileId FileId { get; private set; }
 
-        public WorkCatalogFile() { } // For EF Core
+        public WorkDirectoryFile() { } // For EF Core
 
-        public WorkCatalogFile(
+        public WorkDirectoryFile(
             WorkDirectoryId workCatalogId,
-            FileId fileId)
+            BlobFileId fileId)
         {
             WorkCatalogId = workCatalogId; 
             FileId = fileId;    
         }
 
-        internal static WorkCatalogFile CreateNew(
+        internal static WorkDirectoryFile CreateNew(
             WorkDirectoryId workCatalogId,
-            FileId fileId)
+            BlobFileId fileId)
         {
-            return new WorkCatalogFile(
+            return new WorkDirectoryFile(
                 workCatalogId, 
                 fileId);  
         }

@@ -11,6 +11,7 @@ namespace I3Lab.Works.Domain.WorkAccebilitys
 
         public readonly List<WorkAccebilityMember> WorkMembers = [];
 
+
         public WorkAccebility(WorkId workId)
         {
             Id = new WorkAccebilityId(Guid.NewGuid());

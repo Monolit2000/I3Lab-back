@@ -5,13 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.Files
+namespace I3Lab.Works.Domain.BlobFiles.Events
 {
-    public class FileId : TypedIdValueBase
+    public class RestoreToColdAccessibilitylevelDomainEvent : DomainEventBase
     {
-        public FileId(Guid value)
-            : base(value)
-        {
-        }
     }
 }

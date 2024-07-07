@@ -11,7 +11,7 @@ namespace I3Lab.Works.Infrastructure.Persistence
 {
     public class WorkDbContext : DbContext
     {
-        public DbSet<WorkDirectory> WorkDirectories { get; set; }
+        public DbSet<Works.Domain.WorkDirectorys.WorkDirectory> WorkDirectories { get; set; }
 
         public DbSet<Work> Works { get; set; }
 

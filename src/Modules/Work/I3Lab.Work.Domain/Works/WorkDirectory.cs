@@ -1,12 +1,12 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.WorkDirectorys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using File = I3Lab.Works.Domain.Files.File;
+using BlobFile = I3Lab.Works.Domain.BlobFiles.BlobFile;
 
 namespace I3Lab.Works.Domain.Works
 {
@@ -14,9 +14,9 @@ namespace I3Lab.Works.Domain.Works
     {
         public WorkId WorkId { get; private set; }
 
-        public readonly List<File> Files3Ds = [];
+        public readonly List<BlobFile> Files3Ds = [];
 
-        public readonly List<File> OtherFiles = [];
+        public readonly List<BlobFile> OtherFiles = [];
 
         public string BlobName { get; private set; }
 
@@ -54,7 +54,7 @@ namespace I3Lab.Works.Domain.Works
         }
 
 
-        public void AddFile3D(File file)
+        public void AddFile3D(BlobFile file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -62,7 +62,7 @@ namespace I3Lab.Works.Domain.Works
             Files3Ds.Add(file);
         }
 
-        public void AddFile(File file)
+        public void AddFile(BlobFile file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -70,7 +70,7 @@ namespace I3Lab.Works.Domain.Works
             Files3Ds.Add(file);
         }
 
-        public void RemoveFile3D(File file)
+        public void RemoveFile3D(BlobFile file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -78,7 +78,7 @@ namespace I3Lab.Works.Domain.Works
             Files3Ds.Remove(file);
         }
 
-        public void AddOtherFile(File file)
+        public void AddOtherFile(BlobFile file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -86,7 +86,7 @@ namespace I3Lab.Works.Domain.Works
             OtherFiles.Add(file);
         }
 
-        public void RemoveOtherFile(File file)
+        public void RemoveOtherFile(BlobFile file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -118,12 +118,12 @@ namespace I3Lab.Works.Domain.Works
             BlobCatalogPath = newBlobCatalogPath;
         }
 
-        public File? FindFile3DById(FileId fileId)
+        public BlobFile? FindFile3DById(BlobFileId fileId)
         {
             return Files3Ds.FirstOrDefault(f => f.Id == fileId);
         }
 
-        public File? FindOtherFileById(FileId fileId)
+        public BlobFile? FindOtherFileById(BlobFileId fileId)
         {
             return OtherFiles.FirstOrDefault(f => f.Id == fileId);
         }

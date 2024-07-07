@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.BlobFiles;
 
 namespace I3Lab.Works.Domain.Works
 {

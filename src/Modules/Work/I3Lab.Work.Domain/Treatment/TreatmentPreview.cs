@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Files;
+using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Treatment.Events;
 using System;
 using System.Collections.Generic;
@@ -12,11 +12,11 @@ namespace I3Lab.Works.Domain.Treatment
     public class TreatmentPreview : Entity
     {
         public TreatmentId TreatmentId { get; private set; }
-        public FileId FileId { get; private set; }
+        public BlobFileId FileId { get; private set; }
 
         private TreatmentPreview() { } // For EF Core 
 
-        private TreatmentPreview(TreatmentId treatmentId, FileId fileId)
+        private TreatmentPreview(TreatmentId treatmentId, BlobFileId fileId)
         {
             TreatmentId = treatmentId;
             FileId = fileId;
@@ -26,7 +26,7 @@ namespace I3Lab.Works.Domain.Treatment
 
         internal static TreatmentPreview CreateNew(
             TreatmentId treatmentId, 
-            FileId fileId)
+            BlobFileId fileId)
         {
             return new TreatmentPreview(
                 treatmentId, 

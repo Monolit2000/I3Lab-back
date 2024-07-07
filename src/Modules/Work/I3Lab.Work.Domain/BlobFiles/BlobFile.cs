@@ -1,51 +1,51 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Files.Events;
+using I3Lab.Works.Domain.BlobFiles.Events;
 using I3Lab.Works.Domain.WorkDirectorys;
 
-namespace I3Lab.Works.Domain.Files
+namespace I3Lab.Works.Domain.BlobFiles
 {
-    public class File : Entity
+    public class BlobFile : Entity, IAggregateRoot 
     {
         public WorkDirectoryId WorkDirectoryId { get; private set; }
 
-        public FileId Id { get; private set; }
-        public FileType Type { get; private set; }
+        public BlobFileId Id { get; private set; }
+        public BlobFileType Type { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
         public string BlobName { get; private set; }
         public string FileName { get; private set; }
-        public string BlobCatalogName { get; private set; }
+        public string BlobDirectoryName { get; private set; }
         public string BlobPath { get; private set; }
         public DateTime CreateDate { get; private set; }
 
-        private File() { } //For EF core 
+        private BlobFile() { } //For EF core 
 
-        private File(string fileName, string blobCatalogName, FileType type, string blobPath, string blobName)
+        private BlobFile(string fileName, string blobDirectoryName, BlobFileType type, string blobPath, string blobName)
         {
-            Id = new FileId(Guid.NewGuid());
+            Id = new BlobFileId(Guid.NewGuid());
             FileName = fileName;
             Type = type;
             BlobPath = blobPath;
             BlobName = blobName;
-            BlobCatalogName = blobCatalogName;
+            BlobDirectoryName = blobDirectoryName;
             Accessibilitylevel = Accessibilitylevel.Hot;
             CreateDate = DateTime.UtcNow;
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
-        private File(string fileName, string blobCatalogName, FileType type, string blobPath)
+        private BlobFile(string fileName, string blobDirectoryName, BlobFileType type, string blobPath)
         {
-            Id = new FileId(Guid.NewGuid());
+            Id = new BlobFileId(Guid.NewGuid());
             FileName = fileName;
             Type = type;
             BlobPath = blobPath;
-            BlobCatalogName = blobCatalogName;
+            BlobDirectoryName = blobDirectoryName;
             Accessibilitylevel = Accessibilitylevel.Hot;
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
-        private File(string fileName, FileType type, string blobPath, string blobName, Accessibilitylevel accessibilitylevel)
+        private BlobFile(string fileName, BlobFileType type, string blobPath, string blobName, Accessibilitylevel accessibilitylevel)
         {
-            Id = new FileId(Guid.NewGuid());
+            Id = new BlobFileId(Guid.NewGuid());
             FileName = fileName;
             Type = type;
             BlobPath = blobPath;
@@ -54,22 +54,22 @@ namespace I3Lab.Works.Domain.Files
             AddDomainEvent(new FileCreatedDomainEvent());
         }
 
-        public static File CreateNew(string fileName, string blobCatalogName, FileType type, string path)
+        public static BlobFile CreateNew(string fileName, string blobDirectoryName, BlobFileType type, string path)
         {
-            var newFile = new File(
+            var newFile = new BlobFile(
                 fileName,
-                blobCatalogName,
+                blobDirectoryName,
                 type,
                 path);
 
             return newFile;
         }
 
-        //public static File CreateNew3DFile(string fileName, string path)
+        //public static BlobFile CreateNew3DFile(string fileName, string path)
         //{
-        //    var newFile = new File(
+        //    var newFile = new BlobFile(
         //        fileName,
-        //        FileType.File3D,
+        //        BlobFileType.File3D,
         //        path);
 
         //    return newFile;

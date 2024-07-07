@@ -18,8 +18,13 @@ namespace I3Lab.Works.Application.Works.AddWorkFile
             _workRepository = workRepository;
         }
 
-        public Task<Result<WorkFileDto>> Handle(AddWorkFileCommand request, CancellationToken cancellationToken)
+        public async Task<Result<WorkFileDto>> Handle(AddWorkFileCommand request, CancellationToken cancellationToken)
         {
+            var work = await _workRepository.GetByIdAsync(new WorkId(request.WorkId));
+
+            if (work == null)
+                return Result.Fail("Work not found");
+
             throw new NotImplementedException();
         }
     }
