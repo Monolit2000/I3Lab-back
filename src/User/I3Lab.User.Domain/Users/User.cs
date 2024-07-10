@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.User.Domain.User
+namespace I3Lab.Users.Domain.Users
 {
     public class User : Entity, IAggregateRoot
     {

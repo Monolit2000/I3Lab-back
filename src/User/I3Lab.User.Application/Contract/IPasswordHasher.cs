@@ -1,6 +1,6 @@
 ﻿
 
-namespace I3Lab.User.Application.Contract
+namespace I3Lab.Users.Application.Contract
 {
     public interface IPasswordHasher
     {

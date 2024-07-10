@@ -1,4 +1,4 @@
-﻿namespace I3Lab.User.IntegrationEvents;
+﻿namespace I3Lab.Users.IntegrationEvents;
 
 public class Class1
 {

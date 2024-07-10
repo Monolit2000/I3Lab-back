@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.User.Application.Login
+namespace I3Lab.Users.Application.Login
 {
     public class LoginDto
     {

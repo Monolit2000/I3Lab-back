@@ -1,6 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 
-namespace I3Lab.User.Domain.User
+namespace I3Lab.Users.Domain.Users
 {
     public class UserId : TypedIdValueBase
     {
