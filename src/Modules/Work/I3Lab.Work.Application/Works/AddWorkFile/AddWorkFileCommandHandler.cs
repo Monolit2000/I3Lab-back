@@ -25,6 +25,7 @@ namespace I3Lab.Works.Application.Works.AddWorkFile
             if (work == null)
                 return Result.Fail("Work not found");
 
+            var newWork = await Work.CreateNewWork();
             throw new NotImplementedException();
         }
     }

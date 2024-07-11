@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\I3Lab.User.Domain\I3Lab.User.Domain.csproj" />
+    <ProjectReference Include="..\I3Lab.Users.Domain\I3Lab.Users.Domain.csproj" />
   </ItemGroup>
 
 </Project>

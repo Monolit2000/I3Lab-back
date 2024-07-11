@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Text;
 
 
-namespace I3Lab.Users.Infrastructure
+namespace I3Lab.Users.Infrastructure.JWT
 {
     public class JwtService : IJwtService
     {
@@ -20,11 +20,10 @@ namespace I3Lab.Users.Infrastructure
 
         public string GenegateToken(User user)
         {
-
             List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Role, "Admin"),
-                new Claim(ClaimTypes.Role, "User"),
+                new Claim(ClaimTypes.Role, "Users"),
             };
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
@@ -36,7 +35,7 @@ namespace I3Lab.Users.Infrastructure
             var token = new JwtSecurityToken(
                 claims: claims,
                 signingCredentials: signingCredentials,
-                expires: DateTime.UtcNow.AddHours(_jwtSettings.ExpiryMinutes));;
+                expires: DateTime.UtcNow.AddHours(_jwtSettings.ExpiryMinutes)); ;
 
             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
 

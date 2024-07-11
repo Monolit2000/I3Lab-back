@@ -19,62 +19,23 @@ namespace I3Lab.Works.Domain.BlobFiles
 
         private BlobFile() { } //For EF core 
 
-        private BlobFile(string fileName, string blobDirectoryName, BlobFileType type, string blobPath, string blobName)
+        private BlobFile(string fileName, BlobFileType type)
         {
             Id = new BlobFileId(Guid.NewGuid());
             FileName = fileName;
             Type = type;
-            BlobPath = blobPath;
-            BlobName = blobName;
-            BlobDirectoryName = blobDirectoryName;
             Accessibilitylevel = Accessibilitylevel.Hot;
-            CreateDate = DateTime.UtcNow;
-            AddDomainEvent(new FileCreatedDomainEvent());
+            AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        private BlobFile(string fileName, string blobDirectoryName, BlobFileType type, string blobPath)
-        {
-            Id = new BlobFileId(Guid.NewGuid());
-            FileName = fileName;
-            Type = type;
-            BlobPath = blobPath;
-            BlobDirectoryName = blobDirectoryName;
-            Accessibilitylevel = Accessibilitylevel.Hot;
-            AddDomainEvent(new FileCreatedDomainEvent());
-        }
-
-        private BlobFile(string fileName, BlobFileType type, string blobPath, string blobName, Accessibilitylevel accessibilitylevel)
-        {
-            Id = new BlobFileId(Guid.NewGuid());
-            FileName = fileName;
-            Type = type;
-            BlobPath = blobPath;
-            BlobName = blobName;
-            Accessibilitylevel = accessibilitylevel;
-            AddDomainEvent(new FileCreatedDomainEvent());
-        }
-
-        public static BlobFile CreateNew(string fileName, string blobDirectoryName, BlobFileType type, string path)
+        public static BlobFile CreateNew(string fileName, BlobFileType type)
         {
             var newFile = new BlobFile(
                 fileName,
-                blobDirectoryName,
-                type,
-                path);
+                type);
 
             return newFile;
         }
-
-        //public static BlobFile CreateNew3DFile(string fileName, string path)
-        //{
-        //    var newFile = new BlobFile(
-        //        fileName,
-        //        BlobFileType.File3D,
-        //        path);
-
-        //    return newFile;
-        //}
-
 
         public void RestoreToHotAccessibilitylevel()
         {

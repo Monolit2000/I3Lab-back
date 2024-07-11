@@ -117,15 +117,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.Integratio
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{10BBAF40-D744-499B-958B-2F93E8F41600}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{196C3A2E-F181-4D5E-AA24-F1393384DB91}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{196C3A2E-F181-4D5E-AA24-F1393384DB91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.User.Application", "src\User\I3Lab.User.Application\I3Lab.User.Application.csproj", "{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.User.Domain", "src\User\I3Lab.User.Domain\I3Lab.User.Domain.csproj", "{65E2B62A-FCE6-41DD-A566-627B78601635}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.Domain", "src\User\I3Lab.User.Domain\I3Lab.Users.Domain.csproj", "{65E2B62A-FCE6-41DD-A566-627B78601635}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.User.Infrastructure", "src\User\I3Lab.User.Infrastructure\I3Lab.User.Infrastructure.csproj", "{8415E655-D224-4BC1-A6F5-6D0004F4CAAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.Infrastructure", "src\User\I3Lab.User.Infrastructure\I3Lab.Users.Infrastructure.csproj", "{8415E655-D224-4BC1-A6F5-6D0004F4CAAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.User.IntegrationEvents", "src\User\I3Lab.User.IntegrationEvents\I3Lab.User.IntegrationEvents.csproj", "{F02EDEAA-03D9-41D0-B160-56119AB49FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.IntegrationEvents", "src\User\I3Lab.User.IntegrationEvents\I3Lab.Users.IntegrationEvents.csproj", "{F02EDEAA-03D9-41D0-B160-56119AB49FC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

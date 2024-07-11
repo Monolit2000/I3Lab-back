@@ -1,4 +1,5 @@
-﻿using I3Lab.Works.Domain.Members;
+﻿using I3Lab.Works.Domain.BlobFiles;
+using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkComments;
 using I3Lab.Works.Domain.WorkDirectorys;
@@ -20,6 +21,8 @@ namespace I3Lab.Works.Infrastructure.Persistence
         public DbSet<Treatment> Treatments { get; set; }
 
         public DbSet<Member> Members { get; set; }
+
+        public DbSet<BlobFile> BlobFiles { get; set; }
 
         public WorkDbContext(DbContextOptions<WorkDbContext> options) : base(options)
         {
