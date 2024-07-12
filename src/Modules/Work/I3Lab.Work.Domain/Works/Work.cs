@@ -103,10 +103,14 @@ namespace I3Lab.Works.Domain.Works
             return Result.Ok();
         }
 
-        public void ChangeWorkStatus(WorkStatus newStatus)
+        public Result ChangeWorkStatus(WorkStatus newStatus)
         {
+            if (WorkStatus == newStatus)
+                return Result.Ok(); 
+
             WorkStatus = newStatus;
-            AddDomainEvent(new WorkStatusChangedDomainEvent(this.Id, newStatus));
+            AddDomainEvent(new WorkStatusChangedDomainEvent(Id, newStatus));
+            return Result.Ok();
         }
     }
 }
