@@ -27,7 +27,6 @@ namespace I3Lab.Works.Application.Works.AddWorkMember
                 return Result.Fail("Work not found");
 
             var addWorkMemberResult = work.AddWorkMember(
-                work.Id,
                 new MemberId(request.MemberId), 
                 new MemberId(request.AddedByMemberId));
 

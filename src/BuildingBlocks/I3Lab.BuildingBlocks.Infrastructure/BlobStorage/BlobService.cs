@@ -21,6 +21,9 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
             _blobServiceClient = blobServiceClient;
             _configuration = configuration;
         }
+
+        #region none
+
         public async Task<Guid> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
@@ -64,7 +67,63 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 
             await blobClient.SetAccessTierAsync(accessTier, cancellationToken: cancellationToken);
         }
+        #endregion
 
+        #region directory 
+
+        public async Task<Guid> UploadAsync(Stream stream, string contentType, string directory = "", CancellationToken cancellationToken = default)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            var fileId = Guid.NewGuid();
+            string blobName = string.IsNullOrEmpty(directory) ? fileId.ToString() : $"{directory}/{fileId}";
+
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+            await blobClient.UploadAsync(
+                stream,
+                new BlobHttpHeaders { ContentType = contentType },
+                cancellationToken: cancellationToken);
+
+            return fileId;
+        }
+
+        public async Task<FileResponce> DownloadAsync(Guid fileId, string directory = "", CancellationToken cancellationToken = default)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            string blobName = string.IsNullOrEmpty(directory) ? fileId.ToString() : $"{directory}/{fileId}";
+
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+            BlobDownloadResult responce = await blobClient.DownloadContentAsync(cancellationToken: cancellationToken);
+
+            return new FileResponce(responce.Content.ToStream(), responce.Details.ContentType);
+        }
+
+        public async Task DeleteAsync(Guid fileId, string directory = "", CancellationToken cancellationToken = default)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            string blobName = string.IsNullOrEmpty(directory) ? fileId.ToString() : $"{directory}/{fileId}";
+
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+            await blobClient.DeleteIfExistsAsync(cancellationToken: cancellationToken);
+        }
+
+        public async Task SetAccessTierAsync(Guid fileId, AccessTier accessTier, string directory = "", CancellationToken cancellationToken = default)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            string blobName = string.IsNullOrEmpty(directory) ? fileId.ToString() : $"{directory}/{fileId}";
+
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+            await blobClient.SetAccessTierAsync(accessTier, cancellationToken: cancellationToken);
+        }
+
+        #endregion
 
     }
 }

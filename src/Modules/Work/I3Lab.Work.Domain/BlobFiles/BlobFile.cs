@@ -14,23 +14,24 @@ namespace I3Lab.Works.Domain.BlobFiles
         public string BlobName { get; private set; }
         public string FileName { get; private set; }
         public string BlobDirectoryName { get; private set; }
-        public string BlobPath { get; private set; }
+        public string BlobFilePath { get; private set; }
         public DateTime CreateDate { get; private set; }
 
         private BlobFile() { } //For EF core 
 
-        private BlobFile(string fileName, BlobFileType type)
+        private BlobFile(BlobFileId blobFileId, string fileName, BlobFileType type)
         {
-            Id = new BlobFileId(Guid.NewGuid());
+            Id = blobFileId;
             FileName = fileName;
             Type = type;
             Accessibilitylevel = Accessibilitylevel.Hot;
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateNew(string fileName, BlobFileType type)
+        public static BlobFile CreateNew(BlobFileId blobFileId, string fileName, BlobFileType type)
         {
             var newFile = new BlobFile(
+                blobFileId,
                 fileName,
                 type);
 
@@ -64,9 +65,5 @@ namespace I3Lab.Works.Domain.BlobFiles
 
             AddDomainEvent(new RestoreToArchiveAccessibilitylevelDomainEvent());
         }
-
-
     }
-
-
 }

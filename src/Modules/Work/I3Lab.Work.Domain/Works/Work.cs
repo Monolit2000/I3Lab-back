@@ -5,15 +5,12 @@ using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
 using I3Lab.Works.Domain.Works.Events;
-using System.Net.WebSockets;
 
 namespace I3Lab.Works.Domain.Works
 {
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
-
-        //public WorkAccebility WorkAccebilityId { get; private set; }
         public WorkDirectory WorkDirectory { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
@@ -31,14 +28,12 @@ namespace I3Lab.Works.Domain.Works
 
         private Work(
             MemberId creatorId,
-            TreatmentId treatmentId
-            /*WorkAccebility workAccebilityId*/)
+            TreatmentId treatmentId)
         {
             Id = new WorkId(Guid.NewGuid());
             WorkStatus = WorkStatus.Pending;
             CreatorId = creatorId;
             TreatmentId = treatmentId;  
-           // WorkAccebilityId = workAccebilityId;
             WorkStartedDate = DateTime.UtcNow;
 
             AddDomainEvent(new WorkCreatedDomainEvent(Id));
@@ -52,26 +47,36 @@ namespace I3Lab.Works.Domain.Works
             return new Work(
                 creatorId,
                 treatmentId);
-                //workAccebilityId);
         }
-        
-        public Result AddWorkMember(WorkId workId, MemberId memberId, MemberId addedBy)
+
+        public Result AddWorkMember(MemberId memberId, MemberId addedBy)
         {
             var addeder = WorkMembers.FirstOrDefault(a => a.MemberId == addedBy);
+            if (addeder == null)
+                return Result
+                    .Fail("The member adding the new work member is not present in the work members list");
 
-            if (addeder != null)
-                return Result.Fail("The member adding the new work member is not present in the work members list");
-
-            var newWorkMember = WorkMember.CreateNew(workId, memberId, addedBy);
-
+            var newWorkMember = WorkMember.CreateNew(this.Id, memberId, addedBy);
             WorkMembers.Add(newWorkMember);
+            AddDomainEvent(new WorkMemberAddedDomainEvent(this.Id, memberId, addedBy));
+            return Result.Ok();
+        }
+
+        public Result RemoveWorkMember(MemberId memberId, MemberId removedBy)
+        {
+            var workMember = WorkMembers.FirstOrDefault(wm => wm.MemberId == memberId);
+            if (workMember == null)
+                return Result
+                    .Fail("The member to be removed is not present in the work members list");
+
+            WorkMembers.Remove(workMember);
+            AddDomainEvent(new WorkMemberRemovedDomainEvent(Id, memberId, removedBy));
             return Result.Ok();
         }
 
         public void AddWorkFile(WorkId workId, BlobFileId fileId)
         {
             var newWorkFile = WorkFile.CreateNew(workId, fileId);
-
             WorkFiles.Add(newWorkFile);
         }
 
@@ -81,10 +86,21 @@ namespace I3Lab.Works.Domain.Works
             AddDomainEvent(new WorkAvatarImageSetDomainEvent(workFile));
         }
 
-        public void AddCustomerId(MemberId customerId)
+        public Result AddCustomerId(MemberId customerId, MemberId addedBy)
         {
+            var addeder = WorkMembers.FirstOrDefault(a => a.MemberId == addedBy);
+            if (addeder == null)
+                return Result
+                    .Fail("The member adding the new work member is not present in the work members list");
+
+            var newWorkMember = WorkMember.CreateNew(this.Id, customerId, addedBy);
+
+            WorkMembers.Add(newWorkMember);
+
             CustomerId = customerId;
             AddDomainEvent(new CustomerAddedDomainEvent(customerId));
+
+            return Result.Ok();
         }
 
         public void ChangeWorkStatus(WorkStatus newStatus)
@@ -92,13 +108,5 @@ namespace I3Lab.Works.Domain.Works
             WorkStatus = newStatus;
             AddDomainEvent(new WorkStatusChangedDomainEvent(this.Id, newStatus));
         }
-
-        //public void MarkAsActive()
-        //{
-        //    WorkStatus = WorkStatus.Active;
-        //    AddDomainEvent(new Set);
-        //}
-
-        
     }
 }

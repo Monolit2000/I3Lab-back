@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
 {
-    public class GetBlobFileQuerie : IRequest<Result<BlobFileDto>>
+    public class GetBlobFileStreamQuerie : IRequest<Result<BlobFileDto>>
     {
         public Guid BlobFileId { get; set; }
 
-        public GetBlobFileQuerie(Guid blobFileId)
+        public GetBlobFileStreamQuerie(Guid blobFileId)
         {
             BlobFileId = blobFileId;
         }

@@ -1,4 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Works.Events;
 
@@ -10,12 +11,13 @@ namespace I3Lab.Works.Domain.Works
         public WorkId WorkId { get; private set; }
         public MemberId MemberId { get; private set; }
         public MemberAccessibilityType AccessibilityType { get; private set; }
+
+        public 
+
         public MemberId AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
 
-        private WorkMember()
-        {
-        }
+        private WorkMember() { } //for EF core
 
         private WorkMember(WorkId workId, MemberId memberId, MemberId addedBy) 
         {
@@ -36,9 +38,20 @@ namespace I3Lab.Works.Domain.Works
                 addedBy);
         }
 
-        public void ChangeAccessibilityType()
+
+        public Result ChangeAccessibilityType(MemberAccessibilityType newAccessibilityType)
         {
-            AddDomainEvent(new MemberAccessibilityTypeChengedDomainEvent());
+            if (AccessibilityType == newAccessibilityType)
+                return Result.Ok();
+
+            AccessibilityType = newAccessibilityType;
+
+            AddDomainEvent(new MemberAccessibilityTypeChangedDomainEvent(
+                WorkId, 
+                MemberId, 
+                newAccessibilityType));
+
+            return Result.Ok();
         }
 
     }

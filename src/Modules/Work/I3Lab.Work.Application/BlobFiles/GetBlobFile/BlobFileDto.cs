@@ -12,6 +12,10 @@ namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
     {
         public Stream Stream { get; set; }
 
+        public BlobFileDto()
+        {
+                
+        }
         public BlobFileDto(
             Stream stream)
         {

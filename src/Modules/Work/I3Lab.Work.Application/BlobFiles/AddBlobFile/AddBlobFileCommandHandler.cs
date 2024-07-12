@@ -17,20 +17,23 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
     {
         public async Task<Result<BlobFileDto>> Handle(AddBlobFileCommand request, CancellationToken cancellationToken)
         {
-            var newBlobFile = BlobFile.CreateNew(
-                request.FileName, 
-                request.Type);
+            var blobFileId = await blobService.UploadAsync(request.Stream, request.Type.Value);
 
-            await blobService.UploadAsync(request.Stream, request.Type.Value);
+            var newBlobFile = BlobFile.CreateNew(
+               new BlobFileId(blobFileId),
+               request.FileName,
+               request.Type);
 
             await blobFileRepository.AddAsync(newBlobFile);
 
-            return new BlobFileDto(
+            var blobFileDto = new BlobFileDto(
                 newBlobFile.Id.Value,
                 newBlobFile.FileName,
                 newBlobFile.Type.Value,
                 newBlobFile.CreateDate,
                 newBlobFile.Accessibilitylevel.Value);
+
+            return blobFileDto;
         }
     }
 }
