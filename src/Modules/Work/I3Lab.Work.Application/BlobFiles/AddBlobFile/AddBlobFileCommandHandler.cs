@@ -29,7 +29,7 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
             var blobFileDto = new BlobFileDto(
                 newBlobFile.Id.Value,
                 newBlobFile.FileName,
-                newBlobFile.Type.Value,
+                newBlobFile.FileType.Value,
                 newBlobFile.CreateDate,
                 newBlobFile.Accessibilitylevel.Value);
 

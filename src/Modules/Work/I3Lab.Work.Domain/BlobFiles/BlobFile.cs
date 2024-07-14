@@ -1,15 +1,15 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles.Events;
-using I3Lab.Works.Domain.WorkDirectorys;
+using I3Lab.Works.Domain.Works;
 
 namespace I3Lab.Works.Domain.BlobFiles
 {
     public class BlobFile : Entity, IAggregateRoot 
     {
-        public WorkDirectoryId WorkDirectoryId { get; private set; }
+        public WorkId WorkId { get; private set; }
 
         public BlobFileId Id { get; private set; }
-        public BlobFileType Type { get; private set; }
+        public BlobFileType FileType { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
         public string BlobName { get; private set; }
         public string FileName { get; private set; }
@@ -19,16 +19,22 @@ namespace I3Lab.Works.Domain.BlobFiles
 
         private BlobFile() { } //For EF core 
 
-        private BlobFile(BlobFileId blobFileId, string fileName, BlobFileType type)
+        private BlobFile(
+            BlobFileId blobFileId, 
+            string fileName,
+            BlobFileType type)
         {
             Id = blobFileId;
             FileName = fileName;
-            Type = type;
+            FileType = type;
             Accessibilitylevel = Accessibilitylevel.Hot;
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateNew(BlobFileId blobFileId, string fileName, BlobFileType type)
+        public static BlobFile CreateNew(
+            BlobFileId blobFileId,
+            string fileName,
+            BlobFileType type)
         {
             var newFile = new BlobFile(
                 blobFileId,

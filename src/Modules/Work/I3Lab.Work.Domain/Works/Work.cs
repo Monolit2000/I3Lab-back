@@ -11,6 +11,9 @@ namespace I3Lab.Works.Domain.Works
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
+
+        public string TreatmentName { get; private set; }
+
         public WorkDirectory WorkDirectory { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
