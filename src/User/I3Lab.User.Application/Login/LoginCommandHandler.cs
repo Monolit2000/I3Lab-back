@@ -2,11 +2,7 @@
 using I3Lab.Users.Application.Contract;
 using I3Lab.Users.Domain.Users;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace I3Lab.Users.Application.Login
 {
@@ -30,6 +26,9 @@ namespace I3Lab.Users.Application.Login
         {
             var user = await _userRepository.GetByEmailAsync(request.Email);
 
+            if (user == null)
+                return Result.Fail("User not found");
+                
             var result = _passwordHasher.Verify(request.Password, user.PasswordHash);
 
             if (result is false)

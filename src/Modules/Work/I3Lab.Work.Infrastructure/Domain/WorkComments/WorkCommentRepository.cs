@@ -1,4 +1,5 @@
-﻿using I3Lab.Works.Domain.WorkComments;
+﻿using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.WorkComments;
 using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +60,11 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkComments
                 _context.WorkComments.Remove(workComment);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<WorkComment?> GetByMemberIdAsync(MemberId memberId)
+        {
+            return await _context.WorkComments.FindAsync(memberId);
         }
     }
 }

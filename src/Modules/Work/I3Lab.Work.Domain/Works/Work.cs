@@ -4,6 +4,7 @@ using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
+using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
 
 namespace I3Lab.Works.Domain.Works
@@ -54,10 +55,10 @@ namespace I3Lab.Works.Domain.Works
 
         public Result AddWorkMember(MemberId memberId, MemberId addedBy)
         {
-            var addeder = WorkMembers.FirstOrDefault(a => a.MemberId == addedBy);
-            if (addeder == null)
+
+            if(IsWorkMamberIdContainInWorkMembersList(addedBy))
                 return Result
-                    .Fail("The member adding the new work member is not present in the work members list");
+                    .Fail(WorkErrors.WorkMemberNotFoundError);
 
             var newWorkMember = WorkMember.CreateNew(this.Id, memberId, addedBy);
             WorkMembers.Add(newWorkMember);
@@ -70,7 +71,7 @@ namespace I3Lab.Works.Domain.Works
             var workMember = WorkMembers.FirstOrDefault(wm => wm.MemberId == memberId);
             if (workMember == null)
                 return Result
-                    .Fail("The member to be removed is not present in the work members list");
+                    .Fail(WorkErrors.WorkMemberNotFoundError);
 
             WorkMembers.Remove(workMember);
             AddDomainEvent(new WorkMemberRemovedDomainEvent(Id, memberId, removedBy));
@@ -94,7 +95,7 @@ namespace I3Lab.Works.Domain.Works
             var addeder = WorkMembers.FirstOrDefault(a => a.MemberId == addedBy);
             if (addeder == null)
                 return Result
-                    .Fail("The member adding the new work member is not present in the work members list");
+                    .Fail(WorkErrors.WorkMemberNotFoundError);
 
             var newWorkMember = WorkMember.CreateNew(this.Id, customerId, addedBy);
 
@@ -115,5 +116,17 @@ namespace I3Lab.Works.Domain.Works
             AddDomainEvent(new WorkStatusChangedDomainEvent(Id, newStatus));
             return Result.Ok();
         }
+
+
+        private bool IsWorkMamberIdContainInWorkMembersList(MemberId memberId)
+        {
+            var workMember = WorkMembers.FirstOrDefault(wm => wm.MemberId == memberId);
+
+            if (workMember == null)
+              return false;
+
+            return true;    
+        }
+
     }
 }

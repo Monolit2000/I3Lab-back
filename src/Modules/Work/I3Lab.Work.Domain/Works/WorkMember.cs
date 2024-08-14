@@ -12,7 +12,7 @@ namespace I3Lab.Works.Domain.Works
         public MemberId MemberId { get; private set; }
         public MemberAccessibilityType AccessibilityType { get; private set; }
 
-        public 
+
 
         public MemberId AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }

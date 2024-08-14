@@ -119,7 +119,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{196C3A2E-F181-4D5E-AA24-F1393384DB91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.User.Application", "src\User\I3Lab.User.Application\I3Lab.User.Application.csproj", "{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.Application", "src\User\I3Lab.User.Application\I3Lab.Users.Application.csproj", "{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.Domain", "src\User\I3Lab.User.Domain\I3Lab.Users.Domain.csproj", "{65E2B62A-FCE6-41DD-A566-627B78601635}"
 EndProject

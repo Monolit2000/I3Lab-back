@@ -11,9 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.19.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\User\I3Lab.User.Application\I3Lab.Users.Application.csproj" />
+    <ProjectReference Include="..\..\User\I3Lab.User.Infrastructure\I3Lab.Users.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

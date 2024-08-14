@@ -2,12 +2,6 @@
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.WorkComments;
 using I3Lab.Works.Domain.WorkComments.Events;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using File = I3Lab.Works.Domain.BlobFiles.BlobFile;
 
 namespace I3Lab.Works.Domain.WorkCatalogs
 {
@@ -27,8 +21,8 @@ namespace I3Lab.Works.Domain.WorkCatalogs
 
             AddDomainEvent(new FilePinedDomainEvent());
         }
-
-        public static PinedFile CreatePinedFile(
+        
+        public static PinedFile CreateNew(
             WorkCommentId workCommentId, 
             BlobFileId fileId)
         {

@@ -10,10 +10,12 @@ services:
     ports:
      - 5000:5000
      - 5001:5001
-
+    restart: always
+    depends_on:
+      - postgres-db  
 
   i3lab-blob-storage:
-     image: mcr.microsoft.com/azure-storage/azurite:lastest
+     image: mcr.microsoft.com/azure-storage/azurite:latest
      container_name: i3lab.blob-storage
      volumes: 
        - ./.containers/blob_storage/data:/data
@@ -21,10 +23,21 @@ services:
        - "10000:10000" 
      command: "azurite-blob --blobHost 0.0.0.0 -l /data"
 
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: identity       # Имя базы данных
+      POSTGRES_USER: postgres     # Пользователь базы данных
+      POSTGRES_PASSWORD: postgres # Пароль пользователя
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
 
-
-
-
+volumes:
+  postgres_data:
 
 
 

@@ -10,7 +10,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/API/I3Lab.API/I3Lab.API.csproj", "src/API/I3Lab.API/"]
-RUN dotnet restore "./src/API/I3Lab.API/./I3Lab.API.csproj"
+COPY ["src/User/I3Lab.User.Application/I3Lab.Users.Application.csproj", "src/User/I3Lab.User.Application/"]
+COPY ["src/User/I3Lab.User.Domain/I3Lab.Users.Domain.csproj", "src/User/I3Lab.User.Domain/"]
+COPY ["src/BuildingBlocks/I3Lab.BuildingBlocks.Domain/I3Lab.BuildingBlocks.Domain.csproj", "src/BuildingBlocks/I3Lab.BuildingBlocks.Domain/"]
+COPY ["src/User/I3Lab.User.Infrastructure/I3Lab.Users.Infrastructure.csproj", "src/User/I3Lab.User.Infrastructure/"]
+RUN dotnet restore "./src/API/I3Lab.API/I3Lab.API.csproj"
 COPY . .
 WORKDIR "/src/src/API/I3Lab.API"
 RUN dotnet build "./I3Lab.API.csproj" -c $BUILD_CONFIGURATION -o /app/build

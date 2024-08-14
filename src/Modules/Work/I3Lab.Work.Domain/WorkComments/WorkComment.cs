@@ -13,6 +13,7 @@ namespace I3Lab.Works.Domain.WorkComments
         public WorkId WorkId { get; private set; }
         public string Content { get; private set; }
         public List<PinedFile> PinedFiles { get; private set; }
+
         public WorkCommentId InReplyToCommentId { get; private set; }
 
         public DateTime CreateDate { get; private set; }
@@ -41,7 +42,7 @@ namespace I3Lab.Works.Domain.WorkComments
 
         public void PinFile(WorkCommentId workCommentId, BlobFileId fileId)
         {
-            var newPineFile = PinedFile.CreatePinedFile(workCommentId, fileId);    
+            var newPineFile = PinedFile.CreateNew(workCommentId, fileId);    
 
             PinedFiles.Add(newPineFile);   
         }

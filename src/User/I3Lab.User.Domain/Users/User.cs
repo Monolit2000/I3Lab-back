@@ -1,10 +1,15 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace I3Lab.Users.Domain.Users
 {
-    public class User : Entity, IAggregateRoot
+    public class User : IdentityUser, IAggregateRoot
     {
-        public UserId Id { get; private set; }
+        //public UserId Id { get; private set; }
+
+        public UserId UserId { get; private set; }
+        public new string Id { get; private set; } = Guid.NewGuid().ToString();
+
         public string AvatarImage { get; private set; }
         public string Name { get; private set; }
         public string LastName { get; private set; }
@@ -13,7 +18,9 @@ namespace I3Lab.Users.Domain.Users
         public DateTime RegisterDate { get; private set; }
 
         // Private constructor for EF Core
-        private User() { }
+        //private User() { }
+
+        public User() { }
 
         private User(
             string name,
@@ -22,7 +29,7 @@ namespace I3Lab.Users.Domain.Users
             string passwordHash, 
             string avatarImage)
         {
-            Id = new UserId(Guid.NewGuid());
+            UserId = new UserId(Guid.Parse(Id));
             Name = name;
             LastName = lastName;
             Email = email;
@@ -46,25 +53,25 @@ namespace I3Lab.Users.Domain.Users
                 avatarImage);
         }
 
-        public void UpdateName(string name)
+        public void UpdateName(string newName)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Name cannot be empty.", nameof(name));
-            Name = name;
+            if (string.IsNullOrWhiteSpace(newName))
+                throw new ArgumentException("Name cannot be empty.", nameof(newName));
+            Name = newName;
         }
 
-        public void UpdateLastName(string lastName)
+        public void UpdateLastName(string newLastName)
         {
-            if (string.IsNullOrWhiteSpace(lastName))
-                throw new ArgumentException("Last name cannot be empty.", nameof(lastName));
-            LastName = lastName;
+            if (string.IsNullOrWhiteSpace(newLastName))
+                throw new ArgumentException("Last name cannot be empty.", nameof(newLastName));
+            LastName = newLastName;
         }
 
-        public void UpdateEmail(string email)
+        public void UpdateEmail(string newEmail)
         {
-            if (string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException("Email cannot be empty.", nameof(email));
-            Email = email;
+            if (string.IsNullOrWhiteSpace(newEmail))
+                throw new ArgumentException("Email cannot be empty.", nameof(newEmail));
+            Email = newEmail;
         }
 
         public void UpdatePasswordHash(string passwordHash)

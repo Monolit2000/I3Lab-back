@@ -7,11 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentResults" Version="3.16.0" />
     <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\I3Lab.Users.Domain\I3Lab.Users.Domain.csproj" />
+    <ProjectReference Include="..\I3Lab.User.Domain\I3Lab.Users.Domain.csproj" />
   </ItemGroup>
 
 </Project>
