@@ -4,7 +4,7 @@
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
     <DockerPublishLocally>False</DockerPublishLocally>
-    <ProjectGuid>10bbaf40-d744-499b-958b-2f93e8f41600</ProjectGuid>
+    <ProjectGuid>425d4d5b-5549-40fe-8f4a-c0d831e93052</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerServiceName>i3lab.api</DockerServiceName>

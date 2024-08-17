@@ -1,6 +1,6 @@
-@I3Lab.API_HostAddress = http://localhost:5180
+# @I3Lab.API_HostAddress = http://localhost:5180
 
-GET {{I3Lab.API_HostAddress}}/weatherforecast/
-Accept: application/json
+# GET {{I3Lab.API_HostAddress}}/weatherforecast/
+# Accept: application/json
 
-###
+# ###

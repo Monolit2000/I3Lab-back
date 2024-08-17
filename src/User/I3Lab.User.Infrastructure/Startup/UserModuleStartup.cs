@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Users.Infrastructure.JWT;
+using I3Lab.Users.Infrastructure.Aplication;
 
 namespace I3Lab.Users.Infrastructure.Startup
 {
@@ -30,11 +31,14 @@ namespace I3Lab.Users.Infrastructure.Startup
                 //options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             });
 
+            services.AddApiAuthentication(configuration);
 
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUserRepository, UserRepository>();
-            return services;
+            return services; 
+
+
 
             //services.AddEventBusModule();
             //services.AddScoped<IUserAccessApi, UserAccessApi>();

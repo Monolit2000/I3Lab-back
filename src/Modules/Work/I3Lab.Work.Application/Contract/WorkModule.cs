@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.Contract
 {
-    public class FileName
+    public class WorkModule
     {
     }
 }

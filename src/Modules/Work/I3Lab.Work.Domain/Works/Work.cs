@@ -15,7 +15,7 @@ namespace I3Lab.Works.Domain.Works
 
         public string TreatmentName { get; private set; }
 
-        public WorkDirectory WorkDirectory { get; private set; }
+        //public WorkDirectory WorkDirectory { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
 

@@ -1,63 +1,71 @@
 version: '3.4'
 
+
 services:
-  i3lab-api:
+  i3lab.api:
     image: ${DOCKER_REGISTRY-}i3labapi
-    container_name: i3lab.api 
     build:
       context: .
-      dockerfile: src/API/I3Lab.API/Dockerfile
+      dockerfile: src/API/I3Lab.API/Dockerfile  
+    container_name: i3lab.api
     ports:
-     - 5000:5000
-     - 5001:5001
+      - 5000:8080
+      - 5001:8081
     restart: always
     depends_on:
-      - postgres-db  
-
-  i3lab-blob-storage:
-     image: mcr.microsoft.com/azure-storage/azurite:latest
-     container_name: i3lab.blob-storage
-     volumes: 
-       - ./.containers/blob_storage/data:/data
-     ports: 
-       - "10000:10000" 
-     command: "azurite-blob --blobHost 0.0.0.0 -l /data"
+      - postgres-db
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__Database=Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres
+    networks:
+      - default
 
   postgres-db:
     image: postgres:latest
     container_name: postgres-db
     environment:
-      POSTGRES_DB: identity       # Имя базы данных
-      POSTGRES_USER: postgres     # Пользователь базы данных
-      POSTGRES_PASSWORD: postgres # Пароль пользователя
+      POSTGRES_DB: identity
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - default
     restart: always
+
+
+  i3lab.seq:
+    image: datalust/seq:latest
+    container_name: i3lab-seq
+    environment:
+      - ACCEPT_EULA=Y 
+    ports:
+      - 5341:5341 
+      - 8081:80
+    networks:
+      - default
+    restart: always
+      
+
+  i3lab-blob-storage:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    container_name: i3lab.blob-storage
+    volumes: 
+    - ./.containers/blob_storage/data:/data
+    ports: 
+     - "10000:10000" 
+    command: "azurite-blob --blobHost 0.0.0.0 -l /data"
+
+
+
+
+
 
 volumes:
   postgres_data:
 
-
-
-
-
-
-
-       # i3lab.database:
-  #   image: postgres:latest
-  #   container_name: i3lab.database
-  #   environment:
-  #     - POSTGRES_DB=i3labContext
-  #     - POSTGRES_USER=postgres
-  #     - POSTGRES_PASSWORD=postgres
-  #   volumes:
-  #     - ./.containers/i3labContext-db:/var/lib/postgresql/data
-  #   ports:
-  #     - 5432:5432
-  #   healthcheck:
-  #     test: ["CMD-SHELL", "pg_isready -U postgres"]
-  #     interval: 10s
-  #     timeout: 5s
-  #     retries: 5
+networks:
+  default:
+    name: i3lab-network

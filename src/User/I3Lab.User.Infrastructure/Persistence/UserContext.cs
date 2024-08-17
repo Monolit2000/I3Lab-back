@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace I3Lab.Users.Infrastructure.Persistence
 {
-    public class UserContext : IdentityDbContext<User>
+    public class UserContext : IdentityDbContext
     {
         public DbSet<User> Users { get; set; }
 

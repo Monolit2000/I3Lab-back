@@ -5,11 +5,12 @@ namespace I3Lab.Works.Domain.BlobFiles
 {
     public class Accessibilitylevel : ValueObject
     {
-        public string Value { get; }
         public static Accessibilitylevel Hot => new Accessibilitylevel(nameof(Hot));
         public static Accessibilitylevel Cool => new Accessibilitylevel(nameof(Cool));
         public static Accessibilitylevel Cold => new Accessibilitylevel(nameof(Cold));
         public static Accessibilitylevel Archive => new Accessibilitylevel(nameof(Archive));
+
+        public string Value { get; }
 
         private Accessibilitylevel(string value)
         {

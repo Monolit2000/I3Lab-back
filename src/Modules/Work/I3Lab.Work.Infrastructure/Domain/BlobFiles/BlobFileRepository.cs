@@ -11,9 +11,9 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
 {
     public class BlobFileRepository : IBlobFileRepository
     {
-        private readonly WorkDbContext _context;
+        private readonly WorkContext _context;
 
-        public BlobFileRepository(WorkDbContext context)
+        public BlobFileRepository(WorkContext context)
         {
             _context = context;
         }

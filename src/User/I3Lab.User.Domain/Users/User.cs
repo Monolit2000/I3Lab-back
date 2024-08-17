@@ -1,15 +1,15 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace I3Lab.Users.Domain.Users
 {
-    public class User : IdentityUser, IAggregateRoot
+    public class User : Entity, IAggregateRoot
     {
         //public UserId Id { get; private set; }
 
         public UserId UserId { get; private set; }
-        public new string Id { get; private set; } = Guid.NewGuid().ToString();
-
+        public string Id { get; private set; } = Guid.NewGuid().ToString();
         public string AvatarImage { get; private set; }
         public string Name { get; private set; }
         public string LastName { get; private set; }
@@ -17,40 +17,34 @@ namespace I3Lab.Users.Domain.Users
         public string PasswordHash { get; private set; }
         public DateTime RegisterDate { get; private set; }
 
+        public string RefrashToken { get; private set; }
+
+        public DateTime TokenCreated{ get; set; } 
+
+        public DateTime TokenExpires { get; set; }
+
         // Private constructor for EF Core
         //private User() { }
 
         public User() { }
 
         private User(
-            string name,
-            string lastName,
             string email, 
-            string passwordHash, 
-            string avatarImage)
+            string passwordHash)
         {
             UserId = new UserId(Guid.Parse(Id));
-            Name = name;
-            LastName = lastName;
             Email = email;
             PasswordHash = passwordHash;
-            AvatarImage = avatarImage;
             RegisterDate = DateTime.UtcNow;
         }
 
         public static User Create(
-            string name, 
-            string lastName, 
             string email,
-            string passwordHash, 
-            string avatarImage = null)
+            string passwordHash)
         {
             return new User(
-                name,
-                lastName, 
                 email, 
-                passwordHash, 
-                avatarImage);
+                passwordHash);
         }
 
         public void UpdateName(string newName)
@@ -84,6 +78,13 @@ namespace I3Lab.Users.Domain.Users
         public void UpdateAvatarImage(string avatarImage)
         {
             AvatarImage = avatarImage;
+        }
+
+        public void SetRefrashToken(RefrashToken refrashToken)
+        {
+            RefrashToken = refrashToken.Token;
+            TokenCreated = refrashToken.Created;
+            TokenExpires = refrashToken.Expires;
         }
     }
 }

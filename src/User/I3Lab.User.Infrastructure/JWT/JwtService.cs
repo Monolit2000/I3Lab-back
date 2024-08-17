@@ -11,9 +11,9 @@ namespace I3Lab.Users.Infrastructure.JWT
 {
     public class JwtService : IJwtService
     {
-        private readonly JwtSettings _jwtSettings;
+        private readonly JwtOptions _jwtSettings;
 
-        public JwtService(IOptions<JwtSettings> jwtSettings)
+        public JwtService(IOptions<JwtOptions> jwtSettings)
         {
             _jwtSettings = jwtSettings.Value;
         }
@@ -21,7 +21,7 @@ namespace I3Lab.Users.Infrastructure.JWT
         public string GenegateToken(User user)
         {
             List<Claim> claims = new List<Claim> {
-                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Name, user.Id),
                 new Claim(ClaimTypes.Role, "Admin"),
                 new Claim(ClaimTypes.Role, "Users"),
             };
@@ -33,9 +33,11 @@ namespace I3Lab.Users.Infrastructure.JWT
                 SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
+                //issuer: _jwtSettings.Issuer,
+                //audience: _jwtSettings.Audience,    
                 claims: claims,
                 signingCredentials: signingCredentials,
-                expires: DateTime.UtcNow.AddHours(_jwtSettings.ExpiryMinutes)); ;
+                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.ExpiresTime)); ;
 
             var tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
 

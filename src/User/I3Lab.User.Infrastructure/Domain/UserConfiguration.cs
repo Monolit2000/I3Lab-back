@@ -11,11 +11,11 @@ namespace I3Lab.Users.Infrastructure.Domain
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.UserId)
-                .HasConversion(new UserIdConverter());
+                .HasConversion(new UserIdConverter()).IsRequired(false);
 
             builder.Property(e => e.AvatarImage).IsRequired(false);
-            builder.Property(e => e.Name).IsRequired();
-            builder.Property(e => e.LastName).IsRequired();
+            builder.Property(e => e.Name).IsRequired(false);
+            builder.Property(e => e.LastName).IsRequired(false);
             builder.Property(e => e.Email).IsRequired();
             builder.Property(e => e.PasswordHash).IsRequired();
             builder.Property(e => e.RegisterDate).IsRequired();

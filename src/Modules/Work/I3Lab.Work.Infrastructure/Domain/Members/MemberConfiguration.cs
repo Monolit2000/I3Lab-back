@@ -1,6 +1,7 @@
 ﻿using I3Lab.Works.Domain.Members;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using I3Lab.Works.Infrastructure.Domain.Works;
 
 
 namespace I3Lab.Works.Infrastructure.Domain.Members
@@ -10,6 +11,8 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
         public void Configure(EntityTypeBuilder<Member> builder)
         {
             builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Id).HasConversion<MemberIdConverter>();
 
             builder.Property(e => e.Login)
                 .IsRequired();
@@ -24,6 +27,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
 
             builder.ComplexProperty(o => o.MemberRole, roleBuilder =>
             {
+                roleBuilder.IsRequired();
                 roleBuilder.Property(p => p.Value).HasColumnName("MemberRole");
             });
 

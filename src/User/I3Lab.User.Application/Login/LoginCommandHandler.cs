@@ -2,6 +2,8 @@
 using I3Lab.Users.Application.Contract;
 using I3Lab.Users.Domain.Users;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using System.Security.Cryptography;
 
 
 namespace I3Lab.Users.Application.Login
@@ -11,15 +13,18 @@ namespace I3Lab.Users.Application.Login
         private readonly IPasswordHasher _passwordHasher;
         private readonly IUserRepository _userRepository;
         private readonly IJwtService _jwtService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public LoginCommandHandler(
             IPasswordHasher passwordHasher,
             IUserRepository userRepository,
-            IJwtService jwtService)
+            IJwtService jwtService,
+            IHttpContextAccessor httpContextAccessor)
         {
             _passwordHasher = passwordHasher;
             _userRepository = userRepository;
-            _jwtService = jwtService;   
+            _jwtService = jwtService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<Result<LoginDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -36,7 +41,38 @@ namespace I3Lab.Users.Application.Login
 
             var token = _jwtService.GenegateToken(user);
 
+            var refrashToken = GenearateRefrashToken();
+
+            user.SetRefrashToken(refrashToken);
+
+            SetRefrashToken(refrashToken);
+
             return new LoginDto(token);
+        }
+
+        private RefrashToken GenearateRefrashToken()
+        {
+            var refrashToken = new RefrashToken()
+            {
+                Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
+                Expires = DateTime.Now.AddDays(7)
+            };
+
+            return refrashToken;
+        }
+
+        private void SetRefrashToken(RefrashToken newRefrashToken)
+        {
+            var coockieOptions = new CookieOptions
+            {
+                HttpOnly = true,
+                Expires = newRefrashToken.Expires
+            };
+
+            _httpContextAccessor.HttpContext.Response.Cookies.Append(
+                "refrash-Token", 
+                newRefrashToken.Token, 
+                coockieOptions);
         }
     }
 }

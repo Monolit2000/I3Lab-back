@@ -8,9 +8,9 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 {
     public class WorkRepository : IWorkRepository
     {
-        private readonly WorkDbContext _context;
+        private readonly WorkContext _context;
 
-        public WorkRepository(WorkDbContext context)
+        public WorkRepository(WorkContext context)
         {
             _context = context;
         }

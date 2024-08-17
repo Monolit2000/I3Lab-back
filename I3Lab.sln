@@ -115,8 +115,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.Infrastruc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.UserAccess.IntegrationEvents", "src\Modules\UserAccess\I3Lab.UserAccess.IntegrationEvents\I3Lab.UserAccess.IntegrationEvents.csproj", "{B72C2EAF-C55C-4989-8C85-E37155936B04}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{10BBAF40-D744-499B-958B-2F93E8F41600}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{196C3A2E-F181-4D5E-AA24-F1393384DB91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.Application", "src\User\I3Lab.User.Application\I3Lab.Users.Application.csproj", "{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}"
@@ -126,6 +124,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.Infrastructure", "src\User\I3Lab.User.Infrastructure\I3Lab.Users.Infrastructure.csproj", "{8415E655-D224-4BC1-A6F5-6D0004F4CAAD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.IntegrationEvents", "src\User\I3Lab.User.IntegrationEvents\I3Lab.Users.IntegrationEvents.csproj", "{F02EDEAA-03D9-41D0-B160-56119AB49FC5}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{425D4D5B-5549-40FE-8F4A-C0D831E93052}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -289,10 +289,6 @@ Global
 		{B72C2EAF-C55C-4989-8C85-E37155936B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B72C2EAF-C55C-4989-8C85-E37155936B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B72C2EAF-C55C-4989-8C85-E37155936B04}.Release|Any CPU.Build.0 = Release|Any CPU
-		{10BBAF40-D744-499B-958B-2F93E8F41600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{10BBAF40-D744-499B-958B-2F93E8F41600}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{10BBAF40-D744-499B-958B-2F93E8F41600}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{10BBAF40-D744-499B-958B-2F93E8F41600}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADD3D287-F6E0-4816-B1D7-8D1C3AF9665E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -309,6 +305,10 @@ Global
 		{F02EDEAA-03D9-41D0-B160-56119AB49FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F02EDEAA-03D9-41D0-B160-56119AB49FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F02EDEAA-03D9-41D0-B160-56119AB49FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
