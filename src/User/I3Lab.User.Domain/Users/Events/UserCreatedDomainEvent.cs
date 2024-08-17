@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Treatment
+namespace I3Lab.Users.Domain.Users.Events
 {
-    public class TreatmentDto
+    internal class UserCreatedDomainEvent
     {
     }
 }

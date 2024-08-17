@@ -6,7 +6,7 @@ namespace I3Lab.Works.Infrastructure.Persistence.Extensions
 {
     public static class MigrationExtensions
     {
-        public static void ApplyWorkDbContextMigrations(this IApplicationBuilder app)
+        public static void ApplyWorkContextMigrations(this IApplicationBuilder app)
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 

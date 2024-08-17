@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity.Core.Objects;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace I3Lab.API.Modules.Users
 {
@@ -32,7 +33,9 @@ namespace I3Lab.API.Modules.Users
         [HttpPost("Test")]
         public async Task<IActionResult> Test( )
         {
-            return Ok("Test");
+
+            var test = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            return Ok(test);
         }
 
         [HttpPost("Register")]

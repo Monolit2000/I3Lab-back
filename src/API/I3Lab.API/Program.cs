@@ -66,8 +66,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    app.ApplyMigrations();
-    app.ApplyWorkDbContextMigrations();
+    app.ApplyUserContextMigrations();
+    app.ApplyWorkContextMigrations();
 }
 
 app.UseHttpsRedirection();

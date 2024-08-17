@@ -24,6 +24,11 @@ namespace I3Lab.Users.Application.Register
         }
         public async Task<Result<RegisterDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
+            var userExist = _userRepository.GetByEmailAsync(request.Email);
+
+            //if (userExist != null)
+            //    return Result.Fail("User already exist");
+
             var hashPassword = _passwordHasher.Generate(request.Password);
 
             var user = User.Create(

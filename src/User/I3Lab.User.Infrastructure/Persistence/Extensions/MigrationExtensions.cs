@@ -7,7 +7,7 @@ namespace I3Lab.Users.Infrastructure.Persistence.Extensions
 {
     public static class MigrationExtensions
     {
-        public static void ApplyMigrations( this IApplicationBuilder app)
+        public static void ApplyUserContextMigrations( this IApplicationBuilder app)
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 
