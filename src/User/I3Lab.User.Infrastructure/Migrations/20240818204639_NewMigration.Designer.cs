@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240817044307_NewMigration")]
+    [Migration("20240818204639_NewMigration")]
     partial class NewMigration
     {
         /// <inheritdoc />
@@ -49,7 +49,6 @@ namespace I3Lab.Users.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("RefrashToken")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("RegisterDate")

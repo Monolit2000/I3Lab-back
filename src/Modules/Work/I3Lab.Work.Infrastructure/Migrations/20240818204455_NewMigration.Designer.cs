@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    [Migration("20240817005229_NewMigration")]
+    [Migration("20240818204455_NewMigration")]
     partial class NewMigration
     {
         /// <inheritdoc />
@@ -21,6 +21,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("work")
                 .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -55,7 +56,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlobFiles");
+                    b.ToTable("BlobFiles", "work");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Members.Member", b =>
@@ -90,7 +91,48 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Members");
+                    b.ToTable("Members", "work");
+                });
+
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("PatientId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("TreatmentPreview")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Treatments", "work");
+                });
+
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.TreatmentStage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("TreatmentId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TreatmentId");
+
+                    b.ToTable("TreatmentStage", "work");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>
@@ -124,7 +166,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Works");
+                    b.ToTable("Works", "work");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.WorkFile", b =>
@@ -152,7 +194,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.HasIndex("WorkId1")
                         .IsUnique();
 
-                    b.ToTable("WorkFile");
+                    b.ToTable("WorkFile", "work");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.BlobFiles.BlobFile", b =>
@@ -169,7 +211,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles");
+                            b1.ToTable("BlobFiles", "work");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -187,7 +229,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles");
+                            b1.ToTable("BlobFiles", "work");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -196,6 +238,13 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Navigation("Accessibilitylevel");
 
                     b.Navigation("FileType");
+                });
+
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.TreatmentStage", b =>
+                {
+                    b.HasOne("I3Lab.Works.Domain.Treatments.Treatments", null)
+                        .WithMany("TreatmentStages")
+                        .HasForeignKey("TreatmentId");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>
@@ -219,7 +268,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.HasIndex("WorkId", "MemberId")
                                 .IsUnique();
 
-                            b1.ToTable("WorkMember");
+                            b1.ToTable("WorkMember", "work");
 
                             b1.WithOwner()
                                 .HasForeignKey("WorkId");
@@ -238,7 +287,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                                     b2.HasKey("WorkMemberWorkId", "WorkMemberMemberId");
 
-                                    b2.ToTable("WorkMember");
+                                    b2.ToTable("WorkMember", "work");
 
                                     b2.WithOwner()
                                         .HasForeignKey("WorkMemberWorkId", "WorkMemberMemberId");
@@ -261,6 +310,11 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.HasOne("I3Lab.Works.Domain.Works.Work", null)
                         .WithOne("WorkAvatarImage")
                         .HasForeignKey("I3Lab.Works.Domain.Works.WorkFile", "WorkId1");
+                });
+
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatments", b =>
+                {
+                    b.Navigation("TreatmentStages");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>

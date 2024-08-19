@@ -1,9 +1,12 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using System.ComponentModel;
 
 namespace I3Lab.Works.Domain.Members
 {
     public class Member : Entity, IAggregateRoot
     {
+        public ClinicId ClinicId { get; private set; }
+
         public MemberId Id { get; private set; }
 
         public MemberRole MemberRole { get; private set; }

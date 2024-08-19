@@ -17,20 +17,16 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             builder.HasKey(wf => wf.FileId );
 
             builder.Property(wf => wf.FileId)
-                .HasConversion<BlobFileIdConverter>()
-                .IsRequired();
+                .HasConversion<BlobFileIdConverter>().IsRequired();
 
             // Конвертеры для идентификаторов
             builder.Property(wf => wf.WorkId)
-                .HasConversion<WorkIdConverter>()
-                .IsRequired();
+                .HasConversion<WorkIdConverter>().IsRequired();
 
             // Настройка других свойств
-            builder.Property(wf => wf.ContainerName)
-                .IsRequired();
+            builder.Property(wf => wf.ContainerName).IsRequired();
 
-            builder.Property(wf => wf.CreateDate)
-                .IsRequired();
+            builder.Property(wf => wf.CreateDate).IsRequired();
         }
     }
 }

@@ -1,22 +1,25 @@
 version: '3.4'
 
-
 services:
   i3lab.api:
     image: ${DOCKER_REGISTRY-}i3labapi
     build:
       context: .
       dockerfile: src/API/I3Lab.API/Dockerfile  
-    container_name: i3lab.api
+    container_name: i3lab-api
     ports:
       - 5000:5000
       - 5001:5001
     restart: always
     depends_on:
       - postgres-db
+      - rabbitmq
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Database=Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres
+      - MessageBroker__HostName=amqp://i3lab-rabbitmq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
     networks:
       - default
 
@@ -35,7 +38,6 @@ services:
       - default
     restart: always
 
-
   i3lab.seq:
     image: datalust/seq:latest
     container_name: i3lab-seq
@@ -48,15 +50,34 @@ services:
       - default
     restart: always
       
-
   i3lab-blob-storage:
     image: mcr.microsoft.com/azure-storage/azurite:latest
     container_name: i3lab.blob-storage
     volumes: 
-    - ./.containers/blob_storage/data:/data
+      - ./.containers/blob_storage/data:/data
     ports: 
-     - "10000:10000" 
+      - "10000:10000" 
     command: "azurite-blob --blobHost 0.0.0.0 -l /data"
+    networks:
+      - default
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: i3lab-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"   
+      - "15672:15672" 
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+      - rabbitmq_data:/var/log/rabbitmq
+
+    networks:
+      - default
+    restart: always
 
 
 
@@ -65,7 +86,76 @@ services:
 
 volumes:
   postgres_data:
+  rabbitmq_data:
 
 networks:
   default:
     name: i3lab-network
+
+
+
+# services:
+#   i3lab.api:
+#     image: ${DOCKER_REGISTRY-}i3labapi
+#     build:
+#       context: .
+#       dockerfile: src/API/I3Lab.API/Dockerfile  
+#     container_name: i3lab.api
+#     ports:
+#       - 5000:5000
+#       - 5001:5001
+#     restart: always
+#     depends_on:
+#       - postgres-db
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Development
+#       - ConnectionStrings__Database=Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres
+#     networks:
+#       - default
+
+#   postgres-db:
+#     image: postgres:latest
+#     container_name: postgres-db
+#     environment:
+#       POSTGRES_DB: identity
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     ports:
+#       - "5432:5432"
+#     networks:
+#       - default
+#     restart: always
+
+
+#   i3lab.seq:
+#     image: datalust/seq:latest
+#     container_name: i3lab-seq
+#     environment:
+#       - ACCEPT_EULA=Y 
+#     ports:
+#       - 5341:5341 
+#       - 8081:80
+#     networks:
+#       - default
+#     restart: always
+      
+
+#   i3lab-blob-storage:
+#     image: mcr.microsoft.com/azure-storage/azurite:latest
+#     container_name: i3lab.blob-storage
+#     volumes: 
+#     - ./.containers/blob_storage/data:/data
+#     ports: 
+#      - "10000:10000" 
+#     command: "azurite-blob --blobHost 0.0.0.0 -l /data"
+
+    
+
+# volumes:
+#   postgres_data:
+
+# networks:
+#   default:
+#     name: i3lab-network

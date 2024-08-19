@@ -13,5 +13,6 @@ namespace I3Lab.Works.Domain.Treatment
         Task AddAsync(Treatment treatment);
         Task UpdateAsync(Treatment treatment);
         Task DeleteAsync(TreatmentId id);
+        Task SaveChangesAsync();
     }
 }

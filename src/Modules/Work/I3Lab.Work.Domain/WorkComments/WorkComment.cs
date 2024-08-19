@@ -32,7 +32,7 @@ namespace I3Lab.Works.Domain.WorkComments
             CreateDate = DateTime.UtcNow;  
         }
 
-        internal static WorkComment CreateNew(WorkId workId, MemberId authorId, string content) 
+        public static WorkComment CreateNew(WorkId workId, MemberId authorId, string content) 
         { 
             return new WorkComment(
                 workId,

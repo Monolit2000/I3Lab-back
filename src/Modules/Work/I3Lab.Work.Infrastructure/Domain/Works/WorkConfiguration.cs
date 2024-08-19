@@ -17,7 +17,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             builder.HasKey(e => e.Id);
 
             // Конвертеры для идентификаторов
-            builder.Property(e => e.Id).HasConversion<WorkIdConverter>();
+            //builder.Property(e => e.Id).HasConversion<WorkIdConverter>();
 
 
             builder.Property(e => e.TreatmentId).HasConversion<TreatmentIdConverter>();

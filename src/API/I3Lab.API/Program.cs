@@ -10,6 +10,7 @@ using OpenTelemetry.Exporter;
 using I3Lab.BuildingBlocks.Infrastructure.StartUp;
 using I3Lab.Works.Infrastructure.Persistence.Extensions;
 using I3Lab.Works.Infrastructure.Startup;
+using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,9 +54,10 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(J
 builder.Services.AddBuildingBlocksModule(builder.Configuration);
 
 builder.Services
-    .AddUserModule(builder.Configuration);
+    .AddUserModule(builder.Configuration)
+    .AddWorkModule(builder.Configuration);
 
-builder.Services.AddWorkModule(builder.Configuration);
+builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
 
 
 var app = builder.Build();
@@ -71,6 +73,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapHealthChecks("health");
 
 app.UseSerilogRequestLogging();
 

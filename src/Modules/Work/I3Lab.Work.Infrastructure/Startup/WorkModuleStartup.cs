@@ -1,20 +1,23 @@
-﻿using I3Lab.Works.Application.Contract;
-using I3Lab.Works.Domain.Works;
-using I3Lab.Works.Infrastructure.Domain.Works;
-using I3Lab.Works.Infrastructure.Persistence;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using I3Lab.Works.Domain.Works;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.BlobFiles;
+using I3Lab.Works.Domain.Treatment;
 using Microsoft.EntityFrameworkCore;
+using I3Lab.Works.Application.Contract;
+using Microsoft.Extensions.Configuration;
+using I3Lab.BuildingBlocks.Infrastructure;
+using I3Lab.Works.Infrastructure.Persistence;
+using I3Lab.Works.Infrastructure.Domain.Works;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using I3Lab.BuildingBlocks.Infrastructure.Domain;
-using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Infrastructure.Domain.Members;
-using I3Lab.Works.Domain.WorkComments;
-using I3Lab.Works.Infrastructure.Domain.WorkComments;
-using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Infrastructure.Domain.BlobFiles;
-using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Infrastructure.Domain.Treatments;
+using I3Lab.Works.Infrastructure.Configurations.EventBus;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using I3Lab.Works.Infrastructure.Configurations.Persistence;
+using I3Lab.Works.Infrastructure.Configurations.Application;
 
 
 namespace I3Lab.Works.Infrastructure.Startup
@@ -25,35 +28,13 @@ namespace I3Lab.Works.Infrastructure.Startup
          this IServiceCollection services, IConfiguration configuration)
         {
 
-            var connectionString = configuration.GetConnectionString("Database");
+            services.AddApplicationServices(configuration);
 
-            services.AddMediatR(cfg =>
-            {
-                cfg.RegisterServicesFromAssembly(typeof(WorkModule).Assembly);
-            });
+            services.AddPersistenceServices(configuration);
 
-            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
-
-            services.AddDbContext<WorkContext>((sp, options) =>
-            {
-                options.UseNpgsql(configuration.GetConnectionString("Database"));
-                options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
-            });
-
-            
-            services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddScoped<IWorkRepository, WorkRepository>();
-            //services.AddScoped<IWorkCommentRepository, WorkCommentRepository>();
-            services.AddScoped<IBlobFileRepository, BlobFileRepository>();
-            //services.AddScoped<ITretmentRepository, TretmentRepository>();
-
+            services.AddMassTransitEventBus(configuration);
 
             return services;
-
-
-            //services.AddEventBusModule();
-            //services.AddScoped<IUserAccessApi, UserAccessApi>();
-            //services.AddScoped<IUserAccessModule, UserAccessModule>();
         }
     }
 }

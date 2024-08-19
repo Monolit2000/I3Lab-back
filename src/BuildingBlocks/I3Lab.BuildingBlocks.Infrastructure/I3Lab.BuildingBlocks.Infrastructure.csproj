@@ -8,13 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.20.0" />
+    <PackageReference Include="MassTransit" Version="8.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="8.0.8" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Modules\Work\I3Lab.Work.Application\I3Lab.Works.Application.csproj" />
     <ProjectReference Include="..\I3Lab.BuildingBlocks.Application\I3Lab.BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\I3Lab.BuildingBlocks.Domain\I3Lab.BuildingBlocks.Domain.csproj" />
   </ItemGroup>

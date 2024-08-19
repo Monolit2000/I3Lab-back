@@ -14,9 +14,10 @@ namespace I3Lab.Works.Domain.Treatment
         public string Name { get; private set; }
 
         public List<TreatmentStage> TreatmentStages = [];
-        public TreatmentPreview TreatmentPreview { get; private set; }
+        //public TreatmentPreview TreatmentPreview { get; private set; }
+        public BlobFileId TreatmentPreview { get; private set; }
 
-    public DateTime CreateDate { get; private set; }
+        public DateTime CreateDate { get; private set; }
 
         private Treatment() { } // For Ef Core
 
@@ -30,7 +31,7 @@ namespace I3Lab.Works.Domain.Treatment
             AddDomainEvent(new TreatmentCreatedDomainEvent());
         }
 
-        internal static Treatment CreateNew(
+        public static Treatment CreateNew(
             MemberId creatorId, 
             MemberId patientId, 
             string name)
@@ -40,6 +41,7 @@ namespace I3Lab.Works.Domain.Treatment
                 patientId, 
                 name); 
         }
+
 
         public void CreateNewTreatmentStage(MemberId creatorId, WorkId workId)
         {
@@ -51,7 +53,7 @@ namespace I3Lab.Works.Domain.Treatment
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)
         {
-            var treatmentStages = TreatmentStages.FirstOrDefault(ts => ts.WorkId == workId);
+            var treatmentStages = TreatmentStages.FirstOrDefault(ts => ts.Id == workId);
             if (treatmentStages == null) 
                 throw new InvalidOperationException("Member not found.");
 
@@ -67,7 +69,7 @@ namespace I3Lab.Works.Domain.Treatment
 
         public void AddPreview(BlobFileId fileId)
         {
-            var treatmentPreview = TreatmentPreview.CreateNew(this.Id, fileId);
+            var treatmentPreview = fileId; //TreatmentPreview.CreateNew(this.Id, fileId);
 
             TreatmentPreview = treatmentPreview;
         }

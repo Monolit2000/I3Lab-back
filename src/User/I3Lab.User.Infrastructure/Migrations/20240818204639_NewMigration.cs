@@ -27,7 +27,7 @@ namespace I3Lab.Users.Infrastructure.Migrations
                     Email = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
                     RegisterDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    RefrashToken = table.Column<string>(type: "text", nullable: false),
+                    RefrashToken = table.Column<string>(type: "text", nullable: true),
                     TokenCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     TokenExpires = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },

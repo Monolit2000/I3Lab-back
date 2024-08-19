@@ -1,11 +1,8 @@
-﻿using Azure.Storage.Blobs;
-using I3Lab.BuildingBlocks.Application;
-using I3Lab.BuildingBlocks.Application.BlobStorage;
-using I3Lab.BuildingBlocks.Infrastructure.BlobStorage;
-using I3Lab.BuildingBlocks.Infrastructure.ExecutionContext;
+﻿using I3Lab.BuildingBlocks.Application;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using I3Lab.BuildingBlocks.Infrastructure.ExecutionContext;
+using I3Lab.BuildingBlocks.Infrastructure.Configurations.BlobStorage;
 
 namespace I3Lab.BuildingBlocks.Infrastructure.StartUp
 {
@@ -14,11 +11,11 @@ namespace I3Lab.BuildingBlocks.Infrastructure.StartUp
         public static IServiceCollection AddBuildingBlocksModule(
             this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddSingleton<IBlobService, BlobService>();
-
-            services.AddSingleton(_ => new BlobServiceClient(configuration.GetConnectionString("BlobStorage")));
-
             services.AddSingleton<IExecutionContextAccessor, ExecutionContextAccessor>();
+
+            services.AddBlobStorage(configuration);
+
+            services.AddHealthChecks();
 
             return services;
         }

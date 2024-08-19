@@ -39,13 +39,11 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
         public async Task AddAsync(Treatment treatment)
         {
             await _context.Treatments.AddAsync(treatment);
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(Treatment treatment)
         {
             _context.Treatments.Update(treatment);
-            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(TreatmentId id)
@@ -54,8 +52,12 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
             if (treatment != null)
             {
                 _context.Treatments.Remove(treatment);
-                await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

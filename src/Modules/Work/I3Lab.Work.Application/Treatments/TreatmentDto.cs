@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.WorkComments
+namespace I3Lab.Works.Application.Treatments
 {
-    internal class AddWorkCommentCommand
+    public class TreatmentDto
     {
     }
 }

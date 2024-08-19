@@ -55,13 +55,12 @@ namespace I3Lab.Works.Domain.Works
 
         public Result AddWorkMember(MemberId memberId, MemberId addedBy)
         {
-
             if(IsWorkMamberIdContainInWorkMembersList(addedBy))
-                return Result
-                    .Fail(WorkErrors.WorkMemberNotFoundError);
+                return Result.Fail(WorkErrors.WorkMemberNotFoundError);
 
             var newWorkMember = WorkMember.CreateNew(this.Id, memberId, addedBy);
             WorkMembers.Add(newWorkMember);
+
             AddDomainEvent(new WorkMemberAddedDomainEvent(this.Id, memberId, addedBy));
             return Result.Ok();
         }
