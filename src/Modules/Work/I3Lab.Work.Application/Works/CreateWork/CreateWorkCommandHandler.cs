@@ -1,4 +1,6 @@
 ﻿using FluentResults;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.Works;
 using MediatR;
 using System;
@@ -10,15 +12,24 @@ using System.Threading.Tasks;
 namespace I3Lab.Works.Application.Works.CreateWork
 {
     public class CreateWorkCommandHandler(
+        IMemberRepository memberRepository,
         IWorkRepository workRepository,
         IMemberContext memberContext) : IRequestHandler<CreateWorkCommand, Result<WorkDto>>
     {
-        public Task<Result<WorkDto>> Handle(CreateWorkCommand request, CancellationToken cancellationToken)
+        public async Task<Result<WorkDto>> Handle(CreateWorkCommand request, CancellationToken cancellationToken)
         {
+            var member = await memberRepository.GetByIdAsync(memberContext.MemberId);
 
-            
+            if (member == null)
+                return Result.Fail("member not exist");
 
-            throw new NotImplementedException();
+            var work = await Work.CreateAsync(
+                member, 
+                new TreatmentId(request.TreatmentId));
+
+            var workDto = new WorkDto();
+
+            return workDto;
         }
     }
 }

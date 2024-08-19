@@ -43,13 +43,15 @@ namespace I3Lab.Works.Domain.Works
             AddDomainEvent(new WorkCreatedDomainEvent(Id));
         }
 
-        public static Work CreateNewWork(
-            MemberId creatorId, 
-            TreatmentId treatmentId,
-            WorkAccebility workAccebilityId)
+        public static async Task<Result<Work>> CreateAsync(
+            Member creator, 
+            TreatmentId treatmentId)
         {
+            if (!IsMemberRoleValid(creator))
+                return Result.Fail(WorkErrors.MemberNotHaveRequiredRole);
+
             return new Work(
-                creatorId,
+                creator.Id,
                 treatmentId);
         }
 
@@ -93,8 +95,7 @@ namespace I3Lab.Works.Domain.Works
         {
             var addeder = WorkMembers.FirstOrDefault(a => a.MemberId == addedBy);
             if (addeder == null)
-                return Result
-                    .Fail(WorkErrors.WorkMemberNotFoundError);
+                return Result.Fail(WorkErrors.WorkMemberNotFoundError);
 
             var newWorkMember = WorkMember.CreateNew(this.Id, customerId, addedBy);
 
@@ -125,6 +126,11 @@ namespace I3Lab.Works.Domain.Works
               return false;
 
             return true;    
+        }
+
+        private static bool IsMemberRoleValid(Member creator)
+        {
+            return creator.MemberRole == MemberRole.Doctor || creator.MemberRole == MemberRole.Admin;
         }
 
     }

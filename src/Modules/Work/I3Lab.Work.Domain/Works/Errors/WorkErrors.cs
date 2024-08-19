@@ -11,5 +11,8 @@ namespace I3Lab.Works.Domain.Works.Errors
     public static class WorkErrors
     {
         public static readonly string WorkMemberNotFoundError = "The member adding the new work member is not present in the work members list";
+
+        public static readonly string MemberNotHaveRequiredRole = "The member does not have the required role";
+
     }
 }
