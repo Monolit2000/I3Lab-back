@@ -12,7 +12,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
         {
             builder.HasKey(e => e.Id);
 
-            builder.Property(e => e.Id).HasConversion<MemberIdConverter>();
+            //builder.Property(e => e.Id).HasConversion<MemberIdConverter>();
 
             builder.Property(e => e.Login)
                 .IsRequired();

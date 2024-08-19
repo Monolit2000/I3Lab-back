@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using I3Lab.Users.Infrastructure.JWT;
 
-namespace I3Lab.Users.Infrastructure.Aplication
+namespace I3Lab.Users.Infrastructure.Configurations.Aplication
 {
     public static class ApplicationServices
     {

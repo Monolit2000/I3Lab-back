@@ -15,14 +15,9 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
     {
         public void Configure(EntityTypeBuilder<BlobFile> builder)
         {
-            // Установка ключа для BlobFile
             builder.HasKey(bf => bf.Id);
 
-            // Конвертеры для идентификаторов
-            builder.Property(bf => bf.Id).HasConversion<BlobFileIdConverter>();
-
-            builder.Property(bf => bf.WorkId).HasConversion<WorkIdConverter>().IsRequired();
-
+            builder.Property(bf => bf.WorkId).IsRequired();
             builder.Property(bf => bf.BlobName).IsRequired();
             builder.Property(bf => bf.FileName).IsRequired();
             builder.Property(bf => bf.BlobDirectoryName).IsRequired();
@@ -40,17 +35,5 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
                 b.Property(ft => ft.Value).HasColumnName("FileType").IsRequired();
             });
         }
-    }
-
-    public class BlobFileIdConverter : ValueConverter<BlobFileId, Guid>
-    {
-        public BlobFileIdConverter()
-            : base(id => id.Value, value => new BlobFileId(value)) { }
-    }
-
-    public class WorkIdConverter : ValueConverter<WorkId, Guid>
-    {
-        public WorkIdConverter()
-            : base(id => id.Value, value => new WorkId(value)) { }
     }
 }

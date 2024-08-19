@@ -10,9 +10,11 @@ namespace I3Lab.Works.Infrastructure.Persistence.Extensions
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-            using WorkContext userContext = scope.ServiceProvider.GetRequiredService<WorkContext>();
+            using WorkContext workContext = scope.ServiceProvider.GetRequiredService<WorkContext>();
 
-            userContext.Database.Migrate();
+            //workContext.Database.EnsureDeleted();
+
+            workContext.Database.Migrate();
         }
     }
 }

@@ -61,6 +61,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("ClinicId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -91,7 +94,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.ToTable("Members", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatments", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.Treatment", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -117,7 +120,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.ToTable("Treatments", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.TreatmentStage", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.TreatmentStage", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -137,13 +140,13 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CreatorId")
+                    b.Property<Guid>("CreatorId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CustomerId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("TreatmentId")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("TreatmentName")
@@ -237,9 +240,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Navigation("FileType");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.TreatmentStage", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.TreatmentStage", b =>
                 {
-                    b.HasOne("I3Lab.Works.Domain.Treatments.Treatments", null)
+                    b.HasOne("I3Lab.Works.Domain.Treatment.Treatment", null)
                         .WithMany("TreatmentStages")
                         .HasForeignKey("TreatmentId");
                 });
@@ -309,7 +312,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .HasForeignKey("I3Lab.Works.Domain.Works.WorkFile", "WorkId1");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatments", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.Treatment", b =>
                 {
                     b.Navigation("TreatmentStages");
                 });

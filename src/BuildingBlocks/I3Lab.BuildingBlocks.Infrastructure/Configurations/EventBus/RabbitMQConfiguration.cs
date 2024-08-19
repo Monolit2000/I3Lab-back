@@ -1,4 +1,5 @@
-﻿using MassTransit;
+﻿using I3Lab.BuildingBlocks.Infrastructure.MussTransitEventBus;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,9 +24,12 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus
                     });
 
                     configurator.ConfigureEndpoints(context);
+
+
                 });
             });
 
+            //services.AddHostedService<MassageLoopPublisher>();
             return services;
         }
     }

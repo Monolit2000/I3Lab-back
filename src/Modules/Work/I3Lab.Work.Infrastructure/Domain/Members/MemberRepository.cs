@@ -26,6 +26,13 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
             return member;
         }
 
+        public async Task<Member> GetByEmailAsync(string email)
+        {
+            var member = await _context.Members.FirstOrDefaultAsync(m => m.Email == email);
+
+            return member;
+        }
+
         public async Task<IEnumerable<Member>> GetAllAsync()
         {
             return await _context.Members.ToListAsync();

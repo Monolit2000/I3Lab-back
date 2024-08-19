@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigration : Migration
+    public partial class EasyStrongIdMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,6 +40,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ClinicId = table.Column<Guid>(type: "uuid", nullable: true),
                     Login = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: false),
@@ -74,10 +75,10 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TreatmentId = table.Column<Guid>(type: "uuid", nullable: true),
+                    TreatmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     TreatmentName = table.Column<string>(type: "text", nullable: true),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: false),
                     WorkStartedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     WorkStatus = table.Column<string>(type: "text", nullable: true)
                 },

@@ -10,6 +10,8 @@ namespace I3Lab.Works.Domain.Members
     {
         public  Task<Member> GetByIdAsync(MemberId id);
 
+        public Task<Member> GetByEmailAsync(string email);
+
         public  Task AddAsync(Member member);
 
         public  Task UpdateAsync(Member member);

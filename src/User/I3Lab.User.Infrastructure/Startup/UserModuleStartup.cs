@@ -6,7 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Users.Infrastructure.JWT;
-using I3Lab.Users.Infrastructure.Aplication;
+using I3Lab.Users.Infrastructure.Configurations.Aplication;
+using I3Lab.Users.Infrastructure.Configurations.EventBus;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using I3Lab.BuildingBlocks.Infrastructure.Domain;
 
 namespace I3Lab.Users.Infrastructure.Startup
 {
@@ -23,12 +26,12 @@ namespace I3Lab.Users.Infrastructure.Startup
                 cfg.RegisterServicesFromAssembly(typeof(IJwtService).Assembly);
             });
 
-            //services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
             services.AddDbContext<UserContext>((sp, options) =>
             {
                 options.UseNpgsql(configuration.GetConnectionString("Database"));
-                //options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             });
 
             services.AddApiAuthentication(configuration);
@@ -36,6 +39,9 @@ namespace I3Lab.Users.Infrastructure.Startup
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddMassTransitEventBus(configuration);
+
             return services; 
 
 

@@ -1,4 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Users.Domain.Users.Events;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 
@@ -36,6 +37,12 @@ namespace I3Lab.Users.Domain.Users
             Email = email;
             PasswordHash = passwordHash;
             RegisterDate = DateTime.UtcNow;
+
+            AddDomainEvent(new UserCreatedDomainEvent(
+                UserId.Value,
+                "Name",
+                Email, 
+                "LastName"));
         }
 
         public static User Create(

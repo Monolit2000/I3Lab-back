@@ -22,10 +22,7 @@ namespace I3Lab.Users.Infrastructure.Domain
             builder.Property(e => e.RefrashToken).IsRequired(false);
 
 
-            // builder.HasMany<IdentityUserClaim<string>>()
-            //.WithOne()
-            //.HasForeignKey(uc => uc.UserId)
-            //.HasPrincipalKey(u => u.Id);
+          
         }
     }
 }

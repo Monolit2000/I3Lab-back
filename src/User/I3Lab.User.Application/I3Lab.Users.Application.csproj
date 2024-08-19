@@ -8,11 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.16.0" />
+    <PackageReference Include="MassTransit" Version="8.2.4" />
     <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\I3Lab.User.Domain\I3Lab.Users.Domain.csproj" />
+    <ProjectReference Include="..\I3Lab.User.IntegrationEvents\I3Lab.Users.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,10 +17,6 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
             builder.HasMany(e => e.TreatmentStages) 
                    .WithOne() 
                    .HasForeignKey(e => e.TreatmentId); 
-
-            //builder.HasOne(e => e.TreatmentPreview) 
-            //       .WithOne() 
-            //       .HasForeignKey<TreatmentPreview>(e => e.TreatmentId); 
         }
     }
 }

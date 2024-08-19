@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240818204639_NewMigration")]
-    partial class NewMigration
+    [Migration("20240819084223_EasyStrongIdMigration")]
+    partial class EasyStrongIdMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

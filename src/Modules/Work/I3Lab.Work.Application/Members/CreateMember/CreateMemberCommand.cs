@@ -9,27 +9,23 @@ namespace I3Lab.Works.Application.Members.CreateMember
         [JsonConstructor]
         public CreateMemberCommand(
            Guid memberId,
-           string login,
+           string name,
            string email,
-           string firstName,
-           string lastName,
-           string name)
+           string lastName)
         {
-            Login = login;
             MemberId = memberId;
-            Email = email;
-            FirstName = firstName;
-            LastName = lastName;
             Name = name;
+            Email = email;
+            LastName = lastName;
         }
 
         internal Guid MemberId { get; }
 
-        internal string Login { get; }
+        //internal string Login { get; }
 
         internal string Email { get; }
 
-        internal string FirstName { get; }
+        //internal string FirstName { get; }
 
         internal string LastName { get; }
 

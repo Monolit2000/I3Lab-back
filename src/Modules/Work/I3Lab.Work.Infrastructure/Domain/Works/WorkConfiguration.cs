@@ -20,11 +20,11 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             //builder.Property(e => e.Id).HasConversion<WorkIdConverter>();
 
 
-            builder.Property(e => e.TreatmentId).HasConversion<TreatmentIdConverter>();
+            builder.Property(e => e.TreatmentId).IsRequired();
 
-            builder.Property(e => e.CreatorId).HasConversion<MemberIdConverter>();
+            builder.Property(e => e.CreatorId).IsRequired();
 
-            builder.Property(e => e.CustomerId).HasConversion<MemberIdConverter>();
+            builder.Property(e => e.CustomerId).IsRequired();
 
 
             //Конфигурация WorkFile
@@ -64,17 +64,15 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
                 b.HasKey(wm => new { wm.WorkId, wm.MemberId });
 
 
-                b.Property(wm => wm.WorkId)
-                .HasConversion<WorkIdConverter>()
-                    .IsRequired();
+                b.Property(wm => wm.WorkId).IsRequired();
 
                 //b.OwnsOne(o => o.WorkId, b =>
                 //{
                 //    b.Property(a => a.Value).HasColumnName("WorkId").IsRequired();
                 //});
 
-                b.Property(wm => wm.MemberId).HasConversion<MemberIdConverter>().IsRequired();
-                b.Property(wm => wm.AddedBy).HasConversion<MemberIdConverter>().IsRequired();
+                b.Property(wm => wm.MemberId).IsRequired();
+                b.Property(wm => wm.AddedBy).IsRequired();
                 b.Property(wm => wm.JoinDate).IsRequired();
 
                 b.OwnsOne(at => at.AccessibilityType, b =>
@@ -97,32 +95,32 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
         }
     }
 
-    public class WorkIdConverter : ValueConverter<WorkId, Guid>
-    {
-        public WorkIdConverter()
-            : base(id => id.Value, value => new WorkId(value)) { }
-    }
-
-    public class TreatmentIdConverter : ValueConverter<TreatmentId, Guid>
-    {
-        public TreatmentIdConverter()
-            : base(id => id.Value, value => new TreatmentId(value)) { }
-    }
-
-    public class MemberIdConverter : ValueConverter<MemberId, Guid>
-    {
-        public MemberIdConverter()
-            : base(id => id.Value, value => new MemberId(value)) { }
-    }
-    //public class WorkFileIdConverter : ValueConverter<WorkFileId, Guid>
+    //public class WorkIdConverter : ValueConverter<WorkId, Guid>
     //{
-    //    public WorkFileIdConverter()
-    //        : base(id => id.Value, value => new WorkFileId(value)) { }
+    //    public WorkIdConverter()
+    //        : base(id => id.Value, value => new WorkId(value)) { }
     //}
 
-    public class BlobFileIdConverter : ValueConverter<BlobFileId, Guid>
-    {
-        public BlobFileIdConverter()
-            : base(id => id.Value, value => new BlobFileId(value)) { }
-    }
+    //public class TreatmentIdConverter : ValueConverter<TreatmentId, Guid>
+    //{
+    //    public TreatmentIdConverter()
+    //        : base(id => id.Value, value => new TreatmentId(value)) { }
+    //}
+
+    //public class MemberIdConverter : ValueConverter<MemberId, Guid>
+    //{
+    //    public MemberIdConverter()
+    //        : base(id => id.Value, value => new MemberId(value)) { }
+    //}
+    ////public class WorkFileIdConverter : ValueConverter<WorkFileId, Guid>
+    ////{
+    ////    public WorkFileIdConverter()
+    ////        : base(id => id.Value, value => new WorkFileId(value)) { }
+    ////}
+
+    //public class BlobFileIdConverter : ValueConverter<BlobFileId, Guid>
+    //{
+    //    public BlobFileIdConverter()
+    //        : base(id => id.Value, value => new BlobFileId(value)) { }
+    //}
 }
