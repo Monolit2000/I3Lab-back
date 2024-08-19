@@ -1,4 +1,6 @@
-﻿using I3Lab.Works.Application.BlobFiles.AddBlobFile;
+﻿using I3Lab.BuildingBlocks.Application.Cache;
+using I3Lab.BuildingBlocks.Infrastructure.Cache;
+using I3Lab.Works.Application.BlobFiles.AddBlobFile;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +17,8 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.Cache
             this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDistributedMemoryCache();
+
+            services.AddSingleton<ICacheService, CacheService>();
 
             return services;
         }
