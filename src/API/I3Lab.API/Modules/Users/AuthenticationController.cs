@@ -9,7 +9,7 @@ using System.Security.Claims;
 
 namespace I3Lab.API.Modules.Users
 {
-    [Route("api/[controller]")]
+    [Route("api/authentication")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -29,8 +29,8 @@ namespace I3Lab.API.Modules.Users
 
         private HttpContext _httpContext => _httpContextAccessor.HttpContext;
 
-        [Authorize]
-        [HttpPost("Test")]
+
+        [HttpPost("test")]
         public async Task<IActionResult> Test( )
         {
 
@@ -38,7 +38,7 @@ namespace I3Lab.API.Modules.Users
             return Ok(test);
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterUserCommand registerUserCommand)
         {
             var responce = await _mediator.Send(registerUserCommand);
@@ -47,7 +47,7 @@ namespace I3Lab.API.Modules.Users
         
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand loginCommand)
         {
 
@@ -59,7 +59,7 @@ namespace I3Lab.API.Modules.Users
 
         }
 
-        [HttpPost("Refresh")]
+        [HttpPost("refresh")]
         public async Task<IActionResult> Refresh()
         {
             _logger.LogInformation("Refresh called");
@@ -77,7 +77,7 @@ namespace I3Lab.API.Modules.Users
         }
 
         [Authorize]
-        [HttpDelete("Revoke")]
+        [HttpDelete("revoke")]
         public async Task<IActionResult> Revoke()
         {
             _logger.LogInformation("Revoke called");

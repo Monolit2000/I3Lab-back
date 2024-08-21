@@ -31,7 +31,7 @@ namespace I3Lab.Users.Application.Register
 
             var hashPassword = _passwordHasher.Generate(request.Password);
 
-            var user = User.Create(
+            var user = User.CreateNew(
                 request.Email, 
                 hashPassword);
 

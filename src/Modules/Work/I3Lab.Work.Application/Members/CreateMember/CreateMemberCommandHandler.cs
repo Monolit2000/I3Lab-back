@@ -1,12 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.Works.Domain.Members;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Storage.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.Members.CreateMember
 {
@@ -16,9 +10,25 @@ namespace I3Lab.Works.Application.Members.CreateMember
 
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
         {
-            //var newMember = Member.CreateNew();
+            if (await memberRepository.IsEmailTakenAsync(request.Email))
+            {
+                return Result.Fail("Email is already taken");
+            }
 
-            return new MemberDto();
+            var newMember = Member.CreateNew(
+                request.Email
+            );
+
+            await memberRepository.AddAsync(newMember);
+            await memberRepository.SaveChangesAsync();
+
+            var memberDto = new MemberDto
+            {
+                Id = newMember.Id.Value,
+                Email = newMember.Email,
+            };
+
+            return Result.Ok(memberDto);
         }
     }
 }

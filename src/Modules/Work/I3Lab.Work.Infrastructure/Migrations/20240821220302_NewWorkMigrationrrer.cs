@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class EasyStrongIdMigration : Migration
+    public partial class NewWorkMigrationrrer : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,10 +41,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClinicId = table.Column<Guid>(type: "uuid", nullable: true),
-                    Login = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    FirstName = table.Column<string>(type: "text", nullable: false),
-                    LastName = table.Column<string>(type: "text", nullable: false),
+                    FirstName = table.Column<string>(type: "text", nullable: true),
+                    LastName = table.Column<string>(type: "text", nullable: true),
                     MemberRole = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>

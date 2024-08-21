@@ -2,6 +2,7 @@
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment.Events;
+using I3Lab.Works.Domain.WorkCatalogs.Events;
 using I3Lab.Works.Domain.Works;
 
 namespace I3Lab.Works.Domain.Treatment
@@ -27,6 +28,7 @@ namespace I3Lab.Works.Domain.Treatment
             CreatorId = creatorId;
             PatientId = patientId;
             CreateDate = DateTime.UtcNow;
+            Name = name;
 
             AddDomainEvent(new TreatmentCreatedDomainEvent());
         }

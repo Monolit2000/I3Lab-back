@@ -1,4 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using System.ComponentModel;
 
 namespace I3Lab.Works.Domain.Members
@@ -10,8 +11,6 @@ namespace I3Lab.Works.Domain.Members
         public MemberId Id { get; private set; }
 
         public MemberRole MemberRole { get; private set; }
-
-        public string Login { get; private set; }
 
         public string Email { get; private set; }
 
@@ -25,34 +24,28 @@ namespace I3Lab.Works.Domain.Members
         }
 
         private Member(
-            MemberId id,
-            string login,
-            string email, 
-            string firstName,
-            string lastName)
+            string email)
         {
-            Id = id;
-            Login = login;
+            Id = new MemberId(Guid.NewGuid());
             Email = email;
-            FirstName = firstName;
-            LastName = lastName;
+            MemberRole = MemberRole.Doctor;
         }
 
-        public static Member CreateNew(
-            MemberId id,
-            string login,
-            string email,
-            string firstName,
-            string lastName)
+        public static Member CreateNew(string email)
         {
-            return new Member(
-                id, 
-                login, 
-                email, 
-                firstName, 
-                lastName);
+            return new Member(email);
         }
 
+
+        public Result ChangeRole(string newRoleValue)
+        {
+            var result = MemberRole.Create(newRoleValue);
+            if (result.IsFailed)
+                return Result.Fail(result.Errors);
+
+            MemberRole = result.Value;
+            return Result.Ok();
+        }
 
     }
 

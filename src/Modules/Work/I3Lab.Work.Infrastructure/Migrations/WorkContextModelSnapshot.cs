@@ -69,15 +69,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.Works.Domain.Members.Member.MemberRole#MemberRole", b1 =>

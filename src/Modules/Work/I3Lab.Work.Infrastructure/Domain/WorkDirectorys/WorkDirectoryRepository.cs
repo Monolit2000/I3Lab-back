@@ -13,7 +13,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkDirectorys
         //    _context = context;
         //}
 
-        //public async Task<WorkDirectory> GetByIdAsync(WorkDirectoryId id)
+        //public async Task<WorkDirectory> GetMByIdAsync(WorkDirectoryId id)
         //{
         //    var workDirectory = await _context.WorkDirectories
         //        .Include(wd => wd.Files3Ds)
@@ -37,7 +37,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkDirectorys
 
         //public async Task DeleteAsync(WorkDirectoryId id)
         //{
-        //    var workDirectory = await GetByIdAsync(id);
+        //    var workDirectory = await GetMByIdAsync(id);
         //    if (workDirectory != null)
         //    {
         //        _context.WorkDirectories.Remove(workDirectory);

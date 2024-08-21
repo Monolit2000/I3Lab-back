@@ -18,7 +18,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Member> GetByIdAsync(MemberId id)
+        public async Task<Member> GetMByIdAsync(MemberId id)
         {
             var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -32,6 +32,13 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
 
             return member;
         }
+
+
+        public async Task<bool> IsEmailTakenAsync(string email)
+        {
+            return await _context.Members.AnyAsync(m => m.Email == email);
+        }
+
 
         public async Task<IEnumerable<Member>> GetAllAsync()
         {
@@ -52,12 +59,17 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
 
         public async Task DeleteAsync(MemberId id)
         {
-            var member = await GetByIdAsync(id);
+            var member = await GetMByIdAsync(id);
             if (member != null)
             {
                 _context.Members.Remove(member);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

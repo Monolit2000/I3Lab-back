@@ -35,5 +35,6 @@ namespace I3Lab.Works.Domain.Members
             return new MemberRole(value);
         }
 
+
     }
 }

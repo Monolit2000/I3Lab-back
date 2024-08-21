@@ -3,6 +3,7 @@ using System;
 using I3Lab.Users.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20240821194036_NewUserMigrationPropertiLastAndFirstNameIsNotRequired")]
+    partial class NewUserMigrationPropertiLastAndFirstNameIsNotRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,7 +48,16 @@ namespace I3Lab.Users.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("RefrashToken")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("RegisterDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("TokenCreated")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("TokenExpires")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("UserId")

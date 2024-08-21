@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
-builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+//builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
 
 builder.Host.UseSerilog((context, loggerConfig) =>
@@ -50,6 +50,7 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(J
 //    .AddEntityFrameworkStores<UserContext>()
 //    .AddApiEndpoints();
 
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddBuildingBlocksModule(builder.Configuration);
 
@@ -80,8 +81,8 @@ app.UseSerilogRequestLogging();
 
 app.MapControllers();
 
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthentication();
+//app.UseAuthorization();
 
 //app.MapIdentityApi<User>();
 

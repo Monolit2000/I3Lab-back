@@ -127,6 +127,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Users.IntegrationEven
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{425D4D5B-5549-40FE-8F4A-C0D831E93052}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.Works.UnitTests", "src\Modules\Work\Tests\I3Lab.Works.UnitTests\I3Lab.Works.UnitTests.csproj", "{09B314E4-FC11-477C-88B8-D2B0DAEE6F09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -309,6 +311,10 @@ Global
 		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{425D4D5B-5549-40FE-8F4A-C0D831E93052}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B314E4-FC11-477C-88B8-D2B0DAEE6F09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B314E4-FC11-477C-88B8-D2B0DAEE6F09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B314E4-FC11-477C-88B8-D2B0DAEE6F09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B314E4-FC11-477C-88B8-D2B0DAEE6F09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -374,6 +380,7 @@ Global
 		{65E2B62A-FCE6-41DD-A566-627B78601635} = {196C3A2E-F181-4D5E-AA24-F1393384DB91}
 		{8415E655-D224-4BC1-A6F5-6D0004F4CAAD} = {196C3A2E-F181-4D5E-AA24-F1393384DB91}
 		{F02EDEAA-03D9-41D0-B160-56119AB49FC5} = {196C3A2E-F181-4D5E-AA24-F1393384DB91}
+		{09B314E4-FC11-477C-88B8-D2B0DAEE6F09} = {CD76A713-83ED-46FB-8E3C-5720C1185163}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E875D627-79AF-42D9-94D0-FD78D037AD2C}

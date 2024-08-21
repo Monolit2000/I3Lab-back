@@ -4,6 +4,7 @@ using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.WorkAccebilitys;
+using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
 
@@ -12,6 +13,8 @@ namespace I3Lab.Works.Domain.Works
     public class Work : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
+
+        //public WorkChat WorkChat { get; private set; } 
 
         public string TreatmentName { get; private set; }
 

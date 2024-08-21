@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace I3Lab.API.Modules.Works
 {
-    [Route("api/[controller]")]
+    [Route("api/works")]
     [ApiController]
     public class WorksController : ControllerBase
     {
@@ -21,9 +21,6 @@ namespace I3Lab.API.Modules.Works
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
         }
-
-
-
 
     }
 }

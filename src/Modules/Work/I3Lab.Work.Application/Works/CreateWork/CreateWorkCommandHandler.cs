@@ -3,33 +3,46 @@ using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment;
 using I3Lab.Works.Domain.Works;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.Works.CreateWork
 {
     public class CreateWorkCommandHandler(
         IMemberRepository memberRepository,
+        ITretmentRepository tretmentRepository,
         IWorkRepository workRepository,
         IMemberContext memberContext) : IRequestHandler<CreateWorkCommand, Result<WorkDto>>
     {
         public async Task<Result<WorkDto>> Handle(CreateWorkCommand request, CancellationToken cancellationToken)
         {
-            var member = await memberRepository.GetByIdAsync(memberContext.MemberId);
+            var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
+            if (treatment == null)
+                return Result.Fail("Treatment not exist");
 
-            if (member == null)
-                return Result.Fail("member not exist");
+            var creator = await memberRepository.GetMByIdAsync(memberContext.MemberId);
+            if (creator == null)
+                return Result.Fail("Member not exist");
 
-            var work = await Work.CreateAsync(
-                member, 
-                new TreatmentId(request.TreatmentId));
+            var createWorkResult = await Work.CreateAsync(creator, new TreatmentId(request.TreatmentId));
+            if (createWorkResult.IsFailed)
+                return Result.Fail(createWorkResult.Errors);
 
-            var workDto = new WorkDto();
+            var work = createWorkResult.Value;
 
-            return workDto;
+            await workRepository.AddAsync(work);
+            await workRepository.SaveChangesAsync();
+
+            var workDto = new WorkDto
+            {
+                Id = work.Id.Value,
+                TreatmentId = work.TreatmentId.Value,
+                TreatmentName = work.TreatmentName,
+                WorkStatus = work.WorkStatus.ToString(),
+                WorkStartedDate = work.WorkStartedDate,
+                CreatorId = work.CreatorId.Value
+            };
+
+            return Result.Ok(workDto);
         }
     }
 }
+

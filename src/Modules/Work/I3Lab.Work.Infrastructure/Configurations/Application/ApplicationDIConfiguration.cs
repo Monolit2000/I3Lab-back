@@ -23,6 +23,7 @@ namespace I3Lab.Works.Infrastructure.Configurations.Application
                 cfg.RegisterServicesFromAssembly(typeof(WorkModule).Assembly);
             });
 
+            
             services.AddScoped<IMemberContext, MemberContext>();
             services.AddScoped<IMemberRepository, MemberRepository>();
             services.AddScoped<IWorkRepository, WorkRepository>();

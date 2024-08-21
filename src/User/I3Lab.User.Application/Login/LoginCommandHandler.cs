@@ -41,11 +41,11 @@ namespace I3Lab.Users.Application.Login
 
             var token = _jwtService.GenegateToken(user);
 
-            var refrashToken = GenearateRefrashToken();
+            //var refrashToken = GenearateRefrashToken();
 
-            user.SetRefrashToken(refrashToken);
+            //user.SetRefrashToken(refrashToken);
 
-            SetRefrashToken(refrashToken);
+            //SetRefrashToken(refrashToken);
 
             return new LoginDto(token);
         }

@@ -12,18 +12,8 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
         {
             builder.HasKey(e => e.Id);
 
-            //builder.Property(e => e.Id).HasConversion<MemberIdConverter>();
-
-            builder.Property(e => e.Login)
-                .IsRequired();
-
             builder.Property(e => e.Email)
                 .IsRequired();
-
-            //builder.OwnsOne(o => o.MemberRole, roleBuilder =>
-            //{
-            //    roleBuilder.Property(r => r.Value).HasColumnName("MemberRole").IsRequired();
-            //});
 
             builder.ComplexProperty(o => o.MemberRole, roleBuilder =>
             {
@@ -31,11 +21,11 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
                 roleBuilder.Property(p => p.Value).HasColumnName("MemberRole");
             });
 
-            builder.Property(e => e.FirstName)
-                .IsRequired();
+            builder.Property(m => m.ClinicId).IsRequired(false);
 
-            builder.Property(e => e.LastName)
-                .IsRequired();
+            builder.Property(e => e.FirstName).IsRequired(false);
+
+            builder.Property(e => e.LastName).IsRequired(false);
         }
     }
 }

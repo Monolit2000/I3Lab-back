@@ -18,11 +18,6 @@ namespace I3Lab.Users.Domain.Users
         public string PasswordHash { get; private set; }
         public DateTime RegisterDate { get; private set; }
 
-        public string RefrashToken { get; private set; }
-
-        public DateTime TokenCreated{ get; set; } 
-
-        public DateTime TokenExpires { get; set; }
 
         // Private constructor for EF Core
         //private User() { }
@@ -31,11 +26,13 @@ namespace I3Lab.Users.Domain.Users
 
         private User(
             string email, 
-            string passwordHash)
+            string passwordHash,
+            string avatarImage = "")
         {
             UserId = new UserId(Guid.Parse(Id));
             Email = email;
             PasswordHash = passwordHash;
+            AvatarImage = avatarImage;
             RegisterDate = DateTime.UtcNow;
 
             AddDomainEvent(new UserCreatedDomainEvent(
@@ -45,13 +42,15 @@ namespace I3Lab.Users.Domain.Users
                 "LastName"));
         }
 
-        public static User Create(
+        public static User CreateNew(
             string email,
-            string passwordHash)
+            string passwordHash,
+            string avatarImage = "")
         {
             return new User(
                 email, 
-                passwordHash);
+                passwordHash,
+                avatarImage);
         }
 
         public void UpdateName(string newName)
@@ -89,9 +88,7 @@ namespace I3Lab.Users.Domain.Users
 
         public void SetRefrashToken(RefrashToken refrashToken)
         {
-            RefrashToken = refrashToken.Token;
-            TokenCreated = refrashToken.Created;
-            TokenExpires = refrashToken.Expires;
+         
         }
     }
 }

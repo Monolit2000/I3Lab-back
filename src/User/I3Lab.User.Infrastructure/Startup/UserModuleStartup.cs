@@ -10,6 +10,8 @@ using I3Lab.Users.Infrastructure.Configurations.Aplication;
 using I3Lab.Users.Infrastructure.Configurations.EventBus;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using I3Lab.BuildingBlocks.Infrastructure.Domain;
+using I3Lab.BuildingBlocks.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace I3Lab.Users.Infrastructure.Startup
 {
@@ -30,11 +32,12 @@ namespace I3Lab.Users.Infrastructure.Startup
 
             services.AddDbContext<UserContext>((sp, options) =>
             {
+                options.ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
                 options.UseNpgsql(configuration.GetConnectionString("Database"));
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             });
 
-            services.AddApiAuthentication(configuration);
+            //services.AddApiAuthentication(configuration);
 
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();

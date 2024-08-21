@@ -20,11 +20,20 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
         }
 
 
-        public async Task<Treatment> GetByIdAsync(TreatmentId id)
+        public async Task<bool> IsNameUniqueAsync(string name)
+        {
+            var treatment = await _context.Treatments.FirstOrDefaultAsync(x => x.Name == name);
+            if (treatment == null)
+                return true;
+
+            return false;
+        }
+
+        public async Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken)
         {
             var treatment = await _context.Treatments
                 .Include(t => t.TreatmentStages)
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
 
             return treatment;
         }
@@ -46,9 +55,9 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
             _context.Treatments.Update(treatment);
         }
 
-        public async Task DeleteAsync(TreatmentId id)
+        public async Task DeleteAsync(TreatmentId id, CancellationToken cancellationToken)
         {
-            var treatment = await GetByIdAsync(id);
+            var treatment = await GetByIdAsync(id, cancellationToken);
             if (treatment != null)
             {
                 _context.Treatments.Remove(treatment);

@@ -8,5 +8,17 @@ namespace I3Lab.Works.Application.Works.CreateWork
 {
     public class WorkDto
     {
+        public Guid Id { get; set; }
+        public Guid TreatmentId { get; set; }
+        public string TreatmentName { get; set; }
+        public string WorkStatus { get; set; }
+        public DateTime WorkStartedDate { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid? CustomerId { get; set; }
+        public string WorkAvatarImageUrl { get; set; }
+
+        // Дополнительные свойства, если необходимо
+        public List<WorkMemberDto> WorkMembers { get; set; } = new List<WorkMemberDto>();
+        public List<WorkFileDto> WorkFiles { get; set; } = new List<WorkFileDto>();
     }
 }

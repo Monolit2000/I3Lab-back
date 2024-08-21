@@ -16,9 +16,6 @@ namespace I3Lab.Works.Application.Members.CreateMember
              nameof(NewUserRegisteredIntegrationEventHandler), context.Message.UserId);
 
             var command = new CreateMemberCommand(
-                context.Message.UserId,
-                context.Message.Name,
-                context.Message.Email,
                 context.Message.LastName);
 
             await publisher.Send(command);

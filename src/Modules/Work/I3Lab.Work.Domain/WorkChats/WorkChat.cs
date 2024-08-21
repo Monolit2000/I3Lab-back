@@ -40,7 +40,7 @@ namespace I3Lab.Works.Domain.WorkChats
             Messages.Add(newMessage);
         }
 
-        public void AddParticipant(MemberId memberId)
+        public void AddChatMember(MemberId memberId)
         {
             if (Participants.Any(p => p.MemberId == memberId))
                 throw new InvalidOperationException("Member is already a participant in the chat.");
@@ -49,7 +49,7 @@ namespace I3Lab.Works.Domain.WorkChats
             Participants.Add(newParticipant);
         }
 
-        public void RemoveParticipant(MemberId memberId)
+        public void RemoveChatMember(MemberId memberId)
         {
             var participant = Participants.FirstOrDefault(p => p.MemberId == memberId);
             if (participant == null)
