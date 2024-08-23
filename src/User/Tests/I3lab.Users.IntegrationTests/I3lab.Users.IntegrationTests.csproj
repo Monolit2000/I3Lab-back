@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\API\I3Lab.API\I3Lab.API.csproj" />
-    <ProjectReference Include="..\..\I3Lab.User.Application\I3Lab.Users.Application.csproj" />
     <ProjectReference Include="..\..\I3Lab.User.Infrastructure\I3Lab.Users.Infrastructure.csproj" />
   </ItemGroup>
 
