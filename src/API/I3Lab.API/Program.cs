@@ -12,6 +12,7 @@ using I3Lab.Works.Infrastructure.Persistence.Extensions;
 using I3Lab.Works.Infrastructure.Startup;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

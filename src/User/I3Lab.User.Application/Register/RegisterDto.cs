@@ -8,5 +8,6 @@ namespace I3Lab.Users.Application.Register
 {
     public class RegisterDto
     {
+        public Guid UserId { get; set; }   
     }
 }

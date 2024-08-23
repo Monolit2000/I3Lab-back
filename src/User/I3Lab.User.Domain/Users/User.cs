@@ -19,10 +19,9 @@ namespace I3Lab.Users.Domain.Users
         public DateTime RegisterDate { get; private set; }
 
 
-        // Private constructor for EF Core
-        //private User() { }
+        //Private constructor for EF Core
+        private User() { }
 
-        public User() { }
 
         private User(
             string email, 

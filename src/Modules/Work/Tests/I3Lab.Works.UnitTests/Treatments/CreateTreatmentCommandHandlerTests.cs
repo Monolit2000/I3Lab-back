@@ -2,9 +2,9 @@
 using I3Lab.Works.Application.Treatments.ApplicationErrors;
 using I3Lab.Works.Application.Treatments.CreateTreatment;
 using I3Lab.Works.Domain.Treatment;
-using I3Lab.Works.Domain.Works;
 using FluentAssertions;
 using NSubstitute;
+using AutoFixture;
 
 namespace I3Lab.Works.UnitTests.Treatments
 {
@@ -26,7 +26,12 @@ namespace I3Lab.Works.UnitTests.Treatments
         public async Task Handle_Should_ReturnError_WhenNameIsEmpty()
         {
             //Arrange 
-            var command = new CreateTreatmentCommand(string.Empty);
+
+            var fixture = new Fixture();
+
+            var command = fixture.Build<CreateTreatmentCommand>()
+                .With(command => command.TreatmentName, string.Empty)
+                .Create();
 
             _tretmentRepositoryMock.IsNameUniqueAsync(command.TreatmentName)
                 .Returns(true);
@@ -55,12 +60,16 @@ namespace I3Lab.Works.UnitTests.Treatments
         [Fact]
         public async Task Handle_Should_ReturnSuccess_WhenNameIsUnique()
         {
+            var fixture = new Fixture();
+
+            var command = fixture.Create<CreateTreatmentCommand>();
+
             //Arrange 
-            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == Command.TreatmentName))
+            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == command.TreatmentName))
                .Returns(true);
 
             //Act
-            var result = await _handler.Handle(Command, default);
+            var result = await _handler.Handle(command, default);
 
             //Assert
             result.IsSuccess.Should().Be(true);
@@ -70,12 +79,17 @@ namespace I3Lab.Works.UnitTests.Treatments
         [Fact]
         public async Task Handle_Should_CallRepositorySaveChengesAsync_WhenNameIsUnique()
         {
+
             //Arrange 
-            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == Command.TreatmentName))
+            var fixture = new Fixture();
+
+            var command = fixture.Create<CreateTreatmentCommand>();
+
+            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == command.TreatmentName))
                .Returns(true);
 
             //Act
-            var result = await _handler.Handle(Command, default);
+            var result = await _handler.Handle(command, default);
 
             //Assert
             await _tretmentRepositoryMock.Received(1).SaveChangesAsync();   
@@ -85,11 +99,15 @@ namespace I3Lab.Works.UnitTests.Treatments
         public async Task Handle_Should_CallRepository_WhenNameIsUnique()
         {
             //Arrange 
-            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == Command.TreatmentName))
+            var fixture = new Fixture();
+
+            var command = fixture.Create<CreateTreatmentCommand>();
+
+            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == command.TreatmentName))
                .Returns(true);
 
             //Act
-            var result = await _handler.Handle(Command, default);
+            var result = await _handler.Handle(command, default);
 
             //Assert
             await _tretmentRepositoryMock.Received(1).AddAsync(Arg.Any<Treatment>());

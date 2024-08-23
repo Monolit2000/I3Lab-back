@@ -11,7 +11,7 @@ namespace I3Lab.Users.Application.Register
         public async Task Handle(UserCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
             await publisher.Publish(new UserRegisteredIntegretionEvent(
-                notification.Id,
+                notification.UserId,
                 notification.Name,
                 notification.Email, 
                 notification.LastName));  

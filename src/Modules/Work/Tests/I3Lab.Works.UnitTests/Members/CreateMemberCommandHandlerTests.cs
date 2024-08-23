@@ -2,7 +2,6 @@
 using I3Lab.Works.Application.Members.CreateMember;
 using I3Lab.Works.Domain.Members;
 using NSubstitute;
-using System.Reflection.Metadata;
 namespace I3Lab.Works.UnitTests.Members
 {
     public class CreateMemberCommandHandlerTests

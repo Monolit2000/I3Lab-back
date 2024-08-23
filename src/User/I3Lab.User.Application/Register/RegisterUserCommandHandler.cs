@@ -2,11 +2,6 @@
 using I3Lab.Users.Application.Contract;
 using I3Lab.Users.Domain.Users;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Users.Application.Register
 {
@@ -24,20 +19,21 @@ namespace I3Lab.Users.Application.Register
         }
         public async Task<Result<RegisterDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var userExist = _userRepository.GetByEmailAsync(request.Email);
+            var userExist = await _userRepository.GetByEmailAsync(request.Email);
 
-            //if (userExist != null)
-            //    return Result.Fail("User already exist");
+            if (userExist != null)
+                return Result.Fail("User already exist");
 
             var hashPassword = _passwordHasher.Generate(request.Password);
 
             var user = User.CreateNew(
                 request.Email, 
-                hashPassword);
+                hashPassword,
+                request.AvatarImage);
 
             await _userRepository.AddAsync(user);
 
-            return new RegisterDto();
+            return new RegisterDto() {UserId = user.UserId.Value };
         }
     }
 }
