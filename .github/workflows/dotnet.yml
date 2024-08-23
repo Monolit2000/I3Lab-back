@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore ./I3Lab.sln
       
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build ./I3Lab.sln --no-restore
       
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test ./I3Lab.sln --no-build --verbosity normal
