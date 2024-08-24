@@ -1,11 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.BuildingBlocks.Infrastructure
 {

@@ -11,6 +11,7 @@ using I3Lab.BuildingBlocks.Infrastructure.StartUp;
 using I3Lab.Works.Infrastructure.Persistence.Extensions;
 using I3Lab.Works.Infrastructure.Startup;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
+using I3Lab.Doctors.Infrastructure.Startup;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,7 +58,8 @@ builder.Services.AddBuildingBlocksModule(builder.Configuration);
 
 builder.Services
     .AddUserModule(builder.Configuration)
-    .AddWorkModule(builder.Configuration);
+    .AddWorkModule(builder.Configuration)
+    .AddDoctorModule(builder.Configuration);
 
 builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
 
@@ -71,6 +73,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     app.ApplyUserContextMigrations();
+    app.ApplyWorkContextMigrations();
     app.ApplyWorkContextMigrations();
 }
 

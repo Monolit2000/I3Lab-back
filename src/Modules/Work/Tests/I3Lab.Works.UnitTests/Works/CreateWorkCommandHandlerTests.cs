@@ -104,7 +104,7 @@ namespace I3Lab.Works.Tests.Application.Works
             var command = new CreateWorkCommand { TreatmentId = treatmentId };
             var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatment");
             var member = Member.CreateNew("creator@example.com");
-            var work = await Work.CreateAsync(member, new TreatmentId(treatmentId));
+            var work = await treatment.CreateNewTreatmentStage(member);
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(treatment);
@@ -131,7 +131,7 @@ namespace I3Lab.Works.Tests.Application.Works
             var command = new CreateWorkCommand { TreatmentId = treatmentId };
             var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatment");
             var member = Member.CreateNew("creator@example.com");
-            var work =  await Work.CreateAsync(member, new TreatmentId(treatmentId));
+            var work =  await Work.CreateBasedOnTreatmentAsync(member, new TreatmentId(treatmentId));
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(treatment);

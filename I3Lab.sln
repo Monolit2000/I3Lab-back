@@ -33,15 +33,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Patient.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Patient.IntegrationEvents", "src\Modules\Patient\I3Lab.Patient.IntegrationEvents\I3Lab.Patient.IntegrationEvents.csproj", "{B9FB31D0-2EB4-4E4C-B9B8-DFF38837FC02}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doctor", "Doctor", "{8A72FED2-4D91-49AF-812D-281D60D9C360}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doctors", "Doctors", "{8A72FED2-4D91-49AF-812D-281D60D9C360}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctor.Application", "src\Modules\Doctor\I3Lab.Doctor.Application\I3Lab.Doctor.Application.csproj", "{9F792FE3-84B2-415A-9778-AF9D3C0CD2E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctors.Application", "src\Modules\Doctor\I3Lab.Doctor.Application\I3Lab.Doctors.Application.csproj", "{9F792FE3-84B2-415A-9778-AF9D3C0CD2E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctor.Domain", "src\Modules\Doctor\I3Lab.Doctor.Domain\I3Lab.Doctor.Domain.csproj", "{B347D98B-2526-4D1B-A7E3-62E316F12FE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctors.Domain", "src\Modules\Doctor\I3Lab.Doctor.Domain\I3Lab.Doctors.Domain.csproj", "{B347D98B-2526-4D1B-A7E3-62E316F12FE3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctor.Infrastructure", "src\Modules\Doctor\I3Lab.Doctor.Infrastructure\I3Lab.Doctor.Infrastructure.csproj", "{1785C62B-1A5F-42EB-8C33-4DECD65ED917}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctors.Infrastructure", "src\Modules\Doctor\I3Lab.Doctor.Infrastructure\I3Lab.Doctors.Infrastructure.csproj", "{1785C62B-1A5F-42EB-8C33-4DECD65ED917}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctor.IntegrationEvents", "src\Modules\Doctor\I3Lab.Doctor.IntegrationEvents\I3Lab.Doctor.IntegrationEvents.csproj", "{1642357A-11E9-4CB7-9882-A38D27A42F82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Doctors.IntegrationEvents", "src\Modules\Doctor\I3Lab.Doctor.IntegrationEvents\I3Lab.Doctors.IntegrationEvents.csproj", "{1642357A-11E9-4CB7-9882-A38D27A42F82}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Artisan", "Artisan", "{D808CB4A-678A-4A1E-B718-B61608F3EF7C}"
 EndProject
@@ -131,9 +131,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.UnitTests", "sr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7B2B1804-2B82-4889-9754-F7BBFA59290C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3lab.Users.UnitTests", "src\User\Tests\I3lab.Users.UnitTests\I3lab.Users.UnitTests.csproj", "{2AE57DE0-A786-40E3-A198-F3D063829867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3lab.Users.UnitTests", "src\User\Tests\I3lab.Users.UnitTests\I3lab.Users.UnitTests.csproj", "{2AE57DE0-A786-40E3-A198-F3D063829867}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3lab.Users.IntegrationTests", "src\User\Tests\I3lab.Users.IntegrationTests\I3lab.Users.IntegrationTests.csproj", "{7B149F88-9F9E-4423-9DA7-CBE76B9AFC27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3lab.Users.IntegrationTests", "src\User\Tests\I3lab.Users.IntegrationTests\I3lab.Users.IntegrationTests.csproj", "{7B149F88-9F9E-4423-9DA7-CBE76B9AFC27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3lab.Works.IntegrationTests", "src\Modules\Work\Tests\I3lab.Works.IntegrationTests\I3lab.Works.IntegrationTests.csproj", "{26DF4C48-0341-4E54-890E-484AAB0314AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8A1C189E-3C5C-4C5F-BC92-3B71216E7E95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -329,6 +333,10 @@ Global
 		{7B149F88-9F9E-4423-9DA7-CBE76B9AFC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B149F88-9F9E-4423-9DA7-CBE76B9AFC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B149F88-9F9E-4423-9DA7-CBE76B9AFC27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DF4C48-0341-4E54-890E-484AAB0314AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DF4C48-0341-4E54-890E-484AAB0314AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DF4C48-0341-4E54-890E-484AAB0314AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DF4C48-0341-4E54-890E-484AAB0314AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -398,6 +406,8 @@ Global
 		{7B2B1804-2B82-4889-9754-F7BBFA59290C} = {196C3A2E-F181-4D5E-AA24-F1393384DB91}
 		{2AE57DE0-A786-40E3-A198-F3D063829867} = {7B2B1804-2B82-4889-9754-F7BBFA59290C}
 		{7B149F88-9F9E-4423-9DA7-CBE76B9AFC27} = {7B2B1804-2B82-4889-9754-F7BBFA59290C}
+		{26DF4C48-0341-4E54-890E-484AAB0314AF} = {CD76A713-83ED-46FB-8E3C-5720C1185163}
+		{8A1C189E-3C5C-4C5F-BC92-3B71216E7E95} = {7434BD59-E912-456A-84DD-9BAD00C04676}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E875D627-79AF-42D9-94D0-FD78D037AD2C}

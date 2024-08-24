@@ -9,10 +9,10 @@ namespace I3Lab.Works.Domain.WorkChats
 {
     public class ChatMessage : Entity
     {
-        public ChatMessageId Id { get; private set; }
-
         public WorkChatId WorkChatId { get; private set; }
         public MemberId SenderId { get; private set; }
+
+        public ChatMessageId Id { get; private set; }
         public string MessageText { get; private set; }
         public DateTime SentDate { get; private set; }
         public BlobFileId FileResponceId { get; private set; }

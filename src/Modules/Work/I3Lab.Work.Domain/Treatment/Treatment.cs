@@ -1,4 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatment.Events;
@@ -44,13 +45,17 @@ namespace I3Lab.Works.Domain.Treatment
                 name); 
         }
 
-
-        public void CreateNewTreatmentStage(MemberId creatorId, WorkId workId)
+        public async Task<Result<Work>> CreateNewTreatmentStage(Member creator)
         {
-            var newTreatmentStage = TreatmentStage.CreateNew(this.Id, workId);
-            TreatmentStages.Add(newTreatmentStage);
+            //var newTreatmentStage = TreatmentStage.CreateNew(this.Id, workId);
 
-            AddDomainEvent(new NewTreatmentStageCreatedDomainEvent());
+            //TreatmentStages.Add(newTreatmentStage);
+
+            var workResult = await Work.CreateBasedOnTreatmentAsync(creator, Id);
+
+            return workResult;
+
+            //AddDomainEvent(new NewTreatmentStageCreatedDomainEvent());
         }
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)

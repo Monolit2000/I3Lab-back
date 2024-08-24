@@ -11,9 +11,7 @@ namespace I3Lab.Works.Application.Members.CreateMember
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
         {
             if (await memberRepository.IsEmailTakenAsync(request.Email))
-            {
                 return Result.Fail("Email is already taken");
-            }
 
             var newMember = Member.CreateNew(
                 request.Email

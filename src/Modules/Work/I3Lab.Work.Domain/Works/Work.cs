@@ -43,10 +43,10 @@ namespace I3Lab.Works.Domain.Works
             TreatmentId = treatmentId;  
             WorkStartedDate = DateTime.UtcNow;
 
-            AddDomainEvent(new WorkCreatedDomainEvent(Id));
+            AddDomainEvent(new WorkCreatedDomainEvent(Id, treatmentId));
         }
 
-        public static async Task<Result<Work>> CreateAsync(
+        public static async Task<Result<Work>> CreateBasedOnTreatmentAsync(
             Member creator, 
             TreatmentId treatmentId)
         {

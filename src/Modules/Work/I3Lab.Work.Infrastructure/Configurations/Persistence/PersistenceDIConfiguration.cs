@@ -1,6 +1,4 @@
-﻿using I3Lab.Works.Domain.Works;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.BlobFiles;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using I3Lab.BuildingBlocks.Infrastructure;
