@@ -18,7 +18,10 @@ namespace I3lab.Users.IntegrationTests.Users
         public async Task Handle_Should_CreateUser_WhenCommandIsValid()
         {
             // Arrange 
-            var command = new RegisterUserCommand(Faker.Internet.Email(), Faker.Internet.Password(), Faker.Internet.Avatar());
+            var command = new RegisterUserCommand(
+                Faker.Internet.Email(), 
+                Faker.Internet.Password(), 
+                Faker.Internet.Avatar());
 
             //Act
             var result = await Sender.Send(command);

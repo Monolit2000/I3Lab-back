@@ -2,6 +2,8 @@
 using I3lab.Users.IntegrationTests.Abstraction;
 using I3Lab.Users.Application.Login;
 using I3Lab.Users.Domain.Users;
+using NSubstitute;
+using I3Lab.Users.Application.Contract;
 
 
 namespace I3lab.Users.IntegrationTests.Users
