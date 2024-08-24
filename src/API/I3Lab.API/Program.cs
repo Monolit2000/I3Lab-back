@@ -70,7 +70,7 @@ if (app.Environment.IsDevelopment())
 
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();
-    app.ApplyDoctorContextMigrations();
+    //app.ApplyDoctorContextMigrations();
 }
 
 app.UseHttpsRedirection();
