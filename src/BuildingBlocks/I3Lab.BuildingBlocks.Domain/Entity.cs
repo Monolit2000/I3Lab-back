@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentResults;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,12 +33,27 @@ namespace I3Lab.BuildingBlocks.Domain
             this._domainEvents.Add(domainEvent);
         }
 
-        protected void CheckRule(IBusinessRule rule)
+        protected Result CheckRule(IBusinessRule rule)
         {
             if (rule.IsBroken())
             {
-                throw new BusinessRuleValidationException(rule);
+                return Result.Fail(rule.Message);
             }
+
+            return Result.Ok();
+        }
+
+        protected Result CheckRules(params IBusinessRule[] rules)
+        {
+            foreach (var rule in rules)
+            {
+                if (rule.IsBroken())
+                {
+                    return Result.Fail(rule.Message);
+                }
+            }
+
+            return Result.Ok();
         }
     }
 }

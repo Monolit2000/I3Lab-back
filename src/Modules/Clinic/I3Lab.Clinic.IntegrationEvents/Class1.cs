@@ -1,4 +1,4 @@
-﻿namespace I3Lab.Clinic.IntegrationEvents;
+﻿namespace I3Lab.Clinics.IntegrationEvents;
 
 public class Class1
 {

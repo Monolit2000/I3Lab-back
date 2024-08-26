@@ -1,13 +1,13 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Treatment.Events;
+using I3Lab.Works.Domain.Treatments.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.Treatment
+namespace I3Lab.Works.Domain.Treatments
 {
     public class TreatmentPreview : Entity
     {

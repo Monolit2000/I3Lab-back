@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using I3Lab.Doctors.Domain.Doctors;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
 
         public string Email { get; }
 
+        public string PhoneNumber { get; }
+
         public string DoctorAvatar { get; }
 
         public CreateDoctorCreationProposalCommand(
@@ -26,12 +29,14 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
             string firstName,
             string lastName,
             string email,
+            string phoneNumber,
             string doctorAvatar)
         {
             UserId = userId;
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            PhoneNumber = phoneNumber;
             DoctorAvatar = doctorAvatar;
         }
     }

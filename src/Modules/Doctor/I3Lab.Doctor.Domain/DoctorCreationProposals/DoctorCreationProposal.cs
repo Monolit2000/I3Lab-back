@@ -14,25 +14,26 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
         
         public Email Email { get; private set; }
 
+        public PhoneNumber PhoneNumber { get; private set; }
+
         public ConfirmationStatus ConfirmationStatus { get; private set; }
 
         public DoctorAvatar DoctorAvatar { get; private set; }
 
         public DateTime CreatedAt { get; set; }
 
-        private DoctorCreationProposal()
-        {
-                
-        }
+        private DoctorCreationProposal() { }
 
         private DoctorCreationProposal(
             DoctorName name,
             Email email,
+            PhoneNumber phoneNumber,
             DoctorAvatar doctorAvatar)
         {
             Id = new DoctorCreationProposalId(Guid.NewGuid());
             Name = name;
             Email = email;
+            PhoneNumber = phoneNumber;
             ConfirmationStatus = ConfirmationStatus.Validation;
             DoctorAvatar = doctorAvatar;
             CreatedAt = DateTime.UtcNow;
@@ -40,20 +41,25 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
             AddDomainEvent(new DoctorCreationProposalCreatedDomainEvent(Id.Value));
         }
 
-        public Doctor CreateDoctor()
-        {
-            return Doctor.CreateBaseOnProposal(Name, Email, DoctorAvatar);
-        }
-
         public static DoctorCreationProposal CreateNew(
             DoctorName name,
             Email email,
+            PhoneNumber phoneNumber,
             DoctorAvatar doctorAvatar)
         {
             return new DoctorCreationProposal(
                 name,
                 email,
+                phoneNumber,
                 doctorAvatar);
+        }
+        public Doctor CreateDoctor()
+        {
+            return Doctor.CreateBaseOnProposal(
+                Name, 
+                Email, 
+                PhoneNumber, 
+                DoctorAvatar);
         }
 
         public void Approve()

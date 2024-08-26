@@ -1,4 +1,4 @@
-﻿namespace I3Lab.Clinic.Application;
+﻿namespace I3Lab.Clinics.Application;
 
 public class Class1
 {

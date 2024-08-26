@@ -95,15 +95,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.Integr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Administration.Api", "src\Modules\Administration\I3Lab.Administration.Api\I3Lab.Administration.Api.csproj", "{C6C5552C-B4B6-46A0-B2A5-C5EB538FB283}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clinic", "Clinic", "{05045CD9-2EBF-45B3-83CA-10AA99C87794}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clinics", "Clinics", "{05045CD9-2EBF-45B3-83CA-10AA99C87794}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinic.Application", "src\Modules\Clinic\I3Lab.Clinic.Application\I3Lab.Clinic.Application.csproj", "{DEC111C8-9A0B-4DC7-8B53-722225CF972F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinics.Application", "src\Modules\Clinic\I3Lab.Clinic.Application\I3Lab.Clinics.Application.csproj", "{DEC111C8-9A0B-4DC7-8B53-722225CF972F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinic.Domain", "src\Modules\Clinic\I3Lab.Clinic.Domain\I3Lab.Clinic.Domain.csproj", "{0C6F7D83-35D4-423A-A5B0-24959D791875}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinics.Domain", "src\Modules\Clinic\I3Lab.Clinic.Domain\I3Lab.Clinics.Domain.csproj", "{0C6F7D83-35D4-423A-A5B0-24959D791875}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinic.Infrastructure", "src\Modules\Clinic\I3Lab.Clinic.Infrastructure\I3Lab.Clinic.Infrastructure.csproj", "{454B78DC-90A6-4622-B2ED-0BE6CE980B5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinics.Infrastructure", "src\Modules\Clinic\I3Lab.Clinic.Infrastructure\I3Lab.Clinics.Infrastructure.csproj", "{454B78DC-90A6-4622-B2ED-0BE6CE980B5F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinic.IntegrationEvents", "src\Modules\Clinic\I3Lab.Clinic.IntegrationEvents\I3Lab.Clinic.IntegrationEvents.csproj", "{494EFA6D-BE04-4919-85D7-E77B33D7983C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Clinics.IntegrationEvents", "src\Modules\Clinic\I3Lab.Clinic.IntegrationEvents\I3Lab.Clinics.IntegrationEvents.csproj", "{494EFA6D-BE04-4919-85D7-E77B33D7983C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccess", "UserAccess", "{8D41ACB8-B0F6-49E1-ACC2-3685FD72A6C3}"
 EndProject

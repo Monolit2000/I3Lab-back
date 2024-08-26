@@ -1,5 +1,5 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using MediatR;
 
 namespace I3Lab.Works.Application.Treatments.GetTreatmentById
@@ -11,7 +11,7 @@ namespace I3Lab.Works.Application.Treatments.GetTreatmentById
             var treatment = await treatmentRepository.GetByIdAsync( new TreatmentId(request.TreatmentId), cancellationToken);
 
             if (treatment == null)
-                return Result.Fail<TreatmentDto>("Treatment not found");
+                return Result.Fail<TreatmentDto>("Treatments not found");
 
             var treatmentDto = new TreatmentDto
             {

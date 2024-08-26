@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Doctors.Infrastructure.Migrations
 {
     [DbContext(typeof(DoctorContext))]
-    [Migration("20240824143118_NewMigrationRemuveColumNameDefinition")]
-    partial class NewMigrationRemuveColumNameDefinition
+    [Migration("20240825142229_NewMigrationRemuveColumNameDefinitionTEST")]
+    partial class NewMigrationRemuveColumNameDefinitionTEST
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,6 +112,24 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorCreationProposalId");
                         });
 
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.PhoneNumber", "PhoneNumber", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("PhoneNumber");
+
+                            b1.HasKey("DoctorCreationProposalId");
+
+                            b1.ToTable("DoctorCreationProposals", "doctors");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
                     b.Navigation("DoctorAvatar")
                         .IsRequired();
 
@@ -119,6 +137,9 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Name")
+                        .IsRequired();
+
+                    b.Navigation("PhoneNumber")
                         .IsRequired();
                 });
 
@@ -181,6 +202,24 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorId");
                         });
 
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.PhoneNumber", "PhoneNumber", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("PhoneNumber");
+
+                            b1.HasKey("DoctorId");
+
+                            b1.ToTable("Doctors", "doctors");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorId");
+                        });
+
                     b.Navigation("DoctorAvatar")
                         .IsRequired();
 
@@ -188,6 +227,9 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Name")
+                        .IsRequired();
+
+                    b.Navigation("PhoneNumber")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -88,7 +88,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.ToTable("Members", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.Treatment", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatment", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -112,21 +112,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Treatments", "work");
-                });
-
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.TreatmentStage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("TreatmentId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TreatmentId");
-
-                    b.ToTable("TreatmentStage", "work");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>
@@ -159,6 +144,8 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         });
 
                     b.HasKey("Id");
+
+                    b.HasIndex("TreatmentId");
 
                     b.ToTable("Works", "work");
                 });
@@ -234,15 +221,14 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Navigation("FileType");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.TreatmentStage", b =>
-                {
-                    b.HasOne("I3Lab.Works.Domain.Treatment.Treatment", null)
-                        .WithMany("TreatmentStages")
-                        .HasForeignKey("TreatmentId");
-                });
-
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>
                 {
+                    b.HasOne("I3Lab.Works.Domain.Treatments.Treatment", null)
+                        .WithMany("TreatmentStages")
+                        .HasForeignKey("TreatmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.OwnsMany("I3Lab.Works.Domain.Works.WorkMember", "WorkMembers", b1 =>
                         {
                             b1.Property<Guid>("WorkId")
@@ -306,7 +292,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .HasForeignKey("I3Lab.Works.Domain.Works.WorkFile", "WorkId1");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Treatment.Treatment", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatment", b =>
                 {
                     b.Navigation("TreatmentStages");
                 });

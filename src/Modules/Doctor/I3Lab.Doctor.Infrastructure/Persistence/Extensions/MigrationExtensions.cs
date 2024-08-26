@@ -11,11 +11,11 @@ namespace I3Lab.Doctors.Infrastructure.Persistence.Extensions
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-            using DoctorContext workContext = scope.ServiceProvider.GetRequiredService<DoctorContext>();
+            using DoctorContext doctorContext = scope.ServiceProvider.GetRequiredService<DoctorContext>();
 
             //workContext.Database.EnsureDeleted();
 
-            workContext.Database.Migrate();
+            doctorContext.Database.Migrate();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using MediatR;
 using System;
 using System.Collections.Generic;

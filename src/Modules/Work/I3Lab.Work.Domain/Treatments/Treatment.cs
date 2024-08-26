@@ -2,21 +2,22 @@
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatment.Events;
+using I3Lab.Works.Domain.TreatmentInvites;
+using I3Lab.Works.Domain.Treatments.Events;
 using I3Lab.Works.Domain.WorkCatalogs.Events;
 using I3Lab.Works.Domain.Works;
 
-namespace I3Lab.Works.Domain.Treatment
+namespace I3Lab.Works.Domain.Treatments
 {
     public class Treatment : Entity, IAggregateRoot
     {
-        public TreatmentId Id { get; private set; }
-        public MemberId CreatorId { get; private set; }  
-        public MemberId PatientId { get; private set; }    
-        public string Name { get; private set; }
 
-        public List<TreatmentStage> TreatmentStages = [];
-        //public TreatmentPreview TreatmentPreview { get; private set; }
+        public readonly List<Work> TreatmentStages = [];
+
+        public TreatmentId Id { get; private set; }
+        public MemberId CreatorId { get; private set; }
+        public MemberId PatientId { get; private set; }
+        public string Name { get; private set; }
         public BlobFileId TreatmentPreview { get; private set; }
 
         public DateTime CreateDate { get; private set; }
@@ -35,14 +36,19 @@ namespace I3Lab.Works.Domain.Treatment
         }
 
         public static Treatment CreateNew(
-            MemberId creatorId, 
-            MemberId patientId, 
+            MemberId creatorId,
+            MemberId patientId,
             string name)
         {
             return new Treatment(
-                creatorId, 
-                patientId, 
-                name); 
+                creatorId,
+                patientId,
+                name);
+        }
+
+        public TreatmentInvite Invite(Member member)
+        {
+            return TreatmentInvite.InviteBasedOnTreatment(this ,member).Value;
         }
 
         public async Task<Result<Work>> CreateNewTreatmentStage(Member creator)

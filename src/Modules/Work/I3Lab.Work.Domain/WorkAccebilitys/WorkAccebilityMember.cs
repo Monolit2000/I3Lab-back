@@ -1,6 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.WorkAccebilitys.Events;
 using System.Security.Cryptography.X509Certificates;
 

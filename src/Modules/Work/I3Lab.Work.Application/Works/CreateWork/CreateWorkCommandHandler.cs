@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works;
 using MediatR;
 
@@ -16,7 +16,7 @@ namespace I3Lab.Works.Application.Works.CreateWork
         {
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
             if (treatment == null)
-                return Result.Fail("Treatment not exist");
+                return Result.Fail("Treatments not exist");
 
             var creator = await memberRepository.GetMByIdAsync(memberContext.MemberId);
             if (creator == null)

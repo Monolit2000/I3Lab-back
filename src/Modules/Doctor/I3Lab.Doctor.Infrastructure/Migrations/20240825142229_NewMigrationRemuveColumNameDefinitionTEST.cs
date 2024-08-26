@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Doctors.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigrationRemuveColumNameDefinition : Migration
+    public partial class NewMigrationRemuveColumNameDefinitionTEST : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,6 +23,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     Name_FirstName = table.Column<string>(type: "text", nullable: false),
                     Name_LastName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     ConfirmationStatus = table.Column<string>(type: "text", nullable: false),
                     DoctorAvatarUrl = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -41,6 +42,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     Name_FirstName = table.Column<string>(type: "text", nullable: false),
                     Name_LastName = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     DoctorAvatarUrl = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>

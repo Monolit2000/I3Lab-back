@@ -1,5 +1,5 @@
 ﻿using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;

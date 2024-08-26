@@ -5,8 +5,9 @@ using I3Lab.Works.Infrastructure.Domain.Works;
 using I3Lab.Works.Infrastructure.Domain.Members;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Works.Infrastructure.Domain.BlobFiles;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Infrastructure.Domain.Treatments;
+using I3Lab.Works.Domain.TreatmentInvites;
 
 namespace I3Lab.Works.Infrastructure.Persistence
 {
@@ -16,6 +17,7 @@ namespace I3Lab.Works.Infrastructure.Persistence
 
         //public DbSet<WorkComment> WorkComments { get; set; }
 
+        public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<Work> Works { get; set; }
 
@@ -42,7 +44,12 @@ namespace I3Lab.Works.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new WorkFileConfiguration());
 
 
-            modelBuilder.Ignore<Treatment>();
+            modelBuilder.Ignore<TreatmentInvite>();
+
+            //modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
+
+
+            //modelBuilder.Ignore<Treatment>();
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
         }

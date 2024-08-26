@@ -1,4 +1,4 @@
-﻿using I3Lab.Works.Domain.Treatment;
+﻿using I3Lab.Works.Domain.Treatments;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 

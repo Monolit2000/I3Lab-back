@@ -3,7 +3,7 @@ using I3Lab.Works.Domain.Works;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
-namespace I3Lab.Works.Domain.Treatment
+namespace I3Lab.Works.Domain.Treatments
 {
     public class TreatmentStage : Entity
     {

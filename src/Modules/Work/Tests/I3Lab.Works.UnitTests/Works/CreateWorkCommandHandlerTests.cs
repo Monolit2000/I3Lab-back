@@ -7,7 +7,7 @@ using FluentAssertions;
 using FluentResults;
 using I3Lab.Works.Application.Works.CreateWork;
 using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works;
 using MediatR;
 using NSubstitute;
@@ -49,7 +49,7 @@ namespace I3Lab.Works.Tests.Application.Works
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == "Treatment not exist");
+            result.Errors.Should().ContainSingle(e => e.Message == "Treatments not exist");
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace I3Lab.Works.Tests.Application.Works
             // Arrange
             var treatmentId = Guid.NewGuid();
             var command = new CreateWorkCommand { TreatmentId = treatmentId };
-            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatment");
+            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(treatment);
@@ -78,7 +78,7 @@ namespace I3Lab.Works.Tests.Application.Works
             // Arrange
             var treatmentId = Guid.NewGuid();
             var command = new CreateWorkCommand { TreatmentId = treatmentId };
-            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatment");
+            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
             var member = Member.CreateNew("creator@example.com");
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
@@ -102,7 +102,7 @@ namespace I3Lab.Works.Tests.Application.Works
             // Arrange
             var treatmentId = Guid.NewGuid();
             var command = new CreateWorkCommand { TreatmentId = treatmentId };
-            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatment");
+            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
             var member = Member.CreateNew("creator@example.com");
             var work = await treatment.CreateNewTreatmentStage(member);
 
@@ -129,7 +129,7 @@ namespace I3Lab.Works.Tests.Application.Works
             // Arrange
             var treatmentId = Guid.NewGuid();
             var command = new CreateWorkCommand { TreatmentId = treatmentId };
-            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatment");
+            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
             var member = Member.CreateNew("creator@example.com");
             var work =  await Work.CreateBasedOnTreatmentAsync(member, new TreatmentId(treatmentId));
 

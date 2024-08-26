@@ -1,7 +1,7 @@
 ﻿using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Works.Application.Contract;
 using Microsoft.Extensions.Configuration;

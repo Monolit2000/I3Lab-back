@@ -1,7 +1,7 @@
 ﻿
 using I3Lab.Works.Application.Treatments.ApplicationErrors;
 using I3Lab.Works.Application.Treatments.CreateTreatment;
-using I3Lab.Works.Domain.Treatment;
+using I3Lab.Works.Domain.Treatments;
 using FluentAssertions;
 using NSubstitute;
 using AutoFixture;
@@ -40,7 +40,7 @@ namespace I3Lab.Works.UnitTests.Treatments
             var result = await _handler.Handle(command, default);
 
             //Assert
-            result.Errors.First().Message.Should().Be("Treatment name is Empty");
+            result.Errors.First().Message.Should().Be("Treatments name is Empty");
         }
 
         [Fact]

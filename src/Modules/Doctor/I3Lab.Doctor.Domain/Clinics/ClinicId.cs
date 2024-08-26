@@ -5,9 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.Treatment.Events
+namespace I3Lab.Doctors.Domain.Clinics
 {
-    public class TreatmentAddedWorkDomainEvent : DomainEventBase
+    public class ClinicId : TypedIdValueBase
     {
+        public ClinicId(Guid value) 
+            : base(value)
+        {
+        }
     }
 }

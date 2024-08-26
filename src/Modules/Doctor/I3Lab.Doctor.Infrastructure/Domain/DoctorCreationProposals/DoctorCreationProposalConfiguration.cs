@@ -23,6 +23,11 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
                 //.IsRequired();
             });
 
+            builder.OwnsOne(d => d.PhoneNumber, phoneNumber =>
+            {
+                phoneNumber.Property(a => a.Value).HasColumnName("PhoneNumber").IsRequired();
+            });
+
             builder.OwnsOne(d => d.Email, avatar =>
             {
                 avatar.Property(a => a.Value)

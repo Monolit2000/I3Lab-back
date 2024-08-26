@@ -17,10 +17,14 @@ namespace I3Lab.Doctors.Infrastructure.Domain.Doctors
                 //.IsRequired();
             });
 
+            builder.OwnsOne(d => d.PhoneNumber, phoneNumber =>
+            {
+                phoneNumber.Property(a => a.Value).HasColumnName("PhoneNumber").IsRequired();
+            });
+
             builder.OwnsOne(d => d.Email, avatar =>
             {
-                avatar.Property(a => a.Value);
-                //.IsRequired();
+                avatar.Property(a => a.Value).HasColumnName("Email"); 
             });
 
             builder.OwnsOne(d => d.DoctorAvatar, avatar =>

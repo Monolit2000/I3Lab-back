@@ -8,6 +8,6 @@ namespace I3Lab.Works.Application.Treatments.ApplicationErrors
 {
     public static class TreatmentsErrors
     {
-        public static readonly string NotUniqueName = "Treatment name is not unique";
+        public static readonly string NotUniqueName = "Treatments name is not unique";
     }
 }
