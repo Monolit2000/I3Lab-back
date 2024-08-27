@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using I3Lab.Users.Infrastructure.JWT;
 
 namespace I3Lab.Users.Infrastructure.Configurations.Aplication
 {
@@ -19,6 +13,13 @@ namespace I3Lab.Users.Infrastructure.Configurations.Aplication
             this IServiceCollection services,
             IConfiguration configuration)
         {
+
+
+       
+
+
+
+
             var secretKey = configuration["JwtOptions:SecretKey"];
 
             services.AddHttpContextAccessor();

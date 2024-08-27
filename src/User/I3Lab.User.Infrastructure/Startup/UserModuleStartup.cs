@@ -39,6 +39,10 @@ namespace I3Lab.Users.Infrastructure.Startup
 
             //services.AddApiAuthentication(configuration);
 
+            services
+           .AddFluentEmail(configuration["Email:SenderEmail"], configuration["Email:Sender"])
+           .AddSmtpSender(configuration["Email:Host"], configuration.GetValue<int>("Email:Port"), configuration["Email:Username"], configuration["Email:Password"]);
+
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUserRepository, UserRepository>();

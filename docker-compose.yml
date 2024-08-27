@@ -80,6 +80,15 @@ services:
     restart: always
 
 
+  papercut:
+   image: changemakerstudiosus/papercut-smtp:latest
+   container_name: papercut
+   ports:
+    - 5555:80
+    - 25:25
+
+
+
    
 volumes:
   postgres_data:

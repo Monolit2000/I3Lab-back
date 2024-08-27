@@ -4,7 +4,7 @@ using I3Lab.Users.Application.Register;
 using I3Lab.Users.Application.Contract;
 using I3Lab.Users.Domain.Users;
 using NSubstitute;
-
+using FluentEmail.Core;
 namespace I3lab.Users.Tests.Users
 {
     public class RegisterUserCommandHandlerTests
@@ -12,6 +12,7 @@ namespace I3lab.Users.Tests.Users
         private readonly IFixture _fixture;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IUserRepository _userRepository;
+        private readonly IFluentEmail _fluentEmail;
         private readonly RegisterUserCommandHandler _handler;
 
         public RegisterUserCommandHandlerTests()
@@ -19,7 +20,8 @@ namespace I3lab.Users.Tests.Users
             _fixture = new Fixture();
             _passwordHasher = Substitute.For<IPasswordHasher>();
             _userRepository = Substitute.For<IUserRepository>();
-            _handler = new RegisterUserCommandHandler(_passwordHasher, _userRepository);
+            _fluentEmail = Substitute.For<IFluentEmail>();
+            _handler = new RegisterUserCommandHandler(_passwordHasher, _userRepository, _fluentEmail);
         }
 
         [Fact]
