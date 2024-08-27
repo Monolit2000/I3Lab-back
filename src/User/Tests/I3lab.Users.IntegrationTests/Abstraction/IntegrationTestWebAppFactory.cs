@@ -9,6 +9,7 @@ using I3Lab.Users.Infrastructure.Persistence;
 using I3Lab.Works.Infrastructure.Persistence;
 using I3Lab.BuildingBlocks.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using I3Lab.Doctors.Infrastructure.Persistence;
 namespace I3lab.Users.IntegrationTests.Abstraction
 {
     public class IntegrationTestWebAppFactory : WebApplicationFactory<I3Lab.API.Configuration.Program>, IAsyncLifetime
@@ -34,6 +35,13 @@ namespace I3lab.Users.IntegrationTests.Abstraction
                 services.RemoveAll(typeof(DbContextOptions<WorkContext>));
 
                 services.AddDbContext<WorkContext>(options =>
+                options
+                     .UseNpgsql(_dbContainer.GetConnectionString())
+                     .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>());
+
+                services.RemoveAll(typeof(DbContextOptions<DoctorContext>));
+
+                services.AddDbContext<DoctorContext>(options =>
                 options
                      .UseNpgsql(_dbContainer.GetConnectionString())
                      .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>());
