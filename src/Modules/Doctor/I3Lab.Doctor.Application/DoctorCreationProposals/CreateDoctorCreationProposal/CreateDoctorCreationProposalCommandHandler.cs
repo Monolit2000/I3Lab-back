@@ -11,14 +11,15 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
         public async Task<Result<DoctorCreationProposalDto>> Handle(CreateDoctorCreationProposalCommand request, CancellationToken cancellationToken)
         {
 
-            
+            var email = Email.Create(request.Email);
 
-            var eamil = Email.Create(request.Email);
-
+            var exist = await doctorCreationProposalRepository.ExistByEmailAsync(email);
+            if (exist)
+                return Result.Fail($"Proposal with this email '{email}' already exist");
 
             var doctorCreationProposal = DoctorCreationProposal.CreateNew(
                 DoctorName.Create(request.FirstName, request.LastName),
-                eamil,
+                email,
                 PhoneNumber.Create(request.PhoneNumber),
                 DoctorAvatar.Create( request.DoctorAvatar));
 

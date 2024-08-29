@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Doctors.Domain.DoctorCreationProposals.Events
 {
-    public class DoctorCreationProposalApprovedDomainEvent : DomainEventBase
+    public class DoctorCreationProposalConfirmedDomainEvent : DomainEventBase
     {
     }
 }

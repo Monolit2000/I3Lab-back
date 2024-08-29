@@ -62,14 +62,14 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
                 DoctorAvatar);
         }
 
-        public void Approve()
+        public void Confirm()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
                 throw new InvalidOperationException("Proposal cannot be approved.");
 
             ConfirmationStatus = ConfirmationStatus.Confirmed;
 
-            AddDomainEvent(new DoctorCreationProposalApprovedDomainEvent());
+            AddDomainEvent(new DoctorCreationProposalConfirmedDomainEvent());
         }
 
         public void Reject()
