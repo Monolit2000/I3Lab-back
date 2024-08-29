@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I3Lab.Doctors.Domain.Doctors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,7 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
         Task DeleteAsync(DoctorCreationProposal proposal);
 
         Task<IEnumerable<DoctorCreationProposal>> GetAllPendingAsync();
+
+        Task<bool> ExistByEmailAsync(Email email);
     }
 }

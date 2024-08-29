@@ -85,7 +85,8 @@ services:
    container_name: papercut
    ports:
     - 5555:80
-    - 25:25
+    - 587:587
+    # - 25:25
 
 
 

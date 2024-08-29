@@ -49,5 +49,20 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
                 .Where(p => p.ConfirmationStatus == ConfirmationStatus.Validation)
                 .ToListAsync();
         }
+
+        public async Task<bool> ExistByEmailAsync(Email email)
+        {
+            var exist = await _context.DoctorCreationProposals.AnyAsync(x => x.Email == email);
+            
+            if(exist is false)
+                return exist;
+
+            return exist;
+        }
+
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            await _context.SaveChangesAsync(cancellationToken);
+        }
     }
 }

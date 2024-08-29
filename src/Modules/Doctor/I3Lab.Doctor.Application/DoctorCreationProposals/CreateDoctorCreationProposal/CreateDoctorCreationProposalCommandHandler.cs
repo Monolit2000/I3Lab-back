@@ -10,9 +10,15 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
     {
         public async Task<Result<DoctorCreationProposalDto>> Handle(CreateDoctorCreationProposalCommand request, CancellationToken cancellationToken)
         {
+
+            
+
+            var eamil = Email.Create(request.Email);
+
+
             var doctorCreationProposal = DoctorCreationProposal.CreateNew(
                 DoctorName.Create(request.FirstName, request.LastName),
-                Email.Create(request.Email),
+                eamil,
                 PhoneNumber.Create(request.PhoneNumber),
                 DoctorAvatar.Create( request.DoctorAvatar));
 
