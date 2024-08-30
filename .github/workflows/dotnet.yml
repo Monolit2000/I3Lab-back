@@ -16,7 +16,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-  
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -28,5 +27,10 @@ jobs:
     - name: Build
       run: dotnet build ./I3Lab.sln --no-restore
       
+  test:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Test
       run: dotnet test ./I3Lab.sln --no-build --verbosity normal
