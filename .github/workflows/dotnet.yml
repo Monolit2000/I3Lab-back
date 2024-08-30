@@ -27,18 +27,5 @@ jobs:
     - name: Build
       run: dotnet build ./I3Lab.sln --no-restore
       
-  test:
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
-
-    - uses: actions/checkout@v4
-    - name: test
-      uses: actions/setup-dotnet@v4
-      with:
-         dotnet-version: 8.0.x
-
     - name: Test
       run: dotnet test ./I3Lab.sln --no-build --verbosity normal
-     
