@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\I3Lab.Doctor.Domain\I3Lab.Doctors.Domain.csproj" />
+    <ProjectReference Include="..\I3Lab.Doctor.IntegrationEvents\I3Lab.Doctors.IntegrationEvents.csproj" />
   </ItemGroup>
 
 </Project>

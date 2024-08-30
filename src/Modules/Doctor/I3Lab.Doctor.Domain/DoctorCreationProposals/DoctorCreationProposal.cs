@@ -38,7 +38,15 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
             DoctorAvatar = doctorAvatar;
             CreatedAt = DateTime.UtcNow;
 
-            AddDomainEvent(new DoctorCreationProposalCreatedDomainEvent(Id.Value));
+            AddDomainEvent(new DoctorCreationProposalCreatedDomainEvent(
+                Id.Value,
+                Name.FirstName,
+                Name.LastName,
+                Email.Value,
+                PhoneNumber.Value,
+                DoctorAvatar.Url,
+                CreatedAt
+                ));
         }
 
         public static DoctorCreationProposal CreateNew(
