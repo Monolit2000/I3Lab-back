@@ -9,7 +9,5 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreatio
     public class DoctorCreationProposalDto
     {
 
-        
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using I3Lab.BuildingBlocks.Application.MussTransitEventBus;
-using I3Lab.Users.IntegrationEvents;
+﻿using I3Lab.Users.IntegrationEvents;
 using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -8,7 +7,7 @@ namespace I3Lab.Works.Application.Members.CreateMember
 {
     public class NewUserRegisteredIntegrationEventHandler(
         ILogger<NewUserRegisteredIntegrationEventHandler> logger,
-        IMediator publisher) : IConsumer<UserRegisteredIntegretionEvent>
+        IMediator mediator) : IConsumer<UserRegisteredIntegretionEvent>
     {
         public async Task Consume(ConsumeContext<UserRegisteredIntegretionEvent> context)
         {
@@ -16,9 +15,9 @@ namespace I3Lab.Works.Application.Members.CreateMember
              nameof(NewUserRegisteredIntegrationEventHandler), context.Message.UserId);
 
             var command = new CreateMemberCommand(
-                context.Message.LastName);
+                context.Message.Email);
 
-            await publisher.Send(command);
+            await mediator.Send(command);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Administration.Domain.DoctorCreationProposals
 {
-    public interface IDoctorCreationProposals
+    public interface IDoctorCreationProposalRepository
     {
         Task<DoctorCreationProposal?> GetByIdAsync(DoctorCreationProposalId id);
 

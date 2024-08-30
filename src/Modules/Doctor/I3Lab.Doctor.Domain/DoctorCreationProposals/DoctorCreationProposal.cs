@@ -77,7 +77,7 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
 
             ConfirmationStatus = ConfirmationStatus.Confirmed;
 
-            AddDomainEvent(new DoctorCreationProposalConfirmedDomainEvent());
+            AddDomainEvent(new DoctorCreationProposalConfirmedDomainEvent(Id));
         }
 
         public void Reject()

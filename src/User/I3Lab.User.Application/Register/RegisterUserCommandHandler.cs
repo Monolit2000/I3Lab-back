@@ -37,11 +37,11 @@ namespace I3Lab.Users.Application.Register
 
             await _userRepository.AddAsync(user);
 
-            await _fluentEmail
-                .To(user.Email)
-                .Subject("Email verification")
-                .Body("To verify your email click here")
-                .SendAsync();
+            //await _fluentEmail
+            //    .To(user.Email)
+            //    .Subject("Email verification")
+            //    .Body("To verify your email click here")
+            //    .SendAsync();
 
             return new RegisterDto() {UserId = user.UserId.Value };
         }

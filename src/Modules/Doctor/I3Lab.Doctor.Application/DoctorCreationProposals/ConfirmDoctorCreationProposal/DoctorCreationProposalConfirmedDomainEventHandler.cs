@@ -1,4 +1,5 @@
-﻿using I3Lab.Doctors.Domain.DoctorCreationProposals;
+﻿using I3Lab.Doctors.Application.Doctor.CreateDoctor;
+using I3Lab.Doctors.Domain.DoctorCreationProposals;
 using I3Lab.Doctors.Domain.DoctorCreationProposals.Events;
 using MediatR;
 
@@ -7,9 +8,9 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreatio
     public class DoctorCreationProposalConfirmedDomainEventHandler(
         ISender sender) : INotificationHandler<DoctorCreationProposalConfirmedDomainEvent>
     {
-        public Task Handle(DoctorCreationProposalConfirmedDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(DoctorCreationProposalConfirmedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await sender.Send(new CreateDoctorCommand(notification.DoctorCreationProposalId));
         }
     }
 }

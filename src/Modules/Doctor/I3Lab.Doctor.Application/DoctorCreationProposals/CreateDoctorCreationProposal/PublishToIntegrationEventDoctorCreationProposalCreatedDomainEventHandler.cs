@@ -5,7 +5,7 @@ using I3Lab.Doctors.Domain.DoctorCreationProposals.Events;
 
 namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreationProposal
 {
-    public class DoctorCreationProposalCreatedDomainEventHandler(
+    public class PublishToIntegrationEventDoctorCreationProposalCreatedDomainEventHandler(
         IPublishEndpoint publishEndpoint) : INotificationHandler<DoctorCreationProposalCreatedDomainEvent>
     {
         public async Task Handle(DoctorCreationProposalCreatedDomainEvent notification, CancellationToken cancellationToken)

@@ -5,7 +5,7 @@ using MediatR;
 namespace I3Lab.Administration.Application.RequestDoctorCreationProposalVerification
 {
     public class RequestDoctorCreationProposalVerificationCommandHandler(
-        IDoctorCreationProposals doctorCreationProposals) : IRequestHandler<RequestDoctorCreationProposalVerificationCommand, Result>
+        IDoctorCreationProposalRepository doctorCreationProposals) : IRequestHandler<RequestDoctorCreationProposalVerificationCommand, Result>
     {
         public Task<Result> Handle(RequestDoctorCreationProposalVerificationCommand request, CancellationToken cancellationToken)
         {
