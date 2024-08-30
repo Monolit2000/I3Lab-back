@@ -1,4 +1,6 @@
 ﻿using FluentResults;
+using I3Lab.Doctors.Domain.DoctorCreationProposals;
+using I3Lab.Doctors.Domain.Doctors;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,11 +10,19 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Doctors.Application.Doctor.CreateDoctor
 {
-    public class CreateDoctorCommandHandler : IRequestHandler<CreateDoctorCommand, Result<DoctorDto>>
+    public class CreateDoctorCommandHandler(
+        IDoctorRepository doctorRepository,
+        IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<CreateDoctorCommand, Result<DoctorDto>>
     {
-        public Task<Result<DoctorDto>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
+        public async Task<Result<DoctorDto>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var propose = await doctorCreationProposalRepository.GetByIdAsync(request.DoctorCreationProposalId);
+
+            var doctor = propose.CreateDoctor();
+
+            await doctorRepository.AddAsync(doctor);
+
+            return new DoctorDto();
         }
     }
 }

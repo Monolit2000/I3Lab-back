@@ -1,14 +1,16 @@
 ﻿using FluentResults;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using I3Lab.Doctors.Domain.DoctorCreationProposals;
 
 namespace I3Lab.Doctors.Application.Doctor.CreateDoctor
 {
     public class CreateDoctorCommand : IRequest<Result<DoctorDto>>
     {
+        public DoctorCreationProposalId DoctorCreationProposalId { get; set; }
+
+        public CreateDoctorCommand(DoctorCreationProposalId doctorCreationProposalId)
+        {
+            DoctorCreationProposalId = doctorCreationProposalId;
+        }
     }
 }
