@@ -44,11 +44,16 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
 
             builder.Property(p => p.CreatedAt).IsRequired();
 
-            builder.Property(p => p.ConfirmationStatus)
-                .HasConversion(
-                    status => status.ToString(),
-                    status => (ConfirmationStatus)Enum.Parse(typeof(ConfirmationStatus), status))
-                .IsRequired();
+            builder.OwnsOne(d => d.ConfirmationStatus, status =>
+            {
+                status.Property(s => s.Value).HasColumnName("ConfirmationStatus").IsRequired();
+            });
+
+            //builder.Property(p => p.ConfirmationStatus)
+            //    .HasConversion(
+            //        status => status.ToString(),
+            //        status => (ConfirmationStatus)Enum.Parse(typeof(ConfirmationStatus), status))
+            //    .IsRequired();
         }
     }
 }

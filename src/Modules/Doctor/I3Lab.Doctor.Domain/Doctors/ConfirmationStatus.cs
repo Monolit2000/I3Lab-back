@@ -12,7 +12,7 @@ namespace I3Lab.Doctors.Domain.Doctors
 
         public static ConfirmationStatus Rejected = new ConfirmationStatus(nameof(Rejected));
 
-        private string Value { get; }
+        public string Value { get; }
 
 
         private static readonly HashSet<string> ValidStatuses = new HashSet<string>
