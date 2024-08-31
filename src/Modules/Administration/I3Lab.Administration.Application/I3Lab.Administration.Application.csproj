@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\I3Lab.Administration.Domain\I3Lab.Administration.Domain.csproj" />
   </ItemGroup>
 
