@@ -234,7 +234,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<Guid>("WorkId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("MemberId")
+                            b1.Property<Guid>("Member")
                                 .HasColumnType("uuid");
 
                             b1.Property<Guid>("AddedBy")
@@ -243,9 +243,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<DateTime>("JoinDate")
                                 .HasColumnType("timestamp with time zone");
 
-                            b1.HasKey("WorkId", "MemberId");
+                            b1.HasKey("WorkId", "Member");
 
-                            b1.HasIndex("WorkId", "MemberId")
+                            b1.HasIndex("WorkId", "Member")
                                 .IsUnique();
 
                             b1.ToTable("WorkMember", "work");

@@ -180,7 +180,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 name: "IX_WorkMember_WorkId_MemberId",
                 schema: "work",
                 table: "WorkMember",
-                columns: new[] { "WorkId", "MemberId" },
+                columns: new[] { "WorkId", "Member" },
                 unique: true);
         }
 

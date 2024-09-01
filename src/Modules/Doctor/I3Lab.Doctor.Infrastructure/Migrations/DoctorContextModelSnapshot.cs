@@ -40,7 +40,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     b.ToTable("DoctorCreationProposals", "doctors");
                 });
 
-            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctor", b =>
+            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctors", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -88,7 +88,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorCreationProposalId");
                         });
 
-                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "Name", b1 =>
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "FirstName", b1 =>
                         {
                             b1.Property<Guid>("DoctorCreationProposalId")
                                 .HasColumnType("uuid");
@@ -133,14 +133,14 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     b.Navigation("Email")
                         .IsRequired();
 
-                    b.Navigation("Name")
+                    b.Navigation("FirstName")
                         .IsRequired();
 
                     b.Navigation("PhoneNumber")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctor", b =>
+            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctors", b =>
                 {
                     b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorAvatar", "DoctorAvatar", b1 =>
                         {
@@ -178,7 +178,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorId");
                         });
 
-                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "Name", b1 =>
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "FirstName", b1 =>
                         {
                             b1.Property<Guid>("DoctorId")
                                 .HasColumnType("uuid");
@@ -223,7 +223,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     b.Navigation("Email")
                         .IsRequired();
 
-                    b.Navigation("Name")
+                    b.Navigation("FirstName")
                         .IsRequired();
 
                     b.Navigation("PhoneNumber")

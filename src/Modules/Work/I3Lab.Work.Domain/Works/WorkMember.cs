@@ -9,27 +9,29 @@ namespace I3Lab.Works.Domain.Works
     public class WorkMember : Entity
     {
         public WorkId WorkId { get; private set; }
-        public MemberId MemberId { get; private set; }
+        public Member Member { get; private set; }
         public MemberAccessibilityType AccessibilityType { get; private set; }
 
-
-        public MemberId AddedBy { get; private set; }
+        public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
 
         private WorkMember() { } //for EF core
 
-        private WorkMember(WorkId workId, MemberId memberId, MemberId addedBy) 
+        private WorkMember(
+            WorkId workId,
+            Member member,
+            Member addedBy) 
         {
             WorkId = workId;
-            MemberId = memberId;
+            Member = member;
             AddedBy = addedBy;
             JoinDate = DateTime.UtcNow;
         }
 
         public static WorkMember CreateNew(
-            WorkId workId, 
-            MemberId memberId, 
-            MemberId addedBy)
+            WorkId workId,
+            Member memberId,
+            Member addedBy)
         {
             return new WorkMember(
                 workId, 
@@ -47,7 +49,7 @@ namespace I3Lab.Works.Domain.Works
 
             AddDomainEvent(new MemberAccessibilityTypeChangedDomainEvent(
                 WorkId, 
-                MemberId, 
+                Member, 
                 newAccessibilityType));
 
             return Result.Ok();

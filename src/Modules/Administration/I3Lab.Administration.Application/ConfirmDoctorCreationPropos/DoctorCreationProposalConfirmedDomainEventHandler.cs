@@ -1,13 +1,17 @@
 ﻿using I3Lab.Administration.Domain.DoctorCreationProposals.Events;
+using I3Lab.Administration.IntegrationEvents;
+using MassTransit;
 using MediatR;
 
 namespace I3Lab.Administration.Application.ConfirmDoctorCreationPropos
 {
-    public class DoctorCreationProposalConfirmedDomainEventHandler : INotificationHandler<DoctorCreationProposalConfirmedDomainEvent>
+    public class DoctorCreationProposalConfirmedDomainEventHandler(
+        IPublishEndpoint publishEndpoint) : INotificationHandler<DoctorCreationProposalConfirmedDomainEvent>
     {
-        public Task Handle(DoctorCreationProposalConfirmedDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(DoctorCreationProposalConfirmedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await publishEndpoint
+                .Publish(new DoctorCreationProposalConfirmedIntegrationEvent(notification.DoctorCreationProposalId.Value));
         }
     }
 }

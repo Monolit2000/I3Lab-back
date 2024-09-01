@@ -11,9 +11,9 @@ namespace I3Lab.Works.Application.WorkComments.AddWorkComment
     //{
     //    public async Task<Result<WorkCommentDto>> Handle(AddWorkCommentCommand request, CancellationToken cancellationToken)
     //    {
-    //        var workComment = WorkComment.CreateNew(
+    //        var workComment = WorkComment.CreateBaseOnWork(
     //            new WorkId(request.WorkId),
-    //            new MemberId(request.AuthorId),
+    //            new Member(request.AuthorId),
     //            request.Content);
 
     //        await workCommentRepository.AddAsync(workComment);

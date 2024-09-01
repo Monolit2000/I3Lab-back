@@ -1,4 +1,4 @@
-﻿using I3Lab.Doctors.Application.Doctor.CreateDoctor;
+﻿using I3Lab.Doctors.Application.Doctors.CreateDoctor;
 using I3Lab.Doctors.Domain.DoctorCreationProposals;
 using I3Lab.Doctors.Domain.DoctorCreationProposals.Events;
 using MediatR;

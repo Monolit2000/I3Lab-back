@@ -14,10 +14,10 @@ namespace I3Lab.Administration.Application.ConfirmDoctorCreationPropos
     {
         public async Task<Result<DoctorCreationProposDto>> Handle(ConfirmDoctorCreationProposCommand request, CancellationToken cancellationToken)
         {
-            var DoctorCreationProposal = await doctorCreationProposalRepository.GetByIdAsync(
+            var doctorCreationProposal = await doctorCreationProposalRepository.GetByIdAsync(
                 new DoctorCreationProposalId(request.DoctorCreationProposalId));
 
-            DoctorCreationProposal.Confirm();
+            doctorCreationProposal.Confirm();
 
             return new DoctorCreationProposDto();
         }

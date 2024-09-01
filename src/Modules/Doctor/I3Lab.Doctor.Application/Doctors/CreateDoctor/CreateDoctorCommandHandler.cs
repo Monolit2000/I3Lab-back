@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Doctors.Application.Doctor.CreateDoctor
+namespace I3Lab.Doctors.Application.Doctors.CreateDoctor
 {
     public class CreateDoctorCommandHandler(
         IDoctorRepository doctorRepository,

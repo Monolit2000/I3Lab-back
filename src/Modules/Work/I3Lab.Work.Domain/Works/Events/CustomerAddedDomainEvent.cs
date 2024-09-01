@@ -10,9 +10,9 @@ namespace I3Lab.Works.Domain.Works.Events
 {
     public class CustomerAddedDomainEvent : DomainEventBase
     {
-        public MemberId WorkMember { get; }
+        public Member WorkMember { get; }
 
-        public CustomerAddedDomainEvent(MemberId workMember) 
+        public CustomerAddedDomainEvent(Member workMember) 
         {
             WorkMember = workMember;    
         }   

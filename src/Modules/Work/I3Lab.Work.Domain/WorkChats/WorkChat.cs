@@ -15,47 +15,51 @@ namespace I3Lab.Works.Domain.WorkChats
 
         public WorkChatId Id { get; private set; }
         public List<ChatMessage> Messages { get; private set; }
-        public List<ChatMember> Participants { get; private set; }
+        public List<Member> ChatMembers { get; private set; }
 
         private WorkChat() { } // For EF Core
 
-        private WorkChat(WorkId workId)
+        private WorkChat(WorkId workId, List<Member> members)
         {
             WorkId = workId;
             Messages = new List<ChatMessage>();
-            Participants = new List<ChatMember>();
+            ChatMembers = members;
         }
 
-        public static WorkChat CreateNew(WorkId workId)
+        internal static WorkChat CreateBaseOnWork(
+            WorkId workId, 
+            List<Member> workMembers)
         {
-            return new WorkChat(workId);
+            return new WorkChat(
+                workId, 
+                workMembers);
         }
 
         public void AddMessage(MemberId senderId, string messageText)
         {
-            if (Participants.All(p => p.MemberId != senderId))
+            if (ChatMembers.All(p => p.Id != senderId))
                 throw new InvalidOperationException("Sender is not a participant in the chat.");
 
             var newMessage = ChatMessage.CreateNew(senderId, messageText);
             Messages.Add(newMessage);
         }
 
-        public void AddChatMember(MemberId memberId)
+        public void AddChatMember(Member member)
         {
-            if (Participants.Any(p => p.MemberId == memberId))
+            if (ChatMembers.Any(p => p.Id == member.Id))
                 throw new InvalidOperationException("Member is already a participant in the chat.");
 
-            var newParticipant = new ChatMember(memberId);
-            Participants.Add(newParticipant);
+           // var newParticipant = new ChatMember(memberId);
+            ChatMembers.Add(member);
         }
 
         public void RemoveChatMember(MemberId memberId)
         {
-            var participant = Participants.FirstOrDefault(p => p.MemberId == memberId);
+            var participant = ChatMembers.FirstOrDefault(p => p.Id == memberId);
             if (participant == null)
                 throw new InvalidOperationException("Member is not a participant in the chat.");
 
-            Participants.Remove(participant);
+            ChatMembers.Remove(participant);
         }
     }
 }

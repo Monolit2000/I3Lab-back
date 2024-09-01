@@ -15,7 +15,8 @@ namespace I3Lab.Works.Domain.Works
     {
         public TreatmentId TreatmentId { get; private set; }
 
-        //public WorkChat WorkChat { get; private set; } 
+        public WorkChat WorkChat { get; private set; } 
+
 
         public string TreatmentName { get; private set; }
 
@@ -27,15 +28,15 @@ namespace I3Lab.Works.Domain.Works
 
         public WorkId Id { get; private set; }
         public WorkFile WorkAvatarImage  { get; private set; }
-        public MemberId CustomerId { get; private set; }
+        public Member CustomerId { get; private set; }
         public WorkStatus WorkStatus { get; private set; }
-        public MemberId CreatorId { get; private set; }
+        public Member CreatorId { get; private set; }
         public DateTime WorkStartedDate { get; private set; }   
 
         private Work() { } //for Ef core
 
         private Work(
-            MemberId creatorId,
+            Member creatorId,
             TreatmentId treatmentId)
         {
             Id = new WorkId(Guid.NewGuid());
@@ -43,6 +44,7 @@ namespace I3Lab.Works.Domain.Works
             CreatorId = creatorId;
             TreatmentId = treatmentId;  
             WorkStartedDate = DateTime.UtcNow;
+            WorkChat = WorkChat.CreateBaseOnWork(Id, new List<Member>());
 
             AddDomainEvent(new WorkCreatedDomainEvent(Id, treatmentId));
         }
@@ -55,13 +57,13 @@ namespace I3Lab.Works.Domain.Works
                 return Result.Fail(WorkErrors.MemberNotHaveRequiredRole);
 
             return new Work(
-                creator.Id,
+                creator,
                 treatmentId);
         }
 
-        public Result AddWorkMember(MemberId memberId, MemberId addedBy)
+        public Result AddWorkMember(Member memberId, Member addedBy)
         {
-            if(IsWorkMamberIdContainInWorkMembersList(addedBy))
+            if(IsWorkMamberIdContainInWorkMembersList(addedBy.Id))
                 return Result.Fail(WorkErrors.WorkMemberNotFoundError);
 
             var newWorkMember = WorkMember.CreateNew(this.Id, memberId, addedBy);
@@ -73,7 +75,7 @@ namespace I3Lab.Works.Domain.Works
 
         public Result RemoveWorkMember(MemberId memberId, MemberId removedBy)
         {
-            var workMember = WorkMembers.FirstOrDefault(wm => wm.MemberId == memberId);
+            var workMember = WorkMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
             if (workMember == null)
                 return Result
                     .Fail(WorkErrors.WorkMemberNotFoundError);
@@ -95,9 +97,9 @@ namespace I3Lab.Works.Domain.Works
             AddDomainEvent(new WorkAvatarImageSetDomainEvent(workFile));
         }
 
-        public Result AddCustomerId(MemberId customerId, MemberId addedBy)
+        public Result AddCustomerId(Member customerId, Member addedBy)
         {
-            var result = CheckRules(new OnlyExistingWorkMembersCanAddCustomerRule(WorkMembers, addedBy));
+            var result = CheckRules(new OnlyExistingWorkMembersCanAddCustomerRule(WorkMembers, addedBy.Id));
 
             if (result.IsFailed)
                 return result;
@@ -125,7 +127,7 @@ namespace I3Lab.Works.Domain.Works
 
         private bool IsWorkMamberIdContainInWorkMembersList(MemberId memberId)
         {
-            var workMember = WorkMembers.FirstOrDefault(wm => wm.MemberId == memberId);
+            var workMember = WorkMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
 
             if (workMember == null)
               return false;

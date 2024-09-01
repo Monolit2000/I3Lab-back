@@ -53,15 +53,9 @@ namespace I3Lab.Works.Domain.Treatments
 
         public async Task<Result<Work>> CreateNewTreatmentStage(Member creator)
         {
-            //var newTreatmentStage = TreatmentStage.CreateNew(this.Id, workId);
-
-            //TreatmentStages.Add(newTreatmentStage);
-
             var workResult = await Work.CreateBasedOnTreatmentAsync(creator, Id);
 
             return workResult;
-
-            //AddDomainEvent(new NewTreatmentStageCreatedDomainEvent());
         }
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)
@@ -82,7 +76,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         public void AddPreview(BlobFileId fileId)
         {
-            var treatmentPreview = fileId; //TreatmentPreview.CreateNew(this.Id, fileId);
+            var treatmentPreview = fileId; //TreatmentPreview.CreateBaseOnWork(this.Id, fileId);
 
             TreatmentPreview = treatmentPreview;
         }

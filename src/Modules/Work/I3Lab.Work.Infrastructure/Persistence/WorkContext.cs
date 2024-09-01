@@ -8,6 +8,8 @@ using I3Lab.Works.Infrastructure.Domain.BlobFiles;
 using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Infrastructure.Domain.Treatments;
 using I3Lab.Works.Domain.TreatmentInvites;
+using System.Security.Permissions;
+using I3Lab.Works.Domain.WorkChats;
 
 namespace I3Lab.Works.Infrastructure.Persistence
 {
@@ -16,6 +18,7 @@ namespace I3Lab.Works.Infrastructure.Persistence
         //public DbSet<Works.Domain.WorkDirectorys.WorkDirectory> WorkDirectories { get; set; }
 
         //public DbSet<WorkComment> WorkComments { get; set; }
+        public DbSet<WorkChat> WorkChats { get; set; }
 
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }

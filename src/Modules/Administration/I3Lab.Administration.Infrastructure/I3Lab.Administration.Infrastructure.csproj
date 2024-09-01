@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\Administrators\" />
-    <Folder Include="Startup\" />
   </ItemGroup>
 
   <ItemGroup>

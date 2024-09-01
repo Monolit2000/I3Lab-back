@@ -61,7 +61,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 
             builder.OwnsMany(e => e.WorkMembers, b =>
             {
-                b.HasKey(wm => new { wm.WorkId, wm.MemberId });
+                b.HasKey(wm => new { wm.WorkId, wm.Member });
 
 
                 b.Property(wm => wm.WorkId).IsRequired();
@@ -71,7 +71,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
                 //    b.Property(a => a.Value).HasColumnName("WorkId").IsRequired();
                 //});
 
-                b.Property(wm => wm.MemberId).IsRequired();
+                b.Property(wm => wm.Member).IsRequired();
                 b.Property(wm => wm.AddedBy).IsRequired();
                 b.Property(wm => wm.JoinDate).IsRequired();
 
@@ -81,7 +81,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
                 });
 
                 // Уникальный индекс для WorkMember
-                b.HasIndex(wm => new { wm.WorkId, wm.MemberId }).IsUnique();
+                b.HasIndex(wm => new { wm.WorkId, wm.Member }).IsUnique();
             });
 
             // Настройка других свойств
@@ -107,10 +107,10 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
     //        : base(id => id.Value, value => new TreatmentId(value)) { }
     //}
 
-    //public class MemberIdConverter : ValueConverter<MemberId, Guid>
+    //public class MemberIdConverter : ValueConverter<Member, Guid>
     //{
     //    public MemberIdConverter()
-    //        : base(id => id.Value, value => new MemberId(value)) { }
+    //        : base(id => id.Value, value => new Member(value)) { }
     //}
     ////public class WorkFileIdConverter : ValueConverter<WorkFileId, Guid>
     ////{

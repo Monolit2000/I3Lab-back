@@ -12,7 +12,7 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
         {
             builder.HasKey(p => p.Id);
 
-            //builder.OwnsOne(p => p.Name);
+            //builder.OwnsOne(p => p.FirstName);
             //builder.OwnsOne(p => p.Email);
             //builder.OwnsOne(p => p.DoctorAvatar);
 

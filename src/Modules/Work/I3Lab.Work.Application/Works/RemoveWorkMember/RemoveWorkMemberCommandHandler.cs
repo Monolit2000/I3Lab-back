@@ -21,7 +21,7 @@ namespace I3Lab.Works.Application.Works.RemoveWorkMember
                 return Result.Fail<WorkMemberDto>("Work not found.");
             }
 
-            var workMember = work.WorkMembers.FirstOrDefault(wm => wm.MemberId == new MemberId(request.MemberId));
+            var workMember = work.WorkMembers.FirstOrDefault(wm => wm.Member == new MemberId(request.MemberId));
 
             if (workMember == null)
             {

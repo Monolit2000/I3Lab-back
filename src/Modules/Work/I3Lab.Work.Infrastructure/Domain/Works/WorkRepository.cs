@@ -38,7 +38,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             return await _context.Works
                 .Include(w => w.WorkFiles)
                 .Include(w => w.WorkMembers)
-                .Where(w => w.WorkMembers.Any(m => m.MemberId == id))
+                .Where(w => w.WorkMembers.Any(m => m.Member == id))
                 .ToListAsync();
         }
 

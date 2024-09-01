@@ -1,12 +1,15 @@
-﻿using System;
+﻿using FluentResults;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.WorkChats.AddMessage
 {
-    internal class AddMessageCommand
+    public class AddMessageCommand : IRequest<Result>
     {
     }
 }

@@ -18,7 +18,7 @@ namespace I3Lab.Works.Application.Works.CreateWork
             if (treatment == null)
                 return Result.Fail("Treatments not exist");
 
-            var creator = await memberRepository.GetMByIdAsync(memberContext.MemberId);
+            var creator = await memberRepository.GetMByIdAsync(new MemberId(request.CreatorId));
             if (creator == null)
                 return Result.Fail("Member not exist");
 
@@ -40,10 +40,10 @@ namespace I3Lab.Works.Application.Works.CreateWork
                 TreatmentName = work.TreatmentName,
                 WorkStatus = work.WorkStatus.Value,
                 WorkStartedDate = work.WorkStartedDate,
-                CreatorId = work.CreatorId.Value
+                CreatorId = work.CreatorId.Id.Value
             };
 
-            return Result.Ok(workDto);
+            return workDto;
         }
     }
 }

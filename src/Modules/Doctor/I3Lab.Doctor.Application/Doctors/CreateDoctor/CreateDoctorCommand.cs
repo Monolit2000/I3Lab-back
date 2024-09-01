@@ -2,7 +2,7 @@
 using MediatR;
 using I3Lab.Doctors.Domain.DoctorCreationProposals;
 
-namespace I3Lab.Doctors.Application.Doctor.CreateDoctor
+namespace I3Lab.Doctors.Application.Doctors.CreateDoctor
 {
     public class CreateDoctorCommand : IRequest<Result<DoctorDto>>
     {

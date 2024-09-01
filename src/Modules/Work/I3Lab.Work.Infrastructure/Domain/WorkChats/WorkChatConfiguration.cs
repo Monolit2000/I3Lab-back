@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Doctors.Application.Doctor.CreateDoctor
+namespace I3Lab.Works.Infrastructure.Domain.WorkChats
 {
-    public class DoctorDto
+    public class WorkChatConfiguration
     {
     }
 }

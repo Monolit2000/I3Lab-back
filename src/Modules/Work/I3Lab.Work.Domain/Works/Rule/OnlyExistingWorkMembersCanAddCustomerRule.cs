@@ -19,7 +19,7 @@ namespace I3Lab.Works.Domain.Works.Rule
             _addedBy = addedBy;
         }
 
-        public bool IsBroken() => !_workMembers.Any(m => m.MemberId == _addedBy);
+        public bool IsBroken() => !_workMembers.Any(m => m.Member.Id == _addedBy);
 
         public string Message => "Only existing work members can add a customer.";
     }

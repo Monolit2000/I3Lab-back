@@ -11,5 +11,7 @@ namespace I3Lab.Works.Application.Works.CreateWork
     public class CreateWorkCommand : IRequest<Result<WorkDto>>
     {
         public Guid TreatmentId {  get; set; }
+
+        public Guid CreatorId { get; set; }
     }
 }

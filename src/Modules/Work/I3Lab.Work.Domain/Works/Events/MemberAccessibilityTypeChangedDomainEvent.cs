@@ -11,10 +11,10 @@ namespace I3Lab.Works.Domain.Works.Events
     public class MemberAccessibilityTypeChangedDomainEvent : DomainEventBase
     {
         public WorkId WorkId { get; }
-        public MemberId MemberId { get; }
+        public Member MemberId { get; }
         public MemberAccessibilityType NewAccessibilityType { get; }
 
-        public MemberAccessibilityTypeChangedDomainEvent(WorkId workId, MemberId memberId, MemberAccessibilityType newAccessibilityType)
+        public MemberAccessibilityTypeChangedDomainEvent(WorkId workId, Member memberId, MemberAccessibilityType newAccessibilityType)
         {
             WorkId = workId;
             MemberId = memberId;

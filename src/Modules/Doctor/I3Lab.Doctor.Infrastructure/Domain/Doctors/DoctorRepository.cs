@@ -38,7 +38,7 @@ namespace I3Lab.Doctors.Infrastructure.Domain.Doctors
             await _context.SaveChangesAsync();
         }
 
-        //public async Task<IEnumerable<Doctor>> GetAllByStatusAsync(ConfirmationStatus status)
+        //public async Task<IEnumerable<Doctors>> GetAllByStatusAsync(ConfirmationStatus status)
         //{
         //    return await _context.Doctors
         //        .Where(d => d.ConfirmationStatus == status)
