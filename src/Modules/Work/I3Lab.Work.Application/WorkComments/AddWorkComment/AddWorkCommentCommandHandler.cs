@@ -13,7 +13,7 @@ namespace I3Lab.Works.Application.WorkComments.AddWorkComment
     //    {
     //        var workComment = WorkComment.CreateBaseOnWork(
     //            new WorkId(request.WorkId),
-    //            new Member(request.AuthorId),
+    //            new MemberToInvite(request.AuthorId),
     //            request.Content);
 
     //        await workCommentRepository.AddAsync(workComment);

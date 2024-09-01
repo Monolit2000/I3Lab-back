@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Works\ApplicationErrors\**" />
+    <EmbeddedResource Remove="Works\ApplicationErrors\**" />
+    <None Remove="Works\ApplicationErrors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MassTransit" Version="8.2.4" />
     <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
@@ -18,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Works\ApplicationErrors\" />
+    <Folder Include="Works\Errors\" />
   </ItemGroup>
 
 </Project>

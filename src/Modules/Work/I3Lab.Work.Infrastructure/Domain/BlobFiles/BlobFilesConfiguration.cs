@@ -21,7 +21,13 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             builder.Property(bf => bf.BlobName).IsRequired();
             builder.Property(bf => bf.FileName).IsRequired();
             builder.Property(bf => bf.BlobDirectoryName).IsRequired();
-            builder.Property(bf => bf.BlobFilePath).IsRequired();
+
+            builder.OwnsOne(bf => bf.Path, path =>
+            {
+                path.Property(p => p.Value).HasColumnName("BlobFilePath");
+            });
+
+            builder.Property(bf => bf.Path).IsRequired();
             builder.Property(bf => bf.CreateDate).IsRequired();
 
 

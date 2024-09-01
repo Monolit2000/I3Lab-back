@@ -44,10 +44,20 @@ namespace I3Lab.Works.Domain.WorkChats
             Messages.Add(newMessage);
         }
 
+        public void RemoveMessage(ChatMessageId chatMessageId)
+        {
+            var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
+
+            if (message == null)
+                throw new InvalidOperationException("Messages not faund.");
+
+            Messages.Remove(message); 
+        }
+
         public void AddChatMember(Member member)
         {
             if (ChatMembers.Any(p => p.Id == member.Id))
-                throw new InvalidOperationException("Member is already a participant in the chat.");
+                throw new InvalidOperationException("MemberToInvite is already a participant in the chat.");
 
            // var newParticipant = new ChatMember(memberId);
             ChatMembers.Add(member);
@@ -57,7 +67,7 @@ namespace I3Lab.Works.Domain.WorkChats
         {
             var participant = ChatMembers.FirstOrDefault(p => p.Id == memberId);
             if (participant == null)
-                throw new InvalidOperationException("Member is not a participant in the chat.");
+                throw new InvalidOperationException("MemberToInvite is not a participant in the chat.");
 
             ChatMembers.Remove(participant);
         }

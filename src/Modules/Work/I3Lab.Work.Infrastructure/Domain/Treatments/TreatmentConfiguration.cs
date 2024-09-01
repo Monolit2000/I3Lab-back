@@ -11,7 +11,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
         {
             builder.HasKey(e => e.Id); 
 
-            builder.Property(e => e.Name)
+            builder.Property(e => e.Titel)
                 .IsRequired(); 
 
             builder.HasMany(e => e.TreatmentStages) 

@@ -33,7 +33,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("BlobFilePath")
+                    b.Property<string>("Path")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -56,7 +56,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.ToTable("BlobFiles", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Members.Member", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.Members.MemberToInvite", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -74,7 +74,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.Works.Domain.Members.Member.MemberRole#MemberRole", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.Works.Domain.Members.MemberToInvite.MemberRole#MemberRole", b1 =>
                         {
                             b1.IsRequired();
 
@@ -99,7 +99,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid?>("CreatorId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Titel")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -234,7 +234,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<Guid>("WorkId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("Member")
+                            b1.Property<Guid>("MemberToInvite")
                                 .HasColumnType("uuid");
 
                             b1.Property<Guid>("AddedBy")
@@ -243,9 +243,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<DateTime>("JoinDate")
                                 .HasColumnType("timestamp with time zone");
 
-                            b1.HasKey("WorkId", "Member");
+                            b1.HasKey("WorkId", "MemberToInvite");
 
-                            b1.HasIndex("WorkId", "Member")
+                            b1.HasIndex("WorkId", "MemberToInvite")
                                 .IsUnique();
 
                             b1.ToTable("WorkMember", "work");

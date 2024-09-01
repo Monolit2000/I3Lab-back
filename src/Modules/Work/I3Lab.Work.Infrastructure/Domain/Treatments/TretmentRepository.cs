@@ -22,7 +22,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
 
         public async Task<bool> IsNameUniqueAsync(string name)
         {
-            var treatment = await _context.Treatments.FirstOrDefaultAsync(x => x.Name == name);
+            var treatment = await _context.Treatments.FirstOrDefaultAsync(x => x.Titel == name);
             if (treatment == null)
                 return true;
 

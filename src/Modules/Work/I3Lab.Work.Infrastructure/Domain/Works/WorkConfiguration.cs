@@ -107,10 +107,10 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
     //        : base(id => id.Value, value => new TreatmentId(value)) { }
     //}
 
-    //public class MemberIdConverter : ValueConverter<Member, Guid>
+    //public class MemberIdConverter : ValueConverter<MemberToInvite, Guid>
     //{
     //    public MemberIdConverter()
-    //        : base(id => id.Value, value => new Member(value)) { }
+    //        : base(id => id.Value, value => new MemberToInvite(value)) { }
     //}
     ////public class WorkFileIdConverter : ValueConverter<WorkFileId, Guid>
     ////{

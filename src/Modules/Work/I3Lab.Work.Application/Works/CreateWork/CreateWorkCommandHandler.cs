@@ -20,9 +20,9 @@ namespace I3Lab.Works.Application.Works.CreateWork
 
             var creator = await memberRepository.GetMByIdAsync(new MemberId(request.CreatorId));
             if (creator == null)
-                return Result.Fail("Member not exist");
+                return Result.Fail("MemberToInvite not exist");
 
-            var workResult = await treatment.CreateNewTreatmentStage(creator);
+            var workResult = await treatment.CreateWork(creator);
 
             if (workResult.IsFailed)
                 return Result.Fail(workResult.Errors);

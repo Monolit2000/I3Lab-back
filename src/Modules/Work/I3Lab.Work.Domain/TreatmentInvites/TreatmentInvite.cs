@@ -7,31 +7,35 @@ namespace I3Lab.Works.Domain.TreatmentInvites
 {
     public class TreatmentInvite : Entity, IAggregateRoot
     {
-        public TreatmentInviteId Id { get; private set; }
-        public Member Member { get; private set; }
+        public Member MemberToInvite { get; private set; }
+        public Member Inviter { get; private set; }
         public Treatment Treatment { get; private set; }
-        public TreatmentInviteStatus TreatmentInviteStatus { get; private set; }
 
+        public TreatmentInviteId Id { get; private set; }
+        public TreatmentInviteStatus TreatmentInviteStatus { get; private set; }
         public DateTime OcurredOn { get; private set; } 
 
         private TreatmentInvite() { }
 
-        private TreatmentInvite(Treatment treatment, Member member)
+        private TreatmentInvite(Treatment treatment, Member memberToInvite, Member inviter)
         {
             Id = new TreatmentInviteId(Guid.NewGuid());
             Treatment = treatment;
-            Member = member;
+            MemberToInvite = memberToInvite;
+            Inviter = inviter;
             OcurredOn = DateTime.UtcNow;
             TreatmentInviteStatus = TreatmentInviteStatus.Pending;
         }
 
         public static Result<TreatmentInvite> InviteBasedOnTreatment(
             Treatment treatment,
-            Member member
-            )
+            Member memberToInvite, 
+            Member inviter)
         {
-            var invite = new TreatmentInvite(treatment, member);
-            return Result.Ok(invite);
+            return new TreatmentInvite(
+                treatment, 
+                memberToInvite, 
+                inviter);
         }
 
         public void Accept()

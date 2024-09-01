@@ -14,7 +14,7 @@ namespace I3Lab.Works.Domain.BlobFiles
         public string BlobName { get; private set; }
         public string FileName { get; private set; }
         public string BlobDirectoryName { get; private set; }
-        public string BlobFilePath { get; private set; }
+        public BlobFilePath Path { get; private set; }
         public DateTime CreateDate { get; private set; }
 
         private BlobFile() { } //For EF core 

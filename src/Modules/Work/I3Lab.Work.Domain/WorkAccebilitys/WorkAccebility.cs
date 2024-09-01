@@ -28,7 +28,7 @@ namespace I3Lab.Works.Domain.WorkAccebilitys
         public void JoinToWorkAccebility(MemberId memberId)
         {
             if (WorkMembers.Any(wm => wm.MemberId == memberId))
-                throw new InvalidOperationException("Member already joined.");
+                throw new InvalidOperationException("MemberToInvite already joined.");
 
             var workMember = WorkAccebilityMember.CreateNew(Id, memberId);
             WorkMembers.Add(workMember);
@@ -38,7 +38,7 @@ namespace I3Lab.Works.Domain.WorkAccebilitys
         {
             var member = WorkMembers.FirstOrDefault(wm => wm.MemberId == memberId);
             if (member == null)
-                throw new InvalidOperationException("Member not found.");
+                throw new InvalidOperationException("MemberToInvite not found.");
 
             member.Leave();
             WorkMembers.Remove(member);

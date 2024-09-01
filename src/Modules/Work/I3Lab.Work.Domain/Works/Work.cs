@@ -3,7 +3,6 @@ using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Domain.WorkAccebilitys;
 using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
@@ -13,14 +12,12 @@ namespace I3Lab.Works.Domain.Works
 {
     public class Work : Entity, IAggregateRoot
     {
-        public TreatmentId TreatmentId { get; private set; }
+        public Treatment Treatment { get; private set; }
 
         public WorkChat WorkChat { get; private set; } 
 
 
         public string TreatmentName { get; private set; }
-
-        //public WorkDirectory WorkDirectory { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
 
@@ -37,53 +34,54 @@ namespace I3Lab.Works.Domain.Works
 
         private Work(
             Member creatorId,
-            TreatmentId treatmentId)
+            Treatment treatment)
         {
             Id = new WorkId(Guid.NewGuid());
             WorkStatus = WorkStatus.Pending;
             CreatorId = creatorId;
-            TreatmentId = treatmentId;  
+            Treatment = treatment;  
             WorkStartedDate = DateTime.UtcNow;
-            WorkChat = WorkChat.CreateBaseOnWork(Id, new List<Member>());
 
-            AddDomainEvent(new WorkCreatedDomainEvent(Id, treatmentId));
+            WorkChat = WorkChat.CreateBaseOnWork(Id, treatment.members);
+
+            AddDomainEvent(new WorkCreatedDomainEvent(Id, treatment.Id));
         }
 
         public static async Task<Result<Work>> CreateBasedOnTreatmentAsync(
             Member creator, 
-            TreatmentId treatmentId)
+            Treatment treatment)
         {
             if (!IsMemberRoleValid(creator))
                 return Result.Fail(WorkErrors.MemberNotHaveRequiredRole);
 
             return new Work(
                 creator,
-                treatmentId);
+                treatment);
         }
 
-        public Result AddWorkMember(Member memberId, Member addedBy)
-        {
-            if(IsWorkMamberIdContainInWorkMembersList(addedBy.Id))
-                return Result.Fail(WorkErrors.WorkMemberNotFoundError);
+        //public Result AddWorkMember(Member memberId, Member addedBy)
+        //{
+        //    if(IsWorkMamberIdContainInWorkMembersList(addedBy.Id))
+        //        return Result.Fail(WorkErrors.WorkMemberNotFoundError);
 
-            var newWorkMember = WorkMember.CreateNew(this.Id, memberId, addedBy);
-            WorkMembers.Add(newWorkMember);
+        //    var newWorkMember = WorkMember.CreateNew(this.Id, memberId, addedBy);
+        //    WorkMembers.Add(newWorkMember);
 
-            AddDomainEvent(new WorkMemberAddedDomainEvent(this.Id, memberId, addedBy));
-            return Result.Ok();
-        }
+        //    AddDomainEvent(new WorkMemberAddedDomainEvent(this.Id, memberId, addedBy));
+        //    return Result.Ok();
+        //}
 
-        public Result RemoveWorkMember(MemberId memberId, MemberId removedBy)
-        {
-            var workMember = WorkMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
-            if (workMember == null)
-                return Result
-                    .Fail(WorkErrors.WorkMemberNotFoundError);
+        //public Result RemoveWorkMember(MemberId memberId, MemberId removedBy)
+        //{
+        //    var workMember = WorkMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
+        //    if (workMember == null)
+        //        return Result
+        //            .Fail(WorkErrors.WorkMemberNotFoundError);
 
-            WorkMembers.Remove(workMember);
-            AddDomainEvent(new WorkMemberRemovedDomainEvent(Id, memberId, removedBy));
-            return Result.Ok();
-        }
+        //    WorkMembers.Remove(workMember);
+        //    AddDomainEvent(new WorkMemberRemovedDomainEvent(Id, memberId, removedBy));
+        //    return Result.Ok();
+        //}
 
         public void AddWorkFile(WorkId workId, BlobFileId fileId)
         {

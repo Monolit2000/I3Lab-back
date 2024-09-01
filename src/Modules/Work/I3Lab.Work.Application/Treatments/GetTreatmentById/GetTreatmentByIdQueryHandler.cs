@@ -18,7 +18,7 @@ namespace I3Lab.Works.Application.Treatments.GetTreatmentById
                 Id = treatment.Id.Value,
                 CreatorId = treatment.CreatorId.Value,
                 PatientId = treatment.PatientId.Value,
-                Name = treatment.Name,
+                Name = treatment.Titel,
                 CreateDate = treatment.CreateDate,
                 TreatmentPreview = treatment.TreatmentPreview.Value,
                 TreatmentStages = treatment.TreatmentStages.Select(stage => new TreatmentStageDto
