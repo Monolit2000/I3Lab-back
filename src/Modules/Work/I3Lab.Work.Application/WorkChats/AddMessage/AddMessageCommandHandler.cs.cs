@@ -7,8 +7,6 @@ using MediatR;
 namespace I3Lab.Works.Application.WorkChats.AddMessage
 {
     public class AddMessageCommandHendler(
-        IWorkRepository workRepository,
-        IMemberRepository memberRepository, 
         IWorkChatRepository workChatRepository) : IRequestHandler<AddMessageCommand, Result>
     {
         public async Task<Result> Handle(AddMessageCommand request, CancellationToken cancellationToken)
