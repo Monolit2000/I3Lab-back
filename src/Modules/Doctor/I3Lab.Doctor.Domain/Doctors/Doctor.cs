@@ -2,13 +2,13 @@
 using I3Lab.Doctors.Domain.Clinics;
 using MassTransit.Testing;
 using FluentResults;
+using I3Lab.Doctors.Domain.Doctors.Events;
 
 namespace I3Lab.Doctors.Domain.Doctors
 {
     public class Doctor : Entity, IAggregateRoot
     {
         public readonly List<Clinic> Clinics = [];
-
 
         public DoctorId Id { get; private set; }
         public DoctorName Name { get; private set; }
@@ -42,6 +42,8 @@ namespace I3Lab.Doctors.Domain.Doctors
             Email = email;
             PhoneNumber = phoneNumber;
             DoctorAvatar = doctorAvatar;
+
+            AddDomainEvent(new DoctorCreatedDomainEvent(Id.Value, Name.FirstName, Name.LastName)); 
         }
 
 

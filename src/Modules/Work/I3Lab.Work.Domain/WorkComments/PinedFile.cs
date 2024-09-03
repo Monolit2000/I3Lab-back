@@ -8,13 +8,13 @@ namespace I3Lab.Works.Domain.WorkCatalogs
     public class PinedFile : Entity
     {
         public WorkCommentId WorkCommentId { get; private set; }
-        public BlobFileId FileId { get; private set; }
+        public BlobFile FileId { get; private set; }
 
         public PinedFile() { } // For EF Core 
 
         private PinedFile(
             WorkCommentId workCommentId,
-            BlobFileId fileId)
+            BlobFile fileId)
         {
             WorkCommentId = workCommentId;
             FileId = fileId;
@@ -24,7 +24,7 @@ namespace I3Lab.Works.Domain.WorkCatalogs
         
         public static PinedFile CreateNew(
             WorkCommentId workCommentId, 
-            BlobFileId fileId)
+            BlobFile fileId)
         {
             return new PinedFile(
                 workCommentId, 

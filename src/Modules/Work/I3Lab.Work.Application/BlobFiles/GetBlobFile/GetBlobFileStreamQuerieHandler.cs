@@ -17,7 +17,7 @@ namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
     {
         public async Task<Result<BlobFileDto>> Handle(GetBlobFileStreamQuerie request, CancellationToken cancellationToken)
         {
-            var blobFile = await blobFileRepository.GetByIdAsync(new BlobFileId(request.BlobFileId));
+            var blobFile = await blobFileRepository.GetByIdAsync(new BlobFile(request.BlobFileId));
 
             var fileResponce = await blobService.DownloadAsync(blobFile.Id.Value);
 

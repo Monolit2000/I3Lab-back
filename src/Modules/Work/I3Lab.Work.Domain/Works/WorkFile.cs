@@ -7,7 +7,7 @@ namespace I3Lab.Works.Domain.Works
     public class WorkFile : Entity
     {
         public WorkId WorkId { get; private set; }
-        public BlobFileId FileId { get; private set; }
+        public BlobFile FileId { get; private set; }
 
         public DateTime CreateDate { get; private set; }
 
@@ -15,7 +15,7 @@ namespace I3Lab.Works.Domain.Works
 
         private WorkFile(
             WorkId workId, 
-            BlobFileId fileId)
+            BlobFile fileId)
         {
             WorkId = workId;    
             FileId = fileId;
@@ -23,7 +23,7 @@ namespace I3Lab.Works.Domain.Works
             CreateDate = DateTime.UtcNow;
         }
 
-        internal static WorkFile CreateNew(WorkId workId, BlobFileId fileId)
+        internal static WorkFile CreateNew(WorkId workId, BlobFile fileId)
         {
             return new WorkFile(workId, fileId);
         }

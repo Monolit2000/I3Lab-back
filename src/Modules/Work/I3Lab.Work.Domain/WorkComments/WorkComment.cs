@@ -40,7 +40,7 @@ namespace I3Lab.Works.Domain.WorkComments
                 content); 
         }
 
-        public void PinFile(WorkCommentId workCommentId, BlobFileId fileId)
+        public void PinFile(WorkCommentId workCommentId, BlobFile fileId)
         {
             var newPineFile = PinedFile.CreateNew(workCommentId, fileId);    
 

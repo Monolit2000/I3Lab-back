@@ -40,7 +40,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("BlobName")
+                    b.Property<string>("ContainerName")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -140,7 +140,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("Creator")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CustomerId")
+                    b.Property<Guid>("Customer")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("TreatmentId")
@@ -198,7 +198,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 {
                     b.OwnsOne("I3Lab.Works.Domain.BlobFiles.Accessibilitylevel", "Accessibilitylevel", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("BlobFile")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
@@ -206,17 +206,17 @@ namespace I3Lab.Works.Infrastructure.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("Accessibilitylevel");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("BlobFile");
 
                             b1.ToTable("BlobFiles", "work");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("BlobFile");
                         });
 
                     b.OwnsOne("I3Lab.Works.Domain.BlobFiles.BlobFileType", "FileType", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("BlobFile")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
@@ -224,12 +224,12 @@ namespace I3Lab.Works.Infrastructure.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("FileType");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("BlobFile");
 
                             b1.ToTable("BlobFiles", "work");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("BlobFile");
                         });
 
                     b.Navigation("Accessibilitylevel");

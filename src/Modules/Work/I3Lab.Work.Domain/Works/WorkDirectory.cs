@@ -1,11 +1,4 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.WorkDirectorys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BlobFile = I3Lab.Works.Domain.BlobFiles.BlobFile;
 
 namespace I3Lab.Works.Domain.Works
@@ -118,12 +111,12 @@ namespace I3Lab.Works.Domain.Works
             BlobCatalogPath = newBlobCatalogPath;
         }
 
-        public BlobFile? FindFile3DById(BlobFileId fileId)
+        public BlobFile? FindFile3DById(BlobFile fileId)
         {
             return Files3Ds.FirstOrDefault(f => f.Id == fileId);
         }
 
-        public BlobFile? FindOtherFileById(BlobFileId fileId)
+        public BlobFile? FindOtherFileById(BlobFile fileId)
         {
             return OtherFiles.FirstOrDefault(f => f.Id == fileId);
         }

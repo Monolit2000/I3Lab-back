@@ -12,12 +12,9 @@ namespace I3Lab.Doctors.Domain.Doctors
         public string Value { get; }
 
         private Email(string value)
-        => Value = value;
+            => Value = value;
         
-
-        public static Email Create(string value)
-        {
-            return new Email(value);
-        }
+        public static Email Create(string value) 
+            => new Email(value);
     }
 }

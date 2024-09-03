@@ -18,7 +18,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             _context = context;
         }
 
-        public async Task<BlobFile> GetByIdAsync(BlobFileId id)
+        public async Task<BlobFile> GetByIdAsync(BlobFile id)
         {
             var file = await _context.BlobFiles
                 .FirstOrDefaultAsync(bf => bf.Id == id);
@@ -43,7 +43,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(BlobFileId id)
+        public async Task DeleteAsync(BlobFile id)
         {
             var blobFile = await GetByIdAsync(id);
             if (blobFile != null)

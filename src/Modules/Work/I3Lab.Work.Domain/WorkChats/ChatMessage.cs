@@ -15,13 +15,13 @@ namespace I3Lab.Works.Domain.WorkChats
         public ChatMessageId Id { get; private set; }
         public string MessageText { get; private set; }
         public DateTime SentDate { get; private set; }
-        public BlobFileId FileResponceId { get; private set; }
+        public BlobFile FileResponceId { get; private set; }
 
         public DateTime? EditDate { get; private set; }
 
         private ChatMessage() { } // For EF Core
 
-        private ChatMessage(MemberId senderId, string messageText, BlobFileId fileResponceId = null)
+        private ChatMessage(MemberId senderId, string messageText, BlobFile fileResponceId = null)
         {
             SenderId = senderId;
             MessageText = messageText;
@@ -48,7 +48,7 @@ namespace I3Lab.Works.Domain.WorkChats
         public static ChatMessage CreateNewResponceToFileMessage(
             MemberId senderId, 
             string messageText,
-            BlobFileId blobFileId)
+            BlobFile blobFileId)
         {
             return new ChatMessage(
                 senderId, 

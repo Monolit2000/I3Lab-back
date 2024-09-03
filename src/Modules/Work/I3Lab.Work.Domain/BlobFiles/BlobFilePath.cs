@@ -9,14 +9,25 @@ namespace I3Lab.Works.Domain.BlobFiles
 {
     public class BlobFilePath : ValueObject
     {
-        public string Value { get; }
+        public string ContainerName { get; private set; }
 
-        private BlobFilePath(string value)
-        => Value = value;
+        // FileName it's a BlobFileId value
+        public string FileName { get; private set; }
+        public string BlobDirectoryName { get; private set; }
 
-        public static BlobFilePath Create(string value)
+        private BlobFilePath(
+            string containerName,
+            string blobDirectoryName,
+            string fileName)
         {
-            return new BlobFilePath(value);
+            ContainerName = containerName;
+            FileName = fileName;
+            BlobDirectoryName = blobDirectoryName;
+        }
+
+        public static BlobFilePath Create(string containerName, string blobDirectoryName, string fileName)
+        {
+            return new BlobFilePath(containerName, fileName, blobDirectoryName);
         }
     }
 }

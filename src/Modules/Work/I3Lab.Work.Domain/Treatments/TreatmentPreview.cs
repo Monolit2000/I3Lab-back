@@ -12,11 +12,11 @@ namespace I3Lab.Works.Domain.Treatments
     public class TreatmentPreview : Entity
     {
         public TreatmentId TreatmentId { get; private set; }
-        public BlobFileId FileId { get; private set; }
+        public BlobFile FileId { get; private set; }
 
         private TreatmentPreview() { } // For EF Core 
 
-        private TreatmentPreview(TreatmentId treatmentId, BlobFileId fileId)
+        private TreatmentPreview(TreatmentId treatmentId, BlobFile fileId)
         {
             TreatmentId = treatmentId;
             FileId = fileId;
@@ -26,7 +26,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         internal static TreatmentPreview CreateNew(
             TreatmentId treatmentId, 
-            BlobFileId fileId)
+            BlobFile fileId)
         {
             return new TreatmentPreview(
                 treatmentId, 

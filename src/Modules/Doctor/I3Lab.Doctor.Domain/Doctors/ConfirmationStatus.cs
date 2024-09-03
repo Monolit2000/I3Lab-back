@@ -28,7 +28,7 @@ namespace I3Lab.Doctors.Domain.Doctors
         public static Result<ConfirmationStatus> Create(string value)
         {
             if (!ValidStatuses.Contains(value))
-                return Result.Fail($"Invalid status value: {value}");
+                return Result.Fail($"Invalid status Id: {value}");
 
             return new ConfirmationStatus(value);
         }

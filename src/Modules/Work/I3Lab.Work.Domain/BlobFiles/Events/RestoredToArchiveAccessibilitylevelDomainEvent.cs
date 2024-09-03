@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Works.Domain.BlobFiles.Events
 {
-    public class RestoreToCoolAccessibilitylevelDomainEvent : DomainEventBase
+    public class RestoredToArchiveAccessibilitylevelDomainEvent : DomainEventBase
     {
     }
 }

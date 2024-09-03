@@ -12,13 +12,13 @@ namespace I3Lab.Works.Domain.WorkDirectorys
     {
         public WorkDirectoryId WorkCatalogId { get; private set; }
 
-        public BlobFileId FileId { get; private set; }
+        public BlobFile FileId { get; private set; }
 
         public WorkDirectoryFile() { } // For EF Core
 
         public WorkDirectoryFile(
             WorkDirectoryId workCatalogId,
-            BlobFileId fileId)
+            BlobFile fileId)
         {
             WorkCatalogId = workCatalogId; 
             FileId = fileId;    
@@ -26,7 +26,7 @@ namespace I3Lab.Works.Domain.WorkDirectorys
 
         internal static WorkDirectoryFile CreateNew(
             WorkDirectoryId workCatalogId,
-            BlobFileId fileId)
+            BlobFile fileId)
         {
             return new WorkDirectoryFile(
                 workCatalogId, 

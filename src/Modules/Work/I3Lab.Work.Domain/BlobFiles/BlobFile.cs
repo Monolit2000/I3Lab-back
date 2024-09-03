@@ -7,7 +7,7 @@ namespace I3Lab.Works.Domain.BlobFiles
     public class BlobFile : Entity, IAggregateRoot 
     {
         public WorkId WorkId { get; private set; }
-
+ 
         public BlobFileId Id { get; private set; }
         public BlobFileType FileType { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
@@ -15,61 +15,68 @@ namespace I3Lab.Works.Domain.BlobFiles
         public string FileName { get; private set; }
         public string BlobDirectoryName { get; private set; }
         public BlobFilePath Path { get; private set; }
+
+        public BlobFileUrl Url { get; private set; }
         public DateTime CreateDate { get; private set; }
 
         private BlobFile() { } //For EF core 
 
         private BlobFile(
-            BlobFileId blobFileId, 
+            WorkId workId,
+            BlobFileId blobFileId,
             string fileName,
-            BlobFileType type)
+            BlobFileType type,
+            BlobFileUrl url)
         {
+            WorkId = workId;
             Id = blobFileId;
             FileName = fileName;
             FileType = type;
             Accessibilitylevel = Accessibilitylevel.Hot;
+            Url = url;
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateNew(
-            BlobFileId blobFileId,
-            string fileName,
-            BlobFileType type)
-        {
-            var newFile = new BlobFile(
-                blobFileId,
-                fileName,
-                type);
+        public static BlobFile CreateBaseOnWork(
+            WorkId workId,
+            BlobFileId blobFileId, 
+            string fileName, 
+            BlobFileType type, 
+            BlobFileUrl url) 
+            => new BlobFile(
+                workId, 
+                blobFileId, 
+                fileName, 
+                type, 
+                url);
 
-            return newFile;
-        }
 
         public void RestoreToHotAccessibilitylevel()
         {
             Accessibilitylevel = Accessibilitylevel.Hot;
 
-            AddDomainEvent(new RestoreToHotAccessibilitylevelDomainEvent());
+            AddDomainEvent(new RestoredToHotAccessibilitylevelDomainEvent());
         }
 
         public void RestoreToCoolAccessibilitylevel()
         {
             Accessibilitylevel = Accessibilitylevel.Cool;
 
-            AddDomainEvent(new RestoreToCoolAccessibilitylevelDomainEvent());
+            AddDomainEvent(new RestoredToCoolAccessibilitylevelDomainEvent());
         }
 
         public void RestoreToColdAccessibilitylevel()
         {
             Accessibilitylevel = Accessibilitylevel.Cold;
 
-            AddDomainEvent(new RestoreToColdAccessibilitylevelDomainEvent());
+            AddDomainEvent(new RestoredToColdAccessibilitylevelDomainEvent());
         }
 
         public void RestoreToArchiveAccessibilitylevel()
         {
             Accessibilitylevel = Accessibilitylevel.Archive;
 
-            AddDomainEvent(new RestoreToArchiveAccessibilitylevelDomainEvent());
+            AddDomainEvent(new RestoredToArchiveAccessibilitylevelDomainEvent());
         }
     }
 }

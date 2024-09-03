@@ -22,7 +22,7 @@ namespace I3Lab.Works.Application.Works.CreateWork
             if (creator == null)
                 return Result.Fail("MemberToInvite not exist");
 
-            var workResult = await treatment.CreateWork(creator);
+            var workResult = await treatment.CreateWorkAsync(creator);
 
             if (workResult.IsFailed)
                 return Result.Fail(workResult.Errors);
@@ -37,7 +37,6 @@ namespace I3Lab.Works.Application.Works.CreateWork
             {
                 Id = work.Id.Value,
                 TreatmentId = work.Treatment.Id.Value,
-                TreatmentName = work.TreatmentName,
                 WorkStatus = work.WorkStatus.Value,
                 WorkStartedDate = work.WorkStartedDate,
                 CreatorId = work.CreatorId.Id.Value

@@ -24,7 +24,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 
             builder.Property(e => e.CreatorId).IsRequired();
 
-            builder.Property(e => e.CustomerId).IsRequired();
+            builder.Property(e => e.Customer).IsRequired();
 
 
             //Конфигурация WorkFile
@@ -118,9 +118,9 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
     ////        : base(id => id.Value, value => new WorkFileId(value)) { }
     ////}
 
-    //public class BlobFileIdConverter : ValueConverter<BlobFileId, Guid>
+    //public class BlobFileIdConverter : ValueConverter<BlobFile, Guid>
     //{
     //    public BlobFileIdConverter()
-    //        : base(id => id.Value, value => new BlobFileId(value)) { }
+    //        : base(id => id.Value, value => new BlobFile(value)) { }
     //}
 }
