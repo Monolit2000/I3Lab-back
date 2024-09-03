@@ -18,7 +18,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Member> GetMByIdAsync(MemberId id)
+        public async Task<Member> GetMemberByIdAsync(MemberId id)
         {
             var member = await _context.Members
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -59,7 +59,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Members
 
         public async Task DeleteAsync(MemberId id)
         {
-            var member = await GetMByIdAsync(id);
+            var member = await GetMemberByIdAsync(id);
             if (member != null)
             {
                 _context.Members.Remove(member);

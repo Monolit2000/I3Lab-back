@@ -62,7 +62,7 @@ namespace I3Lab.Works.Tests.Application.Works
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(treatment);
-            _memberRepository.GetMByIdAsync(Arg.Any<MemberId>()).Returns(Task.FromResult<Member>(null));
+            _memberRepository.GetMemberByIdAsync(Arg.Any<MemberId>()).Returns(Task.FromResult<Member>(null));
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
@@ -85,7 +85,7 @@ namespace I3Lab.Works.Tests.Application.Works
                 .Returns(treatment);
 
 
-            _memberRepository.GetMByIdAsync(Arg.Any<MemberId>()).Returns(member);
+            _memberRepository.GetMemberByIdAsync(Arg.Any<MemberId>()).Returns(member);
 
 
             // Act
@@ -109,7 +109,7 @@ namespace I3Lab.Works.Tests.Application.Works
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(treatment);
 
-            _memberRepository.GetMByIdAsync(Arg.Any<MemberId>())
+            _memberRepository.GetMemberByIdAsync(Arg.Any<MemberId>())
                 .Returns(member);
 
             // Act
@@ -135,7 +135,7 @@ namespace I3Lab.Works.Tests.Application.Works
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(treatment);
-            _memberRepository.GetMByIdAsync(Arg.Any<MemberId>()).Returns(member);
+            _memberRepository.GetMemberByIdAsync(Arg.Any<MemberId>()).Returns(member);
 
 
             // Act

@@ -10,28 +10,28 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.Works.AddWorkMember
 {
-    public class AddWorkMemberCommandHandler(
-        IWorkRepository workRepository,
-        IMemberRepository memberRepository) : IRequestHandler<AddWorkMemberCommand, Result<WorkMemberDto>>
-    {
+    //public class AddWorkMemberCommandHandler(
+    //    IWorkRepository workRepository,
+    //    IMemberRepository memberRepository) : IRequestHandler<AddWorkMemberCommand, Result<WorkMemberDto>>
+    //{
       
-        public async Task<Result<WorkMemberDto>> Handle(AddWorkMemberCommand request, CancellationToken cancellationToken)
-        {
-            var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
+    //    public async Task<Result<WorkMemberDto>> Handle(AddWorkMemberCommand request, CancellationToken cancellationToken)
+    //    {
+    //        var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
 
-            if (work == null)
-                return Result.Fail("Work not found");
+    //        if (work == null)
+    //            return Result.Fail("Work not found");
 
-            var addWorkMemberResult = work.AddWorkMember(
-                new MemberId(request.MemberId), 
-                new MemberId(request.AddedByMemberId));
+    //        var addWorkMemberResult = work.AddWorkMember(
+    //            new MemberId(request.MemberId), 
+    //            new MemberId(request.AddedByMemberId));
 
-            if (addWorkMemberResult.IsFailed)
-                return addWorkMemberResult;
+    //        if (addWorkMemberResult.IsFailed)
+    //            return addWorkMemberResult;
 
-            await workRepository.SaveChangesAsync();
+    //        await workRepository.SaveChangesAsync();
 
-            return new WorkMemberDto(work.Id.Value, request.MemberId);
-        }
-    }
+    //        return new WorkMemberDto(work.Id.Value, request.MemberId);
+    //    }
+    //}
 }

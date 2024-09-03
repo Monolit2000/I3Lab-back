@@ -1,18 +1,26 @@
 ﻿using FluentResults;
+using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.WorkChats;
+using I3Lab.Works.Domain.Works;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.WorkChats.AddMessage
 {
-    public class AddMessageCommandHendler : IRequestHandler<AddMessageCommand, Result>
+    public class AddMessageCommandHendler(
+        IWorkRepository workRepository,
+        IMemberRepository memberRepository, 
+        IWorkChatRepository workChatRepository) : IRequestHandler<AddMessageCommand, Result>
     {
-        public Task<Result> Handle(AddMessageCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(AddMessageCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var workChat = await workChatRepository.GetByWorkIdAsync(new WorkId(request.WorkId));
+
+            if (workChat == null)
+                return Result.Fail("WorkChat not found");
+
+            workChat.AddMessage(new MemberId(request.MemberId), request.Message);
+
+            return Result.Ok();
         }
     }
 }

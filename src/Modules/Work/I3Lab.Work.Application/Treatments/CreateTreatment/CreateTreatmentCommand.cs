@@ -11,9 +11,9 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
 {
     public class CreateTreatmentCommand : IRequest<Result<TreatmentDto>>
     {
-        //public Guid PatientId { get; set; }
+        //public Guid Patient { get; set; }
 
-        public string TreatmentName { get; set; }
+        public string TreatmentTitel { get; set; }
 
         public Guid CreatorId { get; set; }
 
@@ -26,7 +26,7 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
 
         public CreateTreatmentCommand(string treatmentName)
         {
-            TreatmentName = treatmentName;
+            TreatmentTitel = treatmentName;
         }
     }
 }

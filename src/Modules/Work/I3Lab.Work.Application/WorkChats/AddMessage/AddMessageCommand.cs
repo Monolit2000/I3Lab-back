@@ -1,15 +1,22 @@
-﻿using FluentResults;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using FluentResults;
 
 namespace I3Lab.Works.Application.WorkChats.AddMessage
 {
     public class AddMessageCommand : IRequest<Result>
     {
+        public Guid WorkId {  get; set; }   
+        public Guid MemberId { get; set; }  
+        public string Message { get; set; }
+
+        public AddMessageCommand(
+            Guid workId,
+            Guid memberId, 
+            string message)
+        {
+            WorkId = workId;
+            MemberId = memberId;    
+            Message = message;  
+        }
     }
 }

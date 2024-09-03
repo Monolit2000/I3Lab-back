@@ -6,25 +6,26 @@ using I3Lab.Works.Domain.Members;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
 using System.Xml.Linq;
 using I3Lab.Works.Application.Treatments.ApplicationErrors;
+using System.Security.Cryptography.X509Certificates;
 
 
 namespace I3Lab.Works.Application.Treatments.CreateTreatment
 {
     public class CreateTreatmentCommandHandler(
-        ITretmentRepository tretmentRepository) : IRequestHandler<CreateTreatmentCommand, Result<TreatmentDto>>
+        ITretmentRepository tretmentRepository,
+        IMemberRepository memberRepository) : IRequestHandler<CreateTreatmentCommand, Result<TreatmentDto>>
     {
         public async Task<Result<TreatmentDto>> Handle(CreateTreatmentCommand request, CancellationToken cancellationToken)
         {
-            if (!await tretmentRepository.IsNameUniqueAsync(request.TreatmentName))
+            if (!await tretmentRepository.IsNameUniqueAsync(request.TreatmentTitel))
                 return Result.Fail(TreatmentsErrors.NotUniqueName);
 
-            if (string.IsNullOrEmpty(request.TreatmentName))
-                return Result.Fail("Treatments name is Empty");
+            var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
+            var patient = await memberRepository.GetMemberByIdAsync(new MemberId(request.PatientId));
+            var titel = Titel.Create(request.TreatmentTitel);
 
             var treatment = Treatment.CreateNew(
-                new MemberId(request.CreatorId),
-                new MemberId(request.PatientId),
-                request.TreatmentName);
+                creator, patient, titel);
 
             await tretmentRepository.AddAsync(treatment);
 

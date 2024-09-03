@@ -16,10 +16,10 @@ namespace I3Lab.Works.Application.Treatments.GetTreatmentById
             var treatmentDto = new TreatmentDto
             {
                 Id = treatment.Id.Value,
-                CreatorId = treatment.CreatorId.Value,
-                PatientId = treatment.PatientId.Value,
-                Name = treatment.Titel,
-                CreateDate = treatment.CreateDate,
+                CreatorId = treatment.Creator.Id.Value,
+                PatientId = treatment.Patient.Id.Value,
+                Name = treatment.Titel.Value,
+                CreateDate = treatment.TreatmentDate.TreatmentStarted,
                 TreatmentPreview = treatment.TreatmentPreview.Value,
                 TreatmentStages = treatment.TreatmentStages.Select(stage => new TreatmentStageDto
                 {

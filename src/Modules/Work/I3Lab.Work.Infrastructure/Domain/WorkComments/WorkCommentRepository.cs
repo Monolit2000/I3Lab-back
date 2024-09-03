@@ -16,7 +16,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkComments
         //    _context = context;
         //}
 
-        //public async Task<WorkComment> GetMByIdAsync(WorkCommentId id)
+        //public async Task<WorkComment> GetMemberByIdAsync(WorkCommentId id)
         //{
         //    var workComment = await _context.WorkComments
         //        .Include(wc => wc.PinedFiles)
@@ -54,7 +54,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkComments
 
         //public async Task DeleteAsync(WorkCommentId id)
         //{
-        //    var workComment = await GetMByIdAsync(id);
+        //    var workComment = await GetMemberByIdAsync(id);
         //    if (workComment != null)
         //    {
         //        _context.WorkComments.Remove(workComment);

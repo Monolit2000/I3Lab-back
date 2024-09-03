@@ -2,7 +2,6 @@
 using I3Lab.Doctors.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace I3Lab.Doctors.Infrastructure.Domain.Doctors
 {
     public class DoctorRepository : IDoctorRepository
@@ -36,6 +35,11 @@ namespace I3Lab.Doctors.Infrastructure.Domain.Doctors
         {
             _context.Doctors.Remove(doctor);
             await _context.SaveChangesAsync();
+        }
+
+        public Task<List<Doctor>> GetAll()
+        {
+            throw new NotImplementedException();
         }
 
         //public async Task<IEnumerable<Doctors>> GetAllByStatusAsync(ConfirmationStatus status)

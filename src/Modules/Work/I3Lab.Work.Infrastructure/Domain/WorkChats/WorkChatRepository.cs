@@ -22,13 +22,13 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
                 .FirstOrDefaultAsync(wc => wc.Id == id, cancellationToken);
         }
 
-        public async Task<IReadOnlyList<WorkChat>> GetByWorkIdAsync(WorkId workId, CancellationToken cancellationToken = default)
+        public async Task<WorkChat?> GetByWorkIdAsync(WorkId workId, CancellationToken cancellationToken = default)
         {
             return await _context.WorkChats
                 .Include(wc => wc.Messages)
                 .Include(wc => wc.ChatMembers)
-                .Where(wc => wc.WorkId == workId)
-                .ToListAsync(cancellationToken);
+                .FirstOrDefaultAsync(wc => wc.WorkId == workId, cancellationToken;
+              
         }
 
         public async Task AddAsync(WorkChat workChat, CancellationToken cancellationToken = default)

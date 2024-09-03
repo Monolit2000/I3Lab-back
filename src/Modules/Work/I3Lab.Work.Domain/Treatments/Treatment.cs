@@ -14,36 +14,41 @@ namespace I3Lab.Works.Domain.Treatments
         public readonly List<Work> TreatmentStages = [];
 
         public readonly List<Member> members = [];
-        public MemberId CreatorId { get; private set; }
-        public MemberId PatientId { get; private set; }
+        public Member Creator { get; private set; }
+        public Member Patient { get; private set; }
 
         public TreatmentId Id { get; private set; }
-        public string Titel { get; private set; }
+        public Titel Titel { get; private set; }
         public BlobFileId TreatmentPreview { get; private set; }
-        public DateTime CreateDate { get; private set; }
+        public TreatmentDate TreatmentDate { get; private set; }
 
         private Treatment() { } // For Ef Core
 
-        private Treatment(MemberId creatorId, MemberId patientId, string name)
+        private Treatment(
+            Member creator, 
+            Member patient,
+            Titel titel)
         {
             Id = new TreatmentId(Guid.NewGuid());
-            CreatorId = creatorId;
-            PatientId = patientId;
-            CreateDate = DateTime.UtcNow;
-            Titel = name;
+            Creator = creator;
+            Patient = patient;
+            Titel = titel;
+            TreatmentDate = TreatmentDate.Start();
 
-            AddDomainEvent(new TreatmentCreatedDomainEvent());
+            AddDomainEvent(new TreatmentCreatedDomainEvent(
+                creator.Id.Value, 
+                Id.Value));
         }
 
         public static Treatment CreateNew(
-            MemberId creatorId,
-            MemberId patientId,
-            string name)
+            Member creator,
+            Member patient,
+            Titel titel)
         {
             return new Treatment(
-                creatorId,
-                patientId,
-                name);
+                creator,
+                patient,
+                titel);
         }
 
         public TreatmentInvite Invite(Member memberToInvite, Member inviter)
@@ -54,22 +59,21 @@ namespace I3Lab.Works.Domain.Treatments
         public async Task<Result<Work>> CreateWork(Member creator)
         {
             return await Work.CreateBasedOnTreatmentAsync(creator, this);
-
         }
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)
         {
             var treatmentStages = TreatmentStages.FirstOrDefault(ts => ts.Id == workId);
             if (treatmentStages == null) 
-                throw new InvalidOperationException("MemberToInvite not found.");
+                throw new InvalidOperationException("Member to invite not found.");
 
             TreatmentStages.Remove(treatmentStages);
             AddDomainEvent(new TreatmentRemuveWorkDomainEvent());
         }
 
-        public void AddPatient(MemberId customerId)
+        public void AddPatient(Member customer)
         {
-            PatientId = customerId;
+            Patient = customer;
             AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
         }
 

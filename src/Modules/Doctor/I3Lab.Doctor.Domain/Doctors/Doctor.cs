@@ -7,18 +7,13 @@ namespace I3Lab.Doctors.Domain.Doctors
 {
     public class Doctor : Entity, IAggregateRoot
     {
-
         public readonly List<Clinic> Clinics = [];
 
 
         public DoctorId Id { get; private set; }
-
         public DoctorName Name { get; private set; }
-
         public Email Email { get; private set; }
-
         public PhoneNumber PhoneNumber { get; private set; }
-
         public DoctorAvatar DoctorAvatar { get; private set; }
 
         private Doctor() { }

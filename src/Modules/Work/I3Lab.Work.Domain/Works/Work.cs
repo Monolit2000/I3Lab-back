@@ -16,7 +16,6 @@ namespace I3Lab.Works.Domain.Works
 
         public WorkChat WorkChat { get; private set; } 
 
-
         public string TreatmentName { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];

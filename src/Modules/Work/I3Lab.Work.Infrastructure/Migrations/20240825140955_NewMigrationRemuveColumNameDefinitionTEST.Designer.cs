@@ -44,7 +44,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("TreatmentDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FileName")
@@ -96,17 +96,17 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("TreatmentDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("CreatorId")
+                    b.Property<Guid?>("Creator")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Titel")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("PatientId")
+                    b.Property<Guid?>("Patient")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TreatmentPreview")
@@ -122,7 +122,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CreatorId")
+                    b.Property<Guid>("Creator")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CustomerId")
@@ -131,7 +131,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("TreatmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("TreatmentName")
+                    b.Property<string>("TreatmentTitel")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("WorkStartedDate")
@@ -162,7 +162,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime>("TreatmentDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("WorkId")

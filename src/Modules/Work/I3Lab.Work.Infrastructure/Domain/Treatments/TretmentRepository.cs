@@ -22,11 +22,11 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
 
         public async Task<bool> IsNameUniqueAsync(string name)
         {
-            var treatment = await _context.Treatments.FirstOrDefaultAsync(x => x.Titel == name);
-            if (treatment == null)
-                return true;
+            var treatment = await _context.Treatments.AnyAsync(x => x.Titel == name);
+            if (treatment == true)
+                return false;
 
-            return false;
+            return true;
         }
 
         public async Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken)
