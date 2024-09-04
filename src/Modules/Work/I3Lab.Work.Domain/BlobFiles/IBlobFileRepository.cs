@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I3Lab.Works.Domain.Works;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,11 @@ namespace I3Lab.Works.Domain.BlobFiles
 {
     public interface IBlobFileRepository
     {
-        Task<BlobFile> GetByIdAsync(BlobFile id);
+        Task<BlobFile?> GetByIdAsync(BlobFileId id);
         Task<IEnumerable<BlobFile>> GetAllAsync();
+        Task<IEnumerable<BlobFile>> GetAllWorkIdAsync(WorkId workId);
         Task AddAsync(BlobFile blobFile);
         Task UpdateAsync(BlobFile blobFile);
-        Task DeleteAsync(BlobFile id);
+        Task DeleteAsync(BlobFileId id);
     }
 }

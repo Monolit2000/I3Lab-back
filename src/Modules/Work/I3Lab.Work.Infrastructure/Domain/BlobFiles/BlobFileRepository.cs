@@ -1,4 +1,5 @@
 ﻿using I3Lab.Works.Domain.BlobFiles;
+using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             _context = context;
         }
 
-        public async Task<BlobFile> GetByIdAsync(BlobFile id)
+        public async Task<BlobFile?> GetByIdAsync(BlobFileId id)
         {
             var file = await _context.BlobFiles
                 .FirstOrDefaultAsync(bf => bf.Id == id);
@@ -43,7 +44,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(BlobFile id)
+        public async Task DeleteAsync(BlobFileId id)
         {
             var blobFile = await GetByIdAsync(id);
             if (blobFile != null)
@@ -51,6 +52,13 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
                 _context.BlobFiles.Remove(blobFile);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task<IEnumerable<BlobFile>> GetAllWorkIdAsync(WorkId workId)
+        {
+            return await _context.BlobFiles
+                .Where(bf => bf.WorkId == workId)
+                .ToListAsync();
         }
     }
 }
