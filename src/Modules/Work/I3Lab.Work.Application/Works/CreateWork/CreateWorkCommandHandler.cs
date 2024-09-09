@@ -10,9 +10,9 @@ namespace I3Lab.Works.Application.Works.CreateWork
         IMemberRepository memberRepository,
         ITretmentRepository tretmentRepository,
         IWorkRepository workRepository,
-        IMemberContext memberContext) : IRequestHandler<CreateWorkCommand, Result<WorkDto>>
+        IMemberContext memberContext) : IRequestHandler<CreateWorksCommand, Result<WorkDto>>
     {
-        public async Task<Result<WorkDto>> Handle(CreateWorkCommand request, CancellationToken cancellationToken)
+        public async Task<Result<WorkDto>> Handle(CreateWorksCommand request, CancellationToken cancellationToken)
         {
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
             if (treatment == null)

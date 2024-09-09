@@ -21,7 +21,7 @@ namespace I3Lab.Works.Tests.Application.Works
         private readonly ITretmentRepository _tretmentRepository;
         private readonly IWorkRepository _workRepository;
         private readonly IMemberContext _memberContext;
-        private readonly IRequestHandler<CreateWorkCommand, Result<WorkDto>> _handler;
+        private readonly IRequestHandler<CreateWorksCommand, Result<WorkDto>> _handler;
 
         public CreateWorkCommandHandlerTests()
         {
@@ -40,7 +40,7 @@ namespace I3Lab.Works.Tests.Application.Works
         public async Task Handle_ShouldReturnFailResult_WhenTreatmentDoesNotExist()
         {
             // Arrange
-            var command = new CreateWorkCommand { TreatmentId = Guid.NewGuid() };
+            var command = new CreateWorksCommand { TreatmentId = Guid.NewGuid() };
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
                 .Returns(Task.FromResult<Treatment>(null));
 
@@ -57,7 +57,7 @@ namespace I3Lab.Works.Tests.Application.Works
         {
             // Arrange
             var treatmentId = Guid.NewGuid();
-            var command = new CreateWorkCommand { TreatmentId = treatmentId };
+            var command = new CreateWorksCommand { TreatmentId = treatmentId };
             var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
 
             _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
@@ -77,7 +77,7 @@ namespace I3Lab.Works.Tests.Application.Works
         {
             // Arrange
             var treatmentId = Guid.NewGuid();
-            var command = new CreateWorkCommand { TreatmentId = treatmentId };
+            var command = new CreateWorksCommand { TreatmentId = treatmentId };
             var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
             var member = Member.CreateNew("creator@example.com");
 
@@ -101,7 +101,7 @@ namespace I3Lab.Works.Tests.Application.Works
         {
             // Arrange
             var treatmentId = Guid.NewGuid();
-            var command = new CreateWorkCommand { TreatmentId = treatmentId };
+            var command = new CreateWorksCommand { TreatmentId = treatmentId };
             var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
             var member = Member.CreateNew("creator@example.com");
             var work = await treatment.CreateWorkAsync(member);
@@ -128,7 +128,7 @@ namespace I3Lab.Works.Tests.Application.Works
         {
             // Arrange
             var treatmentId = Guid.NewGuid();
-            var command = new CreateWorkCommand { TreatmentId = treatmentId };
+            var command = new CreateWorksCommand { TreatmentId = treatmentId };
             var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
             var member = Member.CreateNew("creator@example.com");
             var work =  await Work.CreateBasedOnTreatmentAsync(member, new TreatmentId(treatmentId));

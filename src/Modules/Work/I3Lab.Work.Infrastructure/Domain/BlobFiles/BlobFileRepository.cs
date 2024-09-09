@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
 {
@@ -21,10 +22,8 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
 
         public async Task<BlobFile?> GetByIdAsync(BlobFileId id)
         {
-            var file = await _context.BlobFiles
+            return await _context.BlobFiles
                 .FirstOrDefaultAsync(bf => bf.Id == id);
-
-            return file;
         }
 
         public async Task<IEnumerable<BlobFile>> GetAllAsync()
@@ -35,13 +34,13 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
         public async Task AddAsync(BlobFile blobFile)
         {
             await _context.BlobFiles.AddAsync(blobFile);
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task UpdateAsync(BlobFile blobFile)
         {
             _context.BlobFiles.Update(blobFile);
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task DeleteAsync(BlobFileId id)
@@ -50,15 +49,20 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             if (blobFile != null)
             {
                 _context.BlobFiles.Remove(blobFile);
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
             }
         }
 
-        public async Task<IEnumerable<BlobFile>> GetAllWorkIdAsync(WorkId workId)
+        public async Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(WorkId workId)
         {
             return await _context.BlobFiles
                 .Where(bf => bf.WorkId == workId)
                 .ToListAsync();
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

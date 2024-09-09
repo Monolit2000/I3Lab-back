@@ -1,12 +1,8 @@
 ﻿using MediatR;
 using FluentResults;
-using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Members;
-using I3Lab.BuildingBlocks.Application.BlobStorage;
-using System.Xml.Linq;
 using I3Lab.Works.Application.Treatments.ApplicationErrors;
-using System.Security.Cryptography.X509Certificates;
 
 
 namespace I3Lab.Works.Application.Treatments.CreateTreatment
@@ -22,6 +18,7 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
 
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
             var patient = await memberRepository.GetMemberByIdAsync(new MemberId(request.PatientId));
+
             var titel = Titel.Create(request.TreatmentTitel);
 
             var treatment = Treatment.CreateNew(

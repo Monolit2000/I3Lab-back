@@ -48,7 +48,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("WorkId")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -162,7 +162,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<DateTime>("TreatmentDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid>("WorkId")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("WorkId1")
@@ -170,7 +170,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.HasKey("FileId");
 
-                    b.HasIndex("WorkId");
+                    b.HasIndex("TreatmentId");
 
                     b.HasIndex("WorkId1")
                         .IsUnique();
@@ -231,7 +231,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.OwnsMany("I3Lab.Works.Domain.Works.WorkMember", "WorkMembers", b1 =>
                         {
-                            b1.Property<Guid>("WorkId")
+                            b1.Property<Guid>("TreatmentId")
                                 .HasColumnType("uuid");
 
                             b1.Property<Guid>("MemberToInvite")
@@ -243,15 +243,15 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<DateTime>("JoinDate")
                                 .HasColumnType("timestamp with time zone");
 
-                            b1.HasKey("WorkId", "MemberToInvite");
+                            b1.HasKey("TreatmentId", "MemberToInvite");
 
-                            b1.HasIndex("WorkId", "MemberToInvite")
+                            b1.HasIndex("TreatmentId", "MemberToInvite")
                                 .IsUnique();
 
                             b1.ToTable("WorkMember", "work");
 
                             b1.WithOwner()
-                                .HasForeignKey("WorkId");
+                                .HasForeignKey("TreatmentId");
 
                             b1.OwnsOne("I3Lab.Works.Domain.Works.MemberAccessibilityType", "AccessibilityType", b2 =>
                                 {
@@ -283,7 +283,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 {
                     b.HasOne("I3Lab.Works.Domain.Works.Work", null)
                         .WithMany("WorkFiles")
-                        .HasForeignKey("WorkId")
+                        .HasForeignKey("TreatmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

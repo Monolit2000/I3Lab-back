@@ -10,7 +10,7 @@ namespace I3Lab.Works.Application.BlobFiles.GetBlobFilesByWorkId
     {
         public async Task<Result<List<BlobFileDto>>> Handle(GetBlobFilesByWorkIdCommand request, CancellationToken cancellationToken)
         {
-            var files = await blobFileRepository.GetAllWorkIdAsync(new WorkId(request.WorkId));
+            var files = await blobFileRepository.GetAllByWorkIdAsync(new WorkId(request.WorkId));
 
             if (files is null || !files.Any())
                 return new List<BlobFileDto>();

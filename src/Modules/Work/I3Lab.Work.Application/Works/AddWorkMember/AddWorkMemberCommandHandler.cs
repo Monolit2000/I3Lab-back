@@ -17,7 +17,7 @@ namespace I3Lab.Works.Application.Works.AddWorkMember
       
     //    public async Task<Result<WorkMemberDto>> Handle(AddWorkMemberCommand request, CancellationToken cancellationToken)
     //    {
-    //        var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
+    //        var work = await workRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
 
     //        if (work == null)
     //            return Result.Fail("Work not found");

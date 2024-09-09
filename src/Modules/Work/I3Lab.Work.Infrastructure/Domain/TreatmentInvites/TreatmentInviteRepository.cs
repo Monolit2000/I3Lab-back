@@ -26,13 +26,13 @@ namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
         public async Task AddAsync(TreatmentInvite invite)
         {
             await _context.TreatmentInvites.AddAsync(invite);
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task UpdateAsync(TreatmentInvite invite)
         {
             _context.TreatmentInvites.Update(invite);
-            await _context.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task DeleteAsync(TreatmentInviteId id)
@@ -41,8 +41,13 @@ namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
             if (invite != null)
             {
                 _context.TreatmentInvites.Remove(invite);
-                await _context.SaveChangesAsync();
+                await SaveChangesAsync();
             }
+        }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

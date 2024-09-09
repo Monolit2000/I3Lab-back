@@ -12,5 +12,6 @@ namespace I3Lab.Works.Domain.TreatmentInvites
         Task AddAsync(TreatmentInvite invite);
         Task UpdateAsync(TreatmentInvite invite);
         Task DeleteAsync(TreatmentInviteId id);
+        Task SaveChangesAsync();
     }
 }

@@ -2,42 +2,42 @@
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Works.Events;
+using I3Lab.Works.Domain.Works;
+using I3Lab.Works.Domain.Treatments.Events;
 
-
-namespace I3Lab.Works.Domain.Works
+namespace I3Lab.Works.Domain.Treatments
 {
-    public class WorkMember : Entity
+    public class TreatmentMember : Entity
     {
-        public WorkId WorkId { get; private set; }
+        public TreatmentId TreatmentId { get; private set; }
         public Member Member { get; private set; }
         public MemberAccessibilityType AccessibilityType { get; private set; }
         public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
 
-        private WorkMember() { } //for EF core
+        private TreatmentMember() { } //for EF core
 
-        private WorkMember(
-            WorkId workId,
+        private TreatmentMember(
+            TreatmentId treatmentId,
             Member member,
-            Member addedBy) 
+            Member addedBy)
         {
-            WorkId = workId;
+            TreatmentId = treatmentId;
             Member = member;
             AddedBy = addedBy;
             JoinDate = DateTime.UtcNow;
         }
 
-        public static WorkMember CreateNew(
-            WorkId workId,
+        public static TreatmentMember CreateNew(
+            TreatmentId treatmentId,
             Member memberId,
             Member addedBy)
         {
-            return new WorkMember(
-                workId, 
+            return new TreatmentMember(
+                treatmentId,
                 memberId,
                 addedBy);
         }
-
 
         public Result ChangeAccessibilityType(MemberAccessibilityType newAccessibilityType)
         {
@@ -46,13 +46,9 @@ namespace I3Lab.Works.Domain.Works
 
             AccessibilityType = newAccessibilityType;
 
-            AddDomainEvent(new MemberAccessibilityTypeChangedDomainEvent(
-                WorkId, 
-                Member, 
-                newAccessibilityType));
+            AddDomainEvent(new TreatmentMemberAccessibilityTypeChangedDomainEvent(TreatmentId, Member, newAccessibilityType));
 
             return Result.Ok();
         }
-
     }
 }

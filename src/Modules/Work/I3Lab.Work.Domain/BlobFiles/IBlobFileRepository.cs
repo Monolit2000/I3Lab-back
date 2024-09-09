@@ -11,9 +11,10 @@ namespace I3Lab.Works.Domain.BlobFiles
     {
         Task<BlobFile?> GetByIdAsync(BlobFileId id);
         Task<IEnumerable<BlobFile>> GetAllAsync();
-        Task<IEnumerable<BlobFile>> GetAllWorkIdAsync(WorkId workId);
+        Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(WorkId workId);
         Task AddAsync(BlobFile blobFile);
         Task UpdateAsync(BlobFile blobFile);
         Task DeleteAsync(BlobFileId id);
+        Task SaveChangesAsync();
     }
 }

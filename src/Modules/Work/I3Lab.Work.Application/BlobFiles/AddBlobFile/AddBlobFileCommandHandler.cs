@@ -21,14 +21,17 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
         {
             var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
 
-            var blobFileId = await blobService.UploadAsync(request.Stream, request.Type.Value);
+            var blobFileNameId = await blobService.UploadAsync(request.Stream, request.Type.Value);
+
+            //var filePath = BlobFilePath.Create();
+
+            var blobFileUrl = BlobFileUrl.Create(blobFileNameId.ToString());
 
             var newBlobFile = BlobFile.CreateBaseOnWork(
                 work.Id,
-                new BlobFileId(blobFileId),
-                request.FileName,
+                blobFileNameId.ToString(),
                 request.Type,
-                BlobFileUrl.Create(blobFileId.ToString()));
+                blobFileUrl);
 
             await blobFileRepository.AddAsync(newBlobFile);
 

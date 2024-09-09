@@ -9,7 +9,9 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
     {
         public async Task Handle(TreatmentCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-            await sender.Send(new CreateWorkCommand());
+            await sender.Send(new CreateWorksCommand(
+                    notification.TreatmentId, 
+                    notification.CreatorId));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace I3Lab.Works.Application.WorkComments.AddWorkComment
     //    public async Task<Result<WorkCommentDto>> Handle(AddWorkCommentCommand request, CancellationToken cancellationToken)
     //    {
     //        var workComment = WorkComment.CreateBaseOnWork(
-    //            new WorkId(request.WorkId),
+    //            new TreatmentId(request.TreatmentId),
     //            new MemberToInvite(request.AuthorId),
     //            request.Content);
 

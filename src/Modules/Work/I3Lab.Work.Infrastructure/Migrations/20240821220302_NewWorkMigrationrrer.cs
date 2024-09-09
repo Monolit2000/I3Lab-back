@@ -167,7 +167,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 name: "IX_WorkFile_WorkId",
                 schema: "work",
                 table: "WorkFile",
-                column: "WorkId");
+                column: "TreatmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFile_WorkId1",
@@ -180,7 +180,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 name: "IX_WorkMember_WorkId_MemberId",
                 schema: "work",
                 table: "WorkMember",
-                columns: new[] { "WorkId", "MemberToInvite" },
+                columns: new[] { "TreatmentId", "MemberToInvite" },
                 unique: true);
         }
 

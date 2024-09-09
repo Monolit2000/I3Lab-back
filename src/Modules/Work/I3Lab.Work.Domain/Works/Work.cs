@@ -1,12 +1,10 @@
 ﻿using FluentResults;
+using I3Lab.Works.Domain.Members;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
-using I3Lab.Works.Domain.Works.Rule;
 
 namespace I3Lab.Works.Domain.Works
 {
@@ -54,10 +52,10 @@ namespace I3Lab.Works.Domain.Works
                 treatment);
         }
 
-        public BlobFile Create(  )
-        {
+        //public BlobFile Create(  )
+        //{
 
-        }
+        //}
 
         public void AddWorkFile(WorkId workId, BlobFile fileId)
         {

@@ -2,6 +2,7 @@
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.Treatments;
 using FluentResults;
+using I3Lab.Works.Domain.TreatmentInvites.Events;
 
 namespace I3Lab.Works.Domain.TreatmentInvites
 {
@@ -15,7 +16,7 @@ namespace I3Lab.Works.Domain.TreatmentInvites
         public TreatmentInviteStatus TreatmentInviteStatus { get; private set; }
         public DateTime OcurredOn { get; private set; } 
 
-        private TreatmentInvite() { }
+        private TreatmentInvite() { } // For EF core only
 
         private TreatmentInvite(Treatment treatment, Member memberToInvite, Member inviter)
         {
@@ -25,6 +26,11 @@ namespace I3Lab.Works.Domain.TreatmentInvites
             Inviter = inviter;
             OcurredOn = DateTime.UtcNow;
             TreatmentInviteStatus = TreatmentInviteStatus.Pending;
+
+            AddDomainEvent(new TreatmentInviteCreatedDomainEvent(
+                this.Treatment, 
+                this.MemberToInvite,
+                this.Inviter));
         }
 
         public static Result<TreatmentInvite> InviteBasedOnTreatment(
@@ -44,6 +50,7 @@ namespace I3Lab.Works.Domain.TreatmentInvites
                 throw new InvalidOperationException("Only pending invites can be accepted.");
 
             TreatmentInviteStatus = TreatmentInviteStatus.Accepted;
+            AddDomainEvent(new TreatmentInviteAcceptedDomainEvent());
         }
 
         public void Reject()
@@ -52,6 +59,8 @@ namespace I3Lab.Works.Domain.TreatmentInvites
                 throw new InvalidOperationException("Only pending invites can be declined.");
 
             TreatmentInviteStatus = TreatmentInviteStatus.Rejected;
+
+            AddDomainEvent(new TreatmentInviteRejectedDomainEvent());
         }
     }
 

@@ -23,13 +23,12 @@ namespace I3Lab.Works.Domain.BlobFiles
 
         private BlobFile(
             WorkId workId,
-            BlobFileId blobFileId,
             string fileName,
             BlobFileType type,
             BlobFileUrl url)
         {
             WorkId = workId;
-            Id = blobFileId;
+            Id = new BlobFileId(Guid.NewGuid());
             FileName = fileName;
             FileType = type;
             Accessibilitylevel = Accessibilitylevel.Hot;
@@ -38,14 +37,12 @@ namespace I3Lab.Works.Domain.BlobFiles
         }
 
         public static BlobFile CreateBaseOnWork(
-            WorkId workId,
-            BlobFileId blobFileId, 
+            WorkId workId, 
             string fileName, 
             BlobFileType type, 
             BlobFileUrl url) 
             => new BlobFile(
-                workId, 
-                blobFileId, 
+                workId,  
                 fileName, 
                 type, 
                 url);

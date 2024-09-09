@@ -32,11 +32,11 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkComments
         //        .ToListAsync();
         //}
 
-        //public async Task<IEnumerable<WorkComment>> GetAllByWorkIdAsync(WorkId workId)
+        //public async Task<IEnumerable<WorkComment>> GetAllByWorkIdAsync(TreatmentId workId)
         //{
         //    return await _context.WorkComments
         //        .Include(wc => wc.PinedFiles)
-        //        .Where(wc => wc.WorkId == workId)
+        //        .Where(wc => wc.TreatmentId == workId)
         //        .ToListAsync();
         //}
 
