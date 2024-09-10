@@ -2,6 +2,7 @@
 using I3Lab.Works.Domain.Members;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.BlobFiles;
+using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
@@ -17,6 +18,7 @@ namespace I3Lab.Works.Domain.Works
         //public readonly List<WorkMember> WorkMembers = [];
 
         public WorkId Id { get; private set; }
+        public WorkTitel Titel { get; private set; }
         public WorkFile WorkAvatarImage  { get; private set; }
         public Member Customer { get; private set; }
         public WorkStatus WorkStatus { get; private set; }
@@ -27,12 +29,14 @@ namespace I3Lab.Works.Domain.Works
 
         private Work(
             Member creatorId,
-            Treatment treatment)
+            Treatment treatment,
+            WorkTitel workTitel)
         {
             Id = new WorkId(Guid.NewGuid());
             WorkStatus = WorkStatus.Pending;
             CreatorId = creatorId;
-            Treatment = treatment;  
+            Treatment = treatment;
+            Titel = workTitel; 
             WorkStartedDate = DateTime.UtcNow;
 
             //WorkChat = WorkChat.CreateBaseOnWork(Id, treatment.TreatmentMembers);
@@ -42,14 +46,16 @@ namespace I3Lab.Works.Domain.Works
 
         internal static async Task<Result<Work>> CreateBasedOnTreatmentAsync(
             Member creator, 
-            Treatment treatment)
+            Treatment treatment,
+            WorkTitel workTitel)
         {
             if (!IsMemberRoleValid(creator))
                 return Result.Fail(WorkErrors.MemberNotHaveRequiredRole);
 
             return new Work(
                 creator,
-                treatment);
+                treatment,
+                workTitel);
         }
 
         //public BlobFile Create(  )
@@ -57,6 +63,10 @@ namespace I3Lab.Works.Domain.Works
 
         //}
 
+        public WorkChat CreateWorkChat(List<Member> members)
+        {
+            return WorkChat.CreateBaseOnWork(this.Id, members);
+        }
         public void AddWorkFile(WorkId workId, BlobFile fileId)
         {
             var newWorkFile = WorkFile.CreateNew(workId, fileId);

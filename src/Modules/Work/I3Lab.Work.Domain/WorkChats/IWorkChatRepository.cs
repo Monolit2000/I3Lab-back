@@ -9,5 +9,6 @@ namespace I3Lab.Works.Domain.WorkChats
         Task AddAsync(WorkChat workChat, CancellationToken cancellationToken = default);
         Task UpdateAsync(WorkChat workChat, CancellationToken cancellationToken = default);
         Task RemoveAsync(WorkChat workChat, CancellationToken cancellationToken = default);
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

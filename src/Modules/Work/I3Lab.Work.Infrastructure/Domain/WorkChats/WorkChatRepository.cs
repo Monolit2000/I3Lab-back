@@ -2,6 +2,8 @@
 using I3Lab.Works.Domain.Works;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+using System.Threading;
 
 namespace I3Lab.Works.Infrastructure.Domain.WorkChats
 {
@@ -27,7 +29,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
             return await _context.WorkChats
                 .Include(wc => wc.Messages)
                 .Include(wc => wc.ChatMembers)
-                .FirstOrDefaultAsync(wc => wc.WorkId == workId, cancellationToken;
+                .FirstOrDefaultAsync(wc => wc.WorkId == workId, cancellationToken);
               
         }
 
@@ -50,6 +52,11 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
         }
 
         public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             await _context.SaveChangesAsync();
         }

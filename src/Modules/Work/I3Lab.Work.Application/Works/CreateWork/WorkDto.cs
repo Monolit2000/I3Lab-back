@@ -17,8 +17,7 @@ namespace I3Lab.Works.Application.Works.CreateWork
         public Guid? CustomerId { get; set; }
         public string WorkAvatarImageUrl { get; set; }
 
-        // Дополнительные свойства, если необходимо
-        public List<WorkMemberDto> WorkMembers { get; set; } = new List<WorkMemberDto>();
-        public List<WorkFileDto> WorkFiles { get; set; } = new List<WorkFileDto>();
+        //public List<WorkMemberDto> WorkMembers { get; set; } = new List<WorkMemberDto>();
+        //public List<WorkFileDto> WorkFiles { get; set; } = new List<WorkFileDto>();
     }
 }

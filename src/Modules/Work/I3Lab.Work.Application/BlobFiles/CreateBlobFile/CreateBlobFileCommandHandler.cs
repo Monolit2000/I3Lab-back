@@ -3,21 +3,15 @@ using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Works;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Storage.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
 {
-    public class AddBlobFileCommandHandler(
+    public class CreateBlobFileCommandHandler(
         IWorkRepository workRepository,
         IBlobFileRepository blobFileRepository,
-        IBlobService blobService) : IRequestHandler<AddBlobFileCommand, Result<BlobFileDto>>
+        IBlobService blobService) : IRequestHandler<CreateBlobFileBlobFileCommand, Result<BlobFileDto>>
     {
-        public async Task<Result<BlobFileDto>> Handle(AddBlobFileCommand request, CancellationToken cancellationToken)
+        public async Task<Result<BlobFileDto>> Handle(CreateBlobFileBlobFileCommand request, CancellationToken cancellationToken)
         {
             var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
 

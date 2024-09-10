@@ -29,7 +29,7 @@ namespace I3Lab.Works.Tests.Application.Works
             _tretmentRepository = Substitute.For<ITretmentRepository>();
             _workRepository = Substitute.For<IWorkRepository>();
             _memberContext = Substitute.For<IMemberContext>();
-            _handler = new CreateWorkCommandHandler(
+            _handler = new CreateWorksCommandHandler(
                 _memberRepository,
                 _tretmentRepository,
                 _workRepository,

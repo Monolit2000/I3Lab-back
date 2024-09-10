@@ -15,55 +15,47 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             _context = context;
         }
 
-        public async Task<Work> GetByIdAsync(WorkId id)
+        public async Task<Work?> GetByIdAsync(WorkId id, CancellationToken cancellationToken = default)
         {
-            var work = await _context.Works
+            return await _context.Works
                 .Include(w => w.WorkFiles)
-                .Include(w => w.WorkMembers)
                 .FirstOrDefaultAsync(w => w.Id == id);
-
-            return work;
         }
 
-        public async Task<IEnumerable<Work>> GetAllAsync()
+        public async Task<IEnumerable<Work>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
-                .Include(w => w.WorkMembers)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Work>> GetAllByMemberIdAsync(MemberId id)
+        public async Task<IEnumerable<Work>> GetAllByMemberIdAsync(MemberId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
-                .Include(w => w.WorkMembers)
-                .Where(w => w.WorkMembers.Any(m => m.Member == id))
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Work>> GetAllByTreatmentIdAsync(TreatmentId id)
+        public async Task<IEnumerable<Work>> GetAllByTreatmentIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
-                .Include(w => w.WorkMembers)
-                .Where(w => w.TreatmentId == id)
                 .ToListAsync();
         }
 
-        public async Task AddAsync(Work work)
+        public async Task AddAsync(Work work, CancellationToken cancellationToken = default)
         {
             await _context.Works.AddAsync(work);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Work work)
+        public async Task UpdateAsync(Work work, CancellationToken cancellationToken = default)
         {
             _context.Works.Update(work);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(WorkId id)
+        public async Task DeleteAsync(WorkId id, CancellationToken cancellationToken = default)
         {
             var work = await GetByIdAsync(id);
             if (work != null)
@@ -73,9 +65,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             }
         }
 
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+            => await _context.SaveChangesAsync();
     }
 }

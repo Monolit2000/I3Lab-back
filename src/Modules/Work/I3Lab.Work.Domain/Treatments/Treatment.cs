@@ -52,9 +52,9 @@ namespace I3Lab.Works.Domain.Treatments
             return TreatmentInvite.InviteBasedOnTreatment(this , memberToInvite, inviter).Value;
         }
 
-        public async Task<Result<Work>> CreateWorkAsync(Member creator)
+        public async Task<Result<Work>> CreateWorkAsync(Member creator, WorkTitel workTitel)
         {
-            return await Work.CreateBasedOnTreatmentAsync(creator, this);
+            return await Work.CreateBasedOnTreatmentAsync(creator, this, workTitel);
         }
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)

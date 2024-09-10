@@ -9,14 +9,19 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
     {
         public void Configure(EntityTypeBuilder<Treatment> builder)
         {
-            builder.HasKey(e => e.Id); 
+            builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Titel)
-                .IsRequired(); 
+                .IsRequired();
 
-            builder.HasMany(e => e.TreatmentStages) 
-                   .WithOne() 
-                   .HasForeignKey(e => e.TreatmentId); 
+            builder.HasMany(e => e.TreatmentStages)
+                   .WithOne()
+                   .HasForeignKey(e => e.Treatment.Id);
+
+            builder.HasMany(e => e.TreatmentMemberss)
+                 .WithOne()
+                 .HasForeignKey(e => e.TreatmentId)
+                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -17,12 +17,15 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
                 return Result.Fail(TreatmentsErrors.NotUniqueName);
 
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
+
             var patient = await memberRepository.GetMemberByIdAsync(new MemberId(request.PatientId));
 
             var titel = Titel.Create(request.TreatmentTitel);
 
             var treatment = Treatment.CreateNew(
-                creator, patient, titel);
+                creator, 
+                patient, 
+                titel);
 
             await tretmentRepository.AddAsync(treatment);
 

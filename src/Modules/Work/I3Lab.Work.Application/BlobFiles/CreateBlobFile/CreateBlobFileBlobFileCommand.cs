@@ -2,16 +2,10 @@
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.WorkDirectorys;
 using MediatR;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
 {
-    public class AddBlobFileCommand : IRequest<Result<BlobFileDto>>
+    public class CreateBlobFileBlobFileCommand : IRequest<Result<BlobFileDto>>
     {
         public Guid WorkId { get; set; }    
         public string FileName { get; set; }
@@ -21,7 +15,7 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
 
         public Stream Stream { get; set; }
 
-        public AddBlobFileCommand(
+        public CreateBlobFileBlobFileCommand(
             string fileName,
             BlobFileType type,
             string blobPath,

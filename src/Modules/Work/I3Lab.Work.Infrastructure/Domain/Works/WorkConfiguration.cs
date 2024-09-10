@@ -13,26 +13,27 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
     {
         public void Configure(EntityTypeBuilder<Work> builder)
         {
-            // Установка ключа для Work
             builder.HasKey(e => e.Id);
 
-            // Конвертеры для идентификаторов
             //builder.Property(e => e.Id).HasConversion<WorkIdConverter>();
-
-
-            builder.Property(e => e.TreatmentId).IsRequired();
 
             builder.Property(e => e.CreatorId).IsRequired();
 
             builder.Property(e => e.Customer).IsRequired();
 
-
-            //Конфигурация WorkFile
             builder.HasMany(e => e.WorkFiles)
                 .WithOne()
                 .HasForeignKey(f => f.WorkId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
+
+            builder.Property(e => e.WorkStartedDate).IsRequired();
+
+            builder.ComplexProperty(o => o.WorkStatus, b =>
+            {
+                b.IsRequired();
+                b.Property(a => a.Value).HasColumnName("WorkStatus");
+            });
 
             //builder.OwnsMany(e => e.WorkFiles, b =>
             //{
@@ -51,47 +52,38 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             //});
 
 
-
-
             //builder.HasMany(e => e.WorkMembers)
             //    .WithOne()
             //    .HasForeignKey(m => m.TreatmentId)
             //    .OnDelete(DeleteBehavior.Cascade)
             //    .IsRequired();
 
-            builder.OwnsMany(e => e.WorkMembers, b =>
-            {
-                b.HasKey(wm => new { wm.WorkId, wm.Member });
+
+            //builder.OwnsMany(e => e.WorkMembers, b =>
+            //{
+            //    b.HasKey(wm => new { wm.WorkId, wm.Member });
 
 
-                b.Property(wm => wm.WorkId).IsRequired();
+            //    b.Property(wm => wm.WorkId).IsRequired();
 
-                //b.OwnsOne(o => o.TreatmentId, b =>
-                //{
-                //    b.Property(a => a.Value).HasColumnName("TreatmentId").IsRequired();
-                //});
+            //    //b.OwnsOne(o => o.TreatmentId, b =>
+            //    //{
+            //    //    b.Property(a => a.Value).HasColumnName("TreatmentId").IsRequired();
+            //    //});
 
-                b.Property(wm => wm.Member).IsRequired();
-                b.Property(wm => wm.AddedBy).IsRequired();
-                b.Property(wm => wm.JoinDate).IsRequired();
+            //    b.Property(wm => wm.Member).IsRequired();
+            //    b.Property(wm => wm.AddedBy).IsRequired();
+            //    b.Property(wm => wm.JoinDate).IsRequired();
 
-                b.OwnsOne(at => at.AccessibilityType, b =>
-                {
-                    b.Property(a => a.Value).HasColumnName("AccessibilityType");
-                });
+            //    b.OwnsOne(at => at.AccessibilityType, b =>
+            //    {
+            //        b.Property(a => a.Value).HasColumnName("AccessibilityType");
+            //    });
 
-                // Уникальный индекс для WorkMember
-                b.HasIndex(wm => new { wm.WorkId, wm.Member }).IsUnique();
-            });
+            //    // Уникальный индекс для WorkMember
+            //    b.HasIndex(wm => new { wm.WorkId, wm.Member }).IsUnique();
+            //});
 
-            // Настройка других свойств
-            builder.Property(e => e.WorkStartedDate).IsRequired();
-
-            builder.ComplexProperty(o => o.WorkStatus, b =>
-            {
-                b.IsRequired();
-                b.Property(a => a.Value).HasColumnName("WorkStatus");
-            });
         }
     }
 

@@ -19,7 +19,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 
             builder.Property(wf => wf.WorkId).IsRequired();
 
-            builder.Property(wf => wf.ContainerName).IsRequired();
+            //builder.Property(wf => wf.ContainerName).IsRequired();
 
             builder.Property(wf => wf.CreateDate).IsRequired();
         }
