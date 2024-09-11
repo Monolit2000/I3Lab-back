@@ -32,7 +32,7 @@ namespace I3Lab.Works.Domain.WorkChats
                workMembers);
         }
 
-        internal static WorkChat CreateBaseOnWork(
+        public static WorkChat CreateBaseOnWork(
             WorkId workId, 
             List<Member> workMembers)
         {

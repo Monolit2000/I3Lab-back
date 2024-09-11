@@ -51,7 +51,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         public async Task<Result<Work>> CreateWorkAsync(Member creator, WorkTitel workTitel)
         {
-            return await Work.CreateBasedOnTreatmentAsync(creator, this, workTitel);
+            return await Work.CreateBasedOnTreatmentAsync(creator, this.Id, workTitel);
         }
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)

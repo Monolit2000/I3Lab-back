@@ -19,6 +19,8 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 
             //builder.Property(e => e.Creator).IsRequired();
 
+            builder.Property(e => e.TreatmentId);
+
             builder.HasOne(e => e.Creator)
                 .WithMany();
 

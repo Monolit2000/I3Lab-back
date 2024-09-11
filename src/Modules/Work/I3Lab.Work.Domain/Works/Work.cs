@@ -12,7 +12,7 @@ namespace I3Lab.Works.Domain.Works
 {
     public class Work : Entity, IAggregateRoot
     {
-        public Treatment Treatment { get; private set; }
+        public TreatmentId TreatmentId { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
 
@@ -30,22 +30,22 @@ namespace I3Lab.Works.Domain.Works
 
         private Work(
             Member creatorId,
-            Treatment treatment,
+            TreatmentId treatment,
             WorkTitel workTitel)
         {
             Id = new WorkId(Guid.NewGuid());
             WorkStatus = WorkStatus.Pending;
             Creator = creatorId;
-            Treatment = treatment;
+            TreatmentId = treatment;
             Titel = workTitel; 
             WorkStartedDate = DateTime.UtcNow;
 
-            AddDomainEvent(new WorkCreatedDomainEvent(Id, treatment.Id));
+            AddDomainEvent(new WorkCreatedDomainEvent(Id, TreatmentId));
         }
 
-        internal static async Task<Result<Work>> CreateBasedOnTreatmentAsync(
-            Member creator, 
-            Treatment treatment,
+        public static async Task<Result<Work>> CreateBasedOnTreatmentAsync(
+            Member creator,
+            TreatmentId treatment,
             WorkTitel workTitel)
         {
             if (!IsMemberRoleValid(creator))
