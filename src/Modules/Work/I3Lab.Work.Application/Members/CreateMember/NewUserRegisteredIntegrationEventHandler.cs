@@ -15,6 +15,7 @@ namespace I3Lab.Works.Application.Members.CreateMember
              nameof(NewUserRegisteredIntegrationEventHandler), context.Message.UserId);
 
             var command = new CreateMemberCommand(
+                context.Message.UserId,
                 context.Message.Email);
 
             await mediator.Send(command);

@@ -101,14 +101,14 @@ namespace I3Lab.Works.Domain.WorkDirectorys
             BlobCatalogPath = newBlobCatalogPath;
         }
 
-        public BlobFile? FindFile3DById(BlobFile fileId)
-        {
-            return Files3Ds.FirstOrDefault(f => f.Id == fileId);
-        }
+        //public BlobFile? FindFile3DById(BlobFile fileId)
+        //{
+        //    return Files3Ds.FirstOrDefault(f => f.Id == fileId);
+        //}
 
-        public BlobFile? FindOtherFileById(BlobFile fileId)
-        {
-            return OtherFiles.FirstOrDefault(f => f.Id == fileId);
-        }
+        //public BlobFile? FindOtherFileById(BlobFile fileId)
+        //{
+        //    return OtherFiles.FirstOrDefault(f => f.Id == fileId);
+        //}
     }
 }

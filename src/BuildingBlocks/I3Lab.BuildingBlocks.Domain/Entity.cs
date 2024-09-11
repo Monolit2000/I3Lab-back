@@ -46,14 +46,13 @@ namespace I3Lab.BuildingBlocks.Domain
         protected Result CheckRules(params IBusinessRule[] rules)
         {
             foreach (var rule in rules)
-            {
-                if (rule.IsBroken())
-                {
-                    return Result.Fail(rule.Message);
-                }
-            }
+                return CheckRule(rule); 
 
             return Result.Ok();
         }
+        //if (rule.IsBroken())
+        //{
+        //    return Result.Fail(rule.Message);
+        //}
     }
 }

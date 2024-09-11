@@ -1,5 +1,7 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Works.Domain.Members;
+using I3Lab.Works.Domain.WorkChats.Events;
 using I3Lab.Works.Domain.Works;
 
 namespace I3Lab.Works.Domain.WorkChats
@@ -42,7 +44,7 @@ namespace I3Lab.Works.Domain.WorkChats
         public void AddMessage(MemberId senderId, string messageText)
         {
             if (ChatMembers.All(p => p.Id != senderId))
-                throw new InvalidOperationException("Sender is not a participant in the chat.");
+                throw new InvalidOperationException("Sender is not a member in the chat.");
 
             var newMessage = ChatMessage.CreateNew(senderId, messageText);
             Messages.Add(newMessage);
@@ -58,10 +60,19 @@ namespace I3Lab.Works.Domain.WorkChats
             Messages.Remove(message); 
         }
 
+        public Result EditMessage(ChatMessageId chatMessageId, string newMessage)
+        {
+            var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
+
+            message.Edit(newMessage);
+
+            return Result.Ok();
+        }
+
         public void AddChatMember(Member member)
         {
             if (ChatMembers.Any(p => p.Id == member.Id))
-                throw new InvalidOperationException("MemberToInvite is already a participant in the chat.");
+                throw new InvalidOperationException("MemberToInvite is already a member in the chat.");
 
            // var newParticipant = new ChatMember(memberId);
             ChatMembers.Add(member);
@@ -69,11 +80,13 @@ namespace I3Lab.Works.Domain.WorkChats
 
         public void RemoveChatMember(MemberId memberId)
         {
-            var participant = ChatMembers.FirstOrDefault(p => p.Id == memberId);
-            if (participant == null)
-                throw new InvalidOperationException("MemberToInvite is not a participant in the chat.");
+            var member = ChatMembers.FirstOrDefault(p => p.Id == memberId);
+            if (member == null)
+                throw new InvalidOperationException("MemberToInvite is not a member in the chat.");
 
-            ChatMembers.Remove(participant);
+            ChatMembers.Remove(member);
+
+            AddDomainEvent(new ChatMemberRemovedDamainEvent(this.Id, member.Id));
         }
     }
 }

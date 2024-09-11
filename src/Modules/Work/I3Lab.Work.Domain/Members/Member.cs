@@ -24,16 +24,17 @@ namespace I3Lab.Works.Domain.Members
         }
 
         private Member(
+            MemberId memberId,
             string email)
         {
-            Id = new MemberId(Guid.NewGuid());
+            Id = memberId;
             Email = email;
             MemberRole = MemberRole.Doctor;
         }
 
-        public static Member CreateNew(string email)
+        public static Member CreateNew(MemberId memberId, string email)
         {
-            return new Member(email);
+            return new Member(memberId, email);
         }
 
 

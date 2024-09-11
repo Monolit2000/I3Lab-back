@@ -51,7 +51,7 @@ namespace I3Lab.Works.Domain.TreatmentInvites
                 return Result.Fail(TreatmentInviteErrors.InvalidInviteStatus());
 
             TreatmentInviteStatus = TreatmentInviteStatus.Accepted;
-            AddDomainEvent(new TreatmentInviteAcceptedDomainEvent());
+            AddDomainEvent(new TreatmentInviteAcceptedDomainEvent(Treatment.Id, MemberToInvite.Id, Inviter.Id));
             return Result.Ok();
         }
 

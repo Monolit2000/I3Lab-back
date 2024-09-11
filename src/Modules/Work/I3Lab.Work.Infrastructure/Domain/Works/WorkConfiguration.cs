@@ -17,15 +17,26 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
 
             //builder.Property(e => e.Id).HasConversion<WorkIdConverter>();
 
-            builder.Property(e => e.CreatorId).IsRequired();
+            //builder.Property(e => e.Creator).IsRequired();
 
-            builder.Property(e => e.Customer).IsRequired();
+            builder.HasOne(e => e.Creator)
+                .WithMany();
+
+            // builder.Property(e => e.Customer).IsRequired();
+
+            builder.HasOne(e => e.Customer)
+                  .WithMany();
 
             builder.HasMany(e => e.WorkFiles)
                 .WithOne()
                 .HasForeignKey(f => f.WorkId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
+
+            builder.OwnsOne(e => e.Titel, b =>
+            {
+                b.Property(t => t.Value).HasColumnName("Titel").IsRequired();
+            });
 
             builder.Property(e => e.WorkStartedDate).IsRequired();
 
@@ -38,9 +49,9 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             //builder.OwnsMany(e => e.WorkFiles, b =>
             //{
 
-            //    b.HasKey(wf => wf.FileId);
+            //    b.HasKey(wf => wf.File);
 
-            //    b.Property(wf => wf.FileId)
+            //    b.Property(wf => wf.File)
             //        .HasConversion<BlobFileIdConverter>()
             //        .IsRequired();
 
@@ -48,7 +59,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             //        .HasConversion<WorkIdConverter>()
             //        .IsRequired();
 
-            //    b.HasIndex(wf => new { wf.TreatmentId, wf.FileId }).IsUnique();
+            //    b.HasIndex(wf => new { wf.TreatmentId, wf.File }).IsUnique();
             //});
 
 

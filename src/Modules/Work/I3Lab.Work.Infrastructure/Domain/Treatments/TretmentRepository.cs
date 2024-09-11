@@ -19,10 +19,9 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
             _context = context;
         }
 
-
         public async Task<bool> IsNameUniqueAsync(string name)
         {
-            var treatment = await _context.Treatments.AnyAsync(x => x.Titel == name);
+            var treatment = await _context.Treatments.AnyAsync(x => x.Titel.Value == name/*Titel.Create(name)*/);
             if (treatment == true)
                 return false;
 

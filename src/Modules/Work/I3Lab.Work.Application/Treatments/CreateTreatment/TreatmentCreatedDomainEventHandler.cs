@@ -1,4 +1,4 @@
-﻿using I3Lab.Works.Application.Works.CreateWork;
+﻿using I3Lab.Works.Application.Works.CreateWorks;
 using I3Lab.Works.Domain.Treatments.Events;
 using MediatR;
 

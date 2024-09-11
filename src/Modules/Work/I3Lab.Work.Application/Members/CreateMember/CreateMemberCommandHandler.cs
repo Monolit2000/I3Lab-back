@@ -14,6 +14,7 @@ namespace I3Lab.Works.Application.Members.CreateMember
                 return Result.Fail("Email is already taken");
 
             var newMember = Member.CreateNew(
+                new MemberId(request.UserId),
                 request.Email);
 
             await memberRepository.AddAsync(newMember);

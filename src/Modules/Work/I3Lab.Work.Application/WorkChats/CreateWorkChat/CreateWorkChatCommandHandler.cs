@@ -1,4 +1,5 @@
-﻿using I3Lab.Works.Domain.TreatmentInvites;
+﻿using FluentResults;
+using I3Lab.Works.Domain.TreatmentInvites;
 using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Works;
@@ -19,6 +20,9 @@ namespace I3Lab.Works.Application.WorkChats.CreateWorkChat
         public async Task Handle(CreateWorkChatCommand request, CancellationToken cancellationToken)
         {
             var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
+
+            if (work == null)
+                return;
 
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 

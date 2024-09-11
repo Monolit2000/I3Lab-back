@@ -17,8 +17,12 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
                 return Result.Fail(TreatmentsErrors.NotUniqueName);
 
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
+            if (creator is null)
+                return Result.Fail("Creator is null");
 
             var patient = await memberRepository.GetMemberByIdAsync(new MemberId(request.PatientId));
+            if (creator is null)
+                return Result.Fail("patient is null");
 
             var titel = Titel.Create(request.TreatmentTitel);
 

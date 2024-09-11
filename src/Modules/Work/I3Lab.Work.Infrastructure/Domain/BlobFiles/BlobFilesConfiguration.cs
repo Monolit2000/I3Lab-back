@@ -24,6 +24,11 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
 
             builder.OwnsOne(bf => bf.Path);
 
+            builder.OwnsOne(bf => bf.Url, b =>
+            {
+                b.Property(a => a.Value).HasColumnName("Url").IsRequired();
+            });
+
             //builder.OwnsOne(bf => bf.Path, path =>
             //{
             //    path.Property(p => p.ContainerName).HasColumnName("ContainerName");
@@ -31,7 +36,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             //    path.Property(p => p.FileName).HasColumnName("FileName");
             //});
 
-            builder.Property(bf => bf.Path).IsRequired();
+            //builder.Property(bf => bf.Path).HasColumnName("BlobFilePath").IsRequired();
             builder.Property(bf => bf.CreateDate).IsRequired();
 
 

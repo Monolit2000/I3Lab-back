@@ -6,6 +6,7 @@ using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
+using I3Lab.Works.Domain.WorkCatalogs.Events;
 
 namespace I3Lab.Works.Domain.Works
 {
@@ -22,7 +23,7 @@ namespace I3Lab.Works.Domain.Works
         public WorkFile WorkAvatarImage  { get; private set; }
         public Member Customer { get; private set; }
         public WorkStatus WorkStatus { get; private set; }
-        public Member CreatorId { get; private set; }
+        public Member Creator { get; private set; }
         public DateTime WorkStartedDate { get; private set; }   
 
         private Work() { } //for Ef core
@@ -34,12 +35,10 @@ namespace I3Lab.Works.Domain.Works
         {
             Id = new WorkId(Guid.NewGuid());
             WorkStatus = WorkStatus.Pending;
-            CreatorId = creatorId;
+            Creator = creatorId;
             Treatment = treatment;
             Titel = workTitel; 
             WorkStartedDate = DateTime.UtcNow;
-
-            //WorkChat = WorkChat.CreateBaseOnWork(Id, treatment.TreatmentMembers);
 
             AddDomainEvent(new WorkCreatedDomainEvent(Id, treatment.Id));
         }
@@ -63,6 +62,10 @@ namespace I3Lab.Works.Domain.Works
 
         //}
 
+        public BlobFile CreateBlobFile(string fileName, BlobFileType fileType, BlobFileUrl blobFileUrl)
+        {
+            return BlobFile.CreateBaseOnWork(this.Id, fileName, fileType, blobFileUrl);
+        }
         public WorkChat CreateWorkChat(List<Member> members)
         {
             return WorkChat.CreateBaseOnWork(this.Id, members);

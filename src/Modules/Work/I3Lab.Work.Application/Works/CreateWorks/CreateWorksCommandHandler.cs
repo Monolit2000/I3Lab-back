@@ -4,7 +4,7 @@ using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works;
 using MediatR;
 
-namespace I3Lab.Works.Application.Works.CreateWork
+namespace I3Lab.Works.Application.Works.CreateWorks
 {
     public class CreateWorksCommandHandler(
         IMemberRepository memberRepository,
@@ -25,11 +25,10 @@ namespace I3Lab.Works.Application.Works.CreateWork
             if (creator == null)
                 return Result.Fail("MemberToInvite not exist");
 
-
             foreach (var titel in BaseWorkTitels)
             {
-
-                var workResult = await treatment.CreateWorkAsync(creator, WorkTitel.Create(titel));
+                var workResult = await treatment.CreateWorkAsync(
+                    creator, WorkTitel.Create(titel));
 
                 if (workResult.IsFailed)
                     return Result.Fail(workResult.Errors);
@@ -47,7 +46,7 @@ namespace I3Lab.Works.Application.Works.CreateWork
             //    TreatmentId = work.Treatment.Id.Value,
             //    WorkStatus = work.WorkStatus.Value,
             //    WorkStartedDate = work.WorkStartedDate,
-            //    CreatorId = work.CreatorId.Id.Value
+            //    Creator = work.Creator.Id.Value
             //};
 
             return new WorkDto();

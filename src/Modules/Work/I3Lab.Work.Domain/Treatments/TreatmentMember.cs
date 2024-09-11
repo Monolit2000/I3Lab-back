@@ -10,6 +10,9 @@ namespace I3Lab.Works.Domain.Treatments
     public class TreatmentMember : Entity
     {
         public TreatmentId TreatmentId { get; private set; }
+
+        public TreatmentMemberId Id { get; private set; }
+
         public Member Member { get; private set; }
         public MemberAccessibilityType AccessibilityType { get; private set; }
         public Member AddedBy { get; private set; }
@@ -22,6 +25,7 @@ namespace I3Lab.Works.Domain.Treatments
             Member member,
             Member addedBy)
         {
+            Id = new TreatmentMemberId( Guid.NewGuid());
             TreatmentId = treatmentId;
             Member = member;
             AddedBy = addedBy;

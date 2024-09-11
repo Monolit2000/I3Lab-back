@@ -27,10 +27,7 @@ namespace I3Lab.Works.Domain.Treatments
         public static Treatment CreateNew(Member creator, Member patient, Titel titel) 
             => new Treatment(creator, patient, titel);
 
-        private Treatment()
-        {
-            // For Ef Core
-        }
+        private Treatment() { } // For Ef Core
 
         private Treatment(
             Member creator, 
@@ -82,7 +79,7 @@ namespace I3Lab.Works.Domain.Treatments
             return Result.Ok();
         }
 
-        public Result RemoveTreatmentMember(Member member, Member addedBy)
+        public Result RemoveTreatmentMember(MemberId memberId, MemberId removingMemberId)
         {
             var treatmentMember = TreatmentMemberss.FirstOrDefault(member => member.Member.Id == member.Member.Id);
 
@@ -91,11 +88,23 @@ namespace I3Lab.Works.Domain.Treatments
 
             TreatmentMemberss.Remove(treatmentMember);
 
-            AddDomainEvent(new MemberRemovedFromTreatmentDomainEvent(Id.Value, member.Id.Value));
+            AddDomainEvent(new MemberRemovedFromTreatmentDomainEvent(Id.Value, treatmentMember.Member.Id.Value));
 
             return Result.Ok();
         }
 
+        public void AddPatient(Member customer)
+        {
+            Patient = customer;
+            AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
+        }
+
+        public void AddPreview(BlobFile fileId)
+        {
+            var treatmentPreview = fileId; //TreatmentPreview.CreateBaseOnWork(this.Id, fileId);
+
+            TreatmentPreview = treatmentPreview;
+        }
 
         //public Result AddMember(Member newMember)
         //{
@@ -124,17 +133,6 @@ namespace I3Lab.Works.Domain.Treatments
         //}
 
 
-        public void AddPatient(Member customer)
-        {
-            Patient = customer;
-            AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
-        }
 
-        public void AddPreview(BlobFile fileId)
-        {
-            var treatmentPreview = fileId; //TreatmentPreview.CreateBaseOnWork(this.Id, fileId);
-
-            TreatmentPreview = treatmentPreview;
-        }
     }
 }

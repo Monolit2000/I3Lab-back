@@ -1,13 +1,18 @@
-﻿using I3Lab.Works.Domain.TreatmentInvites.Events;
+﻿using I3Lab.Works.Application.Treatments.AddTreatmentMember;
+using I3Lab.Works.Domain.TreatmentInvites.Events;
 using MediatR;
 
 namespace I3Lab.Works.Application.TreatmentInvites.AcceptTreatmentInvite
 {
-    public class TreatmentInviteAcceptedDomainEventHandler : INotificationHandler<TreatmentInviteAcceptedDomainEvent>
+    public class TreatmentInviteAcceptedDomainEventHandler(
+         ISender sender) : INotificationHandler<TreatmentInviteAcceptedDomainEvent>
     {
-        public Task Handle(TreatmentInviteAcceptedDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(TreatmentInviteAcceptedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await sender.Send(new AddTreatmentMemberCommand(
+                notification.TreatmentId.Value, 
+                notification.InviteeId.Value, 
+                notification.InviterId.Value));
         }
     }
 }

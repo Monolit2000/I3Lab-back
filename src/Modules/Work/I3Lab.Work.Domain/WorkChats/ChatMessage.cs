@@ -17,6 +17,8 @@ namespace I3Lab.Works.Domain.WorkChats
         public DateTime SentDate { get; private set; }
         public BlobFile FileResponceId { get; private set; }
 
+        public bool IsEdited { get; private set; }    
+
         public DateTime? EditDate { get; private set; }
 
         private ChatMessage() { } // For EF Core
@@ -26,6 +28,7 @@ namespace I3Lab.Works.Domain.WorkChats
             SenderId = senderId;
             MessageText = messageText;
             SentDate = DateTime.UtcNow;
+            IsEdited = false;   
 
             if (fileResponceId != null)
             {
@@ -56,9 +59,10 @@ namespace I3Lab.Works.Domain.WorkChats
                 blobFileId);
         }
 
-        public Result EditChatMessage(string NewMessageText)
+        public Result Edit(string NewMessageText)
         {
             MessageText = NewMessageText;
+            IsEdited = true;
             AddDomainEvent(new ChatMessageEditedDomainEvent());
 
             return Result.Ok();

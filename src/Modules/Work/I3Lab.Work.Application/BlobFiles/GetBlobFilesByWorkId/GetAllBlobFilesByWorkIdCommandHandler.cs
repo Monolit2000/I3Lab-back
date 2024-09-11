@@ -5,10 +5,10 @@ using MediatR;
 
 namespace I3Lab.Works.Application.BlobFiles.GetBlobFilesByWorkId
 {
-    public class GetBlobFilesByWorkIdCommandHandler(
-        IBlobFileRepository blobFileRepository) : IRequestHandler<GetBlobFilesByWorkIdCommand, Result<List<BlobFileDto>>>
+    public class GetAllBlobFilesByWorkIdCommandHandler(
+        IBlobFileRepository blobFileRepository) : IRequestHandler<GetAllBlobFilesByWorkIdCommand, Result<List<BlobFileDto>>>
     {
-        public async Task<Result<List<BlobFileDto>>> Handle(GetBlobFilesByWorkIdCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<BlobFileDto>>> Handle(GetAllBlobFilesByWorkIdCommand request, CancellationToken cancellationToken)
         {
             var files = await blobFileRepository.GetAllByWorkIdAsync(new WorkId(request.WorkId));
 

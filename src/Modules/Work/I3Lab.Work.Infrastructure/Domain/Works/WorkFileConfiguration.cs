@@ -13,9 +13,12 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
     {
         public void Configure(EntityTypeBuilder<WorkFile> builder)
         {
-            builder.HasKey(wf => wf.FileId );
+            builder.HasKey(wf => wf.WorkId);
 
-            builder.Property(wf => wf.FileId).IsRequired();
+           // builder.Property(wf => wf.File).IsRequired();
+
+            builder.HasOne(wf => wf.File)
+              .WithMany();
 
             builder.Property(wf => wf.WorkId).IsRequired();
 

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Works.Application.Treatments.CreateTreatmentStage
 {
-
     public class CreateTreatmentStageCommandHandler(
         ITretmentRepository tretmentRepository,
         IMemberRepository memberRepository) : IRequestHandler<CreateTreatmentStageCommand, Result<TreatmentStageDto>>
