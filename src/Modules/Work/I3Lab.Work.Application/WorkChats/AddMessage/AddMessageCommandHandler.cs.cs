@@ -16,9 +16,9 @@ namespace I3Lab.Works.Application.WorkChats.AddMessage
             if (workChat == null)
                 return Result.Fail("WorkChat not found");
 
-            workChat.AddMessage(new MemberId(request.MemberId), request.Message);
+            var result = workChat.AddMessage(new MemberId(request.MemberId), request.Message);
 
-            return Result.Ok();
+            return result;
         }
     }
 }

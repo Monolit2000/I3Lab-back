@@ -15,16 +15,16 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
 
             builder.HasKey(cm => cm.Id);
 
-            
+
             builder.Property(cm => cm.MessageText)
                    .IsRequired()
-                   .HasMaxLength(1000); 
+                   .HasMaxLength(1000);
 
             builder.Property(cm => cm.SentDate)
                    .IsRequired();
 
             builder.Property(cm => cm.EditDate)
-                   .IsRequired(false); 
+                   .IsRequired(false);
 
             // Настройка отношения с WorkChat
             builder.HasOne<WorkChat>()
@@ -32,14 +32,16 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
                    .HasForeignKey(cm => cm.WorkChatId)
                    .OnDelete(DeleteBehavior.Cascade);
 
+
+
             // Настройка отношения с Member
             builder.HasOne<Member>()
                    .WithMany()
                    .HasForeignKey(cm => cm.SenderId);
-                   //.OnDelete(DeleteBehavior.Restrict);
+            //.OnDelete(DeleteBehavior.Restrict);
 
             // Настройка навигационных свойств
-            builder.Navigation(cm => cm.SenderId).AutoInclude();
+            //builder.Navigation(cm => cm.SenderId).AutoInclude();
         }
     }
 }

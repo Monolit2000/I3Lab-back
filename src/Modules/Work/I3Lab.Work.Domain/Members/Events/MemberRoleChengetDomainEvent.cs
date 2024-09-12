@@ -13,6 +13,14 @@ namespace I3Lab.Works.Domain.Members.Events
 
         public MemberRole NewMemberRole { get; private set; }
 
+        public MemberRoleChengetDomainEvent(
+            MemberId memberId, 
+            MemberRole newMemberRole)
+        {
+            MemberId = memberId;
+            NewMemberRole = newMemberRole;
+        }
+
 
     }
 }

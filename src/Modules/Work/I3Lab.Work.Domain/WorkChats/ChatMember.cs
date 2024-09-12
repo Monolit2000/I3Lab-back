@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,14 +12,28 @@ namespace I3Lab.Works.Domain.WorkChats
 {
     public class ChatMember : Entity
     {
+        public WorkChatId WorkChatId { get; set; }
+
         [Key]
         public MemberId MemberId { get; private set; }
 
         private ChatMember() { } // For EF Core
 
-        public ChatMember(MemberId memberId)
+        private ChatMember(
+            WorkChatId workChatId, 
+            MemberId memberId)
         {
             MemberId = memberId;
+            WorkChatId = workChatId;
+        }
+
+        public static ChatMember CreateNew(
+            WorkChatId workChatId, 
+            MemberId memberId)
+        {
+            return new ChatMember(
+                workChatId, 
+                memberId);
         }
     }
 }

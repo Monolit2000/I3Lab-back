@@ -7,12 +7,13 @@ namespace I3Lab.Works.Domain.Members
 {
     public class MemberRole : ValueObject
     {
-        public string Value { get; }
-
         internal static MemberRole Patient => new MemberRole(nameof(Patient));
         internal static MemberRole Artisan => new MemberRole(nameof(Artisan));
         internal static MemberRole Admin => new MemberRole(nameof(Admin));
         internal static MemberRole Doctor => new MemberRole(nameof(Doctor));
+
+        public string Value { get; }
+
 
         private static readonly HashSet<string> ValidStatuses = new HashSet<string>
         {
@@ -34,7 +35,5 @@ namespace I3Lab.Works.Domain.Members
 
             return new MemberRole(value);
         }
-
-
     }
 }

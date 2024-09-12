@@ -4,7 +4,6 @@ using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.WorkChats.Events;
 
-
 namespace I3Lab.Works.Domain.WorkChats
 {
     public class ChatMessage : Entity
@@ -16,47 +15,62 @@ namespace I3Lab.Works.Domain.WorkChats
         public string MessageText { get; private set; }
         public DateTime SentDate { get; private set; }
         public BlobFile FileResponceId { get; private set; }
-
-        public bool IsEdited { get; private set; }    
-
+        public bool IsEdited { get; private set; }
         public DateTime? EditDate { get; private set; }
+
+        public ChatMessageId? RepliedToMessageId { get; private set; }
 
         private ChatMessage() { } // For EF Core
 
-        private ChatMessage(MemberId senderId, string messageText, BlobFile fileResponceId = null)
+        private ChatMessage(
+            MemberId senderId,
+            string messageText,
+            BlobFile fileResponceId = null,
+            ChatMessageId? repliedToMessageId = null)
         {
             SenderId = senderId;
             MessageText = messageText;
             SentDate = DateTime.UtcNow;
-            IsEdited = false;   
+            IsEdited = false;
+            RepliedToMessageId = repliedToMessageId;
 
             if (fileResponceId != null)
             {
                 FileResponceId = fileResponceId;
                 AddDomainEvent(new ResponceToFileChatMessageCreatedDomainEvent());
             }
+            else if (repliedToMessageId != null)
+            {
+                AddDomainEvent(new ReplyToChatMessageCreatedDomainEvent(repliedToMessageId.Value));
+            }
             else
+            {
                 AddDomainEvent(new ChatMessageCreatedDomainEvent());
+            }
         }
 
         public static ChatMessage CreateNew(
-            MemberId senderId, 
-            string messageText)
+            MemberId senderId,
+            string messageText,
+            ChatMessageId? repliedToMessageId = null)
         {
             return new ChatMessage(
-                senderId, 
-                messageText);
+                senderId,
+                messageText,
+                repliedToMessageId: repliedToMessageId);
         }
 
         public static ChatMessage CreateNewResponceToFileMessage(
-            MemberId senderId, 
+            MemberId senderId,
             string messageText,
-            BlobFile blobFileId)
+            BlobFile blobFileId,
+            ChatMessageId? repliedToMessageId = null)
         {
             return new ChatMessage(
-                senderId, 
-                messageText, 
-                blobFileId);
+                senderId,
+                messageText,
+                blobFileId,
+                repliedToMessageId);
         }
 
         public Result Edit(string NewMessageText)
@@ -70,19 +84,12 @@ namespace I3Lab.Works.Domain.WorkChats
 
         public bool IsResponceToFileChatMessage()
         {
-            if (FileResponceId == null)
-                return false;
-
-            return true;
+            return FileResponceId != null;
         }
 
         public bool IsEditedChatMessage()
         {
-            if (EditDate == null)
-                return false;
-
-            return true;
+            return EditDate != null;
         }
-
     }
 }

@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using System.ComponentModel;
+using I3Lab.Works.Domain.Members.Events;
 
 namespace I3Lab.Works.Domain.Members
 {
@@ -13,15 +13,12 @@ namespace I3Lab.Works.Domain.Members
         public MemberRole MemberRole { get; private set; }
 
         public string Email { get; private set; }
-
+                            
         public string FirstName { get; private set; }
 
         public string LastName { get; private set; }
 
-        private Member()
-        {
-            // For EF Core
-        }
+        private Member() { } // For EF Core
 
         private Member(
             MemberId memberId,
@@ -32,11 +29,11 @@ namespace I3Lab.Works.Domain.Members
             MemberRole = MemberRole.Doctor;
         }
 
-        public static Member CreateNew(MemberId memberId, string email)
+        public static Member CreateNew(
+            MemberId memberId, string email)
         {
             return new Member(memberId, email);
         }
-
 
         public Result ChangeRole(string newRoleValue)
         {
@@ -45,10 +42,9 @@ namespace I3Lab.Works.Domain.Members
                 return Result.Fail(result.Errors);
 
             MemberRole = result.Value;
+            AddDomainEvent(new MemberRoleChengetDomainEvent(Id, result.Value));
             return Result.Ok();
         }
-
     }
-
 }
 

@@ -74,7 +74,7 @@ namespace I3Lab.Works.Domain.Treatments
 
             TreatmentMemberss.Add(treatmentMember);
 
-            AddDomainEvent(new MemberAddedToTreatmentDomainEvent(Id.Value, member.Id.Value));
+            AddDomainEvent(new TreatmentMemberAddedDomainEvent(Id.Value, member.Id.Value));
 
             return Result.Ok();
         }
@@ -113,7 +113,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         //    TreatmentMembers.Add(newMember);
 
-        //    AddDomainEvent(new MemberAddedToTreatmentDomainEvent(Id.Value, newMember.Id.Value));
+        //    AddDomainEvent(new TreatmentMemberAddedDomainEvent(Id.Value, newMember.Id.Value));
 
         //    return Result.Ok();
         //}

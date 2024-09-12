@@ -10,6 +10,8 @@ using I3Lab.Works.Infrastructure.Domain.Treatments;
 using I3Lab.Works.Domain.TreatmentInvites;
 using System.Security.Permissions;
 using I3Lab.Works.Domain.WorkChats;
+using I3Lab.Works.Infrastructure.Domain.WorkChats;
+using I3Lab.Works.Infrastructure.Domain.TreatmentInvites;
 
 namespace I3Lab.Works.Infrastructure.Persistence
 {
@@ -42,19 +44,25 @@ namespace I3Lab.Works.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new WorkConfiguration());
 
+            modelBuilder.ApplyConfiguration(new WorkChatConfiguration());
+
+            //modelBuilder.ApplyConfiguration(new ChatMessageConfiguration());
+
             modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
 
             modelBuilder.ApplyConfiguration(new WorkFileConfiguration());
 
+            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
+            
+            modelBuilder.ApplyConfiguration(new TreatmentInviteConfiguration());
 
-            modelBuilder.Ignore<TreatmentInvite>();
+            //modelBuilder.Ignore<TreatmentInvite>();
 
             //modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
 
 
             //modelBuilder.Ignore<Treatment>();
 
-            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
         }
     }
 }

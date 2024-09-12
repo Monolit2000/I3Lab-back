@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    [Migration("20240911192854_eneasdfjfsdjisdff")]
-    partial class eneasdfjfsdjisdff
+    [Migration("20240912180817_TreatmentInv")]
+    partial class TreatmentInv
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -92,6 +92,34 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.ToTable("Members", "work");
                 });
 
+            modelBuilder.Entity("I3Lab.Works.Domain.TreatmentInvites.TreatmentInvite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("InviterId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("MemberToInviteId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("OcurredOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("TreatmentId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InviterId");
+
+                    b.HasIndex("MemberToInviteId");
+
+                    b.HasIndex("TreatmentId");
+
+                    b.ToTable("TreatmentInvites", "work");
+                });
+
             modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -117,47 +145,12 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.ToTable("Treatments", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.ChatMessage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime?>("EditDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("FileResponceIdId")
-                        .HasColumnType("uuid");
-
-                    b.Property<bool>("IsEdited")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("MessageText")
-                        .HasColumnType("text");
-
-                    b.Property<Guid?>("SenderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("SentDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("WorkChatId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FileResponceIdId");
-
-                    b.HasIndex("WorkChatId");
-
-                    b.ToTable("ChatMessage", "work");
-                });
-
             modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.WorkChat", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("WorkId")
+                    b.Property<Guid>("WorkId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -179,9 +172,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid?>("TreatmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("TreatmentId1")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime>("WorkStartedDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -201,8 +191,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("TreatmentId");
-
-                    b.HasIndex("TreatmentId1");
 
                     b.ToTable("Works", "work");
                 });
@@ -322,7 +310,55 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 {
                     b.HasOne("I3Lab.Works.Domain.WorkChats.WorkChat", null)
                         .WithMany("ChatMembers")
-                        .HasForeignKey("WorkChatId");
+                        .HasForeignKey("WorkChatId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("I3Lab.Works.Domain.TreatmentInvites.TreatmentInvite", b =>
+                {
+                    b.HasOne("I3Lab.Works.Domain.Members.Member", "Inviter")
+                        .WithMany()
+                        .HasForeignKey("InviterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("I3Lab.Works.Domain.Members.Member", "MemberToInvite")
+                        .WithMany()
+                        .HasForeignKey("MemberToInviteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("I3Lab.Works.Domain.Treatments.Treatment", "Treatment")
+                        .WithMany()
+                        .HasForeignKey("TreatmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("I3Lab.Works.Domain.TreatmentInvites.TreatmentInviteStatus", "TreatmentInviteStatus", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentInviteId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("Status");
+
+                            b1.HasKey("TreatmentInviteId");
+
+                            b1.ToTable("TreatmentInvites", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentInviteId");
+                        });
+
+                    b.Navigation("Inviter");
+
+                    b.Navigation("MemberToInvite");
+
+                    b.Navigation("Treatment");
+
+                    b.Navigation("TreatmentInviteStatus");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatment", b =>
@@ -393,8 +429,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<Guid>("TreatmentId")
                                 .HasColumnType("uuid");
 
-                            b1.HasKey("Id")
-                                .HasName("sdfsdfsdf");
+                            b1.HasKey("Id");
 
                             b1.HasIndex("AddedById")
                                 .IsUnique();
@@ -404,7 +439,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                             b1.HasIndex("TreatmentId");
 
-                            b1.ToTable("TreatmentMember", "work");
+                            b1.ToTable("TreatmentMembers", "work");
 
                             b1.HasOne("I3Lab.Works.Domain.Members.Member", "AddedBy")
                                 .WithOne()
@@ -428,7 +463,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                                     b2.HasKey("TreatmentMemberId");
 
-                                    b2.ToTable("TreatmentMember", "work");
+                                    b2.ToTable("TreatmentMembers", "work");
 
                                     b2.WithOwner()
                                         .HasForeignKey("TreatmentMemberId");
@@ -454,17 +489,61 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Navigation("TreatmentPreview");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.ChatMessage", b =>
+            modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.WorkChat", b =>
                 {
-                    b.HasOne("I3Lab.Works.Domain.BlobFiles.BlobFile", "FileResponceId")
-                        .WithMany()
-                        .HasForeignKey("FileResponceIdId");
+                    b.OwnsMany("I3Lab.Works.Domain.WorkChats.ChatMessage", "Messages", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
 
-                    b.HasOne("I3Lab.Works.Domain.WorkChats.WorkChat", null)
-                        .WithMany("Messages")
-                        .HasForeignKey("WorkChatId");
+                            b1.Property<DateTime?>("EditDate")
+                                .HasColumnType("timestamp with time zone");
 
-                    b.Navigation("FileResponceId");
+                            b1.Property<Guid?>("FileResponceIdId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<bool>("IsEdited")
+                                .HasColumnType("boolean");
+
+                            b1.Property<string>("MessageText")
+                                .IsRequired()
+                                .HasMaxLength(1000)
+                                .HasColumnType("character varying(1000)");
+
+                            b1.Property<Guid?>("SenderId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("SentDate")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<Guid>("WorkChatId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("FileResponceIdId");
+
+                            b1.HasIndex("SenderId");
+
+                            b1.HasIndex("WorkChatId");
+
+                            b1.ToTable("WorkChatMessages", "work");
+
+                            b1.HasOne("I3Lab.Works.Domain.BlobFiles.BlobFile", "FileResponceId")
+                                .WithMany()
+                                .HasForeignKey("FileResponceIdId");
+
+                            b1.HasOne("I3Lab.Works.Domain.Members.Member", null)
+                                .WithMany()
+                                .HasForeignKey("SenderId");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WorkChatId");
+
+                            b1.Navigation("FileResponceId");
+                        });
+
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>
@@ -477,13 +556,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("I3Lab.Works.Domain.Treatments.Treatment", "Treatment")
-                        .WithMany()
-                        .HasForeignKey("TreatmentId");
-
                     b.HasOne("I3Lab.Works.Domain.Treatments.Treatment", null)
                         .WithMany("TreatmentStages")
-                        .HasForeignKey("TreatmentId1");
+                        .HasForeignKey("TreatmentId");
 
                     b.OwnsOne("I3Lab.Works.Domain.Works.WorkTitel", "Titel", b1 =>
                         {
@@ -508,8 +583,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Titel");
-
-                    b.Navigation("Treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.WorkFile", b =>
@@ -539,8 +612,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
             modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.WorkChat", b =>
                 {
                     b.Navigation("ChatMembers");
-
-                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>

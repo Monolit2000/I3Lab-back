@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Members
+namespace I3Lab.Works.Domain.WorkChats.Rules
 {
-    internal class MemberContext
+    internal class FileName
     {
     }
 }

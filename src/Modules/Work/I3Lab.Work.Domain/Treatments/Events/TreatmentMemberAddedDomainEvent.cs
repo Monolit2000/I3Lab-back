@@ -2,12 +2,12 @@
 
 namespace I3Lab.Works.Domain.Treatments.Events
 {
-    public class MemberAddedToTreatmentDomainEvent : DomainEventBase
+    public class TreatmentMemberAddedDomainEvent : DomainEventBase
     {
         public Guid TreatmentId { get; }
         public Guid MemberId { get; }
 
-        public MemberAddedToTreatmentDomainEvent(Guid treatmentId, Guid memberId)
+        public TreatmentMemberAddedDomainEvent(Guid treatmentId, Guid memberId)
         {
             TreatmentId = treatmentId;
             MemberId = memberId;

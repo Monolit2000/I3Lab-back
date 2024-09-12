@@ -16,11 +16,6 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
             builder.HasMany(e => e.TreatmentStages)
                    .WithOne();
 
-            //builder.HasMany(e => e.TreatmentMemberss)
-            //     .WithOne()
-            //     .HasForeignKey(e => e.TreatmentId)
-            //     .OnDelete(DeleteBehavior.Cascade);
-
             builder.OwnsOne(t => t.TreatmentDate);
 
             builder.OwnsOne(e => e.Titel, b =>
@@ -28,11 +23,11 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                 b.Property(t => t.Value).HasColumnName("Titel").IsRequired();
             });
 
-            builder.OwnsMany(e => e.TreatmentMemberss, b =>
+           builder.OwnsMany(e => e.TreatmentMemberss, b =>
             {
-                // b.HasKey(wm => new { wm.TreatmentId, wm.Member });
+                b.ToTable("TreatmentMembers");
 
-                b.HasKey(wm => wm.Id).HasName("sdfsdfsdf");
+                b.HasKey(wm => wm.Id);
 
                 b.HasOne(vm => vm.Member)
                 .WithOne();
@@ -42,13 +37,6 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
 
                 b.Property(wm => wm.TreatmentId).IsRequired();
 
-                //b.OwnsOne(o => o.TreatmentId, b =>
-                //{
-                //    b.Property(a => a.Value).HasColumnName("TreatmentId").IsRequired();
-                //});
-
-               // b.Property(wm => wm.Member).IsRequired();
-               // b.Property(wm => wm.AddedBy).IsRequired();
                 b.Property(wm => wm.JoinDate).IsRequired();
 
                 b.OwnsOne(at => at.AccessibilityType, b =>
@@ -56,8 +44,6 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                     b.Property(a => a.Value).HasColumnName("AccessibilityType");
                 });
 
-                // Уникальный индекс для WorkMember
-                // b.HasIndex(wm => new { wm.TreatmentId, wm.Member }).IsUnique();
                 b.HasIndex(wm => wm.TreatmentId);
             });
         }
