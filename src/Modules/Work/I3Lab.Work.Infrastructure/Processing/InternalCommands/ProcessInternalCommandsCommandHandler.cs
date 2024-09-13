@@ -10,7 +10,7 @@ using MediatR;
 
 namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
 {
-    internal class ProcessInternalCommandsCommandHandler : IRequestHandler<ProcessInternalCommandsCommand>
+    internal class ProcessInternalCommandsCommandHandler : ICommandHandler<ProcessInternalCommandsCommand>
     {
         private readonly WorkContext _dbContext;
 
@@ -38,8 +38,6 @@ namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
             foreach (var internalCommand in internalCommands)
             {
                 var result = await policy.ExecuteAndCaptureAsync(() => ProcessCommand(internalCommand));
-
-                Console.WriteLine("ProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommandProcessCommand");
 
                 if (result.Outcome == OutcomeType.Failure)
                 {

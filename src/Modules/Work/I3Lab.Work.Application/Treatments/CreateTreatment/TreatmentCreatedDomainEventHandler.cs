@@ -13,7 +13,6 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
         {
 
             await commandsScheduler.EnqueueAsync(new CreateWorksCommand(
-                Guid.NewGuid(),
                 notification.TreatmentId,
                 notification.CreatorId));
 

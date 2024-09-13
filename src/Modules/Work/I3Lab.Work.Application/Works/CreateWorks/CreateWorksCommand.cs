@@ -11,8 +11,7 @@ namespace I3Lab.Works.Application.Works.CreateWorks
 
         public Guid CreatorId { get; set; }
 
-        public CreateWorksCommand(Guid id, Guid treatmentId, Guid creatorId)
-            : base(id)
+        public CreateWorksCommand(Guid treatmentId, Guid creatorId)
         {
             TreatmentId = treatmentId;
             CreatorId = creatorId;

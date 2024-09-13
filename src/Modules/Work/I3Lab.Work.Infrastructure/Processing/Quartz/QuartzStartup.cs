@@ -15,13 +15,11 @@ namespace I3Lab.Works.Infrastructure.Processing.Quartz
     internal static class QuartzStartup
     {
         private static IScheduler _scheduler;
-
+         
         internal static void Initialize(long? internalProcessingPoolingInterval = null)
         {
             //logger.Information("Quartz starting...");
 
-            Console.WriteLine("Quartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz " +
-                "Quartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingstartingQuartz startingQuartz startingQuartz startingQuartz startingQuartz startingQuartz starting");
 
             var schedulerConfiguration = new NameValueCollection();
             schedulerConfiguration.Add("quartz.scheduler.instanceName", "Meetings");
