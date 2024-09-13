@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using I3Lab.BuildingBlocks.Infrastructure.Domain;
 
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using MassTransit.Courier.Contracts;
 
 namespace I3Lab.Works.Infrastructure.Configurations.Persistence
 {
@@ -24,6 +25,8 @@ namespace I3Lab.Works.Infrastructure.Configurations.Persistence
                 options.UseNpgsql(configuration.GetConnectionString("Database"));
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             });
+
+            // services.AddScoped<WorkContext>();
 
             return services;
         }

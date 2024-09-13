@@ -10,12 +10,12 @@ namespace I3Lab.Works.Application.Works.CreateWorks
         IMemberRepository memberRepository,
         ITretmentRepository tretmentRepository,
         IWorkRepository workRepository,
-        IMemberContext memberContext) : IRequestHandler<CreateWorksCommand, Result<WorkDto>>
+        IMemberContext memberContext) : IRequestHandler<CreateWorksCommand>
     {
 
         public List<string> BaseWorkTitels = new List<string>() { "1", "2", "3", "4" };
 
-        public async Task<Result<WorkDto>> Handle(CreateWorksCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateWorksCommand request, CancellationToken cancellationToken)
         {
             //var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
             //if (treatment == null)
@@ -23,7 +23,7 @@ namespace I3Lab.Works.Application.Works.CreateWorks
 
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
             if (creator == null)
-                return Result.Fail("MemberToInvite not exist");
+                return;
 
             foreach (var titel in BaseWorkTitels)
             {
@@ -31,8 +31,7 @@ namespace I3Lab.Works.Application.Works.CreateWorks
                     creator, new TreatmentId(request.TreatmentId), WorkTitel.Create(titel));
 
                 if (workResult.IsFailed)
-                    return Result.Fail(workResult.Errors);
-
+                    return;
                 var work = workResult.Value;
 
                 await workRepository.AddAsync(work);
@@ -49,7 +48,7 @@ namespace I3Lab.Works.Application.Works.CreateWorks
             //    Creator = work.Creator.Id.Value
             //};
 
-            return new WorkDto();
+         
         }
     }
 }

@@ -18,6 +18,7 @@ using I3Lab.Works.Infrastructure.Configurations.EventBus;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using I3Lab.Works.Infrastructure.Configurations.Persistence;
 using I3Lab.Works.Infrastructure.Configurations.Application;
+using I3Lab.Works.Infrastructure.Processing.Quartz;
 
 
 namespace I3Lab.Works.Infrastructure.Startup
@@ -33,6 +34,8 @@ namespace I3Lab.Works.Infrastructure.Startup
             services.AddPersistenceServices(configuration);
 
             services.AddMassTransitEventBus(configuration);
+
+            QuartzStartup.Initialize();
 
             return services;
         }

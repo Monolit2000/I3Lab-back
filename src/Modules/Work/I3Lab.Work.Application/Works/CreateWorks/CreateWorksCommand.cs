@@ -1,20 +1,18 @@
 ﻿using FluentResults;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using I3Lab.Works.Application.Configuration.Commands;
+using I3Lab.Works.Application.Contract;
+
 
 namespace I3Lab.Works.Application.Works.CreateWorks
 {
-    public class CreateWorksCommand : IRequest<Result<WorkDto>>
+    public class CreateWorksCommand : InternalCommandBase
     {
         public Guid TreatmentId {  get; set; }
 
         public Guid CreatorId { get; set; }
 
-        public CreateWorksCommand(Guid treatmentId, Guid creatorId)
+        public CreateWorksCommand(Guid id, Guid treatmentId, Guid creatorId)
+            : base(id)
         {
             TreatmentId = treatmentId;
             CreatorId = creatorId;

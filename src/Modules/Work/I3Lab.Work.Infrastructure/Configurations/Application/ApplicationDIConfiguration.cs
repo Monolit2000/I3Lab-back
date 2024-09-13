@@ -1,4 +1,5 @@
-﻿using I3Lab.Works.Application.Contract;
+﻿using I3Lab.Works.Application.Configuration.Commands;
+using I3Lab.Works.Application.Contract;
 using I3Lab.Works.Domain.BlobFiles;
 using I3Lab.Works.Domain.Members;
 using I3Lab.Works.Domain.TreatmentInvites;
@@ -11,6 +12,8 @@ using I3Lab.Works.Infrastructure.Domain.TreatmentInvites;
 using I3Lab.Works.Infrastructure.Domain.Treatments;
 using I3Lab.Works.Infrastructure.Domain.WorkChats;
 using I3Lab.Works.Infrastructure.Domain.Works;
+using I3Lab.Works.Infrastructure.Processing.InternalCommands;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,8 +28,11 @@ namespace I3Lab.Works.Infrastructure.Configurations.Application
             services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(WorkModule).Assembly);
+                cfg.RegisterServicesFromAssembly(typeof(ProcessInternalCommandsCommandHandler).Assembly);
+
             });
 
+            services.AddScoped<ICommandsScheduler, CommandsScheduler>();
             
             services.AddScoped<IMemberContext, MemberContext>();
             services.AddScoped<IMemberRepository, MemberRepository>();

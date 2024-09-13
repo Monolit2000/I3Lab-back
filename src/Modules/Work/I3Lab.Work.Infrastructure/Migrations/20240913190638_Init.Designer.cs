@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    [Migration("20240912180817_TreatmentInv")]
-    partial class TreatmentInv
+    [Migration("20240913190638_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,6 +26,28 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("I3Lab.BuildingBlocks.Infrastructure.InternalCommands.InternalCommand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("ProcessedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InternalCommands", "work");
+                });
 
             modelBuilder.Entity("I3Lab.Works.Domain.BlobFiles.BlobFile", b =>
                 {
@@ -73,9 +95,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("WorkChatId")
-                        .HasColumnType("uuid");
-
                     b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.Works.Domain.Members.Member.MemberRole#MemberRole", b1 =>
                         {
                             b1.IsRequired();
@@ -86,8 +105,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         });
 
                     b.HasKey("Id");
-
-                    b.HasIndex("WorkChatId");
 
                     b.ToTable("Members", "work");
                 });
@@ -306,14 +323,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Navigation("Url");
                 });
 
-            modelBuilder.Entity("I3Lab.Works.Domain.Members.Member", b =>
-                {
-                    b.HasOne("I3Lab.Works.Domain.WorkChats.WorkChat", null)
-                        .WithMany("ChatMembers")
-                        .HasForeignKey("WorkChatId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("I3Lab.Works.Domain.TreatmentInvites.TreatmentInvite", b =>
                 {
                     b.HasOne("I3Lab.Works.Domain.Members.Member", "Inviter")
@@ -491,6 +500,24 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
             modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.WorkChat", b =>
                 {
+                    b.OwnsMany("I3Lab.Works.Domain.WorkChats.ChatMember", "ChatMembers", b1 =>
+                        {
+                            b1.Property<Guid>("MemberId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("WorkChatId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("MemberId");
+
+                            b1.HasIndex("WorkChatId");
+
+                            b1.ToTable("ChatMember", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("WorkChatId");
+                        });
+
                     b.OwnsMany("I3Lab.Works.Domain.WorkChats.ChatMessage", "Messages", b1 =>
                         {
                             b1.Property<Guid>("Id")
@@ -509,6 +536,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                                 .IsRequired()
                                 .HasMaxLength(1000)
                                 .HasColumnType("character varying(1000)");
+
+                            b1.Property<Guid?>("RepliedToMessageId")
+                                .HasColumnType("uuid");
 
                             b1.Property<Guid?>("SenderId")
                                 .HasColumnType("uuid");
@@ -542,6 +572,8 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                             b1.Navigation("FileResponceId");
                         });
+
+                    b.Navigation("ChatMembers");
 
                     b.Navigation("Messages");
                 });
@@ -607,11 +639,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
             modelBuilder.Entity("I3Lab.Works.Domain.Treatments.Treatment", b =>
                 {
                     b.Navigation("TreatmentStages");
-                });
-
-            modelBuilder.Entity("I3Lab.Works.Domain.WorkChats.WorkChat", b =>
-                {
-                    b.Navigation("ChatMembers");
                 });
 
             modelBuilder.Entity("I3Lab.Works.Domain.Works.Work", b =>

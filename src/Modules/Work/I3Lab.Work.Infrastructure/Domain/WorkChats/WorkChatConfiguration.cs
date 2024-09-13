@@ -16,9 +16,9 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
             builder.Property(wc => wc.WorkId)
                    .IsRequired();     
 
-            builder.HasMany(wc => wc.ChatMembers)
-                   .WithOne()
-                   .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(wc => wc.ChatMembers)
+            //       .WithOne()
+            //       .OnDelete(DeleteBehavior.Cascade);
 
             builder.OwnsMany(wc => wc.ChatMembers, b =>
             {

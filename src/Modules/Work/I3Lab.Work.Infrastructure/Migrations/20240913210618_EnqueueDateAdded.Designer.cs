@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    partial class WorkContextModelSnapshot : ModelSnapshot
+    [Migration("20240913210618_EnqueueDateAdded")]
+    partial class EnqueueDateAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +39,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.Property<DateTime?>("EnqueueDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Error")
-                        .HasColumnType("text");
 
                     b.Property<DateTime?>("ProcessedDate")
                         .HasColumnType("timestamp with time zone");

@@ -12,6 +12,7 @@ using System.Security.Permissions;
 using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Infrastructure.Domain.WorkChats;
 using I3Lab.Works.Infrastructure.Domain.TreatmentInvites;
+using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 
 namespace I3Lab.Works.Infrastructure.Persistence
 {
@@ -25,6 +26,8 @@ namespace I3Lab.Works.Infrastructure.Persistence
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<Work> Works { get; set; }
+
+        public DbSet<InternalCommand> InternalCommands { get; set; }
 
         public DbSet<Member> Members { get; set; }
 

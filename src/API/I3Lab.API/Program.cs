@@ -8,6 +8,8 @@ using I3Lab.Works.Infrastructure.Startup;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 using I3Lab.Doctors.Infrastructure.Startup;
 using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
+using I3Lab.BuildingBlocks.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -61,6 +63,8 @@ builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
 
 
 var app = builder.Build();
+
+ServiceFactory.Configure(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
