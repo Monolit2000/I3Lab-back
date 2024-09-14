@@ -18,6 +18,8 @@ namespace I3Lab.Works.Application.WorkChats.AddMessage
 
             var result = workChat.AddMessage(new MemberId(request.MemberId), request.Message);
 
+            await workChatRepository.SaveChangesAsync();
+
             return result;
         }
     }

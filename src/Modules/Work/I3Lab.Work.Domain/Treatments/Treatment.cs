@@ -13,7 +13,7 @@ namespace I3Lab.Works.Domain.Treatments
     {
         public readonly List<Work> TreatmentStages = [];
 
-        public readonly List<TreatmentMember> TreatmentMemberss = [];
+        public readonly List<TreatmentMember> TreatmentMembers = [];
 
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
@@ -40,9 +40,27 @@ namespace I3Lab.Works.Domain.Treatments
             Titel = titel;
             TreatmentDate = TreatmentDate.Start();
 
+            AddCreator(creator);
+
+            AddPatient(patient);
+
             AddDomainEvent(new TreatmentCreatedDomainEvent(creator.Id.Value, Id.Value));
         }
 
+
+        private void AddCreator(Member creator)
+        {
+            Creator = creator;
+
+            AddTreatmentMember(creator, creator);
+        }
+
+        public void AddPatient(Member patient)
+        {
+            Patient = patient;
+
+            AddTreatmentMember(patient, Creator);
+        }
 
         public TreatmentInvite Invite(Member memberToInvite, Member inviter)
         {
@@ -67,12 +85,12 @@ namespace I3Lab.Works.Domain.Treatments
 
         public Result AddTreatmentMember(Member member, Member addedBy)
         {
-            if (TreatmentMemberss.Any(member => member.Member.Id == member.Member.Id))
+            if (TreatmentMembers.Any(member => member.Member.Id == member.Member.Id))
                 return Result.Fail(TreatmentErrors.MemberAlreadyAdded);
 
             var treatmentMember = TreatmentMember.CreateNew(this.Id, member, addedBy);
 
-            TreatmentMemberss.Add(treatmentMember);
+            TreatmentMembers.Add(treatmentMember);
 
             AddDomainEvent(new TreatmentMemberAddedDomainEvent(Id.Value, member.Id.Value));
 
@@ -81,23 +99,23 @@ namespace I3Lab.Works.Domain.Treatments
 
         public Result RemoveTreatmentMember(MemberId memberId, MemberId removingMemberId)
         {
-            var treatmentMember = TreatmentMemberss.FirstOrDefault(member => member.Member.Id == member.Member.Id);
+            var treatmentMember = TreatmentMembers.FirstOrDefault(member => member.Member.Id == member.Member.Id);
 
             if(treatmentMember == null)
                 return Result.Fail(TreatmentErrors.MemberAlreadyAdded);
 
-            TreatmentMemberss.Remove(treatmentMember);
+            TreatmentMembers.Remove(treatmentMember);
 
             AddDomainEvent(new MemberRemovedFromTreatmentDomainEvent(Id.Value, treatmentMember.Member.Id.Value));
 
             return Result.Ok();
         }
 
-        public void AddPatient(Member customer)
-        {
-            Patient = customer;
-            AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
-        }
+        //public void AddPatient(Member customer)
+        //{
+        //    Patient = customer;
+        //    AddDomainEvent(new AddedCustomerToTreatmentDomainEvent());
+        //}
 
         public void AddPreview(BlobFile fileId)
         {

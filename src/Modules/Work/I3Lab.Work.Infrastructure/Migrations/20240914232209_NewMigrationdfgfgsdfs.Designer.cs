@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    [Migration("20240913190638_Init")]
-    partial class Init
+    [Migration("20240914232209_NewMigrationdfgfgsdfs")]
+    partial class NewMigrationdfgfgsdfs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,12 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.Property<string>("Data")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("EnqueueDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Error")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("ProcessedDate")
@@ -421,7 +427,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                                 .HasForeignKey("TreatmentId");
                         });
 
-                    b.OwnsMany("I3Lab.Works.Domain.Treatments.TreatmentMember", "TreatmentMemberss", b1 =>
+                    b.OwnsMany("I3Lab.Works.Domain.Treatments.TreatmentMember", "TreatmentMembers", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -452,11 +458,11 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                             b1.HasOne("I3Lab.Works.Domain.Members.Member", "AddedBy")
                                 .WithOne()
-                                .HasForeignKey("I3Lab.Works.Domain.Treatments.Treatment.TreatmentMemberss#I3Lab.Works.Domain.Treatments.TreatmentMember", "AddedById");
+                                .HasForeignKey("I3Lab.Works.Domain.Treatments.Treatment.TreatmentMembers#I3Lab.Works.Domain.Treatments.TreatmentMember", "AddedById");
 
                             b1.HasOne("I3Lab.Works.Domain.Members.Member", "Member")
                                 .WithOne()
-                                .HasForeignKey("I3Lab.Works.Domain.Treatments.Treatment.TreatmentMemberss#I3Lab.Works.Domain.Treatments.TreatmentMember", "MemberId");
+                                .HasForeignKey("I3Lab.Works.Domain.Treatments.Treatment.TreatmentMembers#I3Lab.Works.Domain.Treatments.TreatmentMember", "MemberId");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentId");
@@ -493,7 +499,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                     b.Navigation("TreatmentDate");
 
-                    b.Navigation("TreatmentMemberss");
+                    b.Navigation("TreatmentMembers");
 
                     b.Navigation("TreatmentPreview");
                 });
@@ -502,17 +508,20 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 {
                     b.OwnsMany("I3Lab.Works.Domain.WorkChats.ChatMember", "ChatMembers", b1 =>
                         {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
                             b1.Property<Guid>("MemberId")
                                 .HasColumnType("uuid");
 
                             b1.Property<Guid>("WorkChatId")
                                 .HasColumnType("uuid");
 
-                            b1.HasKey("MemberId");
+                            b1.HasKey("Id");
 
                             b1.HasIndex("WorkChatId");
 
-                            b1.ToTable("ChatMember", "work");
+                            b1.ToTable("ChatMembers", "work");
 
                             b1.WithOwner()
                                 .HasForeignKey("WorkChatId");

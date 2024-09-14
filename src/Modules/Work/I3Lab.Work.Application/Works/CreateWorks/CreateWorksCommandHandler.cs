@@ -17,9 +17,9 @@ namespace I3Lab.Works.Application.Works.CreateWorks
 
         public async Task Handle(CreateWorksCommand request, CancellationToken cancellationToken)
         {
-            //var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
-            //if (treatment == null)
-            //    return Result.Fail("Treatments not exist");
+            var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
+            if (treatment == null)
+                return; /*Result.Fail("Treatments not exist");*/
 
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
             if (creator == null)

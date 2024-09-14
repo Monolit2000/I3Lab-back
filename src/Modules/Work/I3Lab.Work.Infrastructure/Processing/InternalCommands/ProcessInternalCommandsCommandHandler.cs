@@ -4,24 +4,15 @@ using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Polly;
-using I3Lab.Works.Infrastructure;
-using System.Reflection;
-using MediatR;
 
 namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
 {
-    internal class ProcessInternalCommandsCommandHandler : ICommandHandler<ProcessInternalCommandsCommand>
+    internal class ProcessInternalCommandsCommandHandler(
+        WorkContext dbContext) : ICommandHandler<ProcessInternalCommandsCommand>
     {
-        private readonly WorkContext _dbContext;
-
-        public ProcessInternalCommandsCommandHandler(WorkContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
-
         public async Task Handle(ProcessInternalCommandsCommand command, CancellationToken cancellationToken)
         {
-            var internalCommands = await _dbContext.InternalCommands
+            var internalCommands = await dbContext.InternalCommands
                 .Where(c => c.ProcessedDate == null)
                 .OrderBy(c => c.ProcessedDate)
                 .ToListAsync(cancellationToken);
@@ -30,9 +21,9 @@ namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
                 .Handle<Exception>()
                 .WaitAndRetryAsync(new[]
                 {
-                TimeSpan.FromSeconds(1),
-                TimeSpan.FromSeconds(2),
-                TimeSpan.FromSeconds(3)
+                    TimeSpan.FromSeconds(1),
+                    TimeSpan.FromSeconds(2),
+                    TimeSpan.FromSeconds(3)
                 });
 
             foreach (var internalCommand in internalCommands)
@@ -43,14 +34,14 @@ namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
                 {
                     internalCommand.ProcessedDate = DateTime.UtcNow;
                     internalCommand.Error = result.FinalException.ToString();
-                    _dbContext.InternalCommands.Update(internalCommand);
+                    dbContext.InternalCommands.Update(internalCommand);
                 }
 
                 internalCommand.ProcessedDate = DateTime.UtcNow;
 
             }
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
 
         private async Task ProcessCommand(InternalCommand internalCommand)

@@ -23,7 +23,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                 b.Property(t => t.Value).HasColumnName("Titel").IsRequired();
             });
 
-           builder.OwnsMany(e => e.TreatmentMemberss, b =>
+           builder.OwnsMany(e => e.TreatmentMembers, b =>
             {
                 b.ToTable("TreatmentMembers");
 
@@ -31,6 +31,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
 
                 b.HasOne(vm => vm.Member)
                 .WithOne();
+                //.HasForeignKey<TreatmentMember>(wm => wm.MemberId);
 
                 b.HasOne(vm => vm.AddedBy)
                 .WithOne();

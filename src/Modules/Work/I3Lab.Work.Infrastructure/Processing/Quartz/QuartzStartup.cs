@@ -1,14 +1,7 @@
 ﻿using I3Lab.Works.Infrastructure.Processing.InternalCommands;
-using Microsoft.Extensions.Logging;
 using Quartz.Impl;
-using Quartz.Logging;
 using Quartz;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Infrastructure.Processing.Quartz
 {
@@ -18,8 +11,10 @@ namespace I3Lab.Works.Infrastructure.Processing.Quartz
          
         internal static void Initialize(long? internalProcessingPoolingInterval = null)
         {
-            //logger.Information("Quartz starting...");
 
+            //var logger = ServiceFactory.GetScopedService<ILogger>();
+
+            //logger.LogInformation("Quartz starting...");
 
             var schedulerConfiguration = new NameValueCollection();
             schedulerConfiguration.Add("quartz.scheduler.instanceName", "Meetings");
@@ -30,6 +25,36 @@ namespace I3Lab.Works.Infrastructure.Processing.Quartz
             //LogProvider.SetCurrentLogProvider(new SerilogLogProvider(logger));
 
             _scheduler.Start().GetAwaiter().GetResult();
+
+            #region ProcessInternalCommandsJob
+
+            var processInternalCommandsJob = JobBuilder.Create<ProcessInternalCommandsJob>().Build();
+
+            ITrigger triggerCommandsProcessing;
+            if (internalProcessingPoolingInterval.HasValue)
+            {
+                triggerCommandsProcessing =
+                    TriggerBuilder
+                        .Create()
+                        .StartNow()
+                        .WithSimpleSchedule(x =>
+                            x.WithInterval(TimeSpan.FromMilliseconds(internalProcessingPoolingInterval.Value))
+                                .RepeatForever())
+                        .Build();
+            }
+            else
+            {
+                triggerCommandsProcessing =
+                    TriggerBuilder
+                        .Create()
+                        .StartNow()
+                        .WithCronSchedule("0/2 * * ? * *")
+                        .Build();
+            }
+
+            _scheduler.ScheduleJob(processInternalCommandsJob, triggerCommandsProcessing).GetAwaiter().GetResult();
+
+            #endregion
 
             #region ProcessOutboxJob
 
@@ -95,36 +120,6 @@ namespace I3Lab.Works.Infrastructure.Processing.Quartz
 
             #endregion
 
-
-            #region ProcessInternalCommandsJob
-
-            var processInternalCommandsJob = JobBuilder.Create<ProcessInternalCommandsJob>().Build();
-
-            ITrigger triggerCommandsProcessing;
-            if (internalProcessingPoolingInterval.HasValue)
-            {
-                triggerCommandsProcessing =
-                    TriggerBuilder
-                        .Create()
-                        .StartNow()
-                        .WithSimpleSchedule(x =>
-                            x.WithInterval(TimeSpan.FromMilliseconds(internalProcessingPoolingInterval.Value))
-                                .RepeatForever())
-                        .Build();
-            }
-            else
-            {
-                triggerCommandsProcessing =
-                    TriggerBuilder
-                        .Create()
-                        .StartNow()
-                        .WithCronSchedule("0/2 * * ? * *")
-                        .Build();
-            }
-
-            _scheduler.ScheduleJob(processInternalCommandsJob, triggerCommandsProcessing).GetAwaiter().GetResult();
-
-            #endregion
             //logger.Information("Quartz started.");
         }
 

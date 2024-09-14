@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class NewMigrationdfgfgsdfs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,6 +45,8 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Type = table.Column<string>(type: "text", nullable: false),
                     Data = table.Column<string>(type: "text", nullable: false),
+                    Error = table.Column<string>(type: "text", nullable: true),
+                    EnqueueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     ProcessedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -119,18 +121,19 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChatMember",
+                name: "ChatMembers",
                 schema: "work",
                 columns: table => new
                 {
-                    MemberId = table.Column<Guid>(type: "uuid", nullable: false),
-                    WorkChatId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    WorkChatId = table.Column<Guid>(type: "uuid", nullable: false),
+                    MemberId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChatMember", x => x.MemberId);
+                    table.PrimaryKey("PK_ChatMembers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ChatMember_WorkChats_WorkChatId",
+                        name: "FK_ChatMembers_WorkChats_WorkChatId",
                         column: x => x.WorkChatId,
                         principalSchema: "work",
                         principalTable: "WorkChats",
@@ -322,9 +325,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChatMember_WorkChatId",
+                name: "IX_ChatMembers_WorkChatId",
                 schema: "work",
-                table: "ChatMember",
+                table: "ChatMembers",
                 column: "WorkChatId");
 
             migrationBuilder.CreateIndex(
@@ -437,7 +440,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ChatMember",
+                name: "ChatMembers",
                 schema: "work");
 
             migrationBuilder.DropTable(

@@ -15,6 +15,8 @@ namespace I3Lab.Works.Domain.WorkChats
         public WorkChatId WorkChatId { get; set; }
 
         [Key]
+        public ChatMemberId Id { get; set; }  
+        
         public MemberId MemberId { get; private set; }
 
         private ChatMember() { } // For EF Core
@@ -23,6 +25,7 @@ namespace I3Lab.Works.Domain.WorkChats
             WorkChatId workChatId, 
             MemberId memberId)
         {
+            Id = new ChatMemberId(Guid.NewGuid());
             MemberId = memberId;
             WorkChatId = workChatId;
         }

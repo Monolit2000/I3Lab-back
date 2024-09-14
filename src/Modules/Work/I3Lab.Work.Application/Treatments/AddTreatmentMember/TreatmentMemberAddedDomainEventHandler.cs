@@ -11,9 +11,9 @@ namespace I3Lab.Works.Application.Treatments.AddTreatmentMember
     public class TreatmentMemberAddedDomainEventHandler(
         ISender sender): INotificationHandler<TreatmentMemberAddedDomainEvent>
     {
-        public Task Handle(TreatmentMemberAddedDomainEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(TreatmentMemberAddedDomainEvent notification, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

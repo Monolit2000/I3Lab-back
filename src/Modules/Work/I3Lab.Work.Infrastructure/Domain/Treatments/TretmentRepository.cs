@@ -32,6 +32,8 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
         {
             var treatment = await _context.Treatments
                 .Include(t => t.TreatmentStages)
+                .Include(t => t.TreatmentMembers)
+                    .ThenInclude(tm => tm.Member)
                 .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
 
             return treatment;

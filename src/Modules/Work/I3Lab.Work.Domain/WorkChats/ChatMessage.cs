@@ -28,6 +28,7 @@ namespace I3Lab.Works.Domain.WorkChats
             BlobFile fileResponceId = null,
             ChatMessageId? repliedToMessageId = null)
         {
+            Id = new ChatMessageId(Guid.NewGuid());
             SenderId = senderId;
             MessageText = messageText;
             SentDate = DateTime.UtcNow;

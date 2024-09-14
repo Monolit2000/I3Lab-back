@@ -22,10 +22,12 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
 
             builder.OwnsMany(wc => wc.ChatMembers, b =>
             {
+                b.ToTable("ChatMembers");
+
+                b.HasKey(wc => wc.Id);  
+
                 b.WithOwner()
                  .HasForeignKey(cm => cm.WorkChatId);
-
-                b.HasKey(cm => cm.MemberId);
 
                 b.Property(cm => cm.MemberId)
                  .IsRequired();
