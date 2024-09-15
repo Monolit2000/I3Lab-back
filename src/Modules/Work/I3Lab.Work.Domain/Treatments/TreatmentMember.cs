@@ -25,7 +25,7 @@ namespace I3Lab.Works.Domain.Treatments
             Member member,
             Member addedBy)
         {
-            Id = new TreatmentMemberId( Guid.NewGuid());
+            Id = new TreatmentMemberId(Guid.NewGuid());
             TreatmentId = treatmentId;
             Member = member;
             AddedBy = addedBy;

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigrationdfgfgsdfs : Migration
+    public partial class NewMigrationdfgfgsdfasdass : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

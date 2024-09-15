@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    [Migration("20240914232209_NewMigrationdfgfgsdfs")]
-    partial class NewMigrationdfgfgsdfs
+    [Migration("20240915000826_NewMigratiosdfsddfsdfsdfsdfdsf")]
+    partial class NewMigratiosdfsddfsdfsdfsdfdsf
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -432,13 +432,13 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid?>("AddedById")
+                            b1.Property<Guid>("AddedById")
                                 .HasColumnType("uuid");
 
                             b1.Property<DateTime>("JoinDate")
                                 .HasColumnType("timestamp with time zone");
 
-                            b1.Property<Guid?>("MemberId")
+                            b1.Property<Guid>("MemberId")
                                 .HasColumnType("uuid");
 
                             b1.Property<Guid>("TreatmentId")
@@ -446,23 +446,25 @@ namespace I3Lab.Works.Infrastructure.Migrations
 
                             b1.HasKey("Id");
 
-                            b1.HasIndex("AddedById")
-                                .IsUnique();
+                            b1.HasIndex("AddedById");
 
-                            b1.HasIndex("MemberId")
-                                .IsUnique();
+                            b1.HasIndex("MemberId");
 
                             b1.HasIndex("TreatmentId");
 
                             b1.ToTable("TreatmentMembers", "work");
 
                             b1.HasOne("I3Lab.Works.Domain.Members.Member", "AddedBy")
-                                .WithOne()
-                                .HasForeignKey("I3Lab.Works.Domain.Treatments.Treatment.TreatmentMembers#I3Lab.Works.Domain.Treatments.TreatmentMember", "AddedById");
+                                .WithMany()
+                                .HasForeignKey("AddedById")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
 
                             b1.HasOne("I3Lab.Works.Domain.Members.Member", "Member")
-                                .WithOne()
-                                .HasForeignKey("I3Lab.Works.Domain.Treatments.Treatment.TreatmentMembers#I3Lab.Works.Domain.Treatments.TreatmentMember", "MemberId");
+                                .WithMany()
+                                .HasForeignKey("MemberId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentId");

@@ -30,11 +30,15 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                 b.HasKey(wm => wm.Id);
 
                 b.HasOne(vm => vm.Member)
-                .WithOne();
-                //.HasForeignKey<TreatmentMember>(wm => wm.MemberId);
+                  .WithMany() 
+                  .HasForeignKey("MemberId") 
+                  .IsRequired();
 
                 b.HasOne(vm => vm.AddedBy)
-                .WithOne();
+                  .WithMany() 
+                  .HasForeignKey("AddedById") 
+                  .IsRequired();
+
 
                 b.Property(wm => wm.TreatmentId).IsRequired();
 
@@ -45,7 +49,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                     b.Property(a => a.Value).HasColumnName("AccessibilityType");
                 });
 
-                b.HasIndex(wm => wm.TreatmentId);
+                //b.HasIndex(wm => wm.TreatmentId);
             });
         }
     }
