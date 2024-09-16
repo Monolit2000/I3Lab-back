@@ -13,7 +13,7 @@ namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
         {
             var blobFile = await blobFileRepository.GetByIdAsync(new BlobFileId(request.BlobFileId));
 
-            var fileResponce = await blobService.DownloadAsync(blobFile.Id.Value);
+            var fileResponce = await blobService.DownloadAsync( new Guid(blobFile.FileName));
 
             return new BlobFileDto(fileResponce.Stream);
         }

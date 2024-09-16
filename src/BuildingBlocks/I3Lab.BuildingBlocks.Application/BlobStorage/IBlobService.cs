@@ -8,7 +8,7 @@ namespace I3Lab.BuildingBlocks.Application.BlobStorage
 {
     public interface IBlobService
     {
-        Task<Guid> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default);
+        Task<UploadFileResponce> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default);
 
         Task<FileResponce> DownloadAsync(Guid fileId, CancellationToken cancellationToken = default);
 

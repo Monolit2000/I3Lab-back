@@ -25,7 +25,7 @@ namespace I3Lab.Works.Domain.BlobFiles
             BlobDirectoryName = blobDirectoryName;
         }
 
-        public static BlobFilePath Create(string containerName, string blobDirectoryName, string fileName)
+        public static BlobFilePath Create(string containerName, string fileName, string blobDirectoryName = default)
         {
             return new BlobFilePath(containerName, fileName, blobDirectoryName);
         }

@@ -18,11 +18,16 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             builder.HasKey(bf => bf.Id);
 
             builder.Property(bf => bf.WorkId).IsRequired();
-            builder.Property(bf => bf.BlobName).IsRequired();
-            builder.Property(bf => bf.FileName).IsRequired();
-            builder.Property(bf => bf.BlobDirectoryName).IsRequired();
+            builder.Property(bf => bf.BlobName).IsRequired(false);
+            builder.Property(bf => bf.FileName).IsRequired(false);
+            builder.Property(bf => bf.BlobDirectoryName).IsRequired(false);
 
             builder.OwnsOne(bf => bf.Path);
+
+            builder.OwnsOne(bf => bf.ContentType, b =>
+            {
+                b.Property(a => a.Value).HasColumnName("ContentType").IsRequired(false);
+            });
 
             builder.OwnsOne(bf => bf.Url, b =>
             {

@@ -12,6 +12,11 @@ namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
     {
         public Guid BlobFileId { get; set; }
 
+        public GetBlobFileStreamQuerie()
+        {
+                
+        }
+
         public GetBlobFileStreamQuerie(Guid blobFileId)
         {
             BlobFileId = blobFileId;

@@ -10,6 +10,9 @@ namespace I3Lab.Works.Domain.BlobFiles
  
         public BlobFileId Id { get; private set; }
         public BlobFileType FileType { get; private set; }
+
+        public ContentType ContentType { get; private set; }
+
         public Accessibilitylevel Accessibilitylevel { get; private set; }
         public string BlobName { get; private set; }
         public string FileName { get; private set; }
@@ -23,28 +26,19 @@ namespace I3Lab.Works.Domain.BlobFiles
         private BlobFile(
             WorkId workId,
             string fileName,
-            BlobFileType type,
-            BlobFileUrl url)
+            BlobFileType type)
         {
             WorkId = workId;
             Id = new BlobFileId(Guid.NewGuid());
             FileName = fileName;
             FileType = type;
+            Path = BlobFilePath.Create("undefine", Id.Value.ToString());
             Accessibilitylevel = Accessibilitylevel.Hot;
-            Url = url;
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateBaseOnWork(
-            WorkId workId, 
-            string fileName, 
-            BlobFileType type, 
-            BlobFileUrl url) 
-            => new BlobFile(
-                workId,  
-                fileName, 
-                type, 
-                url);
+        public static BlobFile CreateBaseOnWork(WorkId workId, string fileName, BlobFileType type)
+            => new BlobFile(workId, fileName, type);
 
 
         public void RestoreToHotAccessibilitylevel()

@@ -9,23 +9,20 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
     public class CreateBlobFileCommandHandler(
         IWorkRepository workRepository,
         IBlobFileRepository blobFileRepository,
-        IBlobService blobService) : IRequestHandler<CreateBlobFileBlobFileCommand, Result<BlobFileDto>>
+        IBlobService blobService) : IRequestHandler<CreateBlobFileCommand, Result<BlobFileDto>>
     {
-        public async Task<Result<BlobFileDto>> Handle(CreateBlobFileBlobFileCommand request, CancellationToken cancellationToken)
+        public async Task<Result<BlobFileDto>> Handle(CreateBlobFileCommand request, CancellationToken cancellationToken)
         {
             var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
 
             if (work == null)
-                return Result.Fail("dsf");
+                return Result.Fail("Work not found");
 
-            var blobFileNameId = await blobService.UploadAsync(request.Stream, request.Type.Value);
+            var blobFileNameId = await blobService.UploadAsync(request.Stream, request.FileType);
 
-            var blobFileUrl = BlobFileUrl.Create(blobFileNameId.ToString());
-
-            var newBlobFile = work.CreateBlobFile(
-                blobFileNameId.ToString(),
-                request.Type, 
-                blobFileUrl);
+            var newBlobFile = work.CreateWorkFile(
+                blobFileNameId.FileId.ToString(),
+                BlobFileType.Image);
 
             await blobFileRepository.AddAsync(newBlobFile);
 
@@ -40,3 +37,5 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
         }
     }
 }
+
+ //var newBlobFile = BlobFile.CreateBaseOnWork(new WorkId(request.WorkId), blobFileNameId.ToString(), BlobFileType.Image, blobFileUrl);

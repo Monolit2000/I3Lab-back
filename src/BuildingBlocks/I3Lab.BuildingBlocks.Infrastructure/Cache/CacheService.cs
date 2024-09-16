@@ -2,9 +2,6 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using System.Collections.Concurrent;
-using System.Text.Json;
-
-
 
 namespace I3Lab.BuildingBlocks.Infrastructure.Cache
 {
@@ -21,9 +18,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Cache
         public async Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default) 
             where T : class
         {
-            var cacheValue = await _distributedCache.GetStringAsync(
-                key, 
-                cancellationToken);
+            var cacheValue = await _distributedCache.GetStringAsync(key, cancellationToken);
 
             if (string.IsNullOrEmpty(cacheValue))
                 return null;
@@ -39,7 +34,6 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Cache
 
             CacheKeys.TryAdd(key, false);
         }
-
 
         public async Task RemoveAsync(string key, CancellationToken cancellationToken = default)
         {

@@ -58,18 +58,15 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("BlobDirectoryName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("BlobName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FileName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("WorkId")
@@ -317,7 +314,26 @@ namespace I3Lab.Works.Infrastructure.Migrations
                                 .HasForeignKey("BlobFileId");
                         });
 
+                    b.OwnsOne("I3Lab.Works.Domain.BlobFiles.ContentType", "ContentType", b1 =>
+                        {
+                            b1.Property<Guid>("BlobFileId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .HasColumnType("text")
+                                .HasColumnName("ContentType");
+
+                            b1.HasKey("BlobFileId");
+
+                            b1.ToTable("BlobFiles", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("BlobFileId");
+                        });
+
                     b.Navigation("Accessibilitylevel");
+
+                    b.Navigation("ContentType");
 
                     b.Navigation("FileType");
 

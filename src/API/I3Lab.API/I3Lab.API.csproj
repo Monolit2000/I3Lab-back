@@ -39,6 +39,8 @@
 
   <ItemGroup>
     <Folder Include="Configuration\Extensions\" />
+    <Folder Include="Modules\Administrations\" />
+    <Folder Include="Modules\Doctors\" />
   </ItemGroup>
 
 </Project>

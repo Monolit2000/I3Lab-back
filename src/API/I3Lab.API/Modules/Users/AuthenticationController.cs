@@ -1,4 +1,5 @@
-﻿using I3Lab.Users.Application.Login;
+﻿using I3Lab.API.Modules.Base;
+using I3Lab.Users.Application.Login;
 using I3Lab.Users.Application.Register;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,7 @@ namespace I3Lab.API.Modules.Users
 {
     [Route("api/authentication")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : BaseController
     {
         private readonly IMediator _mediator;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -30,62 +31,54 @@ namespace I3Lab.API.Modules.Users
         private HttpContext _httpContext => _httpContextAccessor.HttpContext;
 
 
-        [HttpPost("test")]
-        public async Task<IActionResult> Test( )
-        {
+        //[HttpPost("test")]
+        //public async Task<IActionResult> Test( )
+        //{
 
-            var test = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            return Ok(test);
-        }
+        //    var test = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+        //    return Ok(test);
+        //}
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterUserCommand registerUserCommand)
         {
-            var responce = await _mediator.Send(registerUserCommand);
-
-            return Ok(responce);
-        
+            return HandleResult(await _mediator.Send(registerUserCommand));
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand loginCommand)
         {
-
-            var responce = await _mediator.Send(loginCommand);
-
-            _httpContext.Response.Cookies.Append("token", responce.Value.Token);
-
-            return Ok(responce);
-
+            //_httpContext.Response.Cookies.Append("token", responce.Value.Token);
+            return HandleResult(await _mediator.Send(loginCommand));
         }
 
-        [HttpPost("refresh")]
-        public async Task<IActionResult> Refresh()
-        {
-            _logger.LogInformation("Refresh called");
+        //[HttpPost("refresh")]
+        //public async Task<IActionResult> Refresh()
+        //{
+        //    _logger.LogInformation("Refresh called");
 
-            var refreshToken = Request.Cookies["refrash-Token"];
+        //    var refreshToken = Request.Cookies["refrash-Token"];
 
-            //if (!User)
-            //{ 
+        //    //if (!User)
+        //    //{ 
 
-            //}
+        //    //}
 
 
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
-        [Authorize]
-        [HttpDelete("revoke")]
-        public async Task<IActionResult> Revoke()
-        {
-            _logger.LogInformation("Revoke called");
+        //[Authorize]
+        //[HttpDelete("revoke")]
+        //public async Task<IActionResult> Revoke()
+        //{
+        //    _logger.LogInformation("Revoke called");
 
           
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
 
     }

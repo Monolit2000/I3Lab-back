@@ -1,4 +1,5 @@
-﻿using Azure.Storage.Blobs;
+﻿using Azure.Storage;
+using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
 using Microsoft.Extensions.Configuration;
@@ -12,7 +13,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 
         public IConfiguration _configuration;
 
-        private const string ContainerName = "files";
+        private const string ContainerName = "test";
 
         public BlobService(
             BlobServiceClient blobServiceClient,
@@ -24,19 +25,15 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 
         #region none
 
-        public async Task<Guid> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default)
+        public async Task<UploadFileResponce> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
-
             var fileId = Guid.NewGuid();
+            containerClient.CreateIfNotExists();
             BlobClient blobClient = containerClient.GetBlobClient(fileId.ToString());
+            await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = contentType }, cancellationToken: cancellationToken);
 
-            await blobClient.UploadAsync(
-                stream,
-                new BlobHttpHeaders { ContentType = contentType },
-                cancellationToken: cancellationToken);
-
-            return fileId;
+            return new UploadFileResponce(ContainerName, fileId);
         }
 
         public async Task<FileResponce> DownloadAsync(Guid fileId, CancellationToken cancellationToken = default)

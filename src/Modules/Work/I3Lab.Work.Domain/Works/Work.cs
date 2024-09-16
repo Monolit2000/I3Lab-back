@@ -15,9 +15,6 @@ namespace I3Lab.Works.Domain.Works
         public TreatmentId TreatmentId { get; private set; }
 
         public readonly List<WorkFile> WorkFiles = [];
-
-        //public readonly List<WorkMember> WorkMembers = [];
-
         public WorkId Id { get; private set; }
         public WorkTitel Titel { get; private set; }
         public WorkFile WorkAvatarImage  { get; private set; }
@@ -57,14 +54,9 @@ namespace I3Lab.Works.Domain.Works
                 workTitel);
         }
 
-        //public BlobFile Create(  )
-        //{
-
-        //}
-
-        public BlobFile CreateBlobFile(string fileName, BlobFileType fileType, BlobFileUrl blobFileUrl)
+        public BlobFile CreateWorkFile(string fileName, BlobFileType fileType)
         {
-            return BlobFile.CreateBaseOnWork(this.Id, fileName, fileType, blobFileUrl);
+            return BlobFile.CreateBaseOnWork(this.Id, fileName, fileType);
         }
         public WorkChat CreateWorkChat(List<Member> members)
         {
@@ -100,8 +92,6 @@ namespace I3Lab.Works.Domain.Works
             AddDomainEvent(new WorkStatusChangedDomainEvent(Id, newStatus));
             return Result.Ok();
         }
-
-
 
         private static bool IsMemberRoleValid(Member creator)
         {

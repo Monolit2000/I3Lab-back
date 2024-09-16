@@ -17,6 +17,9 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Database=Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres
+      - ConnectionStrings__BlobStorage=UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://i3lab-blob-storage;
+      # - ConnectionStrings__BlobStorage=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFeofTz3a4p0c1iME6nM3PQQc6hSURNiAZfbfh4w==;BlobEndpoint=http://i3lab.blob-storage;
+
       - MessageBroker__HostName=amqp://i3lab-rabbitmq:5672
       - MessageBroker__UserName=guest
       - MessageBroker__Password=guest
