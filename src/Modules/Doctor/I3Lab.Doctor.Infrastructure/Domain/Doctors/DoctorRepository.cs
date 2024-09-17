@@ -13,7 +13,7 @@ namespace I3Lab.Doctors.Infrastructure.Domain.Doctors
             _context = context;
         }
 
-        public async Task<Doctor?> GetByIdAsync(DoctorId id)
+        public async Task<Doctor> GetByIdAsync(DoctorId id)
         {
             return await _context.Doctors
                 .FirstOrDefaultAsync(d => d.Id == id);
@@ -37,9 +37,9 @@ namespace I3Lab.Doctors.Infrastructure.Domain.Doctors
             await _context.SaveChangesAsync();
         }
 
-        public Task<List<Doctor>> GetAll()
+        public async Task<List<Doctor>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Doctors.ToListAsync();
         }
 
         //public async Task<IEnumerable<Doctors>> GetAllByStatusAsync(ConfirmationStatus status)

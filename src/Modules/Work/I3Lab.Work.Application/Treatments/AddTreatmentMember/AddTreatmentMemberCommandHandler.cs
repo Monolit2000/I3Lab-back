@@ -22,7 +22,10 @@ namespace I3Lab.Works.Application.Treatments.AddTreatmentMember
 
             var invaiter = await memberRepository.GetMemberByIdAsync(new MemberId(request.InvaiterId));
 
-            treatment.AddTreatmentMember(member, invaiter);
+            var result = treatment.AddTreatmentMember(member, invaiter);
+
+            if (result.IsFailed)
+                return;
 
             await tretmentRepository.SaveChangesAsync();
         }

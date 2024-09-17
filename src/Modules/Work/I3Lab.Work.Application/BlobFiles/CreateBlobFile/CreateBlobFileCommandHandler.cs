@@ -18,10 +18,13 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
             if (work == null)
                 return Result.Fail("Work not found");
 
-            var blobFileNameId = await blobService.UploadAsync(request.Stream, request.FileType);
+            var contentType = ContentType.Create(request.ContentType);
+
+            var uploadFileResponce = await blobService.UploadAsync(request.Stream, request.ContentType);
 
             var newBlobFile = work.CreateWorkFile(
-                blobFileNameId.FileId.ToString(),
+                uploadFileResponce.FileId.ToString(),
+                contentType,
                 BlobFileType.Image);
 
             await blobFileRepository.AddAsync(newBlobFile);
@@ -38,4 +41,4 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
     }
 }
 
- //var newBlobFile = BlobFile.CreateBaseOnWork(new WorkId(request.WorkId), blobFileNameId.ToString(), BlobFileType.Image, blobFileUrl);
+ //var newBlobFile = BlobFile.CreateBaseOnWork(new WorkId(request.WorkId), uploadFileResponce.ToString(), BlobFileType.Image, blobFileUrl);

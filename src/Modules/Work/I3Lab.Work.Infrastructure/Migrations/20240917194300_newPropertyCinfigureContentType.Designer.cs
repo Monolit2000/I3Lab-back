@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(WorkContext))]
-    [Migration("20240916231726_dsfojgkdfsdfasdasssdfsd")]
-    partial class dsfojgkdfsdfasdasssdfsd
+    [Migration("20240917194300_newPropertyCinfigureContentType")]
+    partial class newPropertyCinfigureContentType
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Data")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("EnqueueDate")
@@ -47,7 +46,6 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

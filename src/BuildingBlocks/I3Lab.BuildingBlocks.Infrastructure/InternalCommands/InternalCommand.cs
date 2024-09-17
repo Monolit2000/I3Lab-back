@@ -15,7 +15,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.InternalCommands
 
         public string Data { get; set; }
 
-        public string? Error { get; set; }
+        public string Error { get; set; } = default;
 
         public DateTime? EnqueueDate { get; set; }
 

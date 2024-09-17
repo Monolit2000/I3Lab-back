@@ -31,6 +31,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Administration\I3Lab.Administration.Application\I3Lab.Administration.Application.csproj" />
+    <ProjectReference Include="..\..\Modules\Administration\I3Lab.Administration.Infrastructure\I3Lab.Administration.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Doctor\I3Lab.Doctor.Infrastructure\I3Lab.Doctors.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Work\I3Lab.Work.Infrastructure\I3Lab.Works.Infrastructure.csproj" />
     <ProjectReference Include="..\..\User\I3Lab.User.Application\I3Lab.Users.Application.csproj" />
@@ -39,8 +41,6 @@
 
   <ItemGroup>
     <Folder Include="Configuration\Extensions\" />
-    <Folder Include="Modules\Administrations\" />
-    <Folder Include="Modules\Doctors\" />
   </ItemGroup>
 
 </Project>

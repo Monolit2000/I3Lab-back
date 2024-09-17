@@ -14,7 +14,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             _context = context;
         }
 
-        public async Task<BlobFile?> GetByIdAsync(BlobFileId id)
+        public async Task<BlobFile> GetByIdAsync(BlobFileId id)
         {
             return await _context.BlobFiles
                 .FirstOrDefaultAsync(bf => bf.Id == id);

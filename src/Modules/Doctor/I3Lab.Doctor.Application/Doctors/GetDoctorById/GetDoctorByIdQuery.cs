@@ -16,5 +16,10 @@ namespace I3Lab.Doctors.Application.Doctors.GetDoctorById
         {
             DoctorId = doctorId;
         }
+
+        public GetDoctorByIdQuery()
+        {
+                
+        }
     }
 }

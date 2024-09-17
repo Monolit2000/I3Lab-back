@@ -1,15 +1,15 @@
-using I3Lab.Users.Infrastructure.Persistence.Extensions;
-using I3Lab.Users.Infrastructure.Startup;
-using I3Lab.Users.Infrastructure.JWT;
 using Serilog;
-using I3Lab.BuildingBlocks.Infrastructure.StartUp;
-using I3Lab.Works.Infrastructure.Persistence.Extensions;
+using I3Lab.Users.Infrastructure.JWT;
+using I3Lab.Users.Infrastructure.Startup;
 using I3Lab.Works.Infrastructure.Startup;
-using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
-using I3Lab.Doctors.Infrastructure.Startup;
-using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
+using I3Lab.Doctors.Infrastructure.Startup;
+using I3Lab.BuildingBlocks.Infrastructure.StartUp;
+using I3Lab.Administration.Infrastructure.StartUp;
+using I3Lab.Users.Infrastructure.Persistence.Extensions;
+using I3Lab.Works.Infrastructure.Persistence.Extensions;
+using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
+using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,7 +57,8 @@ builder.Services.AddBuildingBlocksModule(builder.Configuration);
 builder.Services
     .AddUserModule(builder.Configuration)
     .AddWorkModule(builder.Configuration)
-    .AddDoctorModule(builder.Configuration);
+    .AddDoctorModule(builder.Configuration)
+    .AddAdministrationModule(builder.Configuration);
 
 builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
 
@@ -72,8 +73,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
+    //app.ClearDbContextMigrations();
+
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();
+    app.ApplyDoctorContextMigrations();
     app.ApplyDoctorContextMigrations();
 }
 

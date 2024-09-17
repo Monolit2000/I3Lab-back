@@ -85,7 +85,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         public Result AddTreatmentMember(Member member, Member addedBy)
         {
-            if (TreatmentMembers.Any(member => member.Member.Id == member.Member.Id))
+            if (TreatmentMembers.Any(m => m.Member.Id == member.Id))
                 return Result.Fail(TreatmentErrors.MemberAlreadyAdded);
 
             var treatmentMember = TreatmentMember.CreateNew(this.Id, member, addedBy);

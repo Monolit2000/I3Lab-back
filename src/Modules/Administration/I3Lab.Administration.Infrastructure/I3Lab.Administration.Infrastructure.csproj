@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Domain\Administrators\" />
+    <Folder Include="Processing\" />
   </ItemGroup>
 
   <ItemGroup>

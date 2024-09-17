@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigrationdfgfgsdfasdass : Migration
+    public partial class newPropertyCinfigureContentType : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,10 +22,11 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     WorkId = table.Column<Guid>(type: "uuid", nullable: false),
                     FileType = table.Column<string>(type: "text", nullable: true),
+                    ContentType = table.Column<string>(type: "text", nullable: true),
                     Accessibilitylevel = table.Column<string>(type: "text", nullable: true),
-                    BlobName = table.Column<string>(type: "text", nullable: false),
-                    FileName = table.Column<string>(type: "text", nullable: false),
-                    BlobDirectoryName = table.Column<string>(type: "text", nullable: false),
+                    BlobName = table.Column<string>(type: "text", nullable: true),
+                    FileName = table.Column<string>(type: "text", nullable: true),
+                    BlobDirectoryName = table.Column<string>(type: "text", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: true),
                     Path_ContainerName = table.Column<string>(type: "text", nullable: true),
                     Path_FileName = table.Column<string>(type: "text", nullable: true),
@@ -43,8 +44,8 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Type = table.Column<string>(type: "text", nullable: false),
-                    Data = table.Column<string>(type: "text", nullable: false),
+                    Type = table.Column<string>(type: "text", nullable: true),
+                    Data = table.Column<string>(type: "text", nullable: true),
                     Error = table.Column<string>(type: "text", nullable: true),
                     EnqueueDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     ProcessedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
@@ -150,9 +151,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     WorkChatId = table.Column<Guid>(type: "uuid", nullable: false),
                     SenderId = table.Column<Guid>(type: "uuid", nullable: true),
                     MessageText = table.Column<string>(type: "character varying(1000)", maxLength: 1000, nullable: false),
-                    SentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     FileResponceIdId = table.Column<Guid>(type: "uuid", nullable: true),
                     IsEdited = table.Column<bool>(type: "boolean", nullable: false),
+                    SentDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     EditDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     RepliedToMessageId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
@@ -225,9 +226,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TreatmentId = table.Column<Guid>(type: "uuid", nullable: false),
-                    MemberId = table.Column<Guid>(type: "uuid", nullable: true),
+                    MemberId = table.Column<Guid>(type: "uuid", nullable: false),
                     AccessibilityType = table.Column<string>(type: "text", nullable: true),
-                    AddedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    AddedById = table.Column<Guid>(type: "uuid", nullable: false),
                     JoinDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -238,13 +239,15 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         column: x => x.AddedById,
                         principalSchema: "work",
                         principalTable: "Members",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TreatmentMembers_Members_MemberId",
                         column: x => x.MemberId,
                         principalSchema: "work",
                         principalTable: "Members",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TreatmentMembers_Treatments_TreatmentId",
                         column: x => x.TreatmentId,
@@ -352,15 +355,13 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 name: "IX_TreatmentMembers_AddedById",
                 schema: "work",
                 table: "TreatmentMembers",
-                column: "AddedById",
-                unique: true);
+                column: "AddedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentMembers_MemberId",
                 schema: "work",
                 table: "TreatmentMembers",
-                column: "MemberId",
-                unique: true);
+                column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentMembers_TreatmentId",

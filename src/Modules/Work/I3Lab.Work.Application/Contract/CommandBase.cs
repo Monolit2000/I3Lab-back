@@ -23,6 +23,8 @@ namespace I3Lab.Works.Application.Contract
 
     public abstract class CommandBase<TResult> : ICommand<TResult>
     {
+        public Guid Id { get; }
+
         protected CommandBase()
         {
             Id = Guid.NewGuid();
@@ -32,7 +34,5 @@ namespace I3Lab.Works.Application.Contract
         {
             Id = id;
         }
-
-        public Guid Id { get; }
     }
 }

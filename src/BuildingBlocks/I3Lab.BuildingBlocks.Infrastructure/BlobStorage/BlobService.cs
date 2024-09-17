@@ -28,12 +28,16 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
         public async Task<UploadFileResponce> UploadAsync(Stream stream, string contentType, CancellationToken cancellationToken = default)
         {
             BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
-            var fileId = Guid.NewGuid();
-            containerClient.CreateIfNotExists();
-            BlobClient blobClient = containerClient.GetBlobClient(fileId.ToString());
-            await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = contentType }, cancellationToken: cancellationToken);
 
-            return new UploadFileResponce(ContainerName, fileId);
+            containerClient.CreateIfNotExists();
+
+            var fileId = Guid.NewGuid();
+            BlobClient blobClient = containerClient.GetBlobClient(fileId.ToString());
+
+            await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = contentType }, cancellationToken: cancellationToken);
+           
+            var uri = blobClient.Uri.ToString();
+            return new UploadFileResponce(ContainerName, fileId, uri);
         }
 
         public async Task<FileResponce> DownloadAsync(Guid fileId, CancellationToken cancellationToken = default)
@@ -64,6 +68,18 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 
             await blobClient.SetAccessTierAsync(accessTier, cancellationToken: cancellationToken);
         }
+
+        public Task<string> GetFileUrlAsync(Guid fileId, string directory = "", CancellationToken cancellationToken = default)
+        {
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(ContainerName);
+
+            string blobName = string.IsNullOrEmpty(directory) ? fileId.ToString() : $"{directory}/{fileId}";
+
+            BlobClient blobClient = containerClient.GetBlobClient(blobName);
+
+            return Task.FromResult(blobClient.Uri.ToString());
+        }
+
         #endregion
 
         #region directory 

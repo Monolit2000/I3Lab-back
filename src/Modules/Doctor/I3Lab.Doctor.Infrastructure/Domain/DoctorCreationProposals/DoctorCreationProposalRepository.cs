@@ -19,7 +19,7 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
             _context = context;
         }
 
-        public async Task<DoctorCreationProposal?> GetByIdAsync(DoctorCreationProposalId id)
+        public async Task<DoctorCreationProposal> GetByIdAsync(DoctorCreationProposalId id)
         {
             return await _context.DoctorCreationProposals
                 .FirstOrDefaultAsync(p => p.Id == id);

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using I3Lab.Administration.Domain.DoctorCreationProposals;
+using I3Lab.Administration.Infrastructure.Domain.DoctorCreationProposals;
 
 namespace I3Lab.Administration.Infrastructure.Persistence
 {
@@ -16,6 +17,8 @@ namespace I3Lab.Administration.Infrastructure.Persistence
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("administration");
+
+            modelBuilder.ApplyConfiguration(new DoctorCreationProposalConfiguration());
         }
     }
 }

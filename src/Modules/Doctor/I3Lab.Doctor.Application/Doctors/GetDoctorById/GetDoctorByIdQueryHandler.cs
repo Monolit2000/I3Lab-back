@@ -12,7 +12,7 @@ namespace I3Lab.Doctors.Application.Doctors.GetDoctorById
             var doctor = await doctorRepository.GetByIdAsync(new DoctorId(request.DoctorId));
 
             if (doctor == null)
-                return Result.Fail("Doctors not exist");
+                return Result.Fail("Doctor not exist");
 
             return new DoctorDto(doctor);
         }

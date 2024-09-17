@@ -17,6 +17,10 @@ namespace I3Lab.Works.Application.TreatmentInvites.CreateTreatmentInvite
 
         public Guid InviterId { get; set; }
 
+        public CreateTreatmentInviteCommand()
+        {
+                
+        }
         public CreateTreatmentInviteCommand(
             Guid treatmentId,
             Guid memberToInviteId,

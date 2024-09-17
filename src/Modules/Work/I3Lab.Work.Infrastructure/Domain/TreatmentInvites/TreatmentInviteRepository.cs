@@ -1,11 +1,6 @@
 ﻿using I3Lab.Works.Domain.TreatmentInvites;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
 {
@@ -18,9 +13,13 @@ namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
             _context = context;
         }
 
-        public async Task<TreatmentInvite?> GetByIdAsync(TreatmentInviteId id)
+        public async Task<TreatmentInvite> GetByIdAsync(TreatmentInviteId id)
         {
-            return await _context.TreatmentInvites.FindAsync(id);
+            return await _context.TreatmentInvites
+                .Include(x => x.Treatment)
+                .Include(x => x.MemberToInvite)
+                .Include(x => x.Inviter)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task AddAsync(TreatmentInvite invite)

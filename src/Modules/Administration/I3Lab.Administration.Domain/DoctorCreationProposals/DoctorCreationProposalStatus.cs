@@ -17,7 +17,7 @@ namespace I3Lab.Administration.Domain.DoctorCreationProposals
 
         public static DoctorCreationProposalStatus Rejected = new DoctorCreationProposalStatus(nameof(Rejected));
 
-        private string Value { get; }
+        public string Value { get; }
 
 
         private static readonly HashSet<string> ValidStatuses = new HashSet<string>

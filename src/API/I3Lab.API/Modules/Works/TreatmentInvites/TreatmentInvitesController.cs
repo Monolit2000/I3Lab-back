@@ -8,6 +8,8 @@ using I3Lab.Works.Application.TreatmentInvites.RejectTreatmentInvite;
 
 namespace I3Lab.API.Modules.Works.TreatmentInvites
 {
+    [Route("api/work/TreatmentInvites")]
+    [ApiController]
     public class TreatmentInvitesController : BaseController
     {
         private readonly IMediator _mediator;
@@ -31,7 +33,7 @@ namespace I3Lab.API.Modules.Works.TreatmentInvites
         }
 
         [HttpPost("acceptTreatmentInvite")]
-        public async Task<IActionResult> CreaeteTreatmentInvite(AcceptTreatmentInviteCommand acceptTreatmentInviteCommand)
+        public async Task<IActionResult> AcceptTreatmentInvite(AcceptTreatmentInviteCommand acceptTreatmentInviteCommand)
         {
             return HandleResult(await _mediator.Send(acceptTreatmentInviteCommand));
         }

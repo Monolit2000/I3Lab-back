@@ -11,8 +11,8 @@ namespace I3Lab.Works.Application.TreatmentInvites.AcceptTreatmentInvite
         {
             await sender.Send(new AddTreatmentMemberCommand(
                 notification.TreatmentId.Value, 
-                notification.InviteeId.Value, 
-                notification.InviterId.Value));
+                notification.InviterId.Value,
+                notification.InviteeId.Value));
         }
     }
 }

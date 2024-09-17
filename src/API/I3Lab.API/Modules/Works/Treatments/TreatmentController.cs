@@ -29,7 +29,7 @@ namespace I3Lab.API.Modules.Treatments
 
 
         [HttpPost("сreateTreatment")]
-        public async Task<IActionResult> Register(CreateTreatmentCommand createTreatmentCommand)
+        public async Task<IActionResult> CeateTreatment(CreateTreatmentCommand createTreatmentCommand)
         {
             return HandleResult(await _mediator.Send(createTreatmentCommand));
         }

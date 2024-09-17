@@ -8,7 +8,7 @@ namespace I3Lab.Doctors.Domain.Doctors
 {
     public interface IDoctorRepository
     {
-        Task<Doctor?> GetByIdAsync(DoctorId id);
+        Task<Doctor> GetByIdAsync(DoctorId id);
 
         Task AddAsync(Doctor doctor);
 

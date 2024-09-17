@@ -11,8 +11,12 @@ namespace I3Lab.Works.Application.TreatmentInvites.RejectTreatmentInvite
         {
             var treatmentInvite = await treatmentInviteRepository.GetByIdAsync(new TreatmentInviteId(request.TreatmentInviteId));
 
-            treatmentInvite.Reject();
+            var result = treatmentInvite.Reject();
 
+            if(result.IsFailed)
+                return result;
+
+            await treatmentInviteRepository.SaveChangesAsync();
             return Result.Ok();
         }
     }

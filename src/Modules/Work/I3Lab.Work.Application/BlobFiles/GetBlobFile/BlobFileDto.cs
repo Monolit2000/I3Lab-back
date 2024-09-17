@@ -6,14 +6,14 @@ namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
     {
         public Stream Stream { get; set; }
 
-        public BlobFileDto()
-        {
-        }
-        [JsonConstructor]
+        public string ContentType { get; set; }
+
         public BlobFileDto(
-            Stream stream)
+            Stream stream, 
+            string contentType)
         {
             Stream = stream;
+            ContentType = contentType;
         }
     }
 }

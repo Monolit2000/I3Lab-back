@@ -53,7 +53,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
 
         public async Task UpdateAsync(Treatment treatment)
         {
-            _context.Treatments.Update(treatment);
+             _context.Treatments.Update(treatment);
         }
 
         public async Task DeleteAsync(TreatmentId id, CancellationToken cancellationToken)

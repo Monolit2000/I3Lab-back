@@ -1,11 +1,5 @@
 ﻿using I3Lab.Works.Application.Contract;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using I3Lab.BuildingBlocks.Infrastructure;
 
 namespace I3Lab.Works.Infrastructure

@@ -49,25 +49,12 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
                 ));
         }
 
-        public static DoctorCreationProposal CreateNew(
-            DoctorName name,
-            Email email,
-            PhoneNumber phoneNumber,
-            DoctorAvatar doctorAvatar)
-        {
-            return new DoctorCreationProposal(
-                name,
-                email,
-                phoneNumber,
-                doctorAvatar);
-        }
+        public static DoctorCreationProposal CreateNew(DoctorName name, Email email, PhoneNumber phoneNumber, DoctorAvatar doctorAvatar) 
+            => new DoctorCreationProposal(name, email, phoneNumber, doctorAvatar);
+
         public Doctor CreateDoctor()
         {
-            return Doctor.CreateBaseOnProposal(
-                Name, 
-                Email, 
-                PhoneNumber, 
-                DoctorAvatar);
+            return Doctor.CreateBaseOnProposal(Name, Email, PhoneNumber, DoctorAvatar);
         }
 
         public void Confirm()

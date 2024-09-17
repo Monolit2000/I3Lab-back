@@ -16,7 +16,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
             _context = context;
         }
 
-        public async Task<WorkChat?> GetByIdAsync(WorkChatId id, CancellationToken cancellationToken = default)
+        public async Task<WorkChat> GetByIdAsync(WorkChatId id, CancellationToken cancellationToken = default)
         {
             return await _context.WorkChats
                 .Include(wc => wc.Messages)
@@ -24,7 +24,7 @@ namespace I3Lab.Works.Infrastructure.Domain.WorkChats
                 .FirstOrDefaultAsync(wc => wc.Id == id, cancellationToken);
         }
 
-        public async Task<WorkChat?> GetByWorkIdAsync(WorkId workId, CancellationToken cancellationToken = default)
+        public async Task<WorkChat> GetByWorkIdAsync(WorkId workId, CancellationToken cancellationToken = default)
         {
             return await _context.WorkChats
                 .Include(wc => wc.Messages)

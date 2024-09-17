@@ -54,9 +54,9 @@ namespace I3Lab.Works.Domain.Works
                 workTitel);
         }
 
-        public BlobFile CreateWorkFile(string fileName, BlobFileType fileType)
+        public BlobFile CreateWorkFile(string fileName, ContentType contentType, BlobFileType fileType)
         {
-            return BlobFile.CreateBaseOnWork(this.Id, fileName, fileType);
+            return BlobFile.CreateBaseOnWork(this.Id, fileName, contentType, fileType);
         }
         public WorkChat CreateWorkChat(List<Member> members)
         {

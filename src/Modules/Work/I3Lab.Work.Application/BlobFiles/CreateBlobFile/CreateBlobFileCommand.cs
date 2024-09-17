@@ -11,7 +11,7 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
         public Guid WorkId { get; set; }    
         public string FileName { get; set; }
 
-        public string FileType { get; set; }
+        public string ContentType { get; set; }
 
         public Stream Stream { get; set; }
 

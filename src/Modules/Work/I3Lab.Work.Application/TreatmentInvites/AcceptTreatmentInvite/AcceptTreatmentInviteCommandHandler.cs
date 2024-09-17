@@ -13,6 +13,8 @@ namespace I3Lab.Works.Application.TreatmentInvites.AcceptTreatmentInvite
 
             treatmentInvite.Accept();
 
+            await treatmentInviteRepository.SaveChangesAsync();
+
             return Result.Ok();
         }
     }

@@ -12,12 +12,12 @@ namespace I3Lab.Works.Domain.WorkChats
         public MemberId SenderId { get; private set; }
         public ChatMessageId Id { get; private set; }
         public string MessageText { get; private set; }
-        public DateTime SentDate { get; private set; }
         public BlobFile FileResponceId { get; private set; }
         public bool IsEdited { get; private set; }
+        public DateTime SentDate { get; private set; }
         public DateTime? EditDate { get; private set; }
 
-        public ChatMessageId? RepliedToMessageId { get; private set; }
+        public ChatMessageId RepliedToMessageId { get; private set; }
 
         private ChatMessage() { } // For EF Core
 
@@ -25,7 +25,7 @@ namespace I3Lab.Works.Domain.WorkChats
             MemberId senderId,
             string messageText,
             BlobFile fileResponceId = null,
-            ChatMessageId? repliedToMessageId = null)
+            ChatMessageId repliedToMessageId = null)
         {
             Id = new ChatMessageId(Guid.NewGuid());
             SenderId = senderId;
@@ -52,7 +52,7 @@ namespace I3Lab.Works.Domain.WorkChats
         public static ChatMessage CreateNew(
             MemberId senderId,
             string messageText,
-            ChatMessageId? repliedToMessageId = null)
+            ChatMessageId repliedToMessageId = null)
         {
             return new ChatMessage(
                 senderId,
@@ -64,7 +64,7 @@ namespace I3Lab.Works.Domain.WorkChats
             MemberId senderId,
             string messageText,
             BlobFile blobFileId,
-            ChatMessageId? repliedToMessageId = null)
+            ChatMessageId repliedToMessageId = null)
         {
             return new ChatMessage(
                 senderId,

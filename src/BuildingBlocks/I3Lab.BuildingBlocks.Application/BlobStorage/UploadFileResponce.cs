@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace I3Lab.BuildingBlocks.Application.BlobStorage
 {
-    public record UploadFileResponce(string Conteiner, Guid FileId, string Directory = default);
+    public record UploadFileResponce(string Conteiner, Guid FileId, string Uri, string Directory = default);
 }

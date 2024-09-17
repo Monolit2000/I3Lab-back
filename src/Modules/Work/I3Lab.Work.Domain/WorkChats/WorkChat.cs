@@ -54,7 +54,7 @@ namespace I3Lab.Works.Domain.WorkChats
 
 
 
-        public Result AddMessage(MemberId senderId, string messageText, ChatMessageId? repliedToMessageId = null)
+        public Result AddMessage(MemberId senderId, string messageText, ChatMessageId repliedToMessageId = null)
         {
             if (ChatMembers.All(p => p.MemberId != senderId))
                 return Result.Fail("Sender is not a member in the chat.");

@@ -5,7 +5,7 @@ namespace I3Lab.Works.Domain.Works
 {
     public interface IWorkRepository
     {
-        Task<Work?> GetByIdAsync(WorkId id, CancellationToken cancellationToken = default);
+        Task<Work> GetByIdAsync(WorkId id, CancellationToken cancellationToken = default);
         Task<IEnumerable<Work>> GetAllAsync(CancellationToken cancellationToken = default);
         Task<IEnumerable<Work>> GetAllByMemberIdAsync(MemberId id, CancellationToken cancellationToken = default);
         Task<IEnumerable<Work>> GetAllByTreatmentIdAsync(TreatmentId id, CancellationToken cancellationToken = default);

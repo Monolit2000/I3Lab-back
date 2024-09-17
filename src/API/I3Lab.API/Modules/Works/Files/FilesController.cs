@@ -5,6 +5,7 @@ using I3Lab.Works.Application.BlobFiles.AddBlobFile;
 using I3Lab.Works.Application.BlobFiles.GetBlobFile;
 using Microsoft.AspNetCore.Http;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
+using I3Lab.Works.Application.BlobFiles.GetBlobFilesByWorkId;
 
 namespace I3Lab.API.Modules.Works.Files
 {
@@ -40,16 +41,41 @@ namespace I3Lab.API.Modules.Works.Files
 
             createBlobFileCommand.Stream = stream;
 
-            createBlobFileCommand.FileType = formFile.ContentType;
+            createBlobFileCommand.ContentType = formFile.ContentType;
 
             return HandleResult(await _mediator.Send(createBlobFileCommand));
         }
 
-        [HttpPost("downloadWorkFile")]
-        public async Task<IActionResult> DownloadWorkFile(GetBlobFileStreamQuerie getBlobFileStreamQuerie)
+        [HttpGet("downloadWorkFile")]
+        public async Task<IResult> DownloadWorkFile(GetBlobFileStreamQuerie getBlobFileStreamQuerie)
         {
-            return HandleResult(await _mediator.Send(getBlobFileStreamQuerie));
+            var fileResponce = await _mediator.Send(getBlobFileStreamQuerie);
+
+            if (fileResponce.IsFailed)
+                return Results.Empty;
+
+            return Results.File(fileResponce.Value.Stream, fileResponce.Value.ContentType);
         }
+
+
+        [HttpGet("downloadWithDeatelsWorkFile")]
+        public async Task<IActionResult> DownloadWithDeatelsWorkFile(GetBlobFileStreamQuerie getBlobFileStreamQuerie)
+        {
+            var filrResponce = await _mediator.Send(getBlobFileStreamQuerie);
+
+            if (filrResponce.IsFailed)
+                return HandleResult(filrResponce);
+
+            return Ok(Results.File(filrResponce.Value.Stream));
+        }
+
+
+        [HttpGet("getAllBlobFilesByWorkId")]
+        public async Task<IActionResult> GetAllBlobFilesByWorkId(GetAllBlobFilesByWorkIdCommand getAllBlobFilesByWorkIdCommand)
+        {
+            return HandleResult(await _mediator.Send(getAllBlobFilesByWorkIdCommand));
+        }
+
     }
 }
 

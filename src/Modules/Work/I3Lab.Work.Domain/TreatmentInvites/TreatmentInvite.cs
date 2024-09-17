@@ -4,6 +4,7 @@ using I3Lab.Works.Domain.Treatments;
 using FluentResults;
 using I3Lab.Works.Domain.TreatmentInvites.Events;
 using I3Lab.Works.Domain.TreatmentInvites.Errors;
+using I3Lab.Works.Domain.TreatmentInvites.Rule;
 
 namespace I3Lab.Works.Domain.TreatmentInvites
 {
@@ -47,8 +48,9 @@ namespace I3Lab.Works.Domain.TreatmentInvites
 
         public Result Accept()
         {
-            if (TreatmentInviteStatus != TreatmentInviteStatus.Pending) 
-                return Result.Fail(TreatmentInviteErrors.InvalidInviteStatus());
+            var result = CheckRule(new TreatmentInviteStatusMustByPending(TreatmentInviteStatus));
+            if (result.IsFailed)
+                return result;
 
             TreatmentInviteStatus = TreatmentInviteStatus.Accepted;
             AddDomainEvent(new TreatmentInviteAcceptedDomainEvent(Treatment.Id, MemberToInvite.Id, Inviter.Id));
@@ -57,8 +59,9 @@ namespace I3Lab.Works.Domain.TreatmentInvites
 
         public Result Reject()
         {
-            if (TreatmentInviteStatus != TreatmentInviteStatus.Pending)
-                return Result.Fail(TreatmentInviteErrors.InvalidInviteStatus());
+            var result = CheckRule(new TreatmentInviteStatusMustByPending(TreatmentInviteStatus));
+            if (result.IsFailed)
+                return result;
 
             TreatmentInviteStatus = TreatmentInviteStatus.Rejected;
             AddDomainEvent(new TreatmentInviteRejectedDomainEvent());
