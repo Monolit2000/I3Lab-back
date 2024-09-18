@@ -15,41 +15,41 @@ namespace I3Lab.Works.Infrastructure.Domain.Works
             _context = context;
         }
 
-        public async Task<Work> GetByIdAsync(WorkId id, CancellationToken cancellationToken = default)
+        public async Task<I3Lab.Works.Domain.Works.Work> GetByIdAsync(WorkId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
                 .FirstOrDefaultAsync(w => w.Id == id);
         }
 
-        public async Task<IEnumerable<Work>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<I3Lab.Works.Domain.Works.Work>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Work>> GetAllByMemberIdAsync(MemberId id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<I3Lab.Works.Domain.Works.Work>> GetAllByMemberIdAsync(MemberId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Work>> GetAllByTreatmentIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<I3Lab.Works.Domain.Works.Work>> GetAllByTreatmentIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
                 .Include(w => w.WorkFiles)
                 .ToListAsync();
         }
 
-        public async Task AddAsync(Work work, CancellationToken cancellationToken = default)
+        public async Task AddAsync(I3Lab.Works.Domain.Works.Work work, CancellationToken cancellationToken = default)
         {
             await _context.Works.AddAsync(work);
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Work work, CancellationToken cancellationToken = default)
+        public async Task UpdateAsync(I3Lab.Works.Domain.Works.Work work, CancellationToken cancellationToken = default)
         {
             _context.Works.Update(work);
             await _context.SaveChangesAsync();

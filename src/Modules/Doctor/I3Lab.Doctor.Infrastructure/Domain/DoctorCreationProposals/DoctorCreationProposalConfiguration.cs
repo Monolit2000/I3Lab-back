@@ -12,10 +12,6 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
         {
             builder.HasKey(p => p.Id);
 
-            //builder.OwnsOne(p => p.FirstName);
-            //builder.OwnsOne(p => p.Email);
-            //builder.OwnsOne(p => p.DoctorAvatar);
-
             builder.OwnsOne(d => d.Name, avatar =>
             {
                 avatar.Property(a => a.FirstName);
@@ -28,10 +24,10 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
                 phoneNumber.Property(a => a.Value).HasColumnName("PhoneNumber").IsRequired();
             });
 
-            builder.OwnsOne(d => d.Email, avatar =>
+            builder.OwnsOne(d => d.Email, a =>
             {
-                avatar.Property(a => a.Value)
-                      .HasColumnName("Email");
+                a.Property(a => a.Value)
+                      .HasColumnName("Emailll");
                 //.IsRequired();
             });
 
@@ -46,7 +42,7 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
 
             builder.OwnsOne(d => d.ConfirmationStatus, status =>
             {
-                status.Property(s => s.Value).HasColumnName("ConfirmationStatus").IsRequired();
+                status.Property(s => s.Value).HasColumnName("ConfirmationStatuss").IsRequired();
             });
 
             //builder.Property(p => p.ConfirmationStatus)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Doctors.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewMigrationRemuveColumNameDefinitionTEST : Migration
+    public partial class NewMigratioijkn : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,12 +20,12 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name_FirstName = table.Column<string>(type: "text", nullable: false),
-                    Name_LastName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
-                    ConfirmationStatus = table.Column<string>(type: "text", nullable: false),
-                    DoctorAvatarUrl = table.Column<string>(type: "text", nullable: false),
+                    Name_FirstName = table.Column<string>(type: "text", nullable: true),
+                    Name_LastName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    ConfirmationStatus = table.Column<string>(type: "text", nullable: true),
+                    DoctorAvatarUrl = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -39,11 +39,11 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name_FirstName = table.Column<string>(type: "text", nullable: false),
-                    Name_LastName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "text", nullable: false),
-                    DoctorAvatarUrl = table.Column<string>(type: "text", nullable: false)
+                    Name_FirstName = table.Column<string>(type: "text", nullable: true),
+                    Name_LastName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    DoctorAvatarUrl = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

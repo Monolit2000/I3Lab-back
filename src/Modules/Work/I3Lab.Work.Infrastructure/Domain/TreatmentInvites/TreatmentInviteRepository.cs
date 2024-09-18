@@ -1,4 +1,5 @@
 ﻿using I3Lab.Works.Domain.TreatmentInvites;
+using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,6 +48,16 @@ namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<TreatmentInvite>> GetAllByTreatmentIdAsync(TreatmentId treatmentId)
+        {
+            return await _context.TreatmentInvites
+                .Where(invite => invite.Treatment.Id == treatmentId)
+                .Include(x => x.Treatment)
+                .Include(x => x.MemberToInvite)
+                .Include(x => x.Inviter)
+                .ToListAsync();
         }
     }
 }

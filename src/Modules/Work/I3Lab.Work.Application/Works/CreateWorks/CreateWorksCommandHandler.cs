@@ -27,7 +27,7 @@ namespace I3Lab.Works.Application.Works.CreateWorks
 
             foreach (var titel in BaseWorkTitels)
             {
-                var workResult = await Work.CreateBasedOnTreatmentAsync(
+                var workResult = await Domain.Works.Work.CreateBasedOnTreatmentAsync(
                     creator, new TreatmentId(request.TreatmentId), WorkTitel.Create(titel));
 
                 if (workResult.IsFailed)

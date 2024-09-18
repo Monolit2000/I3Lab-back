@@ -9,9 +9,9 @@ using I3Lab.Works.Domain.BlobFiles;
 
 namespace I3Lab.Works.Infrastructure.Domain.Works
 {
-    public class WorkConfiguration : IEntityTypeConfiguration<Work>
+    public class WorkConfiguration : IEntityTypeConfiguration<I3Lab.Works.Domain.Works.Work>
     {
-        public void Configure(EntityTypeBuilder<Work> builder)
+        public void Configure(EntityTypeBuilder<I3Lab.Works.Domain.Works.Work> builder)
         {
             builder.HasKey(e => e.Id);
 

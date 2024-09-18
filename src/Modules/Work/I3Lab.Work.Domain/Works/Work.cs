@@ -6,7 +6,6 @@ using I3Lab.Works.Domain.WorkChats;
 using I3Lab.Works.Domain.Treatments;
 using I3Lab.Works.Domain.Works.Errors;
 using I3Lab.Works.Domain.Works.Events;
-using I3Lab.Works.Domain.WorkCatalogs.Events;
 
 namespace I3Lab.Works.Domain.Works
 {

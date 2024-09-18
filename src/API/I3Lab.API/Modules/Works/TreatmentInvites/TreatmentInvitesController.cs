@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using I3Lab.API.Modules.Base;
 using I3Lab.Works.Application.TreatmentInvites.AcceptTreatmentInvite;
 using I3Lab.Works.Application.TreatmentInvites.RejectTreatmentInvite;
+using I3Lab.Works.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId;
 
 namespace I3Lab.API.Modules.Works.TreatmentInvites
 {
@@ -43,5 +44,12 @@ namespace I3Lab.API.Modules.Works.TreatmentInvites
         {
             return HandleResult(await _mediator.Send(rejectTreatmentInviteCommand));
         }
+
+        [HttpGet("GetAllTreatmentInvitesByTreatmentId")]
+        public async Task<IActionResult> GetAllTreatmentInvitesByTreatmentId([FromQuery]GetAllTreatmentInvitesByTreatmentIdQuery getAllTreatmentInvitesByTreatmentIdQuery)
+        {
+            return HandleResult(await _mediator.Send(getAllTreatmentInvitesByTreatmentIdQuery));
+        }
+
     }
 }

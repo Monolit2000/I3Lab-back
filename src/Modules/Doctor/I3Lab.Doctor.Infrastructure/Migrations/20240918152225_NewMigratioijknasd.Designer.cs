@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Doctors.Infrastructure.Migrations
 {
     [DbContext(typeof(DoctorContext))]
-    [Migration("20240825142229_NewMigrationRemuveColumNameDefinitionTEST")]
-    partial class NewMigrationRemuveColumNameDefinitionTEST
+    [Migration("20240918152225_NewMigratioijknasd")]
+    partial class NewMigratioijknasd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,10 +31,6 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("ConfirmationStatus")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -43,7 +39,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                     b.ToTable("DoctorCreationProposals", "doctors");
                 });
 
-            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctors", b =>
+            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctor", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -61,7 +57,6 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Url")
-                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("DoctorAvatarUrl");
 
@@ -79,9 +74,8 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
-                                .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("Email");
+                                .HasColumnName("Emailll");
 
                             b1.HasKey("DoctorCreationProposalId");
 
@@ -91,17 +85,15 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorCreationProposalId");
                         });
 
-                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "FirstName", b1 =>
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "Name", b1 =>
                         {
                             b1.Property<Guid>("DoctorCreationProposalId")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("FirstName")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.Property<string>("LastName")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.HasKey("DoctorCreationProposalId");
@@ -130,20 +122,36 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorCreationProposalId");
                         });
 
-                    b.Navigation("DoctorAvatar")
-                        .IsRequired();
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.ConfirmationStatus", "ConfirmationStatus", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
 
-                    b.Navigation("Email")
-                        .IsRequired();
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("ConfirmationStatus");
 
-                    b.Navigation("FirstName")
-                        .IsRequired();
+                            b1.HasKey("DoctorCreationProposalId");
 
-                    b.Navigation("PhoneNumber")
-                        .IsRequired();
+                            b1.ToTable("DoctorCreationProposals", "doctors");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
+                    b.Navigation("ConfirmationStatus");
+
+                    b.Navigation("DoctorAvatar");
+
+                    b.Navigation("Email");
+
+                    b.Navigation("Name");
+
+                    b.Navigation("PhoneNumber");
                 });
 
-            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctors", b =>
+            modelBuilder.Entity("I3Lab.Doctors.Domain.Doctors.Doctor", b =>
                 {
                     b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorAvatar", "DoctorAvatar", b1 =>
                         {
@@ -151,7 +159,6 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Url")
-                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("DoctorAvatarUrl");
 
@@ -169,7 +176,6 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
-                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("Email");
 
@@ -181,17 +187,15 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorId");
                         });
 
-                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "FirstName", b1 =>
+                    b.OwnsOne("I3Lab.Doctors.Domain.Doctors.DoctorName", "Name", b1 =>
                         {
                             b1.Property<Guid>("DoctorId")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("FirstName")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.Property<string>("LastName")
-                                .IsRequired()
                                 .HasColumnType("text");
 
                             b1.HasKey("DoctorId");
@@ -220,17 +224,13 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                                 .HasForeignKey("DoctorId");
                         });
 
-                    b.Navigation("DoctorAvatar")
-                        .IsRequired();
+                    b.Navigation("DoctorAvatar");
 
-                    b.Navigation("Email")
-                        .IsRequired();
+                    b.Navigation("Email");
 
-                    b.Navigation("FirstName")
-                        .IsRequired();
+                    b.Navigation("Name");
 
-                    b.Navigation("PhoneNumber")
-                        .IsRequired();
+                    b.Navigation("PhoneNumber");
                 });
 #pragma warning restore 612, 618
         }

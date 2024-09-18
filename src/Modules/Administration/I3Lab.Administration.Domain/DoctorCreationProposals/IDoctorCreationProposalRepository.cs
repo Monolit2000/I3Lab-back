@@ -19,5 +19,7 @@ namespace I3Lab.Administration.Domain.DoctorCreationProposals
         Task<IEnumerable<DoctorCreationProposal>> GetAllPendingAsync();
 
         Task<bool> ExistByEmailAsync(Email email);
+
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

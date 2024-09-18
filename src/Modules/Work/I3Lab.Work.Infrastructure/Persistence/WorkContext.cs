@@ -25,7 +25,7 @@ namespace I3Lab.Works.Infrastructure.Persistence
 
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
-        public DbSet<Work> Works { get; set; }
+        public DbSet<Works.Domain.Works.Work> Works { get; set; }
 
         public DbSet<InternalCommand> InternalCommands { get; set; }
 

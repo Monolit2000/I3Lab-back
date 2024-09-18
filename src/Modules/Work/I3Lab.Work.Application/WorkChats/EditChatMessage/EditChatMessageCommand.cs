@@ -16,6 +16,10 @@ namespace I3Lab.Works.Application.WorkChats.EditChatMessage
         public Guid MessageId { get; }  
         public string EditedMessage { get; }
 
+        public EditChatMessageCommand()
+        {
+            
+        }
         public EditChatMessageCommand(
             Guid workId,
             Guid chatMemberId,

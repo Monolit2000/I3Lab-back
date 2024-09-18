@@ -4,6 +4,8 @@ using MediatR;
 using I3Lab.Works.Application.WorkChats.AddChatMember;
 using I3Lab.Works.Application.WorkChats.RemoveChatMessage;
 using I3Lab.API.Modules.Base;
+using I3Lab.Works.Application.WorkChats.EditChatMessage;
+using I3Lab.Works.Application.WorkChats.GetAllChatMessageByWorkId;
 
 namespace I3Lab.API.Modules.Works.WorkChats
 {
@@ -40,12 +42,19 @@ namespace I3Lab.API.Modules.Works.WorkChats
             return HandleResult(await _mediator.Send(removeChatMessageCommand));
         }
 
-        //[HttpPost("addChatMember")]
-        //public async Task<IActionResult> AddChatMember(AddChatMemberCommand addChatMemberCommand)
-        //{
-        //    await _mediator.Send(addChatMemberCommand);
-        //    return Ok();
-        //}
+
+        [HttpPost("EditChatMessage")]
+        public async Task<IActionResult> EditChatMessage(EditChatMessageCommand editChatMessageCommand)
+        {
+            return HandleResult(await _mediator.Send(editChatMessageCommand));
+        }
+
+
+        [HttpGet("getAllChatMessageByWorkId")]
+        public async Task<IActionResult> GetAllChatMessageByWorkId([FromQuery]GetAllChatMessageByWorkIdQuery getAllChatMessageByWorkIdQuery)
+        {
+            return HandleResult(await _mediator.Send(getAllChatMessageByWorkIdQuery));
+        }
 
     }
 }

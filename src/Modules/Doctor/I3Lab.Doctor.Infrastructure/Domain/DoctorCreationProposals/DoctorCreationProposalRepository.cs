@@ -52,10 +52,7 @@ namespace I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals
 
         public async Task<bool> ExistByEmailAsync(Email email)
         {
-            var exist = await _context.DoctorCreationProposals.AnyAsync(x => x.Email == email);
-            
-            if(exist is false)
-                return exist;
+            var exist = await _context.DoctorCreationProposals.AnyAsync(x => x.Email.Value == email.Value);
 
             return exist;
         }

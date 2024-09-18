@@ -14,7 +14,6 @@ namespace I3Lab.Works.Domain.Treatments
         public readonly List<Work> TreatmentStages = [];
 
         public readonly List<TreatmentMember> TreatmentMembers = [];
-
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
 
@@ -67,9 +66,9 @@ namespace I3Lab.Works.Domain.Treatments
             return TreatmentInvite.InviteBasedOnTreatment(this , memberToInvite, inviter).Value;
         }
 
-        public async Task<Result<Work>> CreateWorkAsync(Member creator, WorkTitel workTitel)
+        public async Task<Result<Works.Work>> CreateWorkAsync(Member creator, WorkTitel workTitel)
         {
-            return await Work.CreateBasedOnTreatmentAsync(creator, this.Id, workTitel);
+            return await Works.Work.CreateBasedOnTreatmentAsync(creator, this.Id, workTitel);
         }
 
         public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)

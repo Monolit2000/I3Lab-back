@@ -1,4 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 using I3Lab.Works.Application.Configuration.Commands;
 using I3Lab.Works.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -18,11 +19,12 @@ namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
                 .ToListAsync(cancellationToken);
 
             var policy = Policy
+                //.HandleResult<ResultBase>(x => x.IsFailed)
                 .Handle<Exception>()
                 .WaitAndRetryAsync(new[]
                 {
                     TimeSpan.FromSeconds(1),
-                    TimeSpan.FromSeconds(2),
+                    TimeSpan.FromSeconds(2),    
                     TimeSpan.FromSeconds(3)
                 });
 

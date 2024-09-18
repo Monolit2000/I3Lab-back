@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
+﻿using I3Lab.BuildingBlocks.Domain;
 
 namespace I3Lab.Doctors.Domain.Doctors
 {
-    public class Email
+    public class Email : ValueObject
     {
         public string Value { get; }
 

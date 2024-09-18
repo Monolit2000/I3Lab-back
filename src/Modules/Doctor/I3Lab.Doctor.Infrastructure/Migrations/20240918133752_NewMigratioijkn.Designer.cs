@@ -3,6 +3,7 @@ using System;
 using I3Lab.Doctors.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Doctors.Infrastructure.Migrations
 {
     [DbContext(typeof(DoctorContext))]
-    partial class DoctorContextModelSnapshot : ModelSnapshot
+    [Migration("20240918133752_NewMigratioijkn")]
+    partial class NewMigratioijkn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +75,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
 
                             b1.Property<string>("Value")
                                 .HasColumnType("text")
-                                .HasColumnName("Emailll");
+                                .HasColumnName("Email");
 
                             b1.HasKey("DoctorCreationProposalId");
 
@@ -127,7 +130,7 @@ namespace I3Lab.Doctors.Infrastructure.Migrations
                             b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnType("text")
-                                .HasColumnName("ConfirmationStatuss");
+                                .HasColumnName("ConfirmationStatus");
 
                             b1.HasKey("DoctorCreationProposalId");
 

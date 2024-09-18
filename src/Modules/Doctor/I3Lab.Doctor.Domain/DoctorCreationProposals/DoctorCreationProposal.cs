@@ -45,8 +45,7 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
                 Email.Value,
                 PhoneNumber.Value,
                 DoctorAvatar.Url,
-                CreatedAt
-                ));
+                CreatedAt));
         }
 
         public static DoctorCreationProposal CreateNew(DoctorName name, Email email, PhoneNumber phoneNumber, DoctorAvatar doctorAvatar) 

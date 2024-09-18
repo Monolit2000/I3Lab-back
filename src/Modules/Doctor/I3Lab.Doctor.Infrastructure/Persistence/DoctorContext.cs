@@ -20,7 +20,6 @@ namespace I3Lab.Doctors.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.HasDefaultSchema("doctors");
 
             modelBuilder.ApplyConfiguration(new DoctorCreationProposalConfiguration());

@@ -10,9 +10,9 @@ namespace I3Lab.Works.Domain.TreatmentInvites
 {
     public class TreatmentInvite : Entity, IAggregateRoot
     {
+        public Treatment Treatment { get; private set; }
         public Member MemberToInvite { get; private set; }
         public Member Inviter { get; private set; }
-        public Treatment Treatment { get; private set; }
 
         public TreatmentInviteId Id { get; private set; }
         public TreatmentInviteStatus TreatmentInviteStatus { get; private set; }
