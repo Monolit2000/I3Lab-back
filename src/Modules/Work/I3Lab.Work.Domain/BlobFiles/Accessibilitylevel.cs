@@ -1,7 +1,7 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using System.Reflection.Metadata;
 
-namespace I3Lab.Works.Domain.BlobFiles
+namespace I3Lab.Treatments.Domain.BlobFiles
 {
     public class Accessibilitylevel : ValueObject
     {

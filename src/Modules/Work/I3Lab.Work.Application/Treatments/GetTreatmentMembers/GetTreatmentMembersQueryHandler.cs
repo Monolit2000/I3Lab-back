@@ -1,4 +1,6 @@
 ﻿using FluentResults;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,13 +8,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Treatments.GetTreatmentMembers
+namespace I3Lab.Treatments.Application.Treatments.GetTreatmentMembers
 {
-    public class GetTreatmentMembersQueryHandler : IRequestHandler<GetTreatmentMembersQuery, Result<List<TreatmentMemberDto>>>
+    public class GetTreatmentMembersQueryHandler(
+        ITretmentRepository tretmentRepository) : IRequestHandler<GetTreatmentMembersQuery, Result<List<TreatmentMemberDto>>>
     {
-        public Task<Result<List<TreatmentMemberDto>>> Handle(GetTreatmentMembersQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<TreatmentMemberDto>>> Handle(GetTreatmentMembersQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var tretment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
+
+            var treatmentMember = tretment.TreatmentMembers.FirstOrDefault(tm => tm.Member.Id == new MemberId(request.TreatmentMemberId));
+
+            if (treatmentMember == null)
+                return Result.Fail("Member not found");
+
+            var treatmentMemberDto = new TreatmentMemberDto(
+                treatmentMember.Member.Id.Value,
+                treatmentMember.Member.FirstName,
+                treatmentMember.Member.LastName);
+
+            return new List<TreatmentMemberDto>();
         }
     }
 }

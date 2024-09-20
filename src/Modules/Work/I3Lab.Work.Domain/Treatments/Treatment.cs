@@ -1,29 +1,29 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.TreatmentInvites;
-using I3Lab.Works.Domain.Treatments.Errors;
-using I3Lab.Works.Domain.Treatments.Events;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.Treatments.Errors;
+using I3Lab.Treatments.Domain.Treatments.Events;
+using I3Lab.Treatments.Domain.TreatmentStages;
 
-namespace I3Lab.Works.Domain.Treatments
+namespace I3Lab.Treatments.Domain.Treatments
 {
     public class Treatment : Entity, IAggregateRoot
     {
-        public readonly List<Work> TreatmentStages = [];
+        public readonly List<TreatmentStage> TreatmentStages = [];
 
         public readonly List<TreatmentMember> TreatmentMembers = [];
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
 
         public TreatmentId Id { get; private set; }
-        public Titel Titel { get; private set; }
+        public TreatmentTitel Titel { get; private set; }
         public BlobFile TreatmentPreview { get; private set; }
         public TreatmentDate TreatmentDate { get; private set; }
 
 
-        public static Treatment CreateNew(Member creator, Member patient, Titel titel) 
+        public static Treatment CreateNew(Member creator, Member patient, TreatmentTitel titel) 
             => new Treatment(creator, patient, titel);
 
         private Treatment() { } // For Ef Core
@@ -31,7 +31,7 @@ namespace I3Lab.Works.Domain.Treatments
         private Treatment(
             Member creator, 
             Member patient,
-            Titel titel)
+            TreatmentTitel titel)
         {
             Id = new TreatmentId(Guid.NewGuid());
             Creator = creator;
@@ -66,12 +66,12 @@ namespace I3Lab.Works.Domain.Treatments
             return TreatmentInvite.InviteBasedOnTreatment(this , memberToInvite, inviter).Value;
         }
 
-        public async Task<Result<Works.Work>> CreateWorkAsync(Member creator, WorkTitel workTitel)
+        public async Task<Result<TreatmentStages.TreatmentStage>> CreateWorkAsync(Member creator, TreatmentStageTitel workTitel)
         {
-            return await Works.Work.CreateBasedOnTreatmentAsync(creator, this.Id, workTitel);
+            return await Domain.TreatmentStages.TreatmentStage.CreateBasedOnTreatmentAsync(creator, this.Id, workTitel);
         }
 
-        public void RemuveTreatmentStage(MemberId creatorId, WorkId workId)
+        public void RemuveTreatmentStage(MemberId creatorId, TreatmentStageId workId)
         {
             var treatmentStages = TreatmentStages.FirstOrDefault(ts => ts.Id == workId);
             if (treatmentStages == null) 
@@ -103,12 +103,15 @@ namespace I3Lab.Works.Domain.Treatments
             if(treatmentMember == null)
                 return Result.Fail(TreatmentErrors.MemberAlreadyAdded);
 
+            treatmentMember.Leave();
+
             TreatmentMembers.Remove(treatmentMember);
 
-            AddDomainEvent(new MemberRemovedFromTreatmentDomainEvent(Id.Value, treatmentMember.Member.Id.Value));
+            AddDomainEvent(new MemberRemovedFromTreatmentDomainEvent(Id, treatmentMember.Member.Id));
 
             return Result.Ok();
         }
+
 
         //public void AddPatient(Member customer)
         //{

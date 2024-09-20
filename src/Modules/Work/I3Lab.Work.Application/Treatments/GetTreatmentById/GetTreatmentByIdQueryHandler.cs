@@ -1,8 +1,8 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.Treatments;
+using I3Lab.Treatments.Domain.Treatments;
 using MediatR;
 
-namespace I3Lab.Works.Application.Treatments.GetTreatmentById
+namespace I3Lab.Treatments.Application.Treatments.GetTreatmentById
 {
     public class GetTreatmentByIdQueryHandler(ITretmentRepository treatmentRepository) : IRequestHandler<GetTreatmentByIdQuery, Result<TreatmentDto>>
     {

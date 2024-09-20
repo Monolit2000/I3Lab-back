@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
+namespace I3Lab.Treatments.Application.BlobFiles.GetBlobFile
 {
     public class GetBlobFileStreamQuerie : IRequest<Result<BlobFileDto>>
     {

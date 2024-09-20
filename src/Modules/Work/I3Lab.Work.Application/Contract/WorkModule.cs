@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Contract
+namespace I3Lab.Treatments.Application.Contract
 {
     public class WorkModule
     {

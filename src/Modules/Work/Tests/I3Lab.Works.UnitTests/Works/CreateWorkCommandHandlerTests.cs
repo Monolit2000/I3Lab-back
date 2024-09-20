@@ -5,15 +5,15 @@
 //using System.Threading.Tasks;
 //using FluentAssertions;
 //using FluentResults;
-//using I3Lab.Works.Application.Works.CreateWorks;
-//using I3Lab.Works.Domain.Members;
-//using I3Lab.Works.Domain.Treatments;
-//using I3Lab.Works.Domain.Works;
+//using I3Lab.TreatmentStages.Application.TreatmentStages.CreateWorks;
+//using I3Lab.TreatmentStages.Domain.Members;
+//using I3Lab.TreatmentStages.Domain.Treatments;
+//using I3Lab.TreatmentStages.Domain.TreatmentStages;
 //using MediatR;
 //using NSubstitute;
 //using Xunit;
 
-//namespace I3Lab.Works.Tests.Application.Works
+//namespace I3Lab.TreatmentStages.Tests.Application.TreatmentStages
 //{
 //    public class CreateWorkCommandHandlerTests
 //    {
@@ -131,7 +131,7 @@
 //            var command = new CreateWorksCommand { TreatmentId = treatmentId };
 //            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
 //            var member = Member.CreateNew("creator@example.com");
-//            var work =  await Work.CreateBasedOnTreatmentAsync(member, new TreatmentId(treatmentId));
+//            var work =  await TreatmentStage.CreateBasedOnTreatmentAsync(member, new TreatmentId(treatmentId));
 
 //            _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
 //                .Returns(treatment);

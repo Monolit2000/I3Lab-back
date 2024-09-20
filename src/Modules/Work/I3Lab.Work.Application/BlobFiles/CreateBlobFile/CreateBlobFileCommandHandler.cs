@@ -1,22 +1,22 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
-using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
-namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
+namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
 {
     public class CreateBlobFileCommandHandler(
-        IWorkRepository workRepository,
+        ITreatmentStageRepository workRepository,
         IBlobFileRepository blobFileRepository,
         IBlobService blobService) : IRequestHandler<CreateBlobFileCommand, Result<BlobFileDto>>
     {
         public async Task<Result<BlobFileDto>> Handle(CreateBlobFileCommand request, CancellationToken cancellationToken)
         {
-            var work = await workRepository.GetByIdAsync(new WorkId(request.WorkId));
+            var work = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId));
 
             if (work == null)
-                return Result.Fail("Work not found");
+                return Result.Fail("TreatmentStage not found");
 
             var contentType = ContentType.Create(request.ContentType);
 
@@ -41,4 +41,4 @@ namespace I3Lab.Works.Application.BlobFiles.AddBlobFile
     }
 }
 
- //var newBlobFile = BlobFile.CreateBaseOnWork(new WorkId(request.WorkId), uploadFileResponce.ToString(), BlobFileType.Image, blobFileUrl);
+ //var newBlobFile = BlobFile.CreateBaseOnWork(new TreatmentStageId(request.TreatmentStageId), uploadFileResponce.ToString(), BlobFileType.Image, blobFileUrl);

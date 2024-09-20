@@ -1,8 +1,8 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.TreatmentInvites;
 using MediatR;
 
-namespace I3Lab.Works.Application.TreatmentInvites.AcceptTreatmentInvite
+namespace I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentInvite
 {
     public class AcceptTreatmentInviteCommandHandler
         (ITreatmentInviteRepository treatmentInviteRepository): IRequestHandler<AcceptTreatmentInviteCommand, Result>

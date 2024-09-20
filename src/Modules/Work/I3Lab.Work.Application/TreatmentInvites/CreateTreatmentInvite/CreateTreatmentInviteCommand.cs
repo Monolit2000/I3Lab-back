@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.TreatmentInvites.CreateTreatmentInvite
+namespace I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite
 {
     public class CreateTreatmentInviteCommand : IRequest<Result<TreatmentInviteDto>>
     {

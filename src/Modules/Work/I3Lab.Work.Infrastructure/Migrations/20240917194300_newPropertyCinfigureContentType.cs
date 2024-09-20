@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace I3Lab.Works.Infrastructure.Migrations
+namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class newPropertyCinfigureContentType : Migration
@@ -73,7 +73,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkChats",
+                name: "TreatmentStageChats",
                 schema: "work",
                 columns: table => new
                 {
@@ -137,7 +137,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         name: "FK_ChatMembers_WorkChats_WorkChatId",
                         column: x => x.WorkChatId,
                         principalSchema: "work",
-                        principalTable: "WorkChats",
+                        principalTable: "TreatmentStageChats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -176,7 +176,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         name: "FK_WorkChatMessages_WorkChats_WorkChatId",
                         column: x => x.WorkChatId,
                         principalSchema: "work",
-                        principalTable: "WorkChats",
+                        principalTable: "TreatmentStageChats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -258,7 +258,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Works",
+                name: "TreatmentStages",
                 schema: "work",
                 columns: table => new
                 {
@@ -294,7 +294,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "WorkFile",
+                name: "TreatmentStageFile",
                 schema: "work",
                 columns: table => new
                 {
@@ -316,14 +316,14 @@ namespace I3Lab.Works.Infrastructure.Migrations
                         name: "FK_WorkFile_Works_WorkId",
                         column: x => x.WorkId,
                         principalSchema: "work",
-                        principalTable: "Works",
+                        principalTable: "TreatmentStages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_WorkFile_Works_WorkId1",
                         column: x => x.WorkId1,
                         principalSchema: "work",
-                        principalTable: "Works",
+                        principalTable: "TreatmentStages",
                         principalColumn: "Id");
                 });
 
@@ -331,7 +331,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 name: "IX_ChatMembers_WorkChatId",
                 schema: "work",
                 table: "ChatMembers",
-                column: "WorkChatId");
+                column: "TreatmentStageChatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentInvites_InviterId",
@@ -403,37 +403,37 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 name: "IX_WorkChatMessages_WorkChatId",
                 schema: "work",
                 table: "WorkChatMessages",
-                column: "WorkChatId");
+                column: "TreatmentStageChatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFile_FileId",
                 schema: "work",
-                table: "WorkFile",
+                table: "TreatmentStageFile",
                 column: "FileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkFile_WorkId1",
                 schema: "work",
-                table: "WorkFile",
+                table: "TreatmentStageFile",
                 column: "WorkId1",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Works_CreatorId",
                 schema: "work",
-                table: "Works",
+                table: "TreatmentStages",
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Works_CustomerId",
                 schema: "work",
-                table: "Works",
+                table: "TreatmentStages",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Works_TreatmentId",
                 schema: "work",
-                table: "Works",
+                table: "TreatmentStages",
                 column: "TreatmentId");
         }
 
@@ -461,15 +461,15 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 schema: "work");
 
             migrationBuilder.DropTable(
-                name: "WorkFile",
+                name: "TreatmentStageFile",
                 schema: "work");
 
             migrationBuilder.DropTable(
-                name: "WorkChats",
+                name: "TreatmentStageChats",
                 schema: "work");
 
             migrationBuilder.DropTable(
-                name: "Works",
+                name: "TreatmentStages",
                 schema: "work");
 
             migrationBuilder.DropTable(

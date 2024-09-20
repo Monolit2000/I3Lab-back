@@ -1,13 +1,13 @@
 ﻿
-using I3Lab.Works.Application.Treatments.ApplicationErrors;
-using I3Lab.Works.Application.Treatments.CreateTreatment;
-using I3Lab.Works.Domain.Treatments;
+using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
+using I3Lab.Treatments.Application.Treatments.CreateTreatment;
+using I3Lab.Treatments.Domain.Treatments;
 using FluentAssertions;
 using NSubstitute;
 using AutoFixture;
-using I3Lab.Works.Domain.Members;
+using I3Lab.Treatments.Domain.Members;
 
-namespace I3Lab.Works.UnitTests.Treatments
+namespace I3Lab.Treatments.UnitTests.Treatments
 {
     public class CreateTreatmentCommandHandlerTests
     {

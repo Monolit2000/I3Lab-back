@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.API", "src\API\I3Lab.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FF068670-C5A7-41B5-BD4C-FFDC9A8C1FF9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Works", "Works", "{0C0A4377-DB8C-458C-932F-171B01FAA904}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treatments", "Treatments", "{0C0A4377-DB8C-458C-932F-171B01FAA904}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Application", "src\Modules\Work\I3Lab.Work.Application\I3Lab.Works.Application.csproj", "{90909718-3854-4591-8BC0-D676B5C148D3}"
 EndProject

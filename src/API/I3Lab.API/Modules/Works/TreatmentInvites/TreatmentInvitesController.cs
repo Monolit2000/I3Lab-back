@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using I3Lab.Works.Application.TreatmentInvites.CreateTreatmentInvite;
+using I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite;
 using Microsoft.IdentityModel.Tokens;
 using I3Lab.API.Modules.Base;
-using I3Lab.Works.Application.TreatmentInvites.AcceptTreatmentInvite;
-using I3Lab.Works.Application.TreatmentInvites.RejectTreatmentInvite;
-using I3Lab.Works.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId;
+using I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentInvite;
+using I3Lab.Treatments.Application.TreatmentInvites.RejectTreatmentInvite;
+using I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId;
 
 namespace I3Lab.API.Modules.Works.TreatmentInvites
 {

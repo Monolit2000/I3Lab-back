@@ -1,8 +1,8 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatments;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
 
-namespace I3Lab.Works.Domain.TreatmentInvites.Events
+namespace I3Lab.Treatments.Domain.TreatmentInvites.Events
 {
     public class TreatmentInviteAcceptedDomainEvent : DomainEventBase
     {

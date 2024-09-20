@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Members.GetAllMembers
+namespace I3Lab.Treatments.Application.Members.GetAllMembers
 {
     public class GetAllMembersQuery : IRequest<Result<GetAllMembersQuery>>
     {

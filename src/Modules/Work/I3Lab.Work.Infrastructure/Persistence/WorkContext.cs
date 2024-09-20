@@ -1,31 +1,31 @@
-﻿using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Works;
-using I3Lab.Works.Infrastructure.Domain.Works;
-using I3Lab.Works.Infrastructure.Domain.Members;
+﻿using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentStages;
+using I3Lab.Treatments.Infrastructure.Domain.Works;
+using I3Lab.Treatments.Infrastructure.Domain.Members;
 using Microsoft.EntityFrameworkCore;
-using I3Lab.Works.Infrastructure.Domain.BlobFiles;
-using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Infrastructure.Domain.Treatments;
-using I3Lab.Works.Domain.TreatmentInvites;
+using I3Lab.Treatments.Infrastructure.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Infrastructure.Domain.Treatments;
+using I3Lab.Treatments.Domain.TreatmentInvites;
 using System.Security.Permissions;
-using I3Lab.Works.Domain.WorkChats;
-using I3Lab.Works.Infrastructure.Domain.WorkChats;
-using I3Lab.Works.Infrastructure.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.TreatmentStageChats;
+using I3Lab.Treatments.Infrastructure.Domain.WorkChats;
+using I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites;
 using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 
-namespace I3Lab.Works.Infrastructure.Persistence
+namespace I3Lab.Treatments.Infrastructure.Persistence
 {
     public class WorkContext : DbContext
     {
-        //public DbSet<Works.Domain.WorkDirectorys.WorkDirectory> WorkDirectories { get; set; }
+        //public DbSet<TreatmentStages.Domain.WorkDirectorys.WorkDirectory> WorkDirectories { get; set; }
 
-        //public DbSet<WorkComment> WorkComments { get; set; }
-        public DbSet<WorkChat> WorkChats { get; set; }
+        //public DbSet<WorkComment> TreatmentStageComments { get; set; }
+        public DbSet<TreatmentStageChat> WorkChats { get; set; }
 
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
-        public DbSet<Works.Domain.Works.Work> Works { get; set; }
+        public DbSet<Treatments.Domain.TreatmentStages.TreatmentStage> Works { get; set; }
 
         public DbSet<InternalCommand> InternalCommands { get; set; }
 
@@ -45,7 +45,7 @@ namespace I3Lab.Works.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
-            modelBuilder.ApplyConfiguration(new WorkConfiguration());
+            modelBuilder.ApplyConfiguration(new TreatmentStageConfiguration());
 
             modelBuilder.ApplyConfiguration(new WorkChatConfiguration());
 
@@ -53,7 +53,7 @@ namespace I3Lab.Works.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
 
-            modelBuilder.ApplyConfiguration(new WorkFileConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkTreatmentStageConfiguration());
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
             

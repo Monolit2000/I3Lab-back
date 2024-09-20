@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Treatments.GetTreatmentById
+namespace I3Lab.Treatments.Application.Treatments.GetTreatmentById
 {
     public class GetTreatmentByIdQuery : IRequest<Result<TreatmentDto>>
     {

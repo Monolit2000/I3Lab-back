@@ -1,9 +1,9 @@
-﻿using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Works;
-using I3Lab.Works.Infrastructure.Persistence;
+﻿using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentStages;
+using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
+namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
 {
     public class BlobFileRepository : IBlobFileRepository
     {
@@ -47,7 +47,7 @@ namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
             }
         }
 
-        public async Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(WorkId workId)
+        public async Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(TreatmentStageId workId)
         {
             return await _context.BlobFiles
                 .Where(bf => bf.WorkId == workId)

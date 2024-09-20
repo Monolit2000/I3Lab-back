@@ -1,7 +1,7 @@
-﻿using I3Lab.Works.Application.Contract;
+﻿using I3Lab.Treatments.Application.Contract;
 using System.Reflection;
 
-namespace I3Lab.Works.Infrastructure
+namespace I3Lab.Treatments.Infrastructure
 {
     internal static class Assemblies
     {

@@ -1,9 +1,9 @@
-﻿using I3Lab.Works.Domain.TreatmentInvites;
-using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Infrastructure.Persistence;
+﻿using I3Lab.Treatments.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
+namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
 {
     public class TreatmentInviteRepository : ITreatmentInviteRepository
     {

@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using FluentResults;
-using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Application.Treatments.ApplicationErrors;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 
 
-namespace I3Lab.Works.Application.Treatments.CreateTreatment
+namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
     public class CreateTreatmentCommandHandler(
         ITretmentRepository tretmentRepository,
@@ -24,7 +24,7 @@ namespace I3Lab.Works.Application.Treatments.CreateTreatment
             if (creator is null)
                 return Result.Fail("patient is null");
 
-            var titel = Titel.Create(request.TreatmentTitel);
+            var titel = TreatmentTitel.Create(request.TreatmentTitel);
 
             var treatment = Treatment.CreateNew(
                 creator, 

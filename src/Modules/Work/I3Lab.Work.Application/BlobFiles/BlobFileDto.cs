@@ -1,6 +1,6 @@
-﻿using I3Lab.Works.Domain.BlobFiles;
+﻿using I3Lab.Treatments.Domain.BlobFiles;
 
-namespace I3Lab.Works.Application.BlobFiles
+namespace I3Lab.Treatments.Application.BlobFiles
 {
     public class BlobFileDto
     {

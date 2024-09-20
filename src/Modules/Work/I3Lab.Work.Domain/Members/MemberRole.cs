@@ -1,9 +1,9 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using System.Net;
 
-namespace I3Lab.Works.Domain.Members
+namespace I3Lab.Treatments.Domain.Members
 {
     public class MemberRole : ValueObject
     {

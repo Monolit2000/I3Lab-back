@@ -1,22 +1,22 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Works.Events;
-using I3Lab.Works.Domain.Works;
-using I3Lab.Works.Domain.Treatments.Events;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentStages.Events;
+using I3Lab.Treatments.Domain.TreatmentStages;
+using I3Lab.Treatments.Domain.Treatments.Events;
 
-namespace I3Lab.Works.Domain.Treatments
+namespace I3Lab.Treatments.Domain.Treatments
 {
     public class TreatmentMember : Entity
     {
         public TreatmentId TreatmentId { get; private set; }
-
         public TreatmentMemberId Id { get; private set; }
 
         public Member Member { get; private set; }
         public MemberAccessibilityType AccessibilityType { get; private set; }
         public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
+        public DateTime LeaveDate { get; private set; }
 
         private TreatmentMember() { } //for EF core
 
@@ -36,11 +36,14 @@ namespace I3Lab.Works.Domain.Treatments
             TreatmentId treatmentId,
             Member memberId,
             Member addedBy)
-        {
-            return new TreatmentMember(
+            => new TreatmentMember(
                 treatmentId,
                 memberId,
                 addedBy);
+
+        public void Leave()
+        {
+            LeaveDate = DateTime.UtcNow;    
         }
 
         public Result ChangeAccessibilityType(MemberAccessibilityType newAccessibilityType)

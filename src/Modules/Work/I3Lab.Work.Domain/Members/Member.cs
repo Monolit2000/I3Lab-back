@@ -1,8 +1,8 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Members.Events;
+using I3Lab.Treatments.Domain.Members.Events;
 
-namespace I3Lab.Works.Domain.Members
+namespace I3Lab.Treatments.Domain.Members
 {
     public class Member : Entity, IAggregateRoot
     {

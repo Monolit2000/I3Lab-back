@@ -1,13 +1,13 @@
 using Serilog;
 using I3Lab.Users.Infrastructure.JWT;
 using I3Lab.Users.Infrastructure.Startup;
-using I3Lab.Works.Infrastructure.Startup;
+using I3Lab.Treatments.Infrastructure.Startup;
 using I3Lab.BuildingBlocks.Infrastructure;
 using I3Lab.Doctors.Infrastructure.Startup;
 using I3Lab.BuildingBlocks.Infrastructure.StartUp;
 using I3Lab.Administration.Infrastructure.StartUp;
 using I3Lab.Users.Infrastructure.Persistence.Extensions;
-using I3Lab.Works.Infrastructure.Persistence.Extensions;
+using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 

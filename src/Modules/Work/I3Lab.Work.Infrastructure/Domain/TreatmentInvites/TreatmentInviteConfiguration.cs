@@ -1,8 +1,8 @@
-﻿using I3Lab.Works.Domain.TreatmentInvites;
+﻿using I3Lab.Treatments.Domain.TreatmentInvites;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace I3Lab.Works.Infrastructure.Domain.TreatmentInvites
+namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
 {
     public class TreatmentInviteConfiguration : IEntityTypeConfiguration<TreatmentInvite>
     {

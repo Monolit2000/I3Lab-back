@@ -1,12 +1,12 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.TreatmentInvites.Errors;
+using I3Lab.Treatments.Domain.TreatmentInvites.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.TreatmentInvites.Rule
+namespace I3Lab.Treatments.Domain.TreatmentInvites.Rule
 {
     class TreatmentInviteStatusMustByPending : IBusinessRule
     {

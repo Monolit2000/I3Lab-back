@@ -1,7 +1,7 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.TreatmentInvites;
-using I3Lab.Works.Domain.Treatments;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.Treatments;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.TreatmentInvites.CreateTreatmentInvite
+namespace I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite
 {
     public class CreateTreatmentInviteCommandHandler(
         ITretmentRepository tretmentRepository, 

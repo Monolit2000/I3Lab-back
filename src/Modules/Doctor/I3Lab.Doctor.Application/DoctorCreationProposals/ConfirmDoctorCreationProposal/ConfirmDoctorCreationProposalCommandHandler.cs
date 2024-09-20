@@ -17,7 +17,7 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreatio
 
             proposal.Confirm();
 
-            return new DoctorCreationProposalDto(); 
+            return Result.Ok();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Treatments.RemoveTreatmentMember
+namespace I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember
 {
     internal class RemoveTreatmentMemberCommandHandler
     {

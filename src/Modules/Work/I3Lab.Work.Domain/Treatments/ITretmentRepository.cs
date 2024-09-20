@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.Treatments
+namespace I3Lab.Treatments.Domain.Treatments
 {
     public interface ITretmentRepository
     {
-        Task<bool> IsNameUniqueAsync(string name);
-        Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken);
-        Task<IEnumerable<Treatment>> GetAllAsync();
-        Task AddAsync(Treatment treatment);
-        Task UpdateAsync(Treatment treatment);
-        Task DeleteAsync(TreatmentId id, CancellationToken cancellationToken);
-        Task SaveChangesAsync();
+        Task<bool> IsNameUniqueAsync(string name, CancellationToken cancellationToken = default);
+        Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken = default);
+        Task<IEnumerable<Treatment>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task AddAsync(Treatment treatment, CancellationToken cancellationToken = default);
+        Task UpdateAsync(Treatment treatment, CancellationToken cancellationToken = default);
+        Task DeleteAsync(TreatmentId id, CancellationToken cancellationToken = default);
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

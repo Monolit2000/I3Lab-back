@@ -1,6 +1,6 @@
-﻿using I3Lab.Works.Application.Contract;
+﻿using I3Lab.Treatments.Application.Contract;
 
-namespace I3Lab.Works.Application.Configuration.Commands
+namespace I3Lab.Treatments.Application.Configuration.Commands
 {
     public abstract class InternalCommandBase : ICommand
     {

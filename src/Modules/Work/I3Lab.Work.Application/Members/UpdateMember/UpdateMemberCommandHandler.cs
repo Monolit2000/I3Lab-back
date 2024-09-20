@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using FluentResults;
-using I3Lab.Works.Domain.Members;
+using I3Lab.Treatments.Domain.Members;
 
-namespace I3Lab.Works.Application.Members.UpdateMember
+namespace I3Lab.Treatments.Application.Members.UpdateMember
 {
     public class UpdateMemberCommandHandler(
         IMemberRepository memberRepository) : IRequestHandler<UpdateMemberCommand, Result>

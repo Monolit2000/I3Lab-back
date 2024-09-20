@@ -72,6 +72,8 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
                 throw new InvalidOperationException("Proposal cannot be rejected.");
 
             ConfirmationStatus = ConfirmationStatus.Rejected;
+
+            AddDomainEvent(new DoctorCreationProposalRejectedDomainEvent(Id));
         }
     }
 }

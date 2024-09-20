@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 
-namespace I3Lab.Works.Domain.TreatmentInvites
+namespace I3Lab.Treatments.Domain.TreatmentInvites
 {
     public class TreatmentInviteStatus : ValueObject
     {

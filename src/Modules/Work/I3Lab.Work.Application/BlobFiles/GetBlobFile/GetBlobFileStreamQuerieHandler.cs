@@ -1,9 +1,9 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
-using I3Lab.Works.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.BlobFiles;
 using MediatR;
 
-namespace I3Lab.Works.Application.BlobFiles.GetBlobFile
+namespace I3Lab.Treatments.Application.BlobFiles.GetBlobFile
 {
     public class GetBlobFileStreamQuerieHandler(
         IBlobFileRepository blobFileRepository,

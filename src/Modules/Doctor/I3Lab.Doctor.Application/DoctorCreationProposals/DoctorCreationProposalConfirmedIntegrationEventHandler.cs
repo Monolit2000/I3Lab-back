@@ -1,6 +1,6 @@
 ﻿using I3Lab.Administration.IntegrationEvents;
 using I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreationProposal;
-using I3Lab.Works.Application.Members.CreateMember;
+using I3Lab.Treatments.Application.Members.CreateMember;
 using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;

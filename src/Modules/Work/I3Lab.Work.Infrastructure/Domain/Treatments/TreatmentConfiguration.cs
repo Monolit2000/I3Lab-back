@@ -1,10 +1,10 @@
-﻿using I3Lab.Works.Domain.Treatments;
+﻿using I3Lab.Treatments.Domain.Treatments;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
 
-namespace I3Lab.Works.Infrastructure.Domain.Treatments
+namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
 {
     public class TreatmentConfiguration : IEntityTypeConfiguration<Treatment>
     {
@@ -20,7 +20,7 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
 
             builder.OwnsOne(e => e.Titel, b =>
             {
-                b.Property(t => t.Value).HasColumnName("Titel").IsRequired();
+                b.Property(t => t.Value).HasColumnName("TreatmentTitel").IsRequired();
             });
 
            builder.OwnsMany(e => e.TreatmentMembers, b =>
@@ -28,6 +28,12 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                 b.ToTable("TreatmentMembers");
 
                 b.HasKey(wm => wm.Id);
+
+                b.Property(wm => wm.TreatmentId).IsRequired();
+
+                b.Property(wm => wm.JoinDate).IsRequired();
+
+                b.Property(tm => tm.LeaveDate).IsRequired(false);
 
                 b.HasOne(vm => vm.Member)
                   .WithMany() 
@@ -38,11 +44,6 @@ namespace I3Lab.Works.Infrastructure.Domain.Treatments
                   .WithMany() 
                   .HasForeignKey("AddedById") 
                   .IsRequired();
-
-
-                b.Property(wm => wm.TreatmentId).IsRequired();
-
-                b.Property(wm => wm.JoinDate).IsRequired();
 
                 b.OwnsOne(at => at.AccessibilityType, b =>
                 {

@@ -1,8 +1,8 @@
-﻿using I3Lab.Works.Application.Contract;
+﻿using I3Lab.Treatments.Application.Contract;
 using MediatR;
 using I3Lab.BuildingBlocks.Infrastructure;
 
-namespace I3Lab.Works.Infrastructure
+namespace I3Lab.Treatments.Infrastructure
 {
     internal static class CommandsExecutor
     {

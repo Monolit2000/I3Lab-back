@@ -1,4 +1,4 @@
-﻿namespace I3Lab.Works.Api;
+﻿namespace I3Lab.Treatments.Api;
 
 public class Class1
 {

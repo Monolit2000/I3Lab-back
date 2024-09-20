@@ -1,11 +1,11 @@
-﻿using I3Lab.Works.Domain.Treatments;
+﻿using I3Lab.Treatments.Domain.Treatments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.TreatmentInvites
+namespace I3Lab.Treatments.Domain.TreatmentInvites
 {
     public interface ITreatmentInviteRepository
     {

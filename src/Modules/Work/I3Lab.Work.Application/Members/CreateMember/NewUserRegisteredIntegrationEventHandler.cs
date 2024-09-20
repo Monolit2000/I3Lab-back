@@ -3,7 +3,7 @@ using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace I3Lab.Works.Application.Members.CreateMember
+namespace I3Lab.Treatments.Application.Members.CreateMember
 {
     public class NewUserRegisteredIntegrationEventHandler(
         ILogger<NewUserRegisteredIntegrationEventHandler> logger,

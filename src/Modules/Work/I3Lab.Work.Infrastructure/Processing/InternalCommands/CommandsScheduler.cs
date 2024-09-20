@@ -1,11 +1,11 @@
 ﻿using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 using I3Lab.BuildingBlocks.Infrastructure.Serialization;
-using I3Lab.Works.Application.Configuration.Commands;
-using I3Lab.Works.Application.Contract;
-using I3Lab.Works.Infrastructure.Persistence;
+using I3Lab.Treatments.Application.Configuration.Commands;
+using I3Lab.Treatments.Application.Contract;
+using I3Lab.Treatments.Infrastructure.Persistence;
 using Newtonsoft.Json;
 
-namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
+namespace I3Lab.Treatments.Infrastructure.Processing.InternalCommands
 {
     public class CommandsScheduler : ICommandsScheduler
     {

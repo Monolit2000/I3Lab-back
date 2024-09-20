@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.Members
+namespace I3Lab.Treatments.Domain.Members
 {
     public class MemberId : TypedIdValueBase
     {

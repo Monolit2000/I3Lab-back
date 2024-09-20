@@ -1,13 +1,13 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.BlobFiles.Events;
-using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.BlobFiles.Events;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Domain.TreatmentStages;
 
-namespace I3Lab.Works.Domain.BlobFiles
+namespace I3Lab.Treatments.Domain.BlobFiles
 {
     public class BlobFile : Entity, IAggregateRoot 
     {
-        public WorkId WorkId { get; private set; }
+        public TreatmentStageId WorkId { get; private set; }
 
         //public TreatmentId TreatmentId { get; private set; }
  
@@ -25,7 +25,7 @@ namespace I3Lab.Works.Domain.BlobFiles
         private BlobFile() { } //For EF core 
 
         private BlobFile(
-            WorkId workId,
+            TreatmentStageId workId,
             string fileName,
             ContentType contentType,
             BlobFileType type)
@@ -41,7 +41,7 @@ namespace I3Lab.Works.Domain.BlobFiles
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateBaseOnWork(WorkId workId, string fileName, ContentType ContentType, BlobFileType type)
+        public static BlobFile CreateBaseOnWork(TreatmentStageId workId, string fileName, ContentType ContentType, BlobFileType type)
             => new BlobFile(workId, fileName, ContentType, type);
 
 

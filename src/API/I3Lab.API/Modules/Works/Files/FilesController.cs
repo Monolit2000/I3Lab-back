@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
-using I3Lab.Works.Application.BlobFiles.AddBlobFile;
-using I3Lab.Works.Application.BlobFiles.GetBlobFile;
+using I3Lab.Treatments.Application.BlobFiles.AddBlobFile;
+using I3Lab.Treatments.Application.BlobFiles.GetBlobFile;
 using Microsoft.AspNetCore.Http;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
-using I3Lab.Works.Application.BlobFiles.GetBlobFilesByWorkId;
+using I3Lab.Treatments.Application.BlobFiles.GetBlobFilesByWorkId;
 
 namespace I3Lab.API.Modules.Works.Files
 {

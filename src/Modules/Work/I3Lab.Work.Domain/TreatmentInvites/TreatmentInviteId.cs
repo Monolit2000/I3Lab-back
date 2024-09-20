@@ -1,6 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 
-namespace I3Lab.Works.Domain.TreatmentInvites
+namespace I3Lab.Treatments.Domain.TreatmentInvites
 {
     public class TreatmentInviteId : TypedIdValueBase
     {

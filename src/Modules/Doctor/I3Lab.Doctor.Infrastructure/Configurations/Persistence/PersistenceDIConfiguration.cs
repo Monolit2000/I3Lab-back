@@ -7,7 +7,6 @@ using I3Lab.BuildingBlocks.Infrastructure.Domain;
 using I3Lab.Doctors.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-
 namespace I3Lab.Doctors.Infrastructure.Configurations.Persistence
 {
     public static class PersistenceDIConfiguration

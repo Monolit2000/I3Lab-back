@@ -1,10 +1,10 @@
-﻿using I3Lab.Works.Domain.Members;
+﻿using I3Lab.Treatments.Domain.Members;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using I3Lab.Works.Infrastructure.Domain.Works;
+using I3Lab.Treatments.Infrastructure.Domain.Works;
 
 
-namespace I3Lab.Works.Infrastructure.Domain.Members
+namespace I3Lab.Treatments.Infrastructure.Domain.Members
 {
     public class MemberConfiguration : IEntityTypeConfiguration<Member>
     {

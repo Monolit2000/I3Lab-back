@@ -1,5 +1,5 @@
-﻿using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Works;
+﻿using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Infrastructure.Domain.BlobFiles
+namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
 {
     public class BlobFileConfiguration : IEntityTypeConfiguration<BlobFile>
     {

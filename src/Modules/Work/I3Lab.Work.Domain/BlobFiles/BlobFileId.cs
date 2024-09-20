@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.BlobFiles
+namespace I3Lab.Treatments.Domain.BlobFiles
 {
     public class BlobFileId : TypedIdValueBase
     {

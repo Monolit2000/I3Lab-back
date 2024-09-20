@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.BlobFiles.GetBlobFilesByWorkId
+namespace I3Lab.Treatments.Application.BlobFiles.GetBlobFilesByWorkId
 {
     public class GetAllBlobFilesByWorkIdCommand : IRequest<Result<List<BlobFileDto>>>
     {

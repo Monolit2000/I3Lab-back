@@ -1,17 +1,17 @@
-﻿using I3Lab.Works.Domain.Works;
+﻿using I3Lab.Treatments.Domain.TreatmentStages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Domain.BlobFiles
+namespace I3Lab.Treatments.Domain.BlobFiles
 {
     public interface IBlobFileRepository
     {
         Task<BlobFile> GetByIdAsync(BlobFileId id);
         Task<IEnumerable<BlobFile>> GetAllAsync();
-        Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(WorkId workId);
+        Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(TreatmentStageId workId);
         Task AddAsync(BlobFile blobFile);
         Task UpdateAsync(BlobFile blobFile);
         Task DeleteAsync(BlobFileId id);

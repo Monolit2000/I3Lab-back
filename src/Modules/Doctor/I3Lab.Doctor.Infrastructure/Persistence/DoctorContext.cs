@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using I3Lab.Doctors.Domain.DoctorCreationProposals;
 using I3Lab.Doctors.Infrastructure.Domain.DoctorCreationProposals;
 using I3Lab.Doctors.Infrastructure.Domain.Doctors;
+using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 
 namespace I3Lab.Doctors.Infrastructure.Persistence
 {
@@ -10,6 +11,7 @@ namespace I3Lab.Doctors.Infrastructure.Persistence
     {
         public DbSet<Doctor> Doctors { get; set; }
 
+        public DbSet<InternalCommand> InternalCommands { get; set; }
         public DbSet<DoctorCreationProposal> DoctorCreationProposals { get; set; }
 
         public DoctorContext(DbContextOptions<DoctorContext> options) 

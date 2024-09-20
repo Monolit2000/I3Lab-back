@@ -1,9 +1,9 @@
-﻿using I3Lab.Works.Application.Configuration.Commands;
-using I3Lab.Works.Application.Works.CreateWorks;
-using I3Lab.Works.Domain.Treatments.Events;
+﻿using I3Lab.Treatments.Application.Configuration.Commands;
+using I3Lab.Treatments.Application.Works.CreateWorks;
+using I3Lab.Treatments.Domain.Treatments.Events;
 using MediatR;
 
-namespace I3Lab.Works.Application.Treatments.CreateTreatment
+namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
     public class TreatmentCreatedDomainEventHandler(
         ICommandsScheduler commandsScheduler,

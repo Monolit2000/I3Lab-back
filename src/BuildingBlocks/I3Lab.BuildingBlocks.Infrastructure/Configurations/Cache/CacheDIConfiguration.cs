@@ -1,6 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Application.Cache;
 using I3Lab.BuildingBlocks.Infrastructure.Cache;
-using I3Lab.Works.Application.BlobFiles.AddBlobFile;
+using I3Lab.Treatments.Application.BlobFiles.AddBlobFile;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

@@ -2,7 +2,7 @@
 using MediatR;
 
 
-namespace I3Lab.Works.Application.WorkComments.AddWorkComment
+namespace I3Lab.Treatments.Application.WorkComments.AddWorkComment
 {
     public class AddWorkCommentCommand : IRequest<Result<WorkCommentDto>>
     {

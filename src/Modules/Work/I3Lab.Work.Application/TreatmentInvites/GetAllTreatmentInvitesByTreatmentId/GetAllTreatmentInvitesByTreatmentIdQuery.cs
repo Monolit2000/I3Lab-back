@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId
+namespace I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId
 {
     public class GetAllTreatmentInvitesByTreatmentIdQuery : IRequest<Result<List<TreatmentInviteDto>>>
     {

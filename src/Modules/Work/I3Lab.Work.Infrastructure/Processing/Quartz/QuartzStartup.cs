@@ -1,9 +1,9 @@
-﻿using I3Lab.Works.Infrastructure.Processing.InternalCommands;
+﻿using I3Lab.Treatments.Infrastructure.Processing.InternalCommands;
 using Quartz.Impl;
 using Quartz;
 using System.Collections.Specialized;
 
-namespace I3Lab.Works.Infrastructure.Processing.Quartz
+namespace I3Lab.Treatments.Infrastructure.Processing.Quartz
 {
     internal static class QuartzStartup
     {

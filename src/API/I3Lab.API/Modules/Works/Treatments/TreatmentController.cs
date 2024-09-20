@@ -2,7 +2,7 @@
 using MediatR;
 using I3Lab.Users.Application.Register;
 using Microsoft.AspNetCore.Authorization;
-using I3Lab.Works.Application.Treatments.CreateTreatment;
+using I3Lab.Treatments.Application.Treatments.CreateTreatment;
 using I3Lab.API.Modules.Works.Work;
 using I3Lab.API.Modules.Base;
 

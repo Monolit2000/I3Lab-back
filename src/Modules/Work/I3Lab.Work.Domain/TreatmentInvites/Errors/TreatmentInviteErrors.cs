@@ -1,8 +1,8 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatments;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
 
-namespace I3Lab.Works.Domain.TreatmentInvites.Errors
+namespace I3Lab.Treatments.Domain.TreatmentInvites.Errors
 {
     public static class TreatmentInviteErrors
     {

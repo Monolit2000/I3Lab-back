@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Members.RemoveMember
+namespace I3Lab.Treatments.Application.Members.RemoveMember
 {
     public class RemoveMemberCommand : IRequest<Result>
     {

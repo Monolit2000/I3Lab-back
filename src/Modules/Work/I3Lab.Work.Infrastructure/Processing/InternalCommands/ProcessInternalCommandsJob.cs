@@ -1,6 +1,6 @@
 ﻿using Quartz;
 
-namespace I3Lab.Works.Infrastructure.Processing.InternalCommands
+namespace I3Lab.Treatments.Infrastructure.Processing.InternalCommands
 {
     [DisallowConcurrentExecution]
     public class ProcessInternalCommandsJob : IJob

@@ -1,8 +1,8 @@
 ﻿//using FluentAssertions;
-//using I3Lab.Works.Application.Members.CreateMember;
-//using I3Lab.Works.Domain.Members;
+//using I3Lab.TreatmentStages.Application.Members.CreateMember;
+//using I3Lab.TreatmentStages.Domain.Members;
 //using NSubstitute;
-//namespace I3Lab.Works.UnitTests.Members
+//namespace I3Lab.TreatmentStages.UnitTests.Members
 //{
 //    public class CreateMemberCommandHandlerTests
 //    {

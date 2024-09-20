@@ -1,11 +1,11 @@
-﻿using I3Lab.Works.Application.WorkChats.AddMessage;
+﻿using I3Lab.Treatments.Application.WorkChats.AddMessage;
 using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using I3Lab.Works.Application.WorkChats.AddChatMember;
-using I3Lab.Works.Application.WorkChats.RemoveChatMessage;
+using I3Lab.Treatments.Application.WorkChats.AddChatMember;
+using I3Lab.Treatments.Application.WorkChats.RemoveChatMessage;
 using I3Lab.API.Modules.Base;
-using I3Lab.Works.Application.WorkChats.EditChatMessage;
-using I3Lab.Works.Application.WorkChats.GetAllChatMessageByWorkId;
+using I3Lab.Treatments.Application.WorkChats.EditChatMessage;
+using I3Lab.Treatments.Application.WorkChats.GetAllChatMessageByWorkId;
 
 namespace I3Lab.API.Modules.Works.WorkChats
 {

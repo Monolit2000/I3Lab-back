@@ -1,10 +1,10 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.WorkComments;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentStageComments;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
-namespace I3Lab.Works.Application.WorkComments.AddWorkComment
+namespace I3Lab.Treatments.Application.WorkComments.AddWorkComment
 {
     //public class AddWorkCommentCommandHandler(
     //    IWorkCommentRepository workCommentRepository) : IRequestHandler<AddWorkCommentCommand, Result<WorkCommentDto>>

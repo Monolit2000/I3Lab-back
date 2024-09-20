@@ -1,13 +1,13 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 
-namespace I3Lab.Works.Domain.Treatments
+namespace I3Lab.Treatments.Domain.Treatments
 {
     public class TreatmentStage : Entity
     {
-        public WorkId Id { get; private set; }  
+        public TreatmentStageId Id { get; private set; }  
 
         public TreatmentId TreatmentId {  get; private set; }   
 
@@ -15,7 +15,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         private TreatmentStage(
             TreatmentId treatmentId,
-            WorkId workId)
+            TreatmentStageId workId)
         {
             Id = workId;    
             TreatmentId = treatmentId;
@@ -23,7 +23,7 @@ namespace I3Lab.Works.Domain.Treatments
 
         public static TreatmentStage CreateNew(
             TreatmentId treatmentId,
-            WorkId workId)
+            TreatmentStageId workId)
         {
             return new TreatmentStage(
                 treatmentId,

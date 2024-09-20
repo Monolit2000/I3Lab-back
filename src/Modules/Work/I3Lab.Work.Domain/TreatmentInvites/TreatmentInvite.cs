@@ -1,12 +1,12 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.Treatments;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
 using FluentResults;
-using I3Lab.Works.Domain.TreatmentInvites.Events;
-using I3Lab.Works.Domain.TreatmentInvites.Errors;
-using I3Lab.Works.Domain.TreatmentInvites.Rule;
+using I3Lab.Treatments.Domain.TreatmentInvites.Events;
+using I3Lab.Treatments.Domain.TreatmentInvites.Errors;
+using I3Lab.Treatments.Domain.TreatmentInvites.Rule;
 
-namespace I3Lab.Works.Domain.TreatmentInvites
+namespace I3Lab.Treatments.Domain.TreatmentInvites
 {
     public class TreatmentInvite : Entity, IAggregateRoot
     {

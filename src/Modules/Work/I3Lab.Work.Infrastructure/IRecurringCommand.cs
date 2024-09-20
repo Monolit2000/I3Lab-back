@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Infrastructure
+namespace I3Lab.Treatments.Infrastructure
 {
     public interface IRecurringCommand
     {

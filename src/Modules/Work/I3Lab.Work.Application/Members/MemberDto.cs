@@ -1,4 +1,4 @@
-﻿namespace I3Lab.Works.Application.Members
+﻿namespace I3Lab.Treatments.Application.Members
 {
     public class MemberDto
     {

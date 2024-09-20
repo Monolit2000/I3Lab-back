@@ -1,23 +1,23 @@
-﻿using I3Lab.Works.Application.Configuration.Commands;
-using I3Lab.Works.Application.Contract;
-using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Members;
-using I3Lab.Works.Domain.TreatmentInvites;
-using I3Lab.Works.Domain.Treatments;
-using I3Lab.Works.Domain.WorkChats;
-using I3Lab.Works.Domain.Works;
-using I3Lab.Works.Infrastructure.Domain.BlobFiles;
-using I3Lab.Works.Infrastructure.Domain.Members;
-using I3Lab.Works.Infrastructure.Domain.TreatmentInvites;
-using I3Lab.Works.Infrastructure.Domain.Treatments;
-using I3Lab.Works.Infrastructure.Domain.WorkChats;
-using I3Lab.Works.Infrastructure.Domain.Works;
-using I3Lab.Works.Infrastructure.Processing.InternalCommands;
+﻿using I3Lab.Treatments.Application.Configuration.Commands;
+using I3Lab.Treatments.Application.Contract;
+using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Domain.TreatmentStageChats;
+using I3Lab.Treatments.Domain.TreatmentStages;
+using I3Lab.Treatments.Infrastructure.Domain.BlobFiles;
+using I3Lab.Treatments.Infrastructure.Domain.Members;
+using I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites;
+using I3Lab.Treatments.Infrastructure.Domain.Treatments;
+using I3Lab.Treatments.Infrastructure.Domain.WorkChats;
+using I3Lab.Treatments.Infrastructure.Domain.Works;
+using I3Lab.Treatments.Infrastructure.Processing.InternalCommands;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace I3Lab.Works.Infrastructure.Configurations.Application
+namespace I3Lab.Treatments.Infrastructure.Configurations.Application
 {
     public static class ApplicationDIConfiguration
     {
@@ -36,10 +36,10 @@ namespace I3Lab.Works.Infrastructure.Configurations.Application
             
             services.AddScoped<IMemberContext, MemberContext>();
             services.AddScoped<IMemberRepository, MemberRepository>();
-            services.AddScoped<IWorkRepository, WorkRepository>();
+            services.AddScoped<ITreatmentStageRepository, TreatmentStageRepository>();
             //services.AddScoped<IWorkCommentRepository, WorkCommentRepository>();
             services.AddScoped<ITreatmentInviteRepository, TreatmentInviteRepository>();
-            services.AddScoped<IWorkChatRepository, WorkChatRepository>();
+            services.AddScoped<ITreatmentStageChatRepository, TreatmentStageChatRepository>();
             services.AddScoped<IBlobFileRepository, BlobFileRepository>();
             services.AddScoped<ITretmentRepository, TretmentRepository>();
 

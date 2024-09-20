@@ -1,4 +1,4 @@
-﻿//using I3Lab.Works.Domain.Treatments.Events;
+﻿//using I3Lab.TreatmentStages.Domain.Treatments.Events;
 //using MediatR;
 //using System;
 //using System.Collections.Generic;
@@ -6,7 +6,7 @@
 //using System.Text;
 //using System.Threading.Tasks;
 
-//namespace I3Lab.Works.Application.Treatments.AddTreatmentMember
+//namespace I3Lab.TreatmentStages.Application.Treatments.AddTreatmentMember
 //{
 //    public class TreatmentMemberAddedDomainEventHandler(
 //        ISender sender): INotificationHandler<TreatmentMemberAddedDomainEvent>

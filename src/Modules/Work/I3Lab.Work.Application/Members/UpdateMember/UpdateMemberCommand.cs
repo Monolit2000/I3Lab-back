@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.Members.UpdateMember
+namespace I3Lab.Treatments.Application.Members.UpdateMember
 {
     public class UpdateMemberCommand : IRequest<Result>
     {

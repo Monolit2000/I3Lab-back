@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Users.Infrastructure.Persistence;
-using I3Lab.Works.Infrastructure.Persistence;
+using I3Lab.Treatments.Infrastructure.Persistence;
 using I3Lab.BuildingBlocks.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using I3Lab.Doctors.Infrastructure.Persistence;

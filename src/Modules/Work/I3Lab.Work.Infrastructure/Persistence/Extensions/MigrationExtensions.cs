@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace I3Lab.Works.Infrastructure.Persistence.Extensions
+namespace I3Lab.Treatments.Infrastructure.Persistence.Extensions
 {
     public static class MigrationExtensions
     {

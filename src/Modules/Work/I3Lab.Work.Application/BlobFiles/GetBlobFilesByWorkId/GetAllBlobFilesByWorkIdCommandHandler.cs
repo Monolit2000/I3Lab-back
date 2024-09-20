@@ -1,16 +1,16 @@
 ﻿using FluentResults;
-using I3Lab.Works.Domain.BlobFiles;
-using I3Lab.Works.Domain.Works;
+using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
-namespace I3Lab.Works.Application.BlobFiles.GetBlobFilesByWorkId
+namespace I3Lab.Treatments.Application.BlobFiles.GetBlobFilesByWorkId
 {
     public class GetAllBlobFilesByWorkIdCommandHandler(
         IBlobFileRepository blobFileRepository) : IRequestHandler<GetAllBlobFilesByWorkIdCommand, Result<List<BlobFileDto>>>
     {
         public async Task<Result<List<BlobFileDto>>> Handle(GetAllBlobFilesByWorkIdCommand request, CancellationToken cancellationToken)
         {
-            var files = await blobFileRepository.GetAllByWorkIdAsync(new WorkId(request.WorkId));
+            var files = await blobFileRepository.GetAllByWorkIdAsync(new TreatmentStageId(request.WorkId));
 
             if (files is null || !files.Any())
                 return new List<BlobFileDto>();

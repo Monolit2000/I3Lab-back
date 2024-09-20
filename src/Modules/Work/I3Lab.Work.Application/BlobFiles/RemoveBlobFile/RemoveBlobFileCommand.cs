@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace I3Lab.Works.Application.BlobFiles.RemoveBlobFile
+namespace I3Lab.Treatments.Application.BlobFiles.RemoveBlobFile
 {
     public class RemoveBlobFileCommand : IRequest<Result>
     {

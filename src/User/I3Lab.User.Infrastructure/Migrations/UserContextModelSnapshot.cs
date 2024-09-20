@@ -38,7 +38,7 @@ namespace I3Lab.Users.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<string>("Titel")
+                    b.Property<string>("TreatmentTitel")
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")
