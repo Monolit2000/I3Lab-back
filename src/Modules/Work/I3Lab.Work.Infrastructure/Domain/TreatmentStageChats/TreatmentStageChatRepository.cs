@@ -7,9 +7,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 {
     public class TreatmentStageChatRepository : ITreatmentStageChatRepository
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        public TreatmentStageChatRepository(WorkContext context)
+        public TreatmentStageChatRepository(TreatmentContext context)
         {
             _context = context;
         }

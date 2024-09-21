@@ -9,9 +9,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkComments
 {
     public class TreatmentStageCommentRepository /*: IWorkCommentRepository*/
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        //public WorkCommentRepository(WorkContext context)
+        //public WorkCommentRepository(TreatmentContext context)
         //{
         //    _context = context;
         //}
@@ -32,7 +32,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkComments
         //        .ToListAsync();
         //}
 
-        //public async Task<IEnumerable<WorkComment>> GetAllByWorkIdAsync(TreatmentId workId)
+        //public async Task<IEnumerable<WorkComment>> GetAllByTreatmentStageIdAsync(TreatmentId workId)
         //{
         //    return await _context.TreatmentStageComments
         //        .Include(wc => wc.PinedFiles)

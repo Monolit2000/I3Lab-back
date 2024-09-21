@@ -17,10 +17,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
         {
             builder.HasKey(bf => bf.Id);
 
-            builder.Property(bf => bf.WorkId).IsRequired();
-            builder.Property(bf => bf.BlobName).IsRequired(false);
-            builder.Property(bf => bf.FileName).IsRequired(false);
-            builder.Property(bf => bf.BlobDirectoryName).IsRequired(false);
+            builder.Property(bf => bf.TreatmentStageId).IsRequired();
+
+            builder.Property(bf => bf.TreatmentId).IsRequired(false);
 
             builder.OwnsOne(bf => bf.Path);
 

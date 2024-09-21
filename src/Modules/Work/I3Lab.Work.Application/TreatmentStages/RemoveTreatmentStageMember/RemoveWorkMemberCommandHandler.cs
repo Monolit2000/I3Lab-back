@@ -21,14 +21,14 @@
 //                return Result.Fail<WorkMemberDto>("TreatmentStage not found.");
 //            }
 
-//            var workMember = work.WorkMembers.FirstOrDefault(wm => wm.Member == new MemberId(request.MemberId));
+//            var workMember = work.TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member == new MemberId(request.MemberId));
 
 //            if (workMember == null)
 //            {
 //                return Result.Fail<WorkMemberDto>("TreatmentStage member not found.");
 //            }
 
-//            work.WorkMembers.Remove(workMember);
+//            work.TreatmentAccebilityMembers.Remove(workMember);
 
 //            await workRepository.UpdateAsync(work);
 

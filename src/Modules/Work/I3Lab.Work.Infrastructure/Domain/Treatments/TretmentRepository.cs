@@ -12,9 +12,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
 {
     public class TretmentRepository : ITretmentRepository
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        public TretmentRepository(WorkContext context)
+        public TretmentRepository(TreatmentContext context)
         {
             _context = context;
         }
@@ -31,10 +31,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
         public async Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
         {
             var treatment = await _context.Treatments
-                .Include(t => t.TreatmentStages)
                 .Include(t => t.TreatmentMembers)
                     .ThenInclude(tm => tm.Member)
-                .AsSplitQuery()
                 .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
 
             return treatment;
@@ -43,7 +41,6 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
         public async Task<IEnumerable<Treatment>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Treatments
-                .Include(t => t.TreatmentStages)
                 .ToListAsync();
         }
 

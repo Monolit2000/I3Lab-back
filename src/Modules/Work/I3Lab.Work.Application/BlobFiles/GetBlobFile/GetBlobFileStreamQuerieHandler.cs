@@ -16,7 +16,7 @@ namespace I3Lab.Treatments.Application.BlobFiles.GetBlobFile
             if (blobFile is null)
                 return Result.Fail("File not found");
 
-            var fileResponce = await blobService.DownloadAsync(new Guid(blobFile.FileName));
+            var fileResponce = await blobService.DownloadAsync(new Guid(blobFile.Path.FileName));
 
             return new BlobFileDto(fileResponce.Stream, fileResponce.ContentType);
         }

@@ -8,7 +8,6 @@ using I3Lab.Treatments.Infrastructure.Domain.BlobFiles;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Infrastructure.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentInvites;
-using System.Security.Permissions;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Infrastructure.Domain.WorkChats;
 using I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites;
@@ -16,7 +15,7 @@ using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 
 namespace I3Lab.Treatments.Infrastructure.Persistence
 {
-    public class WorkContext : DbContext
+    public class TreatmentContext : DbContext
     {
         //public DbSet<TreatmentStages.Domain.WorkDirectorys.WorkDirectory> WorkDirectories { get; set; }
 
@@ -33,7 +32,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
         public DbSet<BlobFile> BlobFiles { get; set; }
 
-        public WorkContext(DbContextOptions<WorkContext> options) : base(options)
+        public TreatmentContext(DbContextOptions<TreatmentContext> options) : base(options)
         {
         }
 

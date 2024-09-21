@@ -4,17 +4,20 @@ using System.Collections.Generic;
 using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace I3Lab.Treatments.Infrastructure.Migrations
+namespace I3Lab.Works.Infrastructure.Migrations
 {
-    [DbContext(typeof(WorkContext))]
-    partial class WorkContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TreatmentContext))]
+    [Migration("20240921012203_skdjshdf")]
+    partial class skdjshdf
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,32 +53,29 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.ToTable("InternalCommands", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFile", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.BlobFiles.BlobFile", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("BlobDirectoryName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("BlobName")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("FileName")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("TreatmentId")
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("TreatmentStageId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TreatmentId")
+                        .IsUnique();
+
                     b.ToTable("BlobFiles", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.Members.Member", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.Members.Member", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -93,7 +93,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.TreatmentStages.Domain.Members.Member.MemberRole#MemberRole", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.Treatments.Domain.Members.Member.MemberRole#MemberRole", b1 =>
                         {
                             b1.IsRequired();
 
@@ -107,7 +107,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.ToTable("Members", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentInvites.TreatmentInvite", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInvite", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -135,32 +135,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.ToTable("TreatmentInvites", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.Treatments.Treatment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("PatientId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("TreatmentPreviewId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatorId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("TreatmentPreviewId");
-
-                    b.ToTable("Treatments", "work");
-                });
-
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStageChats.TreatmentStageChat", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStageChats.TreatmentStageChat", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -173,7 +148,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.ToTable("TreatmentStageChats", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStage", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
@@ -187,10 +162,10 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("TreatmentId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("WorkStartedDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<Guid?>("TreatmentStageAvatarImageWorkId")
+                        .HasColumnType("uuid");
 
-                    b.ComplexProperty<Dictionary<string, object>>("TreatmentStageStatus", "I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStage.TreatmentStageStatus#TreatmentStageStatus", b1 =>
+                    b.ComplexProperty<Dictionary<string, object>>("TreatmentStageStatus", "I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage.TreatmentStageStatus#TreatmentStageStatus", b1 =>
                         {
                             b1.IsRequired();
 
@@ -205,14 +180,14 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("TreatmentId");
+                    b.HasIndex("TreatmentStageAvatarImageWorkId");
 
-                    b.ToTable("TreatmentStages", "work");
+                    b.ToTable("Works", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStageFile", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageFile", b =>
                 {
-                    b.Property<Guid>("TreatmentStageId")
+                    b.Property<Guid>("WorkId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreateDate")
@@ -221,22 +196,40 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("FileId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("WorkId1")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("TreatmentStageId");
+                    b.HasKey("WorkId");
 
                     b.HasIndex("FileId");
-
-                    b.HasIndex("WorkId1")
-                        .IsUnique();
 
                     b.ToTable("TreatmentStageFile", "work");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFile", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.Treatments.Treatment", b =>
                 {
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.BlobFiles.Accessibilitylevel", "Accessibilitylevel", b1 =>
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("PatientId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Treatments", "work");
+                });
+
+            modelBuilder.Entity("I3Lab.Treatments.Domain.BlobFiles.BlobFile", b =>
+                {
+                    b.HasOne("I3Lab.Treatments.Domain.Treatments.Treatment", null)
+                        .WithOne("TreatmentPreview")
+                        .HasForeignKey("I3Lab.Treatments.Domain.BlobFiles.BlobFile", "TreatmentId");
+
+                    b.OwnsOne("I3Lab.Treatments.Domain.BlobFiles.Accessibilitylevel", "Accessibilitylevel", b1 =>
                         {
                             b1.Property<Guid>("BlobFileId")
                                 .HasColumnType("uuid");
@@ -254,7 +247,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasForeignKey("BlobFileId");
                         });
 
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFilePath", "Path", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.BlobFiles.BlobFilePath", "Path", b1 =>
                         {
                             b1.Property<Guid>("BlobFileId")
                                 .HasColumnType("uuid");
@@ -276,7 +269,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasForeignKey("BlobFileId");
                         });
 
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFileType", "FileType", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.BlobFiles.BlobFileType", "FileType", b1 =>
                         {
                             b1.Property<Guid>("BlobFileId")
                                 .HasColumnType("uuid");
@@ -294,7 +287,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasForeignKey("BlobFileId");
                         });
 
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFileUrl", "Url", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.BlobFiles.BlobFileUrl", "Url", b1 =>
                         {
                             b1.Property<Guid>("BlobFileId")
                                 .HasColumnType("uuid");
@@ -312,7 +305,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasForeignKey("BlobFileId");
                         });
 
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.BlobFiles.ContentType", "ContentType", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.BlobFiles.ContentType", "ContentType", b1 =>
                         {
                             b1.Property<Guid>("BlobFileId")
                                 .HasColumnType("uuid");
@@ -340,27 +333,27 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Navigation("Url");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentInvites.TreatmentInvite", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInvite", b =>
                 {
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "Inviter")
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Inviter")
                         .WithMany()
                         .HasForeignKey("InviterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "MemberToInvite")
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "MemberToInvite")
                         .WithMany()
                         .HasForeignKey("MemberToInviteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Treatments.Treatment", "Treatment")
+                    b.HasOne("I3Lab.Treatments.Domain.Treatments.Treatment", "Treatment")
                         .WithMany()
                         .HasForeignKey("TreatmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.TreatmentInvites.TreatmentInviteStatus", "TreatmentInviteStatus", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInviteStatus", "TreatmentInviteStatus", b1 =>
                         {
                             b1.Property<Guid>("TreatmentInviteId")
                                 .HasColumnType("uuid");
@@ -387,139 +380,9 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Navigation("TreatmentInviteStatus");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.Treatments.Treatment", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStageChats.TreatmentStageChat", b =>
                 {
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId");
-
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId");
-
-                    b.HasOne("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFile", "TreatmentPreview")
-                        .WithMany()
-                        .HasForeignKey("TreatmentPreviewId");
-
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.Treatments.TreatmentTitel", "TreatmentTitel", b1 =>
-                        {
-                            b1.Property<Guid>("TreatmentId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("TreatmentTitel");
-
-                            b1.HasKey("TreatmentId");
-
-                            b1.ToTable("Treatments", "work");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TreatmentId");
-                        });
-
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.Treatments.TreatmentDate", "TreatmentDate", b1 =>
-                        {
-                            b1.Property<Guid>("TreatmentId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<DateTime>("TreatmentFinished")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<DateTime>("TreatmentStarted")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.HasKey("TreatmentId");
-
-                            b1.ToTable("Treatments", "work");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TreatmentId");
-                        });
-
-                    b.OwnsMany("I3Lab.TreatmentStages.Domain.Treatments.TreatmentMember", "TreatmentMembers", b1 =>
-                        {
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("uuid");
-
-                            b1.Property<Guid>("AddedById")
-                                .HasColumnType("uuid");
-
-                            b1.Property<DateTime>("JoinDate")
-                                .HasColumnType("timestamp with time zone");
-
-                            b1.Property<Guid>("MemberId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<Guid>("TreatmentId")
-                                .HasColumnType("uuid");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("AddedById");
-
-                            b1.HasIndex("MemberId");
-
-                            b1.HasIndex("TreatmentId");
-
-                            b1.ToTable("TreatmentMembers", "work");
-
-                            b1.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "AddedBy")
-                                .WithMany()
-                                .HasForeignKey("AddedById")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "Member")
-                                .WithMany()
-                                .HasForeignKey("MemberId")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
-
-                            b1.WithOwner()
-                                .HasForeignKey("TreatmentId");
-
-                            b1.OwnsOne("I3Lab.TreatmentStages.Domain.TreatmentStages.MemberAccessibilityType", "AccessibilityType", b2 =>
-                                {
-                                    b2.Property<Guid>("TreatmentMemberId")
-                                        .HasColumnType("uuid");
-
-                                    b2.Property<string>("Value")
-                                        .HasColumnType("text")
-                                        .HasColumnName("AccessibilityType");
-
-                                    b2.HasKey("TreatmentMemberId");
-
-                                    b2.ToTable("TreatmentMembers", "work");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("TreatmentMemberId");
-                                });
-
-                            b1.Navigation("AccessibilityType");
-
-                            b1.Navigation("AddedBy");
-
-                            b1.Navigation("Member");
-                        });
-
-                    b.Navigation("Creator");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("TreatmentTitel");
-
-                    b.Navigation("TreatmentDate");
-
-                    b.Navigation("TreatmentMembers");
-
-                    b.Navigation("TreatmentPreview");
-                });
-
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStageChats.TreatmentStageChat", b =>
-                {
-                    b.OwnsMany("I3Lab.TreatmentStages.Domain.TreatmentStageChats.ChatMember", "ChatMembers", b1 =>
+                    b.OwnsMany("I3Lab.Treatments.Domain.TreatmentStageChats.ChatMember", "ChatMembers", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -540,7 +403,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasForeignKey("TreatmentStageChatId");
                         });
 
-                    b.OwnsMany("I3Lab.TreatmentStages.Domain.TreatmentStageChats.ChatMessage", "Messages", b1 =>
+                    b.OwnsMany("I3Lab.Treatments.Domain.TreatmentStageChats.ChatMessage", "Messages", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -568,7 +431,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                             b1.Property<DateTime>("SentDate")
                                 .HasColumnType("timestamp with time zone");
 
-                            b1.Property<Guid>("TreatmentStageChatId")
+                            b1.Property<Guid>("WorkChatId")
                                 .HasColumnType("uuid");
 
                             b1.HasKey("Id");
@@ -577,20 +440,20 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasIndex("SenderId");
 
-                            b1.HasIndex("TreatmentStageChatId");
+                            b1.HasIndex("WorkChatId");
 
                             b1.ToTable("WorkChatMessages", "work");
 
-                            b1.HasOne("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFile", "FileResponceId")
+                            b1.HasOne("I3Lab.Treatments.Domain.BlobFiles.BlobFile", "FileResponceId")
                                 .WithMany()
                                 .HasForeignKey("FileResponceIdId");
 
-                            b1.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", null)
+                            b1.HasOne("I3Lab.Treatments.Domain.Members.Member", null)
                                 .WithMany()
                                 .HasForeignKey("SenderId");
 
                             b1.WithOwner()
-                                .HasForeignKey("TreatmentStageChatId");
+                                .HasForeignKey("WorkChatId");
 
                             b1.Navigation("FileResponceId");
                         });
@@ -600,21 +463,21 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStage", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", b =>
                 {
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "Creator")
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId");
 
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Members.Member", "Customer")
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
-                    b.HasOne("I3Lab.TreatmentStages.Domain.Treatments.Treatment", null)
-                        .WithMany("TreatmentStages")
-                        .HasForeignKey("TreatmentId");
+                    b.HasOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageFile", "TreatmentStageAvatarImage")
+                        .WithMany()
+                        .HasForeignKey("TreatmentStageAvatarImageWorkId");
 
-                    b.OwnsOne("I3Lab.TreatmentStages.Domain.TreatmentStages.WorkTitel", "TreatmentTitel", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageTitel", "Titel", b1 =>
                         {
                             b1.Property<Guid>("TreatmentStageId")
                                 .HasColumnType("uuid");
@@ -626,7 +489,26 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentStageId");
 
-                            b1.ToTable("TreatmentStages", "work");
+                            b1.ToTable("Works", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentStageId");
+                        });
+
+                    b.OwnsOne("I3Lab.Works.Domain.TreatmentStages.TreatmentStageDate", "TreatmentStageDate", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentStageId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("StageFinished")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<DateTime>("StageStarted")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.HasKey("TreatmentStageId");
+
+                            b1.ToTable("Works", "work");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentStageId");
@@ -636,38 +518,163 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.Navigation("Customer");
 
-                    b.Navigation("TreatmentTitel");
+                    b.Navigation("Titel");
+
+                    b.Navigation("TreatmentStageAvatarImage");
+
+                    b.Navigation("TreatmentStageDate");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStageFile", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageFile", b =>
                 {
-                    b.HasOne("I3Lab.TreatmentStages.Domain.BlobFiles.BlobFile", "File")
+                    b.HasOne("I3Lab.Treatments.Domain.BlobFiles.BlobFile", "File")
                         .WithMany()
                         .HasForeignKey("FileId");
 
-                    b.HasOne("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStage", null)
+                    b.HasOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", null)
                         .WithMany("WorkFiles")
-                        .HasForeignKey("TreatmentStageId")
+                        .HasForeignKey("WorkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStage", null)
-                        .WithOne("WorkAvatarImage")
-                        .HasForeignKey("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStageFile", "WorkId1");
 
                     b.Navigation("File");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.Treatments.Treatment", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.Treatments.Treatment", b =>
                 {
-                    b.Navigation("TreatmentStages");
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+
+                    b.OwnsOne("I3Lab.Treatments.Domain.Treatments.TreatmentDate", "TreatmentDate", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("TreatmentFinished")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<DateTime>("TreatmentStarted")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.HasKey("TreatmentId");
+
+                            b1.ToTable("Treatments", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentId");
+                        });
+
+                    b.OwnsMany("I3Lab.Treatments.Domain.Treatments.TreatmentMember", "TreatmentMembers", b1 =>
+                        {
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("AddedById")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("JoinDate")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<DateTime>("LeaveDate")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<Guid>("MemberId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<Guid>("TreatmentId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("AddedById");
+
+                            b1.HasIndex("MemberId");
+
+                            b1.HasIndex("TreatmentId");
+
+                            b1.ToTable("TreatmentMembers", "work");
+
+                            b1.HasOne("I3Lab.Treatments.Domain.Members.Member", "AddedBy")
+                                .WithMany()
+                                .HasForeignKey("AddedById")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.HasOne("I3Lab.Treatments.Domain.Members.Member", "Member")
+                                .WithMany()
+                                .HasForeignKey("MemberId")
+                                .OnDelete(DeleteBehavior.Cascade)
+                                .IsRequired();
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentId");
+
+                            b1.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.MemberAccessibilityType", "AccessibilityType", b2 =>
+                                {
+                                    b2.Property<Guid>("TreatmentMemberId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<string>("Value")
+                                        .HasColumnType("text")
+                                        .HasColumnName("AccessibilityType");
+
+                                    b2.HasKey("TreatmentMemberId");
+
+                                    b2.ToTable("TreatmentMembers", "work");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("TreatmentMemberId");
+                                });
+
+                            b1.Navigation("AccessibilityType");
+
+                            b1.Navigation("AddedBy");
+
+                            b1.Navigation("Member");
+                        });
+
+                    b.OwnsOne("I3Lab.Treatments.Domain.Treatments.TreatmentTitel", "Titel", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("TreatmentTitel");
+
+                            b1.HasKey("TreatmentId");
+
+                            b1.ToTable("Treatments", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentId");
+                        });
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("Patient");
+
+                    b.Navigation("Titel");
+
+                    b.Navigation("TreatmentDate");
+
+                    b.Navigation("TreatmentMembers");
                 });
 
-            modelBuilder.Entity("I3Lab.TreatmentStages.Domain.TreatmentStages.TreatmentStage", b =>
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", b =>
                 {
-                    b.Navigation("WorkAvatarImage");
-
                     b.Navigation("WorkFiles");
+                });
+
+            modelBuilder.Entity("I3Lab.Treatments.Domain.Treatments.Treatment", b =>
+                {
+                    b.Navigation("TreatmentPreview");
                 });
 #pragma warning restore 612, 618
         }

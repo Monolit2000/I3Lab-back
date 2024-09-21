@@ -1,19 +1,19 @@
-﻿//using I3Lab.TreatmentStages.Domain.Treatments.Events;
-//using MediatR;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using I3Lab.Treatments.Application.Configuration.Commands;
+using I3Lab.Treatments.Domain.Treatments.Events;
+using I3Lab.Works.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId;
+using MediatR;
 
-//namespace I3Lab.TreatmentStages.Application.Treatments.AddTreatmentMember
-//{
-//    public class TreatmentMemberAddedDomainEventHandler(
-//        ISender sender): INotificationHandler<TreatmentMemberAddedDomainEvent>
-//    {
-//        public async Task Handle(TreatmentMemberAddedDomainEvent notification, CancellationToken cancellationToken)
-//        {
-//            //throw new NotImplementedException();
-//        }
-//    }
-//}
+
+namespace I3Lab.TreatmentStages.Application.Treatments.AddTreatmentMember
+{
+    public class TreatmentMemberAddedDomainEventHandler(
+        ICommandsScheduler commandsScheduler) : INotificationHandler<TreatmentMemberAddedDomainEvent>
+    {
+        public async Task Handle(TreatmentMemberAddedDomainEvent notification, CancellationToken cancellationToken)
+        {
+            await commandsScheduler.EnqueueAsync(new AddChatMemberToAllTreatmentStageChatsByTreatmentIdCommand(
+                notification.MemberId, 
+                notification.TreatmentId));
+        }
+    }
+}

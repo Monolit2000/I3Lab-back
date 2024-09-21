@@ -1,13 +1,14 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Treatments.Domain.Members;
 
 namespace I3Lab.Treatments.Domain.Treatments.Events
 {
     public class TreatmentMemberAddedDomainEvent : DomainEventBase
     {
-        public Guid TreatmentId { get; }
-        public Guid MemberId { get; }
+        public TreatmentId TreatmentId { get; }
+        public MemberId MemberId { get; }
 
-        public TreatmentMemberAddedDomainEvent(Guid treatmentId, Guid memberId)
+        public TreatmentMemberAddedDomainEvent(TreatmentId treatmentId, MemberId memberId)
         {
             TreatmentId = treatmentId;
             MemberId = memberId;

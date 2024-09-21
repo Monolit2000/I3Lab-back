@@ -10,7 +10,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence.Extensions
         {
             using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-            using WorkContext workContext = scope.ServiceProvider.GetRequiredService<WorkContext>();
+            using TreatmentContext workContext = scope.ServiceProvider.GetRequiredService<TreatmentContext>();
 
             //workContext.Database.EnsureDeleted();
 

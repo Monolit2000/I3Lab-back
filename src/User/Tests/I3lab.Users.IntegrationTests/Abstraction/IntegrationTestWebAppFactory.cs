@@ -32,9 +32,9 @@ namespace I3lab.Users.IntegrationTests.Abstraction
                     .UseNpgsql(_dbContainer.GetConnectionString())
                     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-                services.RemoveAll(typeof(DbContextOptions<WorkContext>));
+                services.RemoveAll(typeof(DbContextOptions<TreatmentContext>));
 
-                services.AddDbContext<WorkContext>(options =>
+                services.AddDbContext<TreatmentContext>(options =>
                 options
                      .UseNpgsql(_dbContainer.GetConnectionString())
                      .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>());

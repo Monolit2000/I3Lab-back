@@ -6,21 +6,22 @@ using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages.Errors;
 using I3Lab.Treatments.Domain.TreatmentStages.Events;
+using I3Lab.Works.Domain.TreatmentStages;
 
 namespace I3Lab.Treatments.Domain.TreatmentStages
 {
     public class TreatmentStage : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
-
+        public Member Creator { get; private set; }
+        public Member Customer { get; private set; }
         public readonly List<TreatmentStageFile> WorkFiles = [];
+
         public TreatmentStageId Id { get; private set; }
         public TreatmentStageTitel Titel { get; private set; }
-        public TreatmentStageFile WorkAvatarImage  { get; private set; }
-        public Member Customer { get; private set; }
-        public TreatmentStageStatus WorkStatus { get; private set; }
-        public Member Creator { get; private set; }
-        public DateTime WorkStartedDate { get; private set; }   
+        public TreatmentStageFile TreatmentStageAvatarImage  { get; private set; }
+        public TreatmentStageStatus TreatmentStageStatus { get; private set; }
+        public TreatmentStageDate TreatmentStageDate { get; private set; }
 
         private TreatmentStage() { } //for Ef core
 
@@ -30,37 +31,33 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
             TreatmentStageTitel workTitel)
         {
             Id = new TreatmentStageId(Guid.NewGuid());
-            WorkStatus = TreatmentStageStatus.Pending;
             Creator = creatorId;
             TreatmentId = treatment;
-            Titel = workTitel; 
-            WorkStartedDate = DateTime.UtcNow;
+            Titel = workTitel;
+            TreatmentStageDate = TreatmentStageDate.Start();
+            TreatmentStageStatus = TreatmentStageStatus.Pending;
 
             AddDomainEvent(new WorkCreatedDomainEvent(Id, TreatmentId));
         }
 
-        public static async Task<Result<TreatmentStage>> CreateBasedOnTreatmentAsync(
+        public static Task<Result<TreatmentStage>> CreateBasedOnTreatmentAsync(
             Member creator,
             TreatmentId treatment,
             TreatmentStageTitel workTitel)
         {
             if (!IsMemberRoleValid(creator))
-                return Result.Fail(WorkErrors.MemberNotHaveRequiredRole);
+                return Task.FromResult(Result.Fail<TreatmentStage>(WorkErrors.MemberNotHaveRequiredRole));
 
-            return new TreatmentStage(
-                creator,
-                treatment,
-                workTitel);
+            var treatmentStage = new TreatmentStage(creator, treatment, workTitel);
+            return Task.FromResult(Result.Ok(treatmentStage));
         }
 
-        public BlobFile CreateWorkFile(string fileName, ContentType contentType, BlobFileType fileType)
-        {
-            return BlobFile.CreateBaseOnWork(this.Id, fileName, contentType, fileType);
-        }
-        public TreatmentStageChat CreateWorkChat(List<Member> members)
-        {
-            return TreatmentStageChat.CreateBaseOnWork(this.Id, members);
-        }
+        public BlobFile CreateTreatmentStageFile(BlobFileUrl url, ContentType contentType, BlobFileType fileType) 
+            => BlobFile.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, url, contentType, fileType);
+
+        public TreatmentStageChat CreateWorkChat(List<Member> members) 
+            => TreatmentStageChat.CreateBaseOnWork(this.Id, members);
+
         public void AddWorkFile(TreatmentStageId workId, BlobFile fileId)
         {
             var newWorkFile = TreatmentStageFile.CreateNew(workId, fileId);
@@ -69,7 +66,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
         public void SetWorkAvatarImage(TreatmentStageFile workFile)
         {
-            WorkAvatarImage = workFile;
+            TreatmentStageAvatarImage = workFile;
             AddDomainEvent(new WorkAvatarImageSetDomainEvent(workFile));
         }
 
@@ -84,10 +81,10 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
         public Result ChangeWorkStatus(TreatmentStageStatus newStatus)
         {
-            if (WorkStatus == newStatus)
+            if (TreatmentStageStatus == newStatus)
                 return Result.Ok(); 
 
-            WorkStatus = newStatus;
+            TreatmentStageStatus = newStatus;
             AddDomainEvent(new WorkStatusChangedDomainEvent(Id, newStatus));
             return Result.Ok();
         }
@@ -101,7 +98,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 }
 //private bool IsWorkMamberIdContainInWorkMembersList(MemberId memberId)
 //{
-//    var workMember = WorkMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
+//    var workMember = TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
 
 //    if (workMember == null)
 //      return false;
@@ -114,8 +111,8 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 //    if(IsWorkMamberIdContainInWorkMembersList(addedBy.Id))
 //        return Result.Fail(WorkErrors.WorkMemberNotFoundError);
 
-//    var newWorkMember = WorkMember.CreateBaseOnWork(this.Id, memberId, addedBy);
-//    WorkMembers.Add(newWorkMember);
+//    var newWorkMember = WorkMember.CreateBaseOnTreatmentStage(this.Id, memberId, addedBy);
+//    TreatmentAccebilityMembers.Add(newWorkMember);
 
 //    AddDomainEvent(new WorkMemberAddedDomainEvent(this.Id, memberId, addedBy));
 //    return Result.Ok();
@@ -123,12 +120,12 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
 //public Result RemoveWorkMember(MemberId memberId, MemberId removedBy)
 //{
-//    var workMember = WorkMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
+//    var workMember = TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
 //    if (workMember == null)
 //        return Result
 //            .Fail(WorkErrors.WorkMemberNotFoundError);
 
-//    WorkMembers.Remove(workMember);
+//    TreatmentAccebilityMembers.Remove(workMember);
 //    AddDomainEvent(new WorkMemberRemovedDomainEvent(Id, memberId, removedBy));
 //    return Result.Ok();
 //}

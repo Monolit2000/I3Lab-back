@@ -9,12 +9,13 @@ namespace I3Lab.Treatments.Domain.BlobFiles
 {
     public interface IBlobFileRepository
     {
-        Task<BlobFile> GetByIdAsync(BlobFileId id);
-        Task<IEnumerable<BlobFile>> GetAllAsync();
-        Task<IEnumerable<BlobFile>> GetAllByWorkIdAsync(TreatmentStageId workId);
-        Task AddAsync(BlobFile blobFile);
-        Task UpdateAsync(BlobFile blobFile);
-        Task DeleteAsync(BlobFileId id);
-        Task SaveChangesAsync();
+        Task<BlobFile> GetByIdAsync(BlobFileId id, CancellationToken cancellationToken = default);
+        Task<IEnumerable<BlobFile>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<IEnumerable<BlobFile>> GetAllByTreatmentStageIdAsync(TreatmentStageId workId, CancellationToken cancellationToken = default);
+        Task<List<BlobFile>> GetAllTypeAndTreatmentStageIdAsync(BlobFileType fileType, TreatmentStageId treatmentStageIdId, CancellationToken cancellationToken = default);
+        Task AddAsync(BlobFile blobFile, CancellationToken cancellationToken = default);
+        Task UpdateAsync(BlobFile blobFile, CancellationToken cancellationToken = default);
+        Task DeleteAsync(BlobFileId id, CancellationToken cancellationToken = default);
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

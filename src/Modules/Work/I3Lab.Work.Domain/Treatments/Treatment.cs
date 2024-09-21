@@ -11,9 +11,8 @@ namespace I3Lab.Treatments.Domain.Treatments
 {
     public class Treatment : Entity, IAggregateRoot
     {
-        public readonly List<TreatmentStage> TreatmentStages = [];
-
         public readonly List<TreatmentMember> TreatmentMembers = [];
+
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
 
@@ -66,20 +65,20 @@ namespace I3Lab.Treatments.Domain.Treatments
             return TreatmentInvite.InviteBasedOnTreatment(this , memberToInvite, inviter).Value;
         }
 
-        public async Task<Result<TreatmentStages.TreatmentStage>> CreateWorkAsync(Member creator, TreatmentStageTitel workTitel)
+        public async Task<Result<TreatmentStages.TreatmentStage>> CreateTreatmentStageAsync(Member creator, TreatmentStageTitel workTitel)
         {
             return await Domain.TreatmentStages.TreatmentStage.CreateBasedOnTreatmentAsync(creator, this.Id, workTitel);
         }
 
-        public void RemuveTreatmentStage(MemberId creatorId, TreatmentStageId workId)
-        {
-            var treatmentStages = TreatmentStages.FirstOrDefault(ts => ts.Id == workId);
-            if (treatmentStages == null) 
-                throw new InvalidOperationException("Member to invite not found.");
+        //public void RemuveTreatmentStage(MemberId creatorId, TreatmentStageId workId)
+        //{
+        //    var treatmentStages = TreatmentStages.FirstOrDefault(ts => ts.Id == workId);
+        //    if (treatmentStages == null) 
+        //        throw new InvalidOperationException("Member to invite not found.");
 
-            TreatmentStages.Remove(treatmentStages);
-            AddDomainEvent(new TreatmentRemuveWorkDomainEvent());
-        }
+        //    TreatmentStages.Remove(treatmentStages);
+        //    AddDomainEvent(new TreatmentRemuveWorkDomainEvent());
+        //}
 
 
         public Result AddTreatmentMember(Member member, Member addedBy)
@@ -91,7 +90,7 @@ namespace I3Lab.Treatments.Domain.Treatments
 
             TreatmentMembers.Add(treatmentMember);
 
-            AddDomainEvent(new TreatmentMemberAddedDomainEvent(Id.Value, member.Id.Value));
+            AddDomainEvent(new TreatmentMemberAddedDomainEvent(Id, member.Id));
 
             return Result.Ok();
         }
@@ -121,7 +120,7 @@ namespace I3Lab.Treatments.Domain.Treatments
 
         public void AddPreview(BlobFile fileId)
         {
-            var treatmentPreview = fileId; //TreatmentPreview.CreateBaseOnWork(this.Id, fileId);
+            var treatmentPreview = fileId; //TreatmentPreview.CreateBaseOnTreatmentStage(this.Id, fileId);
 
             TreatmentPreview = treatmentPreview;
         }

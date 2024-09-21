@@ -6,9 +6,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkDirectorys
 {
     public class WorkDirectoryRepository /*: IWorkDirectoryRepository*/
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        //public WorkDirectoryRepository(WorkContext context)
+        //public WorkDirectoryRepository(TreatmentContext context)
         //{
         //    _context = context;
         //}

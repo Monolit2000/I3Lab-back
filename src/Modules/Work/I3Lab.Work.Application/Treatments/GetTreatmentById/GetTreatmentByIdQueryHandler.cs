@@ -20,10 +20,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetTreatmentById
                 PatientId = treatment.Patient.Id.Value,
                 Name = treatment.Titel.Value,
                 CreateDate = treatment.TreatmentDate.TreatmentStarted,
-                TreatmentStages = treatment.TreatmentStages.Select(stage => new TreatmentStageDto
-                {
-                    Id = stage.Id.Value,
-                }).ToList()
+                TreatmentStages = new List<TreatmentStageDto>()
             };
 
             return Result.Ok(treatmentDto);

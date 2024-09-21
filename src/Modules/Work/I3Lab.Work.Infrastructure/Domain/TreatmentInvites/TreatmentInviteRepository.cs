@@ -7,9 +7,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
 {
     public class TreatmentInviteRepository : ITreatmentInviteRepository
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        public TreatmentInviteRepository(WorkContext context)
+        public TreatmentInviteRepository(TreatmentContext context)
         {
             _context = context;
         }

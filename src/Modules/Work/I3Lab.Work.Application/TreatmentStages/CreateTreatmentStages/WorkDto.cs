@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
         public Guid? CustomerId { get; set; }
         public string WorkAvatarImageUrl { get; set; }
 
-        //public List<WorkMemberDto> WorkMembers { get; set; } = new List<WorkMemberDto>();
+        //public List<WorkMemberDto> TreatmentAccebilityMembers { get; set; } = new List<WorkMemberDto>();
         //public List<TreatmentStageFileDto> WorkFiles { get; set; } = new List<TreatmentStageFileDto>();
     }
 }

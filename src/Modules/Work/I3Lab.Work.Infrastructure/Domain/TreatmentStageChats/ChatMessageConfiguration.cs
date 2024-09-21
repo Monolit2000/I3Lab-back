@@ -9,7 +9,6 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
     {
         public void Configure(EntityTypeBuilder<ChatMessage> builder)
         {
-            // Установка имени таблицы
             builder.ToTable("ChatMessages");
 
 
@@ -26,15 +25,11 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
             builder.Property(cm => cm.EditDate)
                    .IsRequired(false);
 
-            // Настройка отношения с TreatmentStageChat
             builder.HasOne<TreatmentStageChat>()
                    .WithMany(wc => wc.Messages)
                    .HasForeignKey(cm => cm.WorkChatId)
                    .OnDelete(DeleteBehavior.Cascade);
 
-
-
-            // Настройка отношения с Member
             builder.HasOne<Member>()
                    .WithMany()
                    .HasForeignKey(cm => cm.SenderId);

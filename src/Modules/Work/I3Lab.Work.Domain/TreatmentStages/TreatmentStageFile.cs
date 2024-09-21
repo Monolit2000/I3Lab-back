@@ -8,7 +8,6 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
     {
         public TreatmentStageId WorkId { get; private set; }
         public BlobFile File { get; private set; }
-
         public DateTime CreateDate { get; private set; }
 
         private TreatmentStageFile() { } //For EF CORE 

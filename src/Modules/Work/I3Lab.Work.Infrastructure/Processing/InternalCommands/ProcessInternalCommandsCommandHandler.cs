@@ -8,7 +8,7 @@ using Polly;
 namespace I3Lab.Treatments.Infrastructure.Processing.InternalCommands
 {
     internal class ProcessInternalCommandsCommandHandler(
-        WorkContext dbContext) : ICommandHandler<ProcessInternalCommandsCommand>
+        TreatmentContext dbContext) : ICommandHandler<ProcessInternalCommandsCommand>
     {
         public async Task Handle(ProcessInternalCommandsCommand command, CancellationToken cancellationToken)
         {

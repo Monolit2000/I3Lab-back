@@ -19,14 +19,14 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Persistence
         {
             services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
-            services.AddDbContext<WorkContext>((sp, options) =>
+            services.AddDbContext<TreatmentContext>((sp, options) =>
             {
                 options.ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
                 options.UseNpgsql(configuration.GetConnectionString("Database"));
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             });
 
-            // services.AddScoped<WorkContext>();
+            // services.AddScoped<TreatmentContext>();
 
             return services;
         }

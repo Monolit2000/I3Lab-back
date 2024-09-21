@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
 {
     public class ChatMember : Entity
     {
-        public TreatmentStageChatId WorkChatId { get; set; }
+        public TreatmentStageChatId TreatmentStageChatId { get; set; }
 
         [Key]
         public ChatMemberId Id { get; set; }  
@@ -27,7 +27,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         {
             Id = new ChatMemberId(Guid.NewGuid());
             MemberId = memberId;
-            WorkChatId = workChatId;
+            TreatmentStageChatId = workChatId;
         }
 
         public static ChatMember CreateNew(

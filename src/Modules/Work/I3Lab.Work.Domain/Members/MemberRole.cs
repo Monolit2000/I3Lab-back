@@ -1,7 +1,5 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.TreatmentStages;
-using System.Net;
 
 namespace I3Lab.Treatments.Domain.Members
 {

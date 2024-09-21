@@ -1,23 +1,34 @@
-﻿using I3Lab.BuildingBlocks.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 
 namespace I3Lab.Treatments.Domain.TreatmentStages
 {
     public class TreatmentStageStatus : ValueObject
     {
+        public static TreatmentStageStatus Pending => new TreatmentStageStatus(nameof(Pending));
+        public static TreatmentStageStatus Active => new TreatmentStageStatus(nameof(Active));
+        public static TreatmentStageStatus Completed => new TreatmentStageStatus(nameof(Completed));
+
         public string Value { get; }
 
-        internal static TreatmentStageStatus Pending => new TreatmentStageStatus(nameof(Pending));
-        internal static TreatmentStageStatus Active => new TreatmentStageStatus(nameof(Active));
-        internal static TreatmentStageStatus Completed => new TreatmentStageStatus(nameof(Completed));
+        private static readonly HashSet<string> ValidStatuses = new HashSet<string>
+        {
+            nameof(Pending),
+            nameof(Active),
+            nameof(Completed)
+        };
 
-        public TreatmentStageStatus(string value)
+        private TreatmentStageStatus(string value)
         {
             Value = value;
+        }
+
+        public static Result<TreatmentStageStatus> Create(string value)
+        {
+            if (!ValidStatuses.Contains(value))
+                return Result.Fail($"Invalid treatment stage status value: {value}");
+
+            return new TreatmentStageStatus(value);
         }
     }
 }

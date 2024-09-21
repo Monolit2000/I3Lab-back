@@ -3,6 +3,7 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
+using TreatmentStage = I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage;
 
 namespace I3Lab.Treatments.Application.Works.CreateWorks
 {
@@ -27,11 +28,14 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
 
             foreach (var titel in BaseWorkTitels)
             {
-                var workResult = await Domain.TreatmentStages.TreatmentStage.CreateBasedOnTreatmentAsync(
-                    creator, new TreatmentId(request.TreatmentId), TreatmentStageTitel.Create(titel));
+                var workResult = await TreatmentStage.CreateBasedOnTreatmentAsync(
+                    creator, 
+                    new TreatmentId(request.TreatmentId), 
+                    TreatmentStageTitel.Create(titel));
 
                 if (workResult.IsFailed)
                     return;
+
                 var work = workResult.Value;
 
                 await workRepository.AddAsync(work);
@@ -44,7 +48,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
             //    Id = work.Id.Value,
             //    TreatmentId = work.Treatment.Id.Value,
             //    TreatmentStageStatus = work.TreatmentStageStatus.Value,
-            //    WorkStartedDate = work.WorkStartedDate,
+            //    TreatmentStageStartedDate = work.TreatmentStageStartedDate,
             //    Creator = work.Creator.Id.Value
             //};
 

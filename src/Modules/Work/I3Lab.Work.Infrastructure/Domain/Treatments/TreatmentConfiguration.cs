@@ -13,8 +13,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
             builder.HasKey(e => e.Id);
 
 
-            builder.HasMany(e => e.TreatmentStages)
-                   .WithOne();
+            //builder.HasMany(e => e.TreatmentStages)
+            //       .WithOne();
 
             builder.OwnsOne(t => t.TreatmentDate);
 
@@ -33,7 +33,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
 
                 b.Property(wm => wm.JoinDate).IsRequired();
 
-                b.Property(tm => tm.LeaveDate).IsRequired(false);
+                b.Property(tm => tm.LeaveDate);
 
                 b.HasOne(vm => vm.Member)
                   .WithMany() 

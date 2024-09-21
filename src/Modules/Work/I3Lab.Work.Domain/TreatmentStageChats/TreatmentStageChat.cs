@@ -1,8 +1,8 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
 using I3Lab.Treatments.Domain.TreatmentStages;
+using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats
 {
@@ -12,8 +12,8 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         public List<ChatMessage> Messages { get; private set; } = [];
         public List<ChatMember> ChatMembers { get; private set; } = [];
 
-
         public TreatmentStageChatId Id { get; private set; }
+
         private TreatmentStageChat() { } // For EF Core
 
         private TreatmentStageChat(
@@ -113,7 +113,6 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
 
             var chatMember = ChatMember.CreateNew(Id, member.Id);
 
-           // var newParticipant = new ChatMember(memberId);
             ChatMembers.Add(chatMember);
         }
 

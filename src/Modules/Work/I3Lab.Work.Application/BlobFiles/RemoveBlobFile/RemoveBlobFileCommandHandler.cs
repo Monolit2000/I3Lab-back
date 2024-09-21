@@ -10,6 +10,7 @@ namespace I3Lab.Treatments.Application.BlobFiles.RemoveBlobFile
         public async Task<Result> Handle(RemoveBlobFileCommand request, CancellationToken cancellationToken)
         {
             await blobFileRepository.DeleteAsync(new BlobFileId(request.BlobFileId));
+            await blobFileRepository.SaveChangesAsync();
             return Result.Ok();
         }
     }

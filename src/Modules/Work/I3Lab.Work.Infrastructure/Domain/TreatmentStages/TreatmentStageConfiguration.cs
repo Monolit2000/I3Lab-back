@@ -40,13 +40,21 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
                 b.Property(t => t.Value).HasColumnName("TreatmentTitel").IsRequired();
             });
 
-            builder.Property(e => e.WorkStartedDate).IsRequired();
+            //builder.Property(e => e.TreatmentStageStartedDate).IsRequired();
 
-            builder.ComplexProperty(o => o.WorkStatus, b =>
+            builder.ComplexProperty(o => o.TreatmentStageStatus, b =>
             {
                 b.IsRequired();
                 b.Property(a => a.Value).HasColumnName("TreatmentStageStatus");
             });
+
+            builder.OwnsOne(ts => ts.TreatmentStageDate);
+
+            //builder.OwnsOne(ts => ts.TreatmentStageDate, b => 
+            //{
+            //    b.Property(date => date.StageStarted).IsRequired();
+            //    b.Property(date => date.StageFinished);
+            //});
 
             //builder.OwnsMany(e => e.WorkFiles, b =>
             //{
@@ -65,14 +73,14 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
             //});
 
 
-            //builder.HasMany(e => e.WorkMembers)
+            //builder.HasMany(e => e.TreatmentAccebilityMembers)
             //    .WithOne()
             //    .HasForeignKey(m => m.TreatmentId)
             //    .OnDelete(DeleteBehavior.Cascade)
             //    .IsRequired();
 
 
-            //builder.OwnsMany(e => e.WorkMembers, b =>
+            //builder.OwnsMany(e => e.TreatmentAccebilityMembers, b =>
             //{
             //    b.HasKey(wm => new { wm.TreatmentStageId, wm.Member });
 
@@ -99,33 +107,4 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
 
         }
     }
-
-    //public class WorkIdConverter : ValueConverter<TreatmentId, Guid>
-    //{
-    //    public WorkIdConverter()
-    //        : base(id => id.Value, value => new TreatmentId(value)) { }
-    //}
-
-    //public class TreatmentIdConverter : ValueConverter<TreatmentId, Guid>
-    //{
-    //    public TreatmentIdConverter()
-    //        : base(id => id.Value, value => new TreatmentId(value)) { }
-    //}
-
-    //public class MemberIdConverter : ValueConverter<MemberToInvite, Guid>
-    //{
-    //    public MemberIdConverter()
-    //        : base(id => id.Value, value => new MemberToInvite(value)) { }
-    //}
-    ////public class WorkFileIdConverter : ValueConverter<WorkFileId, Guid>
-    ////{
-    ////    public WorkFileIdConverter()
-    ////        : base(id => id.Value, value => new WorkFileId(value)) { }
-    ////}
-
-    //public class BlobFileIdConverter : ValueConverter<BlobFile, Guid>
-    //{
-    //    public BlobFileIdConverter()
-    //        : base(id => id.Value, value => new BlobFile(value)) { }
-    //}
 }

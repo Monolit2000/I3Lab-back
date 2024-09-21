@@ -104,7 +104,7 @@
 //            var command = new CreateWorksCommand { TreatmentId = treatmentId };
 //            var treatment = Treatment.CreateNew(new MemberId(Guid.NewGuid()), new MemberId(Guid.NewGuid()), "Test Treatments");
 //            var member = Member.CreateNew("creator@example.com");
-//            var work = await treatment.CreateWorkAsync(member);
+//            var work = await treatment.CreateTreatmentStageAsync(member);
 
 //            _tretmentRepository.GetByIdAsync(Arg.Any<TreatmentId>(), Arg.Any<CancellationToken>())
 //                .Returns(treatment);

@@ -11,9 +11,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
 {
     public class MemberRepository : IMemberRepository
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        public MemberRepository(WorkContext context)
+        public MemberRepository(TreatmentContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }

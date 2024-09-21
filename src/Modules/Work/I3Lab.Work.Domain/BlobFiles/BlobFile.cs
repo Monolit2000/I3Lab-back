@@ -7,42 +7,41 @@ namespace I3Lab.Treatments.Domain.BlobFiles
 {
     public class BlobFile : Entity, IAggregateRoot 
     {
-        public TreatmentStageId WorkId { get; private set; }
+        public TreatmentStageId TreatmentStageId { get; private set; }
+        public TreatmentId TreatmentId { get; private set; }
 
-        //public TreatmentId TreatmentId { get; private set; }
- 
         public BlobFileId Id { get; private set; }
         public BlobFileType FileType { get; private set; }
         public ContentType ContentType { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
-        public string BlobName { get; private set; }
-        public string FileName { get; private set; }
-        public string BlobDirectoryName { get; private set; }
         public BlobFileUrl Url { get; private set; }
         public BlobFilePath Path { get; private set; }
         public DateTime CreateDate { get; private set; }
 
         private BlobFile() { } //For EF core 
 
+        
         private BlobFile(
+            TreatmentId treatmentId,
             TreatmentStageId workId,
-            string fileName,
             ContentType contentType,
+            BlobFileUrl url,
             BlobFileType type)
         {
-            WorkId = workId;
             Id = new BlobFileId(Guid.NewGuid());
-            FileName = fileName;
+            TreatmentId = treatmentId;
+            TreatmentStageId = workId;
             FileType = type;
             ContentType = contentType;
+            Url = url;
             CreateDate = DateTime.UtcNow;
-            Path = BlobFilePath.Create("undefine", Id.Value.ToString());
+            Path = BlobFilePath.Create("undefine", Id.Value.ToString()).Value;
             Accessibilitylevel = Accessibilitylevel.Hot;
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateBaseOnWork(TreatmentStageId workId, string fileName, ContentType ContentType, BlobFileType type)
-            => new BlobFile(workId, fileName, ContentType, type);
+        public static BlobFile CreateBaseOnTreatmentStage(TreatmentId treatmentId, TreatmentStageId treatmentStageId, BlobFileUrl url, ContentType ContentType, BlobFileType type)
+            => new BlobFile(treatmentId, treatmentStageId, ContentType, url, type);
 
 
         public void RestoreToHotAccessibilitylevel()

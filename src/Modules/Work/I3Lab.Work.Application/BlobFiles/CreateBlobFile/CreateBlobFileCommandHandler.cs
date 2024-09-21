@@ -13,7 +13,7 @@ namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
     {
         public async Task<Result<BlobFileDto>> Handle(CreateBlobFileCommand request, CancellationToken cancellationToken)
         {
-            var work = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId));
+            var work = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId), cancellationToken);
 
             if (work == null)
                 return Result.Fail("TreatmentStage not found");
@@ -22,16 +22,18 @@ namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
 
             var uploadFileResponce = await blobService.UploadAsync(request.Stream, request.ContentType);
 
-            var newBlobFile = work.CreateWorkFile(
-                uploadFileResponce.FileId.ToString(),
+            var newBlobFile = work.CreateTreatmentStageFile(
+                BlobFileUrl.Create(uploadFileResponce.Uri),
                 contentType,
                 BlobFileType.Image);
 
-            await blobFileRepository.AddAsync(newBlobFile);
+            await blobFileRepository.AddAsync(newBlobFile, cancellationToken);
+
+            await blobFileRepository.SaveChangesAsync(cancellationToken);
 
             var blobFileDto = new BlobFileDto(
                 newBlobFile.Id.Value,
-                newBlobFile.FileName,
+                newBlobFile.Path.FileName,
                 newBlobFile.FileType.Value,
                 newBlobFile.CreateDate,
                 newBlobFile.Accessibilitylevel.Value);
@@ -41,4 +43,4 @@ namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
     }
 }
 
- //var newBlobFile = BlobFile.CreateBaseOnWork(new TreatmentStageId(request.TreatmentStageId), uploadFileResponce.ToString(), BlobFileType.Image, blobFileUrl);
+ //var newBlobFile = BlobFile.CreateBaseOnTreatmentStage(new TreatmentStageId(request.TreatmentStageId), uploadFileResponce.ToString(), BlobFileType.Image, blobFileUrl);

@@ -14,7 +14,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
             builder.HasKey(wc => wc.Id);
 
             builder.Property(wc => wc.TreatmentStageId)
-                   .IsRequired();     
+                   .IsRequired();
 
             //builder.HasMany(wc => wc.ChatMembers)
             //       .WithOne()
@@ -24,15 +24,15 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
             {
                 b.ToTable("ChatMembers");
 
-                b.HasKey(wc => wc.Id);  
+                b.HasKey(wc => wc.Id);
 
                 b.WithOwner()
-                 .HasForeignKey(cm => cm.WorkChatId);
+                 .HasForeignKey(cm => cm.TreatmentStageChatId);
 
                 b.Property(cm => cm.MemberId)
                  .IsRequired();
 
-                b.Property(cm => cm.WorkChatId)
+                b.Property(cm => cm.TreatmentStageChatId)
                  .IsRequired();
             });
 

@@ -8,9 +8,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
 {
     public class TreatmentStageRepository : ITreatmentStageRepository
     {
-        private readonly WorkContext _context;
+        private readonly TreatmentContext _context;
 
-        public TreatmentStageRepository(WorkContext context)
+        public TreatmentStageRepository(TreatmentContext context)
         {
             _context = context;
         }

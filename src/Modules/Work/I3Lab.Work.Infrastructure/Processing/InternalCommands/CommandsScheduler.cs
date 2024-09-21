@@ -9,9 +9,9 @@ namespace I3Lab.Treatments.Infrastructure.Processing.InternalCommands
 {
     public class CommandsScheduler : ICommandsScheduler
     {
-        private readonly WorkContext _dbContext;
+        private readonly TreatmentContext _dbContext;
 
-        public CommandsScheduler(WorkContext dbContext)
+        public CommandsScheduler(TreatmentContext dbContext)
         {
             _dbContext = dbContext;
         }
