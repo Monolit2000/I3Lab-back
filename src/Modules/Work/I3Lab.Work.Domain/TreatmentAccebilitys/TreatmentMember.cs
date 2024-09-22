@@ -6,7 +6,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace I3Lab.Treatments.Domain.WorkAccebilitys
 {
-    public class TreatmentAccebilityMember : Entity
+    public class TreatmentMember : Entity
     {
         public WorkAccebilityId WorkAccebilityId { get; private set; }
         public MemberId MemberId { get; private set; }
@@ -17,9 +17,9 @@ namespace I3Lab.Treatments.Domain.WorkAccebilitys
 
         public DateTime? LiveDate { get; private set; }
 
-        private TreatmentAccebilityMember() { } //For Ef core 
+        private TreatmentMember() { } //For Ef core 
         
-        private TreatmentAccebilityMember(
+        private TreatmentMember(
             WorkAccebilityId workAccebilityId, 
             MemberId memberId)
         {
@@ -31,11 +31,11 @@ namespace I3Lab.Treatments.Domain.WorkAccebilitys
             AddDomainEvent(new WorkAccebilityMemberAddedDomainEvent());
         }
 
-        internal static TreatmentAccebilityMember CreateNew (
+        internal static TreatmentMember CreateNew (
             WorkAccebilityId workAccebilityId, 
             MemberId memberId)
         {
-            return new TreatmentAccebilityMember(
+            return new TreatmentMember(
                 workAccebilityId, 
                 memberId);
         }

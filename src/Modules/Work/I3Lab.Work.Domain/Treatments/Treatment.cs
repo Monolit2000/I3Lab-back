@@ -50,14 +50,14 @@ namespace I3Lab.Treatments.Domain.Treatments
         {
             Creator = creator;
 
-            AddTreatmentMember(creator, creator);
+            AddToTreatmentMembers(creator, creator);
         }
 
         public void AddPatient(Member patient)
         {
             Patient = patient;
 
-            AddTreatmentMember(patient, Creator);
+            AddToTreatmentMembers(patient, Creator);
         }
 
         public TreatmentInvite Invite(Member memberToInvite, Member inviter)
@@ -81,7 +81,7 @@ namespace I3Lab.Treatments.Domain.Treatments
         //}
 
 
-        public Result AddTreatmentMember(Member member, Member addedBy)
+        public Result AddToTreatmentMembers(Member member, Member addedBy)
         {
             if (TreatmentMembers.Any(m => m.Member.Id == member.Id))
                 return Result.Fail(TreatmentErrors.MemberAlreadyAdded);
@@ -89,8 +89,6 @@ namespace I3Lab.Treatments.Domain.Treatments
             var treatmentMember = TreatmentMember.CreateNew(this.Id, member, addedBy);
 
             TreatmentMembers.Add(treatmentMember);
-
-            AddDomainEvent(new TreatmentMemberAddedDomainEvent(Id, member.Id));
 
             return Result.Ok();
         }

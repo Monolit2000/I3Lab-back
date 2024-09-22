@@ -3,11 +3,13 @@ using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
+using I3Lab.Treatments.Domain.Treatments;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats
 {
     public class TreatmentStageChat : Entity, IAggregateRoot
     {
+        public TreatmentId TreatmentId { get; private set; }
         public TreatmentStageId TreatmentStageId { get; private set; }
         public List<ChatMessage> Messages { get; private set; } = [];
         public List<ChatMember> ChatMembers { get; private set; } = [];
@@ -17,6 +19,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         private TreatmentStageChat() { } // For EF Core
 
         private TreatmentStageChat(
+            TreatmentId TreatmentId,
             TreatmentStageId TreatmentStageId, 
             List<Member> members)
         {
@@ -26,19 +29,23 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         }
 
         public static TreatmentStageChat CreaterWorkChut(
+            TreatmentId treatmentId,
             TreatmentStageId workId,
             List<Member> workMembers)
         {
             return new TreatmentStageChat(
-               workId,
-               workMembers);
+                treatmentId,
+                workId,
+                workMembers);
         }
 
-        public static TreatmentStageChat CreateBaseOnWork(
+        public static TreatmentStageChat CreateBaseOnTreatmentStage(
+            TreatmentId treatmentId,
             TreatmentStageId workId, 
             List<Member> workMembers)
         {
             return new TreatmentStageChat(
+                treatmentId,
                 workId, 
                 workMembers);
         }

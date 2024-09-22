@@ -2,30 +2,35 @@
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
+using Microsoft.Extensions.Logging;
 
 namespace I3Lab.Treatments.Application.WorkChats.CreateWorkChat
 {
     public class CreateTreatmentStageChatCommandHandler(
         ITreatmentStageRepository workRepository,
-        ITreatmentStageChatRepository workChatRepository,
-        ITretmentRepository tretmentRepository) : IRequestHandler<CreateTreatmentStageChatCommand>
+        ITreatmentStageChatRepository treatmentStageChatRepository,
+        ITretmentRepository tretmentRepository,
+        ILogger<CreateTreatmentStageChatCommandHandler> logger) : IRequestHandler<CreateTreatmentStageChatCommand>
     {
         public async Task Handle(CreateTreatmentStageChatCommand request, CancellationToken cancellationToken)
         {
-            var work = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId));
+            var treatmentStage = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId));
 
-            if (work == null)
+            if (treatmentStage == null)
+            {
+                logger.LogWarning("TreatmentStage not found for WorkId: {WorkId}", request.WorkId);
                 return;
-
+            }
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
             var members = treatment.TreatmentMembers.Select(m => m.Member).ToList();
 
-            var workChat = TreatmentStageChat.CreateBaseOnWork(new TreatmentStageId(request.WorkId), members);
+            var treatmentStageChat = treatmentStage.CreateTreatmentStageChat(members);
 
-            await workChatRepository.AddAsync(workChat);
+            await treatmentStageChatRepository.AddAsync(treatmentStageChat);
 
-            await workChatRepository.SaveChangesAsync();
+            await treatmentStageChatRepository.SaveChangesAsync();
+
         }
     }
 }

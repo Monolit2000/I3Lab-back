@@ -1,4 +1,5 @@
 ﻿using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -16,9 +17,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
             builder.Property(wc => wc.TreatmentStageId)
                    .IsRequired();
 
-            //builder.HasMany(wc => wc.ChatMembers)
-            //       .WithOne()
-            //       .OnDelete(DeleteBehavior.Cascade);
+            builder.Property(wc => wc.TreatmentId)
+                 .IsRequired();
 
             builder.OwnsMany(wc => wc.ChatMembers, b =>
             {

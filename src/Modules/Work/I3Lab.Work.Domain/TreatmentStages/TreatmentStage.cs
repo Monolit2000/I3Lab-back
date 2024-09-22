@@ -15,6 +15,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
         public TreatmentId TreatmentId { get; private set; }
         public Member Creator { get; private set; }
         public Member Customer { get; private set; }
+
         public readonly List<TreatmentStageFile> WorkFiles = [];
 
         public TreatmentStageId Id { get; private set; }
@@ -55,8 +56,8 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
         public BlobFile CreateTreatmentStageFile(BlobFileUrl url, ContentType contentType, BlobFileType fileType) 
             => BlobFile.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, url, contentType, fileType);
 
-        public TreatmentStageChat CreateWorkChat(List<Member> members) 
-            => TreatmentStageChat.CreateBaseOnWork(this.Id, members);
+        public TreatmentStageChat CreateTreatmentStageChat(List<Member> members) 
+            => TreatmentStageChat.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, members);
 
         public void AddWorkFile(TreatmentStageId workId, BlobFile fileId)
         {

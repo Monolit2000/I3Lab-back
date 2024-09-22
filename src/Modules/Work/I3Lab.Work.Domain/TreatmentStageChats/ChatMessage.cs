@@ -74,10 +74,11 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
                 repliedToMessageId);
         }
 
-        public Result Edit(string NewMessageText)
+        public Result Edit(string EditedMessageText)
         {
-            MessageText = NewMessageText;
+            MessageText = EditedMessageText;
             IsEdited = true;
+            EditDate = DateTime.UtcNow;
             AddDomainEvent(new ChatMessageEditedDomainEvent());
 
             return Result.Ok();

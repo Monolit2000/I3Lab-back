@@ -4,6 +4,8 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages.Events;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.Treatments.Events;
+using System.Runtime;
+using System.Security.Cryptography.X509Certificates;
 
 namespace I3Lab.Treatments.Domain.Treatments
 {
@@ -30,6 +32,8 @@ namespace I3Lab.Treatments.Domain.Treatments
             Member = member;
             AddedBy = addedBy;
             JoinDate = DateTime.UtcNow;
+
+            AddDomainEvent(new TreatmentMemberAddedDomainEvent(treatmentId, member.Id));
         }
 
         public static TreatmentMember CreateNew(

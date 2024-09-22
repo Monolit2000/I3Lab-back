@@ -9,7 +9,7 @@ namespace I3Lab.Treatments.Domain.WorkAccebilitys
         public TreatmentStageId TreatmentStageId { get; private set; }
         public WorkAccebilityId Id { get; private set; }
 
-        public readonly List<TreatmentAccebilityMember> TreatmentAccebilityMembers = [];
+        public readonly List<TreatmentMember> TreatmentAccebilityMembers = [];
 
 
         public TreatmentAccebility(TreatmentStageId workId)
@@ -25,16 +25,16 @@ namespace I3Lab.Treatments.Domain.WorkAccebilitys
             return newWorkAccebility;
         }
 
-        public void JoinToWorkAccebility(MemberId memberId)
+        public void JoinToTreatmentAccebility(MemberId memberId)
         {
             if (TreatmentAccebilityMembers.Any(wm => wm.MemberId == memberId))
                 throw new InvalidOperationException("MemberToInvite already joined.");
 
-            var workMember = TreatmentAccebilityMember.CreateNew(Id, memberId);
+            var workMember = TreatmentMember.CreateNew(Id, memberId);
             TreatmentAccebilityMembers.Add(workMember);
         }
 
-        public void LeaveWorkAccebility(MemberId memberId)
+        public void LeaveTreatmentAccebility(MemberId memberId)
         {
             var member = TreatmentAccebilityMembers.FirstOrDefault(wm => wm.MemberId == memberId);
             if (member == null)
