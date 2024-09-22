@@ -3,14 +3,14 @@ using FluentResults;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 
-namespace I3Lab.Treatments.Application.WorkChats.EditChatMessage
+namespace I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage
 {
     public class EditChatMessageCommandHandler(
-        ITreatmentStageChatRepository workChatRepository) : IRequestHandler<EditChatMessageCommand, Result>
+        ITreatmentStageChatRepository treatmentStageChatRepository) : IRequestHandler<EditChatMessageCommand, Result>
     {
         public async Task<Result> Handle(EditChatMessageCommand request, CancellationToken cancellationToken)
         {
-            var chat = await workChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
+            var chat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
             if (chat == null)
                 return Result.Fail("Chat not found");
 
@@ -19,7 +19,7 @@ namespace I3Lab.Treatments.Application.WorkChats.EditChatMessage
             if (result.IsFailed)
                 return result;
 
-            await workChatRepository.SaveChangesAsync(cancellationToken);
+            await treatmentStageChatRepository.SaveChangesAsync(cancellationToken);
 
             return Result.Ok();
         }

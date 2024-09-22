@@ -1,7 +1,7 @@
 ﻿using I3Lab.Treatments.Application.Configuration.Commands;
 using MediatR;
 
-namespace I3Lab.Treatments.Application.WorkChats.RemoveChatMember
+namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMember
 {
     public class RemoveChatMemberCommand : IRequest
     {

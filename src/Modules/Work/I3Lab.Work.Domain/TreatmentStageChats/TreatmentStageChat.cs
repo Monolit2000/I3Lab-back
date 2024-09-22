@@ -4,6 +4,7 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
 using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Domain.BlobFiles;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats
 {
@@ -90,6 +91,24 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
 
             var replyMessage = ChatMessage.CreateNew(senderId, messageText, repliedToMessageId);
             Messages.Add(replyMessage);
+
+            return Result.Ok();
+        }
+
+        public Result AddResponseToFileMessage(MemberId senderId, BlobFile fileResponceId, string messageText = "", ChatMessageId repliedToMessageId = null)
+        {
+            if (ChatMembers.All(p => p.MemberId != senderId))
+                return Result.Fail("Sender is not a member in the chat.");
+
+            if (repliedToMessageId != null)
+            {
+                var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
+                if (originalMessage == null)
+                    return Result.Fail("Replied message not found.");
+            }
+
+            var newMessage = ChatMessage.CreateNewResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
+            Messages.Add(newMessage);
 
             return Result.Ok();
         }

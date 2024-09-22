@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.AddChatMember
+namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMember
 {
     public class AddChatMemberCommand : IRequest
     {

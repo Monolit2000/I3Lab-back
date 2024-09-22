@@ -4,7 +4,7 @@ using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using Microsoft.Extensions.Logging;
 
-namespace I3Lab.Treatments.Application.WorkChats.CreateWorkChat
+namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageChat
 {
     public class CreateTreatmentStageChatCommandHandler(
         ITreatmentStageRepository workRepository,
@@ -18,7 +18,7 @@ namespace I3Lab.Treatments.Application.WorkChats.CreateWorkChat
 
             if (treatmentStage == null)
             {
-                logger.LogWarning("TreatmentStage not found for WorkId: {WorkId}", request.WorkId);
+                logger.LogWarning("TreatmentStage not found for TreatmentStageChatId: {TreatmentStageChatId}", request.WorkId);
                 return;
             }
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);

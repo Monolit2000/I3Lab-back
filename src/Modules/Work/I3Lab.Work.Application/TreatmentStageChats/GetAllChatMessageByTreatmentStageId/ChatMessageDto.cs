@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.GetAllChatMessageByWorkId
+namespace I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWorkId
 {
     public class ChatMessageDto
     {

@@ -1,11 +1,10 @@
-﻿using I3Lab.Treatments.Application.WorkChats.AddMessage;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
-using I3Lab.Treatments.Application.WorkChats.AddChatMember;
-using I3Lab.Treatments.Application.WorkChats.RemoveChatMessage;
 using I3Lab.API.Modules.Base;
-using I3Lab.Treatments.Application.WorkChats.EditChatMessage;
-using I3Lab.Treatments.Application.WorkChats.GetAllChatMessageByWorkId;
+using I3Lab.Treatments.Application.TreatmentStageChats.AddMessage;
+using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMessage;
+using I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage;
+using I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWorkId;
 
 namespace I3Lab.API.Modules.Works.WorkChats
 {
@@ -51,7 +50,7 @@ namespace I3Lab.API.Modules.Works.WorkChats
 
 
         [HttpGet("getAllChatMessageByWorkId")]
-        public async Task<IActionResult> GetAllChatMessageByWorkId([FromQuery]GetAllChatMessageByWorkIdQuery getAllChatMessageByWorkIdQuery)
+        public async Task<IActionResult> GetAllChatMessageByWorkId([FromQuery] GetAllChatMessageByTreatmentStageIdQuery getAllChatMessageByWorkIdQuery)
         {
             return HandleResult(await _mediator.Send(getAllChatMessageByWorkIdQuery));
         }

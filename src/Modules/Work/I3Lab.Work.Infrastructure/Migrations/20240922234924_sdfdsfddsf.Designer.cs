@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     [DbContext(typeof(TreatmentContext))]
-    [Migration("20240921012203_skdjshdf")]
-    partial class skdjshdf
+    [Migration("20240922234924_sdfdsfddsf")]
+    partial class sdfdsfddsf
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,6 +138,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStageChats.TreatmentStageChat", b =>
                 {
                     b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("TreatmentStageId")

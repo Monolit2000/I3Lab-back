@@ -9,18 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.RemoveChatMember
+namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMember
 {
     public class RemoveChatMemberCommandHandler(
-        ITreatmentStageChatRepository workChatRepository) : IRequestHandler<RemoveChatMemberCommand>
+        ITreatmentStageChatRepository treatmentStageChatRepository) : IRequestHandler<RemoveChatMemberCommand>
     {
         public async Task Handle(RemoveChatMemberCommand request, CancellationToken cancellationToken)
         {
-            var workChat = await workChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
+            var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
 
-            workChat.RemoveChatMember(new MemberId(request.MemberId));
+            treatmentStageChat.RemoveChatMember(new MemberId(request.MemberId));
 
-            await workChatRepository.SaveChangesAsync();
+            await treatmentStageChatRepository.SaveChangesAsync();
         }
     }
 }

@@ -9,24 +9,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.AddChatMember
+namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMember
 {
     public class AddChatMemberCommandHandler(
         IMemberRepository memberRepository,  
-        ITreatmentStageChatRepository workChatRepository) : IRequestHandler<AddChatMemberCommand>
+        ITreatmentStageChatRepository treatmentStageChatRepository) : IRequestHandler<AddChatMemberCommand>
     {
         public async Task Handle(AddChatMemberCommand request, CancellationToken cancellationToken)
         {
-            var workChat = await workChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
+            var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
 
-            if (workChat == null)
+            if (treatmentStageChat == null)
                 return;
 
             var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
 
-            workChat.AddChatMember(member);
+            treatmentStageChat.AddChatMember(member);
 
-            await workChatRepository.SaveChangesAsync(cancellationToken);
+            await treatmentStageChatRepository.SaveChangesAsync(cancellationToken);
         }
     }
 }

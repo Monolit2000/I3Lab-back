@@ -1,5 +1,5 @@
 ﻿using I3Lab.Treatments.Application.Configuration.Commands;
-using I3Lab.Treatments.Application.WorkChats.CreateWorkChat;
+using I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageChat;
 using I3Lab.Treatments.Domain.TreatmentStages.Events;
 using MediatR;
 using System;

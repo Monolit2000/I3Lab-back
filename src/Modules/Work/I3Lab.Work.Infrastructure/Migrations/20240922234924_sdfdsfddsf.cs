@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Works.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class skdjshdf : Migration
+    public partial class sdfdsfddsf : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,6 +54,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     TreatmentStageId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>

@@ -137,6 +137,9 @@ namespace I3Lab.Works.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("TreatmentId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("TreatmentStageId")
                         .HasColumnType("uuid");
 

@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using I3Lab.Treatments.Domain.Treatments.Events;
 using I3Lab.Treatments.Application.Configuration.Commands;
-using I3Lab.Treatments.Application.WorkChats.RemoveChatMember;
+using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMember;
 using I3Lab.Works.Application.TreatmentStageChats.RemoveChatMemberWithAllChats;
 
 namespace I3Lab.Works.Application.Treatments.RemoveMember

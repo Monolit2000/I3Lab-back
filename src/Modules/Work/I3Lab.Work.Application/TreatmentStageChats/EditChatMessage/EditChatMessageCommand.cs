@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.EditChatMessage
+namespace I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage
 {
     public class EditChatMessageCommand : IRequest<Result>
     {

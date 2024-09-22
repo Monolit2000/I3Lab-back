@@ -8,19 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.RemoveChatMessage
+namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMessage
 {
     public class RemoveChatMessageCommandHandler(
-        ITreatmentStageChatRepository workChatRepository) : IRequestHandler<RemoveChatMessageCommand, Result>
+        ITreatmentStageChatRepository treatmentStageChatRepository) : IRequestHandler<RemoveChatMessageCommand, Result>
     {
         public async Task<Result> Handle(RemoveChatMessageCommand request, CancellationToken cancellationToken)
         {
-            var workChat = await workChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
+            var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
 
-            if (workChat == null)
+            if (treatmentStageChat == null)
                 return Result.Fail("TreatmentStageChat not found");
 
-            workChat.RemoveMessage(new ChatMessageId(request.MessageId));
+            treatmentStageChat.RemoveMessage(new ChatMessageId(request.MessageId));
 
             return Result.Ok();
         }

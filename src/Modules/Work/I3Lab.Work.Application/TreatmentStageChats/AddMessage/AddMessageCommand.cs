@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using FluentResults;
 
-namespace I3Lab.Treatments.Application.WorkChats.AddMessage
+namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
 {
     public class AddMessageCommand : IRequest<Result>
     {

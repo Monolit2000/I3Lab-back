@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.WorkChats.RemoveChatMessage
+namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMessage
 {
     public class RemoveChatMessageCommand : IRequest<Result>
     {

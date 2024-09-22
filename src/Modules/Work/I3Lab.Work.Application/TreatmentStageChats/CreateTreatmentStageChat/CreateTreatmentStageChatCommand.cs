@@ -1,6 +1,6 @@
 ﻿using I3Lab.Treatments.Application.Configuration.Commands;
 
-namespace I3Lab.Treatments.Application.WorkChats.CreateWorkChat
+namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageChat
 {
     public class CreateTreatmentStageChatCommand : InternalCommandBase
     {
