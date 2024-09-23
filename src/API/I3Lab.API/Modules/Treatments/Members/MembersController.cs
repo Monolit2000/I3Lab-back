@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MediatR;
 
-namespace I3Lab.API.Modules.Works.Members
+namespace I3Lab.API.Modules.Treatments.Members
 {
     public class MembersController : ControllerBase
     {

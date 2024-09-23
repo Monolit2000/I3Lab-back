@@ -6,7 +6,7 @@ using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMessage;
 using I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage;
 using I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWorkId;
 
-namespace I3Lab.API.Modules.Works.WorkChats
+namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 {
 
     [Route("api/workChat")]

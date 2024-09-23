@@ -2,20 +2,20 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace I3Lab.API.Modules.Works.Work
+namespace I3Lab.API.Modules.Treatments.Work
 {
-    [Route("api/works")]
+    [Route("api/treatmentStages")]
     [ApiController]
-    public class WorksController : ControllerBase
+    public class TreatmentStagesController : ControllerBase
     {
         private readonly IMediator _mediator;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger<WorksController> _logger;
+        private readonly ILogger<TreatmentStagesController> _logger;
 
-        public WorksController(
+        public TreatmentStagesController(
             IMediator mediator,
             IHttpContextAccessor httpContextAccessor,
-            ILogger<WorksController> logger)
+            ILogger<TreatmentStagesController> logger)
         {
             _mediator = mediator;
             _httpContextAccessor = httpContextAccessor;

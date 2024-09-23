@@ -1,14 +1,16 @@
 ﻿using FluentResults;
-using I3Lab.Treatments.Domain.BlobFiles;
-using I3Lab.Treatments.Domain.WorkDirectorys;
 using MediatR;
-using System.Text.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFile;
 
-namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
+namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
 {
     public class CreateBlobFileCommand : IRequest<Result<BlobFileDto>>
     {
-        public Guid WorkId { get; set; }    
         public string FileName { get; set; }
         public string ContentType { get; set; }
 
@@ -19,7 +21,6 @@ namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
             string fileName)
         {
             FileName = fileName;
-            WorkId = workId;
         }
     }
 }

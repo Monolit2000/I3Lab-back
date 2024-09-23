@@ -1,12 +1,13 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles.Events;
+using System;
+using System.ComponentModel;
 
 namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
 {
     public class BlobFile : Entity, IAggregateRoot
     {
         public BlobFileId Id { get; private set; }
-        public BlobFileType FileType { get; private set; }
         public ContentType ContentType { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
         public BlobFileUrl Url { get; private set; }
@@ -17,23 +18,27 @@ namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
 
         private BlobFile(
             ContentType contentType,
-            BlobFileUrl url,
-            BlobFileType type)
+            BlobFileUrl url)
         {
             Id = new BlobFileId(Guid.NewGuid());
-     
-            FileType = type;
             ContentType = contentType;
             Url = url;
             CreateDate = DateTime.UtcNow;
             Path = BlobFilePath.Create("undefine", Id.Value.ToString()).Value;
             Accessibilitylevel = Accessibilitylevel.Hot;
+
             AddDomainEvent(new BlobFileCreatedDomainEvent());
         }
 
-        public static BlobFile CreateBaseOnTreatmentStage(BlobFileUrl url, ContentType ContentType, BlobFileType type)
-            => new BlobFile(ContentType, url, type);
+        public static BlobFile Create(BlobFileUrl url, ContentType ContentType)
+            => new BlobFile(ContentType, url);
 
+        public void ChegeBlobFilePath(BlobFilePath blobFilePath, BlobFileUrl url)
+        {
+            Url = url;
+            Path = blobFilePath;
+            AddDomainEvent(new BlobFilePathChengedDomainEvent());
+        }
 
         public void RestoreToHotAccessibilitylevel()
         {

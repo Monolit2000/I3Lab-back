@@ -1,4 +1,4 @@
-﻿namespace I3Lab.API.Modules.Works.Files
+﻿namespace I3Lab.API.Modules.Treatments.Files
 {
     public class UploadWorkFileRequest
     {

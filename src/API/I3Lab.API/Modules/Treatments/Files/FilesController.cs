@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Treatments.Application.BlobFiles.GetBlobFilesByWorkId;
 
-namespace I3Lab.API.Modules.Works.Files
+namespace I3Lab.API.Modules.Treatments.Files
 {
     public class FilesController : BaseController
     {

@@ -26,7 +26,6 @@
   <ItemGroup>
     <Folder Include="Configurations\Application\" />
     <Folder Include="Configurations\EventBus\" />
-    <Folder Include="Processing\" />
     <Folder Include="Startup\" />
   </ItemGroup>
 

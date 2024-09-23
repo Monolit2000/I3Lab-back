@@ -19,7 +19,6 @@ namespace I3Lab.Treatments.Domain.BlobFiles
         public DateTime CreateDate { get; private set; }
 
         private BlobFile() { } //For EF core 
-
         
         private BlobFile(
             TreatmentId treatmentId,

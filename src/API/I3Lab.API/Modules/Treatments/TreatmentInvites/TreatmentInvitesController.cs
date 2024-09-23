@@ -7,7 +7,7 @@ using I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentInvite;
 using I3Lab.Treatments.Application.TreatmentInvites.RejectTreatmentInvite;
 using I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId;
 
-namespace I3Lab.API.Modules.Works.TreatmentInvites
+namespace I3Lab.API.Modules.Treatments.TreatmentInvites
 {
     [Route("api/work/TreatmentInvites")]
     [ApiController]
