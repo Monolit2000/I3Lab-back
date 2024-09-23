@@ -5,7 +5,7 @@ using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
-namespace I3Lab.Works.Application.TreatmentStageChats.CreateResponceToFileChatMessage
+namespace I3Lab.Treatments.Application.TreatmentStageChats.CreateResponceToFileChatMessage
 {
     public class CreateResponceToFileChatMessageCommandHandler(
         ITreatmentStageChatRepository treatmentStageChatRepository,

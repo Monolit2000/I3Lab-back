@@ -9,7 +9,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageC
     public class CreateTreatmentStageChatCommandHandler(
         ITreatmentStageRepository workRepository,
         ITreatmentStageChatRepository treatmentStageChatRepository,
-        ITretmentRepository tretmentRepository,
+        ITreatmentRepository tretmentRepository,
         ILogger<CreateTreatmentStageChatCommandHandler> logger) : IRequestHandler<CreateTreatmentStageChatCommand>
     {
         public async Task Handle(CreateTreatmentStageChatCommand request, CancellationToken cancellationToken)

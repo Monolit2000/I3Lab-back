@@ -9,18 +9,18 @@ using I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWorkId
 namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 {
 
-    [Route("api/workChat")]
+    [Route("api/treatmentStageChats")]
     [ApiController]
-    public class WorkChatController : BaseController
+    public class TreatmentStageChatsController : BaseController
     {
         private readonly IMediator _mediator;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger<WorkChatController> _logger;
+        private readonly ILogger<TreatmentStageChatsController> _logger;
 
-        public WorkChatController(
+        public TreatmentStageChatsController(
             IMediator mediator,
             IHttpContextAccessor httpContextAccessor,
-            ILogger<WorkChatController> logger)
+            ILogger<TreatmentStageChatsController> logger)
         {
             _mediator = mediator;
             _httpContextAccessor = httpContextAccessor;

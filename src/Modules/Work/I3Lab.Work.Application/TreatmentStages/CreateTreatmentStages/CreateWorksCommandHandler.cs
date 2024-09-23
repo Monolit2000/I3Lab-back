@@ -9,7 +9,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
 {
     public class CreateWorksCommandHandler(
         IMemberRepository memberRepository,
-        ITretmentRepository tretmentRepository,
+        ITreatmentRepository tretmentRepository,
         ITreatmentStageRepository workRepository,
         IMemberContext memberContext) : IRequestHandler<CreateWorksCommand>
     {

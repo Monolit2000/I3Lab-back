@@ -2,7 +2,7 @@
 using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
-namespace I3Lab.Works.Application.TreatmentStageChats.RemoveChatMemberWithAllChats
+namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMemberWithAllChats
 {
     public class RemoveChatMemberFromAllTreatmentStageChatsCommandHandler(
         ITreatmentStageRepository treatmentStageRepository,

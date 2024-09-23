@@ -1,6 +1,4 @@
-﻿
-using System;
-using FluentResults;
+﻿using FluentResults;
 
 namespace I3Lab.Treatments.Domain.Treatments
 {

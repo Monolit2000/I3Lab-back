@@ -2,9 +2,9 @@
 using I3Lab.Treatments.Domain.Treatments.Events;
 using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMember;
-using I3Lab.Works.Application.TreatmentStageChats.RemoveChatMemberWithAllChats;
+using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMemberWithAllChats;
 
-namespace I3Lab.Works.Application.Treatments.RemoveMember
+namespace I3Lab.Treatments.Application.Treatments.RemoveMember
 {
     public class TreatmentMemberRemovedDomainEventHendler(
         ICommandsScheduler commandsScheduler) : INotificationHandler<MemberRemovedFromTreatmentDomainEvent>

@@ -9,7 +9,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Works.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId
+namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId
 {
     public class AddChatMemberToAllTreatmentStageChatsByTreatmentIdCommandHandler(
         IMemberRepository memberRepository,

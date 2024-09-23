@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Domain.Treatments
 {
-    public interface ITretmentRepository
+    public interface ITreatmentRepository
     {
         Task<bool> IsNameUniqueAsync(string name, CancellationToken cancellationToken = default);
         Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken = default);

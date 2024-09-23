@@ -13,12 +13,12 @@ namespace I3Lab.Treatments.Domain.Treatments.Events
     {
         public TreatmentId TreatmentId { get; }
         public Member MemberId { get; }
-        public MemberAccessibilityType NewAccessibilityType { get; }
+        public TreatmentMemberAccessibilityType NewAccessibilityType { get; }
 
         public TreatmentMemberAccessibilityTypeChangedDomainEvent(
             TreatmentId treatmentId, 
             Member memberId, 
-            MemberAccessibilityType newAccessibilityType)
+            TreatmentMemberAccessibilityType newAccessibilityType)
         {
             TreatmentId = treatmentId;
             MemberId = memberId;

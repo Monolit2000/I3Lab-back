@@ -4,7 +4,7 @@ using MediatR;
 
 namespace I3Lab.Treatments.Application.Treatments.GetTreatmentById
 {
-    public class GetTreatmentByIdQueryHandler(ITretmentRepository treatmentRepository) : IRequestHandler<GetTreatmentByIdQuery, Result<TreatmentDto>>
+    public class GetTreatmentByIdQueryHandler(ITreatmentRepository treatmentRepository) : IRequestHandler<GetTreatmentByIdQuery, Result<TreatmentDto>>
     {
         public async Task<Result<TreatmentDto>> Handle(GetTreatmentByIdQuery request, CancellationToken cancellationToken)
         {

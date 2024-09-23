@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.TreatmentStages.CreateTreatmentStage
+namespace I3Lab.Modules.BlobFailes.Api
 {
-    public class TreatmentStageDto
+    public interface IBlobFailesApi
     {
+
     }
 }

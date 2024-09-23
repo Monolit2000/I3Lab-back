@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite
 {
     public class CreateTreatmentInviteCommandHandler(
-        ITretmentRepository tretmentRepository, 
+        ITreatmentRepository tretmentRepository, 
         ITreatmentInviteRepository treatmentInviteRepository,
         IMemberRepository memberRepository) : IRequestHandler<CreateTreatmentInviteCommand, Result<TreatmentInviteDto>>
     {

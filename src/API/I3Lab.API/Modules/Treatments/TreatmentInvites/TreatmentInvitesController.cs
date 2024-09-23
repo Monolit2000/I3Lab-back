@@ -9,7 +9,7 @@ using I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesByTrea
 
 namespace I3Lab.API.Modules.Treatments.TreatmentInvites
 {
-    [Route("api/work/TreatmentInvites")]
+    [Route("api/treatments/treatmentInvites")]
     [ApiController]
     public class TreatmentInvitesController : BaseController
     {

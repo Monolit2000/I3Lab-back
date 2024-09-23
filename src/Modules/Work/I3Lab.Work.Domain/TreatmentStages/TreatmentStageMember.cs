@@ -10,7 +10,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
     {
         public TreatmentStageId WorkId { get; private set; }
         public Member Member { get; private set; }
-        public MemberAccessibilityType AccessibilityType { get; private set; }
+        public TreatmentMemberAccessibilityType AccessibilityType { get; private set; }
         public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
 
@@ -39,7 +39,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
         }
 
 
-        public Result ChangeAccessibilityType(MemberAccessibilityType newAccessibilityType)
+        public Result ChangeAccessibilityType(TreatmentMemberAccessibilityType newAccessibilityType)
         {
             if (AccessibilityType == newAccessibilityType)
                 return Result.Ok();

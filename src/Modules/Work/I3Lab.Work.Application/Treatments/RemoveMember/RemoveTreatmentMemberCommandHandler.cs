@@ -6,7 +6,7 @@ using MediatR;
 namespace I3Lab.Treatments.Application.Treatments.RemoveMember
 {
     public class RemoveTreatmentMemberCommandHandler(
-        ITretmentRepository tretmentRepository) : IRequestHandler<RemoveTreatmentMemberCommand, Result>
+        ITreatmentRepository tretmentRepository) : IRequestHandler<RemoveTreatmentMemberCommand, Result>
     {
         public async Task<Result> Handle(RemoveTreatmentMemberCommand request, CancellationToken cancellationToken)
         {

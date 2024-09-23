@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace I3Lab.Works.Infrastructure.Migrations
+namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class sdfdsfddsf : Migration

@@ -13,15 +13,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FF06
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Treatments", "Treatments", "{0C0A4377-DB8C-458C-932F-171B01FAA904}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Application", "src\Modules\Work\I3Lab.Work.Application\I3Lab.Works.Application.csproj", "{90909718-3854-4591-8BC0-D676B5C148D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Treatments.Application", "src\Modules\Work\I3Lab.Work.Application\I3Lab.Treatments.Application.csproj", "{90909718-3854-4591-8BC0-D676B5C148D3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Domain", "src\Modules\Work\I3Lab.Work.Domain\I3Lab.Works.Domain.csproj", "{A26BB184-5F06-40D3-908E-FDB8F501D420}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Treatments.Domain", "src\Modules\Work\I3Lab.Work.Domain\I3Lab.Treatments.Domain.csproj", "{A26BB184-5F06-40D3-908E-FDB8F501D420}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Infrastructure", "src\Modules\Work\I3Lab.Work.Infrastructure\I3Lab.Works.Infrastructure.csproj", "{83E9475B-C79B-49DE-A3D6-CD51FB333F38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Treatments.Infrastructure", "src\Modules\Work\I3Lab.Work.Infrastructure\I3Lab.Treatments.Infrastructure.csproj", "{83E9475B-C79B-49DE-A3D6-CD51FB333F38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.IntegrationEvents", "src\Modules\Work\I3Lab.Work.IntegrationEvents\I3Lab.Works.IntegrationEvents.csproj", "{1E8185E6-CD85-4850-A25A-94238456BE69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Treatments.IntegrationEvents", "src\Modules\Work\I3Lab.Work.IntegrationEvents\I3Lab.Treatments.IntegrationEvents.csproj", "{1E8185E6-CD85-4850-A25A-94238456BE69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Works.Api", "src\Modules\Work\I3Lab.Work.Api\I3Lab.Works.Api.csproj", "{A2D08E4C-9DD8-4EA3-94CC-B91F94F8EECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Treatments.Api", "src\Modules\Work\I3Lab.Work.Api\I3Lab.Treatments.Api.csproj", "{A2D08E4C-9DD8-4EA3-94CC-B91F94F8EECA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Patient", "Patient", "{591BC963-3557-452B-BD4D-4600BFE2849A}"
 EndProject

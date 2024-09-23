@@ -18,7 +18,9 @@ namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
 
             var url = BlobFileUrl.Create(uploadFileResponce.Uri);
 
-            var newBlobFile = BlobFile.Create(url, contentType);
+            var newBlobFile = BlobFile.Create(
+                BlobFileUrl.Create(uploadFileResponce.Uri), 
+                contentType);
 
             await blobFileRepository.AddAsync(newBlobFile, cancellationToken);
 

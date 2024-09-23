@@ -41,7 +41,7 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Application
             services.AddScoped<ITreatmentInviteRepository, TreatmentInviteRepository>();
             services.AddScoped<ITreatmentStageChatRepository, TreatmentStageChatRepository>();
             services.AddScoped<IBlobFileRepository, BlobFileRepository>();
-            services.AddScoped<ITretmentRepository, TretmentRepository>();
+            services.AddScoped<ITreatmentRepository, TretmentRepository>();
 
             return services;
         }

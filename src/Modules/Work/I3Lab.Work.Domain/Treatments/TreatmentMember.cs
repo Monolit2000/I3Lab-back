@@ -1,11 +1,8 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentStages.Events;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.Treatments.Events;
-using System.Runtime;
-using System.Security.Cryptography.X509Certificates;
 
 namespace I3Lab.Treatments.Domain.Treatments
 {
@@ -13,9 +10,10 @@ namespace I3Lab.Treatments.Domain.Treatments
     {
         public TreatmentId TreatmentId { get; private set; }
         public TreatmentMemberId Id { get; private set; }
-
         public Member Member { get; private set; }
-        public MemberAccessibilityType AccessibilityType { get; private set; }
+
+        public TreatmentMemberRole TreatmentMemberRole { get; private set; }    
+        public TreatmentMemberAccessibilityType AccessibilityType { get; private set; }
         public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
         public DateTime LeaveDate { get; private set; }
@@ -45,12 +43,10 @@ namespace I3Lab.Treatments.Domain.Treatments
                 memberId,
                 addedBy);
 
-        public void Leave()
-        {
-            LeaveDate = DateTime.UtcNow;    
-        }
+        public void Leave() 
+            => LeaveDate = DateTime.UtcNow;
 
-        public Result ChangeAccessibilityType(MemberAccessibilityType newAccessibilityType)
+        public Result ChangeAccessibilityType(TreatmentMemberAccessibilityType newAccessibilityType)
         {
             if (AccessibilityType == newAccessibilityType)
                 return Result.Ok();

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace I3Lab.Treatments.Application.Treatments.GetTreatmentMembers
 {
     public class GetTreatmentMembersQueryHandler(
-        ITretmentRepository tretmentRepository) : IRequestHandler<GetTreatmentMembersQuery, Result<List<TreatmentMemberDto>>>
+        ITreatmentRepository tretmentRepository) : IRequestHandler<GetTreatmentMembersQuery, Result<List<TreatmentMemberDto>>>
     {
         public async Task<Result<List<TreatmentMemberDto>>> Handle(GetTreatmentMembersQuery request, CancellationToken cancellationToken)
         {

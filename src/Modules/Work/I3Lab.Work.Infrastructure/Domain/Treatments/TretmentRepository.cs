@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
 {
-    public class TretmentRepository : ITretmentRepository
+    public class TretmentRepository : ITreatmentRepository
     {
         private readonly TreatmentContext _context;
 

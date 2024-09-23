@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace I3Lab.Works.Infrastructure.Migrations
+namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     [DbContext(typeof(TreatmentContext))]
     partial class TreatmentContextModelSnapshot : ModelSnapshot
@@ -614,7 +614,7 @@ namespace I3Lab.Works.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentId");
 
-                            b1.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.MemberAccessibilityType", "AccessibilityType", b2 =>
+                            b1.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentMemberAccessibilityType", "AccessibilityType", b2 =>
                                 {
                                     b2.Property<Guid>("TreatmentMemberId")
                                         .HasColumnType("uuid");

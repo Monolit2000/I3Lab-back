@@ -7,7 +7,7 @@
 //{
 //    public class CreateTreatmentStageCommandHandler(
 //        IMemberRepository memberRepository,
-//        ITretmentRepository tretmentRepository) : IRequestHandler<CreateTreatmentStageCommand, Result<TreatmentStageDto>>
+//        ITreatmentRepository tretmentRepository) : IRequestHandler<CreateTreatmentStageCommand, Result<TreatmentStageDto>>
 //    {
 //        public async Task<Result<TreatmentStageDto>> Handle(CreateTreatmentStageCommand request, CancellationToken cancellationToken)
 //        {

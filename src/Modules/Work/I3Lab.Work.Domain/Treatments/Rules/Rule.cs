@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.TreatmentStages.CreateTreatmentStage
+namespace I3Lab.Treatments.Domain.Treatments.Rules
 {
-    public class TreatmentStageDto
+    internal class Rule
     {
     }
 }

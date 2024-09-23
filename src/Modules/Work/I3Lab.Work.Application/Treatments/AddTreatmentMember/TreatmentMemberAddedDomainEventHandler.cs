@@ -1,6 +1,6 @@
 ﻿using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Treatments.Domain.Treatments.Events;
-using I3Lab.Works.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId;
+using I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId;
 using MediatR;
 
 

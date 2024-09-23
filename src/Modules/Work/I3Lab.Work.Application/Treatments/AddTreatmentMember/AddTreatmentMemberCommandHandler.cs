@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
 {
     public class AddTreatmentMemberCommandHandler(
         IMemberRepository memberRepository,
-        ITretmentRepository tretmentRepository) : IRequestHandler<AddTreatmentMemberCommand>
+        ITreatmentRepository tretmentRepository) : IRequestHandler<AddTreatmentMemberCommand>
     {
         public async Task Handle(AddTreatmentMemberCommand request, CancellationToken cancellationToken)
         {

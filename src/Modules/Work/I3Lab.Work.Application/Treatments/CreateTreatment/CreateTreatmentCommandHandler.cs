@@ -8,7 +8,7 @@ using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
     public class CreateTreatmentCommandHandler(
-        ITretmentRepository tretmentRepository,
+        ITreatmentRepository tretmentRepository,
         IMemberRepository memberRepository) : IRequestHandler<CreateTreatmentCommand, Result<TreatmentDto>>
     {
         public async Task<Result<TreatmentDto>> Handle(CreateTreatmentCommand request, CancellationToken cancellationToken)

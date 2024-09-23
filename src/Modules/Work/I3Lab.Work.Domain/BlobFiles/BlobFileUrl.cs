@@ -32,7 +32,7 @@
 //            return Result.Ok(new BlobFileUrl(value));
 //        }
 
-//        public Result Validate()
+//        public Result ValidatePath()
 //        {
 //            if (string.IsNullOrWhiteSpace(Value))
 //            {
