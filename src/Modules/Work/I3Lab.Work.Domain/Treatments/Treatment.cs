@@ -1,5 +1,4 @@
-﻿
-using FluentResults;
+﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.BlobFiles;
 using I3Lab.Treatments.Domain.Members;
@@ -13,7 +12,7 @@ namespace I3Lab.Treatments.Domain.Treatments
 {
     public class Treatment : Entity, IAggregateRoot
     {
-        public readonly List<TreatmentMember> TreatmentMembers = new();
+        public readonly List<TreatmentMember> TreatmentMembers = [];
 
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
@@ -42,6 +41,7 @@ namespace I3Lab.Treatments.Domain.Treatments
             TreatmentDate = TreatmentDate.Start();
 
             TreatmentMembers.Add(TreatmentMember.CreateNew(Id, creator, creator));
+
             TreatmentMembers.Add(TreatmentMember.CreateNew(Id, patient, creator));
 
             AddDomainEvent(new TreatmentCreatedDomainEvent(creator.Id.Value, Id.Value));
@@ -129,48 +129,6 @@ namespace I3Lab.Treatments.Domain.Treatments
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -18,13 +18,11 @@ namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
             if (treatmentStage == null)
                 return Result.Fail("TreatmentStage not found");
 
-            var contentType = ContentType.Create(request.ContentType);
-
             var uploadFileResponce = await blobService.UploadAsync(request.Stream, request.ContentType);
 
             var newBlobFile = treatmentStage.CreateTreatmentStageFile(
                 BlobFileUrl.Create(uploadFileResponce.Uri),
-                contentType,
+                ContentType.Create(request.ContentType),
                 BlobFileType.Image);
 
             await blobFileRepository.AddAsync(newBlobFile, cancellationToken);
