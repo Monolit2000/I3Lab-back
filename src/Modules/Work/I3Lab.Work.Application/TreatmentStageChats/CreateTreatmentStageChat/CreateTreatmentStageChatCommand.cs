@@ -4,14 +4,14 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageC
 {
     public class CreateTreatmentStageChatCommand : InternalCommandBase
     {
-        public Guid WorkId { get; }
+        public Guid TreatmentStageId { get; }
         public Guid TreatmentId { get; }
 
         public CreateTreatmentStageChatCommand(
-            Guid workId, 
-            Guid treatmentId = default)
+            Guid treatmentStageId, 
+            Guid treatmentId )
         {
-            WorkId = workId;
+            TreatmentStageId = treatmentStageId;
             TreatmentId = treatmentId;
         }
     }

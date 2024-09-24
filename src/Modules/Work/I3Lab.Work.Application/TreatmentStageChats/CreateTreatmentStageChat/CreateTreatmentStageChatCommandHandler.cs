@@ -14,11 +14,11 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageC
     {
         public async Task Handle(CreateTreatmentStageChatCommand request, CancellationToken cancellationToken)
         {
-            var treatmentStage = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId));
+            var treatmentStage = await workRepository.GetByIdAsync(new TreatmentStageId(request.TreatmentStageId));
 
             if (treatmentStage == null)
             {
-                logger.LogWarning("TreatmentStage not found for TreatmentStageChatId: {TreatmentStageChatId}", request.WorkId);
+                logger.LogWarning("TreatmentStage not found for TreatmentStageChatId: {TreatmentStageChatId}", request.TreatmentStageId);
                 return;
             }
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);

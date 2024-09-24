@@ -47,18 +47,6 @@ namespace I3Lab.Treatments.Domain.Treatments
             AddDomainEvent(new TreatmentCreatedDomainEvent(creator.Id.Value, Id.Value));
         }
 
-        //private void AddCreator(Member creator)
-        //{
-        //    Creator = creator;
-        //    AddToTreatmentMembers(creator, creator);
-        //}
-
-        //public void AddPatient(Member patient)
-        //{
-        //    Patient = patient;
-        //    AddToTreatmentMembers(patient, Creator);
-        //}
-
         public TreatmentInvite Invite(Member memberToInvite, Member inviter)
         {
             return TreatmentInvite.InviteBasedOnTreatment(this, memberToInvite, inviter).Value;

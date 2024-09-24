@@ -20,12 +20,13 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         private TreatmentStageChat() { } // For EF Core
 
         private TreatmentStageChat(
-            TreatmentId TreatmentId,
-            TreatmentStageId TreatmentStageId, 
+            TreatmentId treatmentId,
+            TreatmentStageId treatmentStageId, 
             List<Member> members)
         {
             Id = new TreatmentStageChatId(Guid.NewGuid());
-            this.TreatmentStageId = TreatmentStageId;
+            TreatmentId = treatmentId;
+            TreatmentStageId = treatmentStageId;
             ChatMembers = members.Select(x => ChatMember.CreateNew(this.Id, x.Id)).ToList();
         }
 

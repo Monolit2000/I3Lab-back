@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class sdfdsfddsf : Migration
+    public partial class newMigrationdf : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,7 +72,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     PatientId = table.Column<Guid>(type: "uuid", nullable: true),
                     TreatmentTitel = table.Column<string>(type: "text", nullable: true),
                     TreatmentDate_TreatmentStarted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    TreatmentDate_TreatmentFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    TreatmentDate_TreatmentFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    IsCanceled = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

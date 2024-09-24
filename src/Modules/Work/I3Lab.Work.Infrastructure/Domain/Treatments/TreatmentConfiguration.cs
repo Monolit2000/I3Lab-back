@@ -16,6 +16,12 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
             //builder.HasMany(e => e.TreatmentStages)
             //       .WithOne();
 
+            builder.Property(t => t.IsCanceled);
+
+            //builder.Property(t => t.IsFinished);
+
+            builder.Ignore(t => t.IsFinished);
+
             builder.OwnsOne(t => t.TreatmentDate);
 
             builder.OwnsOne(e => e.Titel, b =>

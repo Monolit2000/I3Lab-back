@@ -7,15 +7,10 @@ namespace I3Lab.Treatments.Domain.Members
     public class Member : Entity, IAggregateRoot
     {
         public ClinicId ClinicId { get; private set; }
-
         public MemberId Id { get; private set; }
-
         public MemberRole MemberRole { get; private set; }
-
         public string Email { get; private set; }
-                            
         public string FirstName { get; private set; }
-
         public string LastName { get; private set; }
 
         private Member() { } // For EF Core

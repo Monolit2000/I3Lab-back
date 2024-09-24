@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
 {
-    public class AddTreatmentMemberCommand : IRequest
+    public class AddTreatmentMemberCommand : IRequest<Result>
     {
         public Guid TreatmentId { get; }   
         public Guid MemberId { get; }

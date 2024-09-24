@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
+using MassTransit;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
 {
     public class AddTreatmentMemberCommandHandler(
         IMemberRepository memberRepository,
-        ITreatmentRepository tretmentRepository) : IRequestHandler<AddTreatmentMemberCommand>
+        ITreatmentRepository tretmentRepository) : IRequestHandler<AddTreatmentMemberCommand, Result>
     {
-        public async Task Handle(AddTreatmentMemberCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(AddTreatmentMemberCommand request, CancellationToken cancellationToken)
         {
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
@@ -25,9 +26,11 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
             var result = treatment.AddToTreatmentMembers(member, invaiter);
 
             if (result.IsFailed)
-                return;
+                return result; 
 
             await tretmentRepository.SaveChangesAsync();
+
+            return Result.Ok();
         }
     }
 }

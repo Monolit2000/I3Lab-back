@@ -211,6 +211,9 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("CreatorId")
                         .HasColumnType("uuid");
 
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid?>("PatientId")
                         .HasColumnType("uuid");
 
@@ -477,25 +480,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("TreatmentStageAvatarImageWorkId");
 
-                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageTitel", "Titel", b1 =>
-                        {
-                            b1.Property<Guid>("TreatmentStageId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("Value")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("TreatmentTitel");
-
-                            b1.HasKey("TreatmentStageId");
-
-                            b1.ToTable("Works", "work");
-
-                            b1.WithOwner()
-                                .HasForeignKey("TreatmentStageId");
-                        });
-
-                    b.OwnsOne("I3Lab.Works.Domain.TreatmentStages.TreatmentStageDate", "TreatmentStageDate", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageDate", "TreatmentStageDate", b1 =>
                         {
                             b1.Property<Guid>("TreatmentStageId")
                                 .HasColumnType("uuid");
@@ -505,6 +490,24 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.Property<DateTime>("StageStarted")
                                 .HasColumnType("timestamp with time zone");
+
+                            b1.HasKey("TreatmentStageId");
+
+                            b1.ToTable("Works", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentStageId");
+                        });
+
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageTitel", "Titel", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentStageId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("TreatmentTitel");
 
                             b1.HasKey("TreatmentStageId");
 
