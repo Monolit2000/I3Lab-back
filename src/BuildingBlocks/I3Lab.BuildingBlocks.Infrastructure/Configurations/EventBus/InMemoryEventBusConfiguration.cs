@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MassTransit;
-using I3Lab.Treatments.Application.Members.CreateMember;
 using I3Lab.BuildingBlocks.Infrastructure.MussTransitEventBus;
+using MassTransit;
 
 namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus
 {
