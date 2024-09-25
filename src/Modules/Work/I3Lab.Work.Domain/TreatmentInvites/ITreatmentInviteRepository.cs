@@ -11,6 +11,7 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
     {
         Task<List<TreatmentInvite>> GetAllByTreatmentIdAsync(TreatmentId treatmentId);
         Task<TreatmentInvite> GetByIdAsync(TreatmentInviteId id);
+        Task<TreatmentInvite> GetByTokenAsync(string token);
         Task AddAsync(TreatmentInvite invite);
         Task UpdateAsync(TreatmentInvite invite);
         Task DeleteAsync(TreatmentInviteId id);

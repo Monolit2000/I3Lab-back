@@ -1,7 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles.Events;
-using System;
-using System.ComponentModel;
 
 namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
 {

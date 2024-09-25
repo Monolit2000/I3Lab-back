@@ -13,7 +13,6 @@ using I3Lab.Treatments.Infrastructure.Domain.Treatments;
 using I3Lab.Treatments.Infrastructure.Domain.WorkChats;
 using I3Lab.Treatments.Infrastructure.Domain.Works;
 using I3Lab.Treatments.Infrastructure.Processing.InternalCommands;
-using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

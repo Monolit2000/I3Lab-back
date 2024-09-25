@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using I3Lab.Treatments.Domain.Members;
 
 
 namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
@@ -31,11 +32,25 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
         public async Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
         {
             var treatment = await _context.Treatments
+                .AsSplitQuery() 
                 .Include(t => t.TreatmentMembers)
                     .ThenInclude(tm => tm.Member)
                 .FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
 
             return treatment;
+        }
+
+        public async Task<List<Treatment>> GetAllByPatientAsync(MemberId patientId, CancellationToken cancellationToken = default)
+        {
+            var treatments = await _context.Treatments
+                .AsSplitQuery() 
+                .Include(t => t.Patient)
+                .Include(t => t.TreatmentMembers)
+                    .ThenInclude(tm => tm.Member)
+                .Where(t => t.Patient.Id == patientId)
+                .ToListAsync(cancellationToken);
+
+            return treatments;
         }
 
         public async Task<IEnumerable<Treatment>> GetAllAsync(CancellationToken cancellationToken = default)

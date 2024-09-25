@@ -12,21 +12,16 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
         {
             builder.HasKey(e => e.Id);
 
-
-            //builder.HasMany(e => e.TreatmentStages)
-            //       .WithOne();
-
             builder.Property(t => t.IsCanceled);
 
-            //builder.Property(t => t.IsFinished);
-
-            builder.Ignore(t => t.IsFinished);
+            builder.Property(t => t.IsFinished);
 
             builder.OwnsOne(t => t.TreatmentDate);
 
             builder.OwnsOne(e => e.Titel, b =>
             {
-                b.Property(t => t.Value).HasColumnName("TreatmentTitel").IsRequired();
+                b.Property(t => t.Value).HasColumnName("TreatmentTitel")
+                .IsRequired();
             });
 
            builder.OwnsMany(e => e.TreatmentMembers, b =>

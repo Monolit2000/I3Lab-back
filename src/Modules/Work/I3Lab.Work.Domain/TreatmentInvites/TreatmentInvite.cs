@@ -1,10 +1,9 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
-using FluentResults;
-using I3Lab.Treatments.Domain.TreatmentInvites.Events;
-using I3Lab.Treatments.Domain.TreatmentInvites.Errors;
 using I3Lab.Treatments.Domain.TreatmentInvites.Rule;
+using I3Lab.Treatments.Domain.TreatmentInvites.Events;
 
 namespace I3Lab.Treatments.Domain.TreatmentInvites
 {
@@ -16,6 +15,7 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
 
         public TreatmentInviteId Id { get; private set; }
         public TreatmentInviteStatus TreatmentInviteStatus { get; private set; }
+        public InviteToken InviteToken { get; private set; }
         public DateTime OcurredOn { get; private set; } 
 
         private TreatmentInvite() { } // For EF core only
@@ -28,6 +28,8 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
             Inviter = inviter;
             OcurredOn = DateTime.UtcNow;
             TreatmentInviteStatus = TreatmentInviteStatus.Pending;
+
+            InviteToken = InviteToken.Generate(TimeSpan.FromHours(24));
 
             AddDomainEvent(new TreatmentInviteCreatedDomainEvent(
                 this.Treatment, 
@@ -67,6 +69,32 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
             AddDomainEvent(new TreatmentInviteRejectedDomainEvent());
             return Result.Ok();
         }
+
+        public Result GenerateInviteToken(TimeSpan tokenLifetime)
+        {
+            if (InviteToken != null && !InviteToken.IsExpired())
+                return Result.Fail("An active invite link already exists.");
+
+            InviteToken = InviteToken.Generate(tokenLifetime);
+            return Result.Ok();
+        }
+
+        public string GenerateInviteLink()
+        {
+            var inviteLink = $"/join-invite?token={InviteToken.Token}";
+
+            return inviteLink;
+        }
+
+
+        public Result ValidateInviteToken(string token)
+        {
+            if (InviteToken == null)
+                return Result.Fail("No invite token exists.");
+
+            return InviteToken.Validate(token);
+        }
+
     }
 
    

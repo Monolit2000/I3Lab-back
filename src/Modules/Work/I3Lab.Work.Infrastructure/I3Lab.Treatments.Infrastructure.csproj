@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\I3Lab.Work.Application\I3Lab.Treatments.Application.csproj" />
-    <ProjectReference Include="..\I3Lab.Work.Application\I3Lab.Works.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

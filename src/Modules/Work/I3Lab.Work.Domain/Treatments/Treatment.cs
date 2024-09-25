@@ -22,7 +22,7 @@ namespace I3Lab.Treatments.Domain.Treatments
         public BlobFile TreatmentPreview { get; private set; }
         public TreatmentDate TreatmentDate { get; private set; }
         public bool IsCanceled { get; private set; } = false;
-        public bool IsFinished => TreatmentDate.IsFinished();
+        public bool IsFinished { get; private set; } = false;
 
         public static Treatment CreateNew(Member creator, Member patient, TreatmentTitel titel)
             => new Treatment(creator, patient, titel);
@@ -105,6 +105,8 @@ namespace I3Lab.Treatments.Domain.Treatments
 
             if (result.IsFailed)
                 return result;
+
+            IsFinished = TreatmentDate.IsFinished();    
 
             AddDomainEvent(new TreatmentFinishedDomainEvent(Id.Value, TreatmentDate.TreatmentFinished));
 

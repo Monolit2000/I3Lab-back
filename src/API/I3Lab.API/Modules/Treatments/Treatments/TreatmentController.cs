@@ -10,6 +10,7 @@ using I3Lab.Treatments.Application.Treatments.GetTreatmentById;
 using I3Lab.Treatments.Application.Treatments.AddTreatmentMember;
 using I3Lab.Treatments.Application.Treatments.RemoveMember;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentMembers;
+using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient;
 
 
 namespace I3Lab.API.Modules.Treatments
@@ -40,20 +41,23 @@ namespace I3Lab.API.Modules.Treatments
         [HttpPost("finishTreatment")]
         public async Task<IActionResult> FinishTreatment(FinishTreatmentCommand finishTreatmentCommand)
             => HandleResult(await _mediator.Send(finishTreatmentCommand));
-        
 
         [HttpGet("getTreatmentById")]
-        public async Task<IActionResult> GetTreatmentById(GetTreatmentByIdQuery getTreatmentByIdQuery)
+        public async Task<IActionResult> GetTreatmentById([FromQuery] GetTreatmentByIdQuery getTreatmentByIdQuery)
             => HandleResult(await _mediator.Send(getTreatmentByIdQuery));
 
-        [HttpGet("getTreatmentMembers")]
-        public async Task<IActionResult> GetTreatmentMembers(GetTreatmentMemberByIdQuery getTreatmentMembersQuery)
+        [HttpGet("getTreatmentMemberById")]
+        public async Task<IActionResult> GetTreatmentMembers([FromQuery] GetTreatmentMemberByIdQuery getTreatmentMembersQuery)
            => HandleResult(await _mediator.Send(getTreatmentMembersQuery));
 
-        //[HttpPost("addTreatmentMember")]
-        //public async Task<IActionResult> AddTreatmentMember(AddTreatmentMemberCommand addTreatmentMemberCommand) 
-        //    => HandleResult(await _mediator.Send(addTreatmentMemberCommand));
+        [HttpGet("getTreatmentMembers")]
+        public async Task<IActionResult> GetTreatmentMember([FromQuery] GetTreatmentMembersQuery getTreatmentMembersQuery)
+            => HandleResult(await _mediator.Send(getTreatmentMembersQuery));
 
+        [HttpGet("getAllTreatmentsByPatient")]
+        public async Task<IActionResult> GetAllTreatmentsByPatient([FromQuery]GetAllTreatmentsByPatientQuery getAllTreatmentsByPatientQuery)
+            => HandleResult(await _mediator.Send(getAllTreatmentsByPatientQuery));
+        
 
         [HttpPost("removeTreatmentMember")]
         public async Task<IActionResult> AddTreatmentMember(RemoveTreatmentMemberCommand removeTreatmentMemberCommand) 

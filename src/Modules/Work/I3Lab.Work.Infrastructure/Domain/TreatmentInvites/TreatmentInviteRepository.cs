@@ -23,6 +23,13 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<TreatmentInvite> GetByTokenAsync(string token)
+        {
+            return await _context.TreatmentInvites
+                .FirstOrDefaultAsync(ti => ti.InviteToken.Token == token && ti.InviteToken.ExpiryDate > DateTime.UtcNow);
+        }
+
+
         public async Task AddAsync(TreatmentInvite invite)
         {
             await _context.TreatmentInvites.AddAsync(invite);

@@ -13,5 +13,8 @@ namespace I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesBy
         public string InviterEmail { get; set; }
         public string Status { get; set; }
         public DateTime OcurredOn { get; set; }
+
+        public string TreatmentInviteLink { get; set; }
+        public DateTime InviteExpiryDate { get; set; }
     }
 }

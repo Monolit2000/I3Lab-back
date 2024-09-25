@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class newMigrationdf : Migration
+    public partial class Properjsdhfgtysdf : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -73,7 +73,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     TreatmentTitel = table.Column<string>(type: "text", nullable: true),
                     TreatmentDate_TreatmentStarted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TreatmentDate_TreatmentFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsCanceled = table.Column<bool>(type: "boolean", nullable: false)
+                    IsCanceled = table.Column<bool>(type: "boolean", nullable: false),
+                    IsFinished = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,6 +152,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     MemberToInviteId = table.Column<Guid>(type: "uuid", nullable: false),
                     InviterId = table.Column<Guid>(type: "uuid", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: true),
+                    InviteToken = table.Column<string>(type: "text", nullable: true),
+                    InviteTokenExpiryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     OcurredOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>

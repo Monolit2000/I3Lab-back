@@ -214,6 +214,9 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<bool>("IsCanceled")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsFinished")
+                        .HasColumnType("boolean");
+
                     b.Property<Guid?>("PatientId")
                         .HasColumnType("uuid");
 
@@ -356,6 +359,27 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentInvites.InviteToken", "InviteToken", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentInviteId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("ExpiryDate")
+                                .HasColumnType("timestamp with time zone")
+                                .HasColumnName("InviteTokenExpiryDate");
+
+                            b1.Property<string>("Token")
+                                .HasColumnType("text")
+                                .HasColumnName("InviteToken");
+
+                            b1.HasKey("TreatmentInviteId");
+
+                            b1.ToTable("TreatmentInvites", "work");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentInviteId");
+                        });
+
                     b.OwnsOne("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInviteStatus", "TreatmentInviteStatus", b1 =>
                         {
                             b1.Property<Guid>("TreatmentInviteId")
@@ -373,6 +397,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentInviteId");
                         });
+
+                    b.Navigation("InviteToken");
 
                     b.Navigation("Inviter");
 

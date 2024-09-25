@@ -2,12 +2,6 @@
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.TreatmentStages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId
 {
@@ -25,15 +19,27 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTre
 
             var member = await memberRepository.GetMemberByIdAsync(request.MemberId);
 
-            var tasks = treatmentStages.Select(async treatmentStage =>
+            if (member is null)
+                return;
+
+            var treatmentStageChats = await treatmentStageChatRepository.GetAllByTreatmentIdAsync(request.TreatmentId);
+
+            var tasks = treatmentStageChats.Select(async treatmentStageChat =>
             {
-                var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.Id, cancellationToken);
                 treatmentStageChat?.AddChatMember(member);
                 await treatmentStageRepository.SaveChangesAsync(cancellationToken);
-
-            }).ToList();
+            });
 
             await Task.WhenAll(tasks);
         }
     }
 }
+
+
+            //var tasks = treatmentStages.Select(async treatmentStage =>
+            //{
+            //    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.Id, cancellationToken);
+            //    treatmentStageChat?.AddChatMember(member);
+            //    await treatmentStageRepository.SaveChangesAsync(cancellationToken);
+
+            //}).ToList();

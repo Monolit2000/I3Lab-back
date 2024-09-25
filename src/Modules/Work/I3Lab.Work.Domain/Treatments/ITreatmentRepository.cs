@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I3Lab.Treatments.Domain.Members;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,11 @@ namespace I3Lab.Treatments.Domain.Treatments
     {
         Task<bool> IsNameUniqueAsync(string name, CancellationToken cancellationToken = default);
         Task<Treatment> GetByIdAsync(TreatmentId id, CancellationToken cancellationToken = default);
+        
         Task<IEnumerable<Treatment>> GetAllAsync(CancellationToken cancellationToken = default);
+
+        Task<List<Treatment>> GetAllByPatientAsync(MemberId patientId, CancellationToken cancellationToken = default);
+
         Task AddAsync(Treatment treatment, CancellationToken cancellationToken = default);
         Task UpdateAsync(Treatment treatment, CancellationToken cancellationToken = default);
         Task DeleteAsync(TreatmentId id, CancellationToken cancellationToken = default);
