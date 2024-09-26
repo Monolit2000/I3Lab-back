@@ -24,7 +24,14 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
                 .IsRequired();
             });
 
-           builder.OwnsMany(e => e.TreatmentMembers, b =>
+            builder.OwnsOne(ti => ti.InviteToken, b =>
+            {
+                b.Property(t => t.Token).HasColumnName("InviteToken").IsRequired(false);
+
+                b.Property(t => t.ExpiryDate).HasColumnName("InviteTokenExpiryDate");
+            });
+
+            builder.OwnsMany(e => e.TreatmentMembers, b =>
             {
                 b.ToTable("TreatmentMembers");
 

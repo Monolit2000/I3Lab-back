@@ -13,7 +13,6 @@ namespace I3Lab.Treatments.Domain.Treatments
     public class Treatment : Entity, IAggregateRoot
     {
         public readonly List<TreatmentMember> TreatmentMembers = [];
-
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
 
@@ -21,6 +20,7 @@ namespace I3Lab.Treatments.Domain.Treatments
         public TreatmentTitel Titel { get; private set; }
         public BlobFile TreatmentPreview { get; private set; }
         public TreatmentDate TreatmentDate { get; private set; }
+        public InviteToken InviteToken { get; private set; }
         public bool IsCanceled { get; private set; } = false;
         public bool IsFinished { get; private set; } = false;
 
@@ -39,6 +39,8 @@ namespace I3Lab.Treatments.Domain.Treatments
             Patient = patient;
             Titel = titel;
             TreatmentDate = TreatmentDate.Start();
+
+            InviteToken = InviteToken.Generate(TimeSpan.FromHours(24));
 
             TreatmentMembers.Add(TreatmentMember.CreateNew(Id, creator, creator));
 
@@ -80,6 +82,25 @@ namespace I3Lab.Treatments.Domain.Treatments
             AddDomainEvent(new MemberRemovedFromTreatmentDomainEvent(Id, treatmentMember.Member.Id));
 
             return Result.Ok();
+        }
+
+        public Result GenerateInviteToken(TimeSpan tokenLifetime)
+        {
+            if (InviteToken != null && !InviteToken.IsExpired())
+                return Result.Fail("An active invite link already exists.");
+
+            InviteToken = InviteToken.Generate(tokenLifetime);
+            return Result.Ok();
+        }
+
+        public string GenerateInviteLink(TimeSpan linkLifetime = default)
+        {
+            if (InviteToken == null || InviteToken.IsExpired())
+                InviteToken = InviteToken.Generate(linkLifetime == default ? TimeSpan.FromHours(24) : linkLifetime);
+
+            var inviteLink = $"/join-invite?token={InviteToken.Token}";
+
+            return inviteLink;
         }
 
         public Result Cancel()

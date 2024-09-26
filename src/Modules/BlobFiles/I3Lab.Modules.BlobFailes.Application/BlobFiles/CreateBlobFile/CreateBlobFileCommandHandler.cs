@@ -12,15 +12,11 @@ namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
     {
         public async Task<Result<BlobFileDto>> Handle(CreateBlobFileCommand request, CancellationToken cancellationToken)
         {
-            var contentType = ContentType.Create(request.ContentType);
-
             var uploadFileResponce = await blobService.UploadAsync(request.Stream, request.ContentType);
 
-            var url = BlobFileUrl.Create(uploadFileResponce.Uri);
-
             var newBlobFile = BlobFile.Create(
-                BlobFileUrl.Create(uploadFileResponce.Uri), 
-                contentType);
+                BlobFileUrl.Create(uploadFileResponce.Uri),
+                ContentType.Create(request.ContentType));
 
             await blobFileRepository.AddAsync(newBlobFile, cancellationToken);
 

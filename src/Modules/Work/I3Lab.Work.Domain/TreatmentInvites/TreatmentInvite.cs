@@ -81,6 +81,9 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
 
         public string GenerateInviteLink()
         {
+            if (InviteToken == null || InviteToken.IsExpired())
+                InviteToken = InviteToken.Generate(TimeSpan.FromHours(24));
+
             var inviteLink = $"/join-invite?token={InviteToken.Token}";
 
             return inviteLink;

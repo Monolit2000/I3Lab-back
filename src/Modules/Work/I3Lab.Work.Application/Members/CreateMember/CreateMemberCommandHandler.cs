@@ -7,7 +7,6 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
     public class CreateMemberCommandHandler(
         IMemberRepository memberRepository) : IRequestHandler<CreateMemberCommand, Result<MemberDto>>
     {
-
         public async Task<Result<MemberDto>> Handle(CreateMemberCommand request, CancellationToken cancellationToken)
         {
             if (await memberRepository.IsEmailTakenAsync(request.Email))
@@ -15,7 +14,7 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
 
             var newMember = Member.CreateNew(
                 new MemberId(request.UserId),
-                request.Email);
+                request.Email); 
 
             await memberRepository.AddAsync(newMember);
             await memberRepository.SaveChangesAsync();

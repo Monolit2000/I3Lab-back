@@ -60,7 +60,7 @@ builder.Services
     .AddDoctorModule(builder.Configuration)
     .AddAdministrationModule(builder.Configuration);
 
-builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
+builder.Services.AddMassTransitInMemoryEventBus(builder.Configuration);
 
 
 var app = builder.Build();

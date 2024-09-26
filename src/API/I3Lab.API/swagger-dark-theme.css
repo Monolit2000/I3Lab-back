@@ -1,0 +1,50 @@
+body {
+    background-color: #2E2E2E;
+    color: #D5D5D5;
+}
+
+.swagger-ui {
+    background-color: #2E2E2E;
+    color: #D5D5D5;
+}
+
+    .swagger-ui .topbar {
+        background-color: #1B1B1B;
+    }
+
+    .swagger-ui .opblock {
+        background-color: #3C3C3C;
+    }
+
+    .swagger-ui .opblock-summary {
+        background-color: #4B4B4B;
+        color: #D5D5D5;
+    }
+
+    .swagger-ui .opblock-summary-method {
+        background-color: #5E5E5E;
+        color: #FFF;
+    }
+
+    .swagger-ui .parameter__name,
+    .swagger-ui .parameter__description {
+        color: #B5B5B5;
+    }
+
+    .swagger-ui input,
+    .swagger-ui select,
+    .swagger-ui textarea {
+        background-color: #555;
+        color: #FFF;
+    }
+
+    .swagger-ui .btn {
+        background-color: #4B4B4B;
+        color: #FFF;
+        border-color: #4B4B4B;
+    }
+
+        .swagger-ui .btn:hover {
+            background-color: #6B6B6B;
+            color: #FFF;
+        }

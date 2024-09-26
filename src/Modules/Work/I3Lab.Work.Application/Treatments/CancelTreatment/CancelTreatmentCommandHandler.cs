@@ -15,7 +15,8 @@ namespace I3Lab.Treatments.Application.Treatments.CancelTreatment
         public async Task<Result> Handle(CancelTreatmentCommand request, CancellationToken cancellationToken)
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
-            treatment.Finish();
+
+            treatment.Cancel();
 
             await treatmentRepository.SaveChangesAsync(cancellationToken);
 

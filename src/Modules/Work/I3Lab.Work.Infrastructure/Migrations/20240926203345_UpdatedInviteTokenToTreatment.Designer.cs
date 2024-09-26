@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     [DbContext(typeof(TreatmentContext))]
-    partial class TreatmentContextModelSnapshot : ModelSnapshot
+    [Migration("20240926203345_UpdatedInviteTokenToTreatment")]
+    partial class UpdatedInviteTokenToTreatment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,0 +1,25 @@
+﻿using FluentResults;
+using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace I3Lab.Treatments.Application.Treatments.GetTreatmentJoinLink
+{
+    public class GetTreatmentJoinLinkCommand : IRequest<Result<string>>
+    {
+        public Guid TreatmentId { get; set; }
+
+        public GetTreatmentJoinLinkCommand()
+        {
+                
+        }
+
+        public GetTreatmentJoinLinkCommand(Guid treatmentId)
+        {
+            TreatmentId = treatmentId;
+        }
+    }
+}

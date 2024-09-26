@@ -16,13 +16,13 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
             logger.LogInformation("{Consumer} : {Message}",
              nameof(NewUserRegisteredIntegrationEventHandler), context.Message.UserId);
 
-            await commandsScheduler.EnqueueAsync(new CreateMemberCommand(context.Message.UserId, context.Message.Email));
+            await commandsScheduler.EnqueueAsync(new CreateMemberCommand(
+                context.Message.UserId,
+                context.Message.Email));
 
-            //var command = new CreateMemberCommand(
+            //await mediator.Send(new CreateMemberCommand(
             //    context.Message.UserId,
-            //    context.Message.Email);
-
-            //await mediator.Send(command);
+            //    context.Message.Email));
         }
     }
 }
