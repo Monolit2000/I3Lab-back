@@ -1,10 +1,9 @@
 ﻿using FluentResults;
-using MediatR;
-using System.Text.Json.Serialization;
+using I3Lab.Treatments.Application.Configuration.Commands;
 
 namespace I3Lab.Treatments.Application.Members.CreateMember
 {
-    public class CreateMemberCommand : IRequest<Result<MemberDto>>
+    public class CreateMemberCommand : InternalCommandBase<Result<MemberDto>>
     {
         public string Email { get; }
 
