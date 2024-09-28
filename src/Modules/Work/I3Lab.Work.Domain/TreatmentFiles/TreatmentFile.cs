@@ -14,7 +14,6 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
         public BlobFilePath BlobFilePath { get; private set; }
         public FilePreview FilePreview { get; private set; } 
         public BlobFileType BlobFileType { get; private set; }
-
         public ContentType ContentType { get; set; }
         public double MbSize { get; private set; }
         public DateTime CreateDate { get; private set; }

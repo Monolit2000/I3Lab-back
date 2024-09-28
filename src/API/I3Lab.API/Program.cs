@@ -11,6 +11,10 @@ using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using OpenTelemetry.Metrics;
+using System.Reflection.PortableExecutable;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +26,8 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
 
-builder.Host.UseSerilog((context, loggerConfig) =>
-loggerConfig.ReadFrom.Configuration(context.Configuration));
+builder.Host.UseSerilog((context, loggerConfig) 
+    => loggerConfig.ReadFrom.Configuration(context.Configuration));
 
 builder.Logging.AddSerilog();
 
@@ -39,6 +43,17 @@ builder.Logging.AddSerilog();
 //    });
 //});
 
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(builder => builder.AddService(serviceName: "i3lab.api"))
+    .WithTracing(tracing =>
+    {
+        tracing.AddHttpClientInstrumentation()
+               .AddAspNetCoreInstrumentation()
+               .AddSource(MassTransit.Logging.DiagnosticHeaders.DefaultListenerName);
+
+        tracing.AddOtlpExporter();
+    });
+
 builder.Services.AddControllers();
 
 
@@ -49,6 +64,8 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(J
 //builder.Services.AddIdentityCore<User>()
 //    .AddEntityFrameworkStores<UserContext>()
 //    .AddApiEndpoints();
+
+
 
 builder.Services.AddHttpContextAccessor();
 
@@ -63,6 +80,8 @@ builder.Services
 builder.Services.AddMassTransitInMemoryEventBus(builder.Configuration);
 
 
+
+
 var app = builder.Build();
 
 ServiceFactory.Configure(app.Services);
@@ -73,7 +92,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    //app.ClearDbContextMigrations();
+    app.ClearDbContextMigrations();
 
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();

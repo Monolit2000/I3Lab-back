@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 {
-    public class ChatMessageConfiguration : IEntityTypeConfiguration<ChatMessage>
+    public class ChatMessageConfiguration : IEntityTypeConfiguration<Message>
     {
-        public void Configure(EntityTypeBuilder<ChatMessage> builder)
+        public void Configure(EntityTypeBuilder<Message> builder)
         {
             builder.ToTable("ChatMessages");
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Treatments.GetTreatmentMembers
 {
-    public class GetTreatmentMemberByIdQuery : IRequest<Result<List<TreatmentMemberDto>>>
+    public class GetTreatmentMemberByIdQuery : IRequest<Result<TreatmentMemberDto>>
     {
         public Guid TreatmentId { get; set; }
 

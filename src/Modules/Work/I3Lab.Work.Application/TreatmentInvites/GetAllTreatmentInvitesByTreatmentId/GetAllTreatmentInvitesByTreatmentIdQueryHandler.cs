@@ -19,7 +19,7 @@ namespace I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesBy
                 Status = invite.TreatmentInviteStatus.Value,
                 OcurredOn = invite.OcurredOn,
                 //TreatmentInviteLink = invite.GenerateInviteLink(),
-                //InviteExpiryDate = invite.InviteToken.ExpiryDate
+                //InviteExpiryDate = invite.InvitationToken.ExpiryDate
             }).ToList();
 
             return Result.Ok(treatmentInviteDtos);

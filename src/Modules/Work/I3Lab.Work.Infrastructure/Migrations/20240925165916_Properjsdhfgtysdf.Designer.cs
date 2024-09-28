@@ -435,7 +435,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasForeignKey("TreatmentStageChatId");
                         });
 
-                    b.OwnsMany("I3Lab.Treatments.Domain.TreatmentStageChats.ChatMessage", "Messages", b1 =>
+                    b.OwnsMany("I3Lab.Treatments.Domain.TreatmentStageChats.Message", "Messages", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");

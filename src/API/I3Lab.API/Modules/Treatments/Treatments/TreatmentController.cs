@@ -3,11 +3,13 @@ using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
 using I3Lab.Treatments.Application.Treatments.RemoveMember;
 using I3Lab.Treatments.Application.Treatments.CreateTreatment;
+using I3Lab.Treatments.Application.Treatments.GetAllTreatment;
 using I3Lab.Treatments.Application.Treatments.FinishTreatment;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentById;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentMembers;
-using I3Lab.Treatments.Application.Treatments.GetTreatmentJoinLink;
+using I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient;
+using I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink;
 
 namespace I3Lab.API.Modules.Treatments
 {
@@ -16,6 +18,11 @@ namespace I3Lab.API.Modules.Treatments
     public class TreatmentController(
         IMediator mediator) : BaseController
     {
+
+        [HttpGet("getAllTreatment")]
+        public async Task<IActionResult> GetAllTreatment([FromQuery]GetAllTreatmentQuery getAllTreatmentQuery)
+            => HandleResult(await mediator.Send(getAllTreatmentQuery));
+
 
         [HttpPost("сreateTreatment")]
         public async Task<IActionResult> CeateTreatment(CreateTreatmentCommand createTreatmentCommand)
@@ -45,15 +52,20 @@ namespace I3Lab.API.Modules.Treatments
         [HttpGet("getAllTreatmentsByPatient")]
         public async Task<IActionResult> GetAllTreatmentsByPatient([FromQuery]GetAllTreatmentsByPatientQuery getAllTreatmentsByPatientQuery)
             => HandleResult(await mediator.Send(getAllTreatmentsByPatientQuery));
-        
+
 
         [HttpPost("removeTreatmentMember")]
         public async Task<IActionResult> AddTreatmentMember(RemoveTreatmentMemberCommand removeTreatmentMemberCommand) 
             => HandleResult(await mediator.Send(removeTreatmentMemberCommand));
 
 
-        [HttpGet("GetTreatmentJoinLink")]
-        public async Task<IActionResult> GetTreatmentJoinLink([FromQuery] GetTreatmentJoinLinkCommand getTreatmentJoinLinkCommand)
+        [HttpGet("getTreatmentInvitationLink")]
+        public async Task<IActionResult> GetTreatmentJoinLink([FromQuery] GetTreatmentInvitationLinkCommand getTreatmentJoinLinkCommand)
             => HandleResult(await mediator.Send(getTreatmentJoinLinkCommand));
+
+
+        [HttpPost("joinToTreatmentByInvitationLink")]
+        public async Task<IActionResult> JoinToTreatmentByInvitationLink(JoinToTreatmentByInvitationLinkCommand joinToTreatmentByInvitationLinkCommand)
+            => HandleResult(await mediator.Send(joinToTreatmentByInvitationLinkCommand));
     }
 }

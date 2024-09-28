@@ -8,6 +8,7 @@ namespace I3Lab.Treatments.Domain.Members
 {
     public interface IMemberRepository
     {
+        public Task<List<Member>> GetAllAsync();
         public  Task<Member> GetMemberByIdAsync(MemberId id);
 
         public Task<Member> GetByEmailAsync(string email);

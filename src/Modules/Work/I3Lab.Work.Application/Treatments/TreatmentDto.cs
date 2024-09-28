@@ -10,8 +10,7 @@ namespace I3Lab.Treatments.Application.Treatments
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
-        public bool IsCanceled { get; set; }
-        public bool IsFinished { get; set; }
+        public string Status { get; set; }
         public DateTime TreatmentDate { get; set; }
         public Guid CreatorId { get; set; }
         public Guid PatientId { get; set; }

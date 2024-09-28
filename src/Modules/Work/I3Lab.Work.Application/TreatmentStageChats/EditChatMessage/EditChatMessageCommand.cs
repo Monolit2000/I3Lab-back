@@ -11,10 +11,10 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage
 {
     public class EditChatMessageCommand : IRequest<Result>
     {
-        public Guid WorkId { get; }
-        public Guid ChatMemberId { get; }   
-        public Guid MessageId { get; }  
-        public string EditedMessage { get; }
+        public Guid WorkId { get; set; }
+        public Guid ChatMemberId { get; set; }   
+        public Guid MessageId { get; set; }  
+        public string EditedMessage { get; set; }
 
         public EditChatMessageCommand()
         {

@@ -14,7 +14,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage
             if (chat == null)
                 return Result.Fail("Chat not found");
 
-            var result = chat.EditMessage(new ChatMessageId(request.MessageId), request.EditedMessage);
+            var result = chat.EditMessage(new MessageId(request.MessageId), request.EditedMessage);
 
             if (result.IsFailed)
                 return result;

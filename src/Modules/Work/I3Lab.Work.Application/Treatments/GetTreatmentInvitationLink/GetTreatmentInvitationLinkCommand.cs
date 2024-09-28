@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.Treatments.GetTreatmentJoinLink
+namespace I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink
 {
-    public class GetTreatmentJoinLinkCommand : IRequest<Result<string>>
+    public class GetTreatmentInvitationLinkCommand : IRequest<Result<string>>
     {
         public Guid TreatmentId { get; set; }
 
-        public GetTreatmentJoinLinkCommand()
+        public GetTreatmentInvitationLinkCommand()
         {
                 
         }
 
-        public GetTreatmentJoinLinkCommand(Guid treatmentId)
+        public GetTreatmentInvitationLinkCommand(Guid treatmentId)
         {
             TreatmentId = treatmentId;
         }

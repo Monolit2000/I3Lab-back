@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats.Events
 {
-    public class ChatMemberRemovedDamainEvent : DomainEventBase
+    public class ChatMemberRemovedDomainEvent : DomainEventBase
     {
         public TreatmentStageChatId WorkChatId { get; }
         public MemberId MemberId { get; }
 
-        public ChatMemberRemovedDamainEvent(
+        public ChatMemberRemovedDomainEvent(
             TreatmentStageChatId workChatId,
             MemberId memberId)
         {

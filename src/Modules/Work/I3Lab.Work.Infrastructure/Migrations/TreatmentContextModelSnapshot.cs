@@ -18,7 +18,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("work")
+                .HasDefaultSchema("treatment")
                 .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -47,7 +47,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("InternalCommands", "work");
+                    b.ToTable("InternalCommands", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.BlobFiles.BlobFile", b =>
@@ -69,7 +69,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.HasIndex("TreatmentId")
                         .IsUnique();
 
-                    b.ToTable("BlobFiles", "work");
+                    b.ToTable("BlobFiles", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.Members.Member", b =>
@@ -101,7 +101,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Members", "work");
+                    b.ToTable("Members", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInvite", b =>
@@ -129,7 +129,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasIndex("TreatmentId");
 
-                    b.ToTable("TreatmentInvites", "work");
+                    b.ToTable("TreatmentInvites", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStageChats.TreatmentStageChat", b =>
@@ -145,7 +145,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TreatmentStageChats", "work");
+                    b.ToTable("TreatmentStageChats", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", b =>
@@ -182,7 +182,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasIndex("TreatmentStageAvatarImageWorkId");
 
-                    b.ToTable("Works", "work");
+                    b.ToTable("TreatmentStage", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageFile", b =>
@@ -200,7 +200,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasIndex("FileId");
 
-                    b.ToTable("TreatmentStageFile", "work");
+                    b.ToTable("TreatmentStageFile", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.Treatments.Treatment", b =>
@@ -211,12 +211,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("CreatorId")
                         .HasColumnType("uuid");
 
-                    b.Property<bool>("IsCanceled")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("IsFinished")
-                        .HasColumnType("boolean");
-
                     b.Property<Guid?>("PatientId")
                         .HasColumnType("uuid");
 
@@ -226,7 +220,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("Treatments", "work");
+                    b.ToTable("Treatments", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.BlobFiles.BlobFile", b =>
@@ -247,7 +241,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles", "work");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -269,7 +263,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles", "work");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -287,7 +281,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles", "work");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -305,7 +299,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles", "work");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -322,7 +316,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("BlobFileId");
 
-                            b1.ToTable("BlobFiles", "work");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("BlobFileId");
@@ -374,7 +368,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentInviteId");
 
-                            b1.ToTable("TreatmentInvites", "work");
+                            b1.ToTable("TreatmentInvites", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentInviteId");
@@ -392,7 +386,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentInviteId");
 
-                            b1.ToTable("TreatmentInvites", "work");
+                            b1.ToTable("TreatmentInvites", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentInviteId");
@@ -426,13 +420,13 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasIndex("TreatmentStageChatId");
 
-                            b1.ToTable("ChatMembers", "work");
+                            b1.ToTable("ChatMembers", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentStageChatId");
                         });
 
-                    b.OwnsMany("I3Lab.Treatments.Domain.TreatmentStageChats.ChatMessage", "Messages", b1 =>
+                    b.OwnsMany("I3Lab.Treatments.Domain.TreatmentStageChats.Message", "Messages", b1 =>
                         {
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
@@ -471,7 +465,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasIndex("WorkChatId");
 
-                            b1.ToTable("WorkChatMessages", "work");
+                            b1.ToTable("WorkChatMessages", "treatment");
 
                             b1.HasOne("I3Lab.Treatments.Domain.BlobFiles.BlobFile", "FileResponceId")
                                 .WithMany()
@@ -519,7 +513,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentStageId");
 
-                            b1.ToTable("Works", "work");
+                            b1.ToTable("TreatmentStage", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentStageId");
@@ -537,7 +531,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentStageId");
 
-                            b1.ToTable("Works", "work");
+                            b1.ToTable("TreatmentStage", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentStageId");
@@ -594,7 +588,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentId");
 
-                            b1.ToTable("Treatments", "work");
+                            b1.ToTable("Treatments", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentId");
@@ -613,7 +607,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentId");
 
-                            b1.ToTable("Treatments", "work");
+                            b1.ToTable("Treatments", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentId");
@@ -624,7 +618,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid>("AddedById")
+                            b1.Property<Guid?>("AddedById")
                                 .HasColumnType("uuid");
 
                             b1.Property<DateTime>("JoinDate")
@@ -647,13 +641,11 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasIndex("TreatmentId");
 
-                            b1.ToTable("TreatmentMembers", "work");
+                            b1.ToTable("TreatmentMembers", "treatment");
 
                             b1.HasOne("I3Lab.Treatments.Domain.Members.Member", "AddedBy")
                                 .WithMany()
-                                .HasForeignKey("AddedById")
-                                .OnDelete(DeleteBehavior.Cascade)
-                                .IsRequired();
+                                .HasForeignKey("AddedById");
 
                             b1.HasOne("I3Lab.Treatments.Domain.Members.Member", "Member")
                                 .WithMany()
@@ -675,7 +667,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                                     b2.HasKey("TreatmentMemberId");
 
-                                    b2.ToTable("TreatmentMembers", "work");
+                                    b2.ToTable("TreatmentMembers", "treatment");
 
                                     b2.WithOwner()
                                         .HasForeignKey("TreatmentMemberId");
@@ -686,6 +678,24 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                             b1.Navigation("AddedBy");
 
                             b1.Navigation("Member");
+                        });
+
+                    b.OwnsOne("I3Lab.Treatments.Domain.Treatments.TreatmentStatus", "Status", b1 =>
+                        {
+                            b1.Property<Guid>("TreatmentId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("TreatmentStatus");
+
+                            b1.HasKey("TreatmentId");
+
+                            b1.ToTable("Treatments", "treatment");
+
+                            b1.WithOwner()
+                                .HasForeignKey("TreatmentId");
                         });
 
                     b.OwnsOne("I3Lab.Treatments.Domain.Treatments.TreatmentTitel", "Titel", b1 =>
@@ -700,7 +710,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentId");
 
-                            b1.ToTable("Treatments", "work");
+                            b1.ToTable("Treatments", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentId");
@@ -711,6 +721,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Navigation("InviteToken");
 
                     b.Navigation("Patient");
+
+                    b.Navigation("Status");
 
                     b.Navigation("Titel");
 

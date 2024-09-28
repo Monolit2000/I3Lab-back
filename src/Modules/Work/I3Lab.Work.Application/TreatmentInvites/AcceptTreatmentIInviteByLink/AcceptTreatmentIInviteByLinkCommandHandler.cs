@@ -1,12 +1,12 @@
-﻿using FluentResults;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Treatments.Domain.TreatmentInvites;
-using MediatR;
 
-namespace I3Lab.Treatments.Application.TreatmentInvites.JoinInviteByLink
+namespace I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentIInviteByLink
 {
-    public class JoinInviteByLinkCommandHandler(ITreatmentInviteRepository treatmentInviteRepository) : IRequestHandler<JoinInviteByLinkCommand, Result>
+    public class AcceptTreatmentIInviteByLinkCommandHandler(ITreatmentInviteRepository treatmentInviteRepository) : IRequestHandler<AcceptTreatmentIInviteByLinkCommand, Result>
     {
-        public async Task<Result> Handle(JoinInviteByLinkCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(AcceptTreatmentIInviteByLinkCommand request, CancellationToken cancellationToken)
         {
             var invite = await treatmentInviteRepository.GetByTokenAsync(request.Token);
 

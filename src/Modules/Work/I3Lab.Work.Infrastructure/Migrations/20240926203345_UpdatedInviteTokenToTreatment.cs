@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "InviteToken",
+                name: "InvitationToken",
                 schema: "work",
                 table: "Treatments",
                 type: "text",
@@ -30,7 +30,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "InviteToken",
+                name: "InvitationToken",
                 schema: "work",
                 table: "Treatments");
 

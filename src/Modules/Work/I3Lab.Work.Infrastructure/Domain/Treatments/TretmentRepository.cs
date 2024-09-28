@@ -1,10 +1,5 @@
 ﻿using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Treatments.Domain.Members;
 
@@ -56,7 +51,15 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
         public async Task<IEnumerable<Treatment>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Treatments
-                .ToListAsync();
+                 .Include(t => t.Patient)
+                 .Include(t => t.Creator)
+                 .ToListAsync();
+        }
+
+        public async Task<Treatment> GetByTokenAsync(string token)
+        {
+            return await _context.Treatments
+                .FirstOrDefaultAsync(ti => ti.InvitationToken.Token == token && ti.InvitationToken.ExpiryDate > DateTime.UtcNow);
         }
 
         public async Task AddAsync(Treatment treatment, CancellationToken cancellationToken = default)

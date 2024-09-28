@@ -13,6 +13,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
     {
         public void Configure(EntityTypeBuilder<I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage> builder)
         {
+            builder.ToTable("TreatmentStage");
+
             builder.HasKey(e => e.Id);
 
             //builder.Property(e => e.Id).HasConversion<WorkIdConverter>();

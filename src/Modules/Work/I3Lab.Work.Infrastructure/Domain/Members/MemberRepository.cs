@@ -18,6 +18,14 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+
+        public async Task<List<Member>> GetAllAsync()
+        {
+            var members = await _context.Members.ToListAsync();
+
+            return members;
+        }
+
         public async Task<Member> GetMemberByIdAsync(MemberId id)
         {
             var member = await _context.Members
@@ -37,12 +45,6 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
         public async Task<bool> IsEmailTakenAsync(string email)
         {
             return await _context.Members.AnyAsync(m => m.Email == email);
-        }
-
-
-        public async Task<IEnumerable<Member>> GetAllAsync()
-        {
-            return await _context.Members.ToListAsync();
         }
 
         public async Task AddAsync(Member member)

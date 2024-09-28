@@ -6,7 +6,7 @@ using I3Lab.API.Modules.Base;
 using I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentInvite;
 using I3Lab.Treatments.Application.TreatmentInvites.RejectTreatmentInvite;
 using I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesByTreatmentId;
-using I3Lab.Treatments.Application.TreatmentInvites.JoinInviteByLink;
+using I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentIInviteByLink;
 
 namespace I3Lab.API.Modules.Treatments.TreatmentInvites
 {
@@ -41,7 +41,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentInvites
         }
 
         [HttpGet("/join-invite")]
-        public async Task<IActionResult> JoinInvite([FromQuery] JoinInviteByLinkCommand joinInviteByLinkCommand)
+        public async Task<IActionResult> JoinInvite([FromQuery] AcceptTreatmentIInviteByLinkCommand joinInviteByLinkCommand)
         {
             return HandleResult(await _mediator.Send(joinInviteByLinkCommand));
         }

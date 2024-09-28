@@ -12,10 +12,6 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
         {
             builder.HasKey(e => e.Id);
 
-            builder.Property(t => t.IsCanceled);
-
-            builder.Property(t => t.IsFinished);
-
             builder.OwnsOne(t => t.TreatmentDate);
 
             builder.OwnsOne(e => e.Titel, b =>
@@ -24,9 +20,14 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
                 .IsRequired();
             });
 
-            builder.OwnsOne(ti => ti.InviteToken, b =>
+            builder.OwnsOne(e => e.Status, b =>
             {
-                b.Property(t => t.Token).HasColumnName("InviteToken").IsRequired(false);
+                b.Property(s => s.Value).HasColumnName("TreatmentStatus").IsRequired();
+            });
+
+            builder.OwnsOne(ti => ti.InvitationToken, b =>
+            {
+                b.Property(t => t.Token).HasColumnName("InvitationToken").IsRequired(false);
 
                 b.Property(t => t.ExpiryDate).HasColumnName("InviteTokenExpiryDate");
             });
@@ -48,10 +49,10 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
                   .HasForeignKey("MemberId") 
                   .IsRequired();
 
-                b.HasOne(vm => vm.AddedBy)
-                  .WithMany() 
-                  .HasForeignKey("AddedById") 
-                  .IsRequired();
+                //b.HasOne(vm => vm.AddedBy)
+                //  .WithMany() 
+                //  .HasForeignKey("AddedById") 
+                //  .IsRequired();
 
                 b.OwnsOne(at => at.AccessibilityType, b =>
                 {

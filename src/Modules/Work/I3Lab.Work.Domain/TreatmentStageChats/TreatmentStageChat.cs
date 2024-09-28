@@ -5,6 +5,8 @@ using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentStageChats.Rules;
+using I3Lab.Treatments.Domain.TreatmentStageChats;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats
 {
@@ -12,7 +14,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
     {
         public TreatmentId TreatmentId { get; private set; }
         public TreatmentStageId TreatmentStageId { get; private set; }
-        public List<ChatMessage> Messages { get; private set; } = [];
+        public List<Message> Messages { get; private set; } = [];
         public List<ChatMember> ChatMembers { get; private set; } = [];
 
         public TreatmentStageChatId Id { get; private set; }
@@ -27,19 +29,18 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
             Id = new TreatmentStageChatId(Guid.NewGuid());
             TreatmentId = treatmentId;
             TreatmentStageId = treatmentStageId;
+
             ChatMembers = members.Select(x => ChatMember.CreateNew(this.Id, x.Id)).ToList();
         }
 
-        public static TreatmentStageChat CreaterWorkChut(
+        public static TreatmentStageChat Create(
             TreatmentId treatmentId,
             TreatmentStageId workId,
-            List<Member> workMembers)
-        {
-            return new TreatmentStageChat(
+            List<Member> workMembers) 
+            => new TreatmentStageChat(
                 treatmentId,
                 workId,
                 workMembers);
-        }
 
         public static TreatmentStageChat CreateBaseOnTreatmentStage(
             TreatmentId treatmentId,
@@ -52,106 +53,202 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
                 workMembers);
         }
 
-        //public void AddMessage(MemberId senderId, string messageText)
-        //{
-        //    if (ChatMembers.All(p => p.MemberId != senderId))
-        //        throw new InvalidOperationException("Sender is not a member in the chat.");
 
-        //    var newMessage = ChatMessage.CreateNew(senderId, messageText);
-        //    Messages.Add(newMessage);
-        //}
-
-
-
-        public Result AddMessage(MemberId senderId, string messageText, ChatMessageId repliedToMessageId = null)
+        public Result AddMessage(MemberId senderId, string messageText, MessageId repliedToMessageId = null)
         {
-            if (ChatMembers.All(p => p.MemberId != senderId))
-                return Result.Fail("Sender is not a member in the chat.");
+            var result = CheckRules(
+                new SenderMustBeChatMemberRule(ChatMembers, senderId),
+                new RepliedMessageMustExistRule(Messages, repliedToMessageId));
+            if (result.IsFailed)
+                return result;
 
-            if (repliedToMessageId != null)
-            {
-                var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
-                if (originalMessage == null)
-                    return Result.Fail("Replied message not found.");
-            }
-
-            var newMessage = ChatMessage.CreateNew(senderId, messageText, repliedToMessageId);
+            var newMessage = Message.CreateNew(senderId, messageText, repliedToMessageId);
             Messages.Add(newMessage);
 
             return Result.Ok();
         }
 
-        public Result AddReplyToMessage(MemberId senderId, ChatMessageId repliedToMessageId, string messageText)
+        public Result AddReplyToMessage(MemberId senderId, MessageId repliedToMessageId, string messageText)
         {
-            if (ChatMembers.All(p => p.MemberId != senderId))
-                return Result.Fail("Sender is not a member in the chat.");
+            var result = CheckRules(
+                new SenderMustBeChatMemberRule(ChatMembers, senderId),
+                new RepliedMessageMustExistRule(Messages, repliedToMessageId));
+            if (result.IsFailed)
+                return result;
 
-            var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
-            if (originalMessage == null)
-                return Result.Fail("Replied message not found.");
 
-            var replyMessage = ChatMessage.CreateNew(senderId, messageText, repliedToMessageId);
+            var replyMessage = Message.CreateNew(senderId, messageText, repliedToMessageId);
             Messages.Add(replyMessage);
 
             return Result.Ok();
         }
 
-        public Result AddResponseToFileMessage(MemberId senderId, BlobFile fileResponceId, string messageText = "", ChatMessageId repliedToMessageId = null)
+        public Result AddResponseToFileMessage(MemberId senderId, BlobFile fileResponceId, string messageText = "", MessageId repliedToMessageId = null)
         {
-            if (ChatMembers.All(p => p.MemberId != senderId))
-                return Result.Fail("Sender is not a member in the chat.");
+            var result = CheckRules(
+                new SenderMustBeChatMemberRule(ChatMembers, senderId),
+                new RepliedMessageMustExistRule(Messages, repliedToMessageId));
+            if (result.IsFailed)
+                return result;
 
-            if (repliedToMessageId != null)
-            {
-                var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
-                if (originalMessage == null)
-                    return Result.Fail("Replied message not found.");
-            }
-
-            var newMessage = ChatMessage.CreateNewResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
+            var newMessage = Message.CreateNewResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
             Messages.Add(newMessage);
 
             return Result.Ok();
         }
 
-        public void RemoveMessage(ChatMessageId chatMessageId)
+
+        public Result RemoveMessage(MessageId chatMessageId)
         {
             var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
 
             if (message == null)
-                throw new InvalidOperationException("Messages not faund.");
+                return Result.Fail("Message not found.");
 
-            Messages.Remove(message); 
+            Messages.Remove(message);
+            return Result.Ok();
         }
 
-        public Result EditMessage(ChatMessageId chatMessageId, string newMessage)
+        public Result EditMessage(MessageId chatMessageId, string newMessage)
         {
             var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
+
+            if (message == null)
+                return Result.Fail("Message not found.");
 
             message.Edit(newMessage);
 
             return Result.Ok();
         }
 
-        public void AddChatMember(Member member)
+        public Result AddChatMember(Member member)
         {
-            if (ChatMembers.Any(p => p.MemberId == member.Id))
-                throw new InvalidOperationException("MemberToInvite is already a member in the chat.");
+            var result = CheckRules(new MemberMustNotBeAlreadyInChatRule(ChatMembers, member.Id));
+            if (result.IsFailed)
+                return result;
 
             var chatMember = ChatMember.CreateNew(Id, member.Id);
-
             ChatMembers.Add(chatMember);
+
+            return Result.Ok();
         }
 
-        public void RemoveChatMember(MemberId memberId)
+        public Result RemoveChatMember(MemberId memberId)
         {
             var member = ChatMembers.FirstOrDefault(p => p.MemberId == memberId);
             if (member == null)
-                throw new InvalidOperationException("MemberToInvite is not a member in the chat.");
+                return Result.Fail("Member not found in the chat.");
 
             ChatMembers.Remove(member);
+            AddDomainEvent(new ChatMemberRemovedDomainEvent(this.Id, member.MemberId));
 
-            AddDomainEvent(new ChatMemberRemovedDamainEvent(this.Id, member.MemberId));
+            return Result.Ok();
         }
     }
 }
+
+
+
+//public Result AddMessage(MemberId senderId, string messageText, MessageId repliedToMessageId = null)
+//{
+//    if (ChatMembers.All(p => p.MemberId != senderId))
+//        return Result.Fail("Sender is not a member in the chat.");
+
+//    if (repliedToMessageId != null)
+//    {
+//        var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
+//        if (originalMessage == null)
+//            return Result.Fail("Replied message not found.");
+//    }
+
+//    var newMessage = Message.CreateNew(senderId, messageText, repliedToMessageId);
+//    Messages.Add(newMessage);
+
+//    return Result.Ok();
+//}
+
+//public Result AddReplyToMessage(MemberId senderId, MessageId repliedToMessageId, string messageText)
+//{
+//    if (ChatMembers.All(p => p.MemberId != senderId))
+//        return Result.Fail("Sender is not a member in the chat.");
+
+//    var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
+//    if (originalMessage == null)
+//        return Result.Fail("Replied message not found.");
+
+//    var replyMessage = Message.CreateNew(senderId, messageText, repliedToMessageId);
+//    Messages.Add(replyMessage);
+
+//    return Result.Ok();
+//}
+
+//public Result AddResponseToFileMessage(MemberId senderId, BlobFile fileResponceId, string messageText = "", MessageId repliedToMessageId = null)
+//{
+//    if (ChatMembers.All(p => p.MemberId != senderId))
+//        return Result.Fail("Sender is not a member in the chat.");
+
+//    if (repliedToMessageId != null)
+//    {
+//        var originalMessage = Messages.FirstOrDefault(m => m.Id == repliedToMessageId);
+//        if (originalMessage == null)
+//            return Result.Fail("Replied message not found.");
+//    }
+
+//    var newMessage = Message.CreateNewResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
+//    Messages.Add(newMessage);
+
+//    return Result.Ok();
+//}
+
+
+
+//public Result RemoveMessage(MessageId chatMessageId)
+//{
+//    var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
+
+//    var result = CheckRule(new MessageMustExistRule(message));
+//    if (result.IsFailed)
+//        return result;
+
+//    Messages.Remove(message);
+//    return Result.Ok();
+//}
+
+//public Result EditMessage(MessageId chatMessageId, string newMessage)
+//{
+//    var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
+
+//    var result = CheckRule(new MessageMustExistRule(message));
+//    if (result.IsFailed)
+//        return result;
+
+//    message.Edit(newMessage);
+//    return Result.Ok();
+//}
+
+//public Result AddChatMember(Member member)
+//{
+//    var result = CheckRule(new MemberMustNotBeAlreadyInChatRule(ChatMembers, member.Id));
+//    if (result.IsFailed)
+//        return result;
+
+//    var chatMember = ChatMember.CreateNew(Id, member.Id);
+//    ChatMembers.Add(chatMember);
+
+//    return Result.Ok();
+//}
+
+//public Result RemoveChatMember(MemberId memberId)
+//{
+//    var member = ChatMembers.FirstOrDefault(p => p.MemberId == memberId);
+
+//    var result = CheckRule(new MemberMustBeInChatRule(ChatMembers, memberId));
+//    if (result.IsFailed)
+//        return result;
+
+//    ChatMembers.Remove(member);
+
+//    AddDomainEvent(new ChatMemberRemovedDomainEvent(this.Id, memberId));
+
+//    return Result.Ok();
+//}

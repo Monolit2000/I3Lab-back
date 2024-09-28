@@ -20,6 +20,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
+
         public DbSet<Treatments.Domain.TreatmentStages.TreatmentStage> Works { get; set; }
 
         public DbSet<InternalCommand> InternalCommands { get; set; }
@@ -36,7 +37,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.HasDefaultSchema("work");
+            modelBuilder.HasDefaultSchema("treatment");
 
             modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
@@ -48,7 +49,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
             modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
 
-            modelBuilder.ApplyConfiguration(new WorkTreatmentStageConfiguration());
+            modelBuilder.ApplyConfiguration(new TreatmentStageFileConfiguration());
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
             

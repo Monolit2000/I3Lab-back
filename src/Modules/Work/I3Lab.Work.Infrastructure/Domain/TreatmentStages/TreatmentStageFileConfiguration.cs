@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.Works
 {
-    public class WorkTreatmentStageConfiguration : IEntityTypeConfiguration<TreatmentStageFile>
+    public class TreatmentStageFileConfiguration : IEntityTypeConfiguration<TreatmentStageFile>
     {
         public void Configure(EntityTypeBuilder<TreatmentStageFile> builder)
         {

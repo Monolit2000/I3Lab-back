@@ -10,13 +10,13 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
         {
             builder.HasKey(e => e.Id);
 
-           // builder.Property(e => e.InviteToken).IsRequired(false);
+           // builder.Property(e => e.InvitationToken).IsRequired(false);
 
             builder.OwnsOne(ti => ti.InviteToken, b =>
             {
 
                 b.Property(t => t.Token)
-                   .HasColumnName("InviteToken")
+                   .HasColumnName("InvitationToken")
                    .IsRequired(false);
 
                 b.Property(t => t.ExpiryDate)

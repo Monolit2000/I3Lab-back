@@ -16,6 +16,8 @@ namespace I3Lab.Treatments.Domain.Treatments
 
         Task<List<Treatment>> GetAllByPatientAsync(MemberId patientId, CancellationToken cancellationToken = default);
 
+        Task<Treatment> GetByTokenAsync(string token);
+
         Task AddAsync(Treatment treatment, CancellationToken cancellationToken = default);
         Task UpdateAsync(Treatment treatment, CancellationToken cancellationToken = default);
         Task DeleteAsync(TreatmentId id, CancellationToken cancellationToken = default);

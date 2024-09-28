@@ -41,7 +41,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
             {
                 b.ToTable("WorkChatMessages");
 
-                // Reuse the ChatMessage configuration for properties and relationships
+                // Reuse the Message configuration for properties and relationships
                 b.WithOwner()
                  .HasForeignKey(cm => cm.WorkChatId);
 

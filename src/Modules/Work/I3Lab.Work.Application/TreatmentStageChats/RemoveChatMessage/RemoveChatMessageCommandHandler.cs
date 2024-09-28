@@ -20,7 +20,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMessage
             if (treatmentStageChat == null)
                 return Result.Fail("TreatmentStageChat not found");
 
-            treatmentStageChat.RemoveMessage(new ChatMessageId(request.MessageId));
+            treatmentStageChat.RemoveMessage(new MessageId(request.MessageId));
 
             return Result.Ok();
         }

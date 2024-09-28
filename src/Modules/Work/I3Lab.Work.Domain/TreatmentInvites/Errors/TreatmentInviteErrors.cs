@@ -25,10 +25,8 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites.Errors
         }
 
         public static Error InviteNotFound(TreatmentInviteId inviteId)
-        {
-            return new Error($"The invite with ID {inviteId} was not found.")
+            => new Error($"The invite with ID {inviteId} was not found.")
                 .WithMetadata("InviteId", inviteId.ToString());
-        }
 
         public static Error TreatmentNotFound(Treatment treatment)
         {

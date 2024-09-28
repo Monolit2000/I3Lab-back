@@ -25,8 +25,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient
             {
                 Id = t.Id.Value,
                 Title = t.Titel.Value,
-                IsCanceled = t.IsCanceled,
-                IsFinished = t.IsFinished,
+                Status = t.Status.Value,
                 TreatmentDate = t.TreatmentDate.TreatmentStarted,
                 CreatorId = t.Creator.Id.Value,
                 PatientId = t.Patient.Id.Value

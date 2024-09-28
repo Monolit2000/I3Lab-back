@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats
 {
-    public class ChatMessageId : TypedIdValueBase
+    public class MessageId : TypedIdValueBase
     {
-        public ChatMessageId(Guid value) 
+        public MessageId(Guid value) 
             : base(value)
         {
         }

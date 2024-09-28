@@ -8,7 +8,11 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Members.GetAllMembers
 {
-    public class GetAllMembersQuery : IRequest<Result<GetAllMembersQuery>>
+    public class GetAllMembersQuery : IRequest<Result<List<MemberDto>>>
     {
+        public GetAllMembersQuery()
+        {
+            
+        }
     }
 }
