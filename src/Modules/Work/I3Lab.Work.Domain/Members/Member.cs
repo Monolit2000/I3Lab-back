@@ -1,6 +1,7 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members.Events;
+using System.Text.Json.Serialization;
 
 namespace I3Lab.Treatments.Domain.Members
 {
@@ -15,6 +16,7 @@ namespace I3Lab.Treatments.Domain.Members
 
         private Member() { } // For EF Core
 
+     
         private Member(
             MemberId memberId,
             string email)

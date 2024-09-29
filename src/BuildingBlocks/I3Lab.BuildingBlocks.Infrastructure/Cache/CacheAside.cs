@@ -1,6 +1,7 @@
 ﻿using System.Text.Json;
 using I3Lab.BuildingBlocks.Application.Cache;
 using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
 
 namespace I3Lab.BuildingBlocks.Infrastructure.Cache
 {
@@ -12,24 +13,23 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Cache
         };
 
         public static async Task<T?> GetOrCreateAsync<T>(
-            this IDistributedCache cache,
-            string key,
-            Func<CancellationToken, Task<T>> factory,
-            DistributedCacheEntryOptions? options = null,
-            CancellationToken cancellationToken = default)
+             this IDistributedCache cache,
+             string key,
+             Func<CancellationToken, Task<T>> factory,
+             DistributedCacheEntryOptions? options = null,
+             CancellationToken cancellationToken = default)
         {
-            var caheValue = await cache.GetStringAsync(key, cancellationToken);
+            var cachedValue = await cache.GetStringAsync(key, cancellationToken);
 
             T? value;
-            if (!string.IsNullOrWhiteSpace(caheValue))
+            if (!string.IsNullOrWhiteSpace(cachedValue))
             {
-                value = JsonSerializer.Deserialize<T>(caheValue, new JsonSerializerOptions { IncludeFields = true });
+                value = JsonConvert.DeserializeObject<T>(cachedValue);
 
                 if (value is not null)
                 {
                     return value;
                 }
-
             }
 
             value = await factory(cancellationToken);
@@ -37,7 +37,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Cache
             if (value is null)
                 return default;
 
-            await cache.SetStringAsync(key, JsonSerializer.Serialize(value), options ?? Default, cancellationToken);
+            await cache.SetStringAsync(key, JsonConvert.SerializeObject(value), options ?? Default, cancellationToken);
 
             return value;
         }
@@ -60,7 +60,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Cache
             if (value is null)
                 return null;
 
-            await cacheService.SetAsync(key, value, options ?? Default, cancellationToken);
+            await cacheService.SetAsync(key, value/*, options ?? Default, cancellationToken*/);
 
             return value;
         }

@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using OpenTelemetry.Metrics;
-using System.Runtime.CompilerServices;
-using I3Lab.Treatments.Application.Members.GetAllMembers;
+﻿using MediatR;
 using I3Lab.API.Modules.Base;
+using Microsoft.AspNetCore.Mvc;
+using I3Lab.Treatments.Application.Members.GetAllMembers;
 
 namespace I3Lab.API.Modules.Treatments.Members
 {
@@ -26,9 +24,8 @@ namespace I3Lab.API.Modules.Treatments.Members
 
 
         [HttpGet("getAllMembers")]
-
-        public async Task<IActionResult> GetAllMembers(GetAllMembersQuery getAllMembersQuery)
-            => HandleResult(await _mediator.Send(getAllMembersQuery));
+        public async Task<IActionResult> GetAllMembers()
+            => Ok(await _mediator.Send(new GetAllMembersQuery()));
 
     }
 }

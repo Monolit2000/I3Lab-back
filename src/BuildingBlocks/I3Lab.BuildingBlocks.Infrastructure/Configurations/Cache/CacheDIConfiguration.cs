@@ -12,7 +12,11 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.Cache
         {
             services.AddDistributedMemoryCache();
 
+            services.AddMemoryCache();
+
             services.AddSingleton<ICacheService, CacheService>();
+            services.AddSingleton<IInMemoryCacheService, InMemoryCacheService>();
+            services.AddSingleton<IDistributedCacheService, DistributedCacheService>();
 
             return services;
         }

@@ -19,7 +19,7 @@ namespace I3Lab.Doctors.Infrastructure.Startup
 
             services.AddMassTransitEventBus(configuration);
 
-            QuartzStartup.Initialize();
+            //QuartzStartup.Initialize();
 
             return services;
         }
