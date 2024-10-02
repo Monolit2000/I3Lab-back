@@ -18,6 +18,7 @@ namespace I3Lab.Treatments.Application.BlobFiles.AddBlobFile
             if (treatmentStage == null)
                 return Result.Fail("TreatmentStage not found");
 
+            //Use BlobFile module
             var uploadFileResponce = await blobService.UploadAsync(request.Stream, request.ContentType);
 
             var newBlobFile = treatmentStage.CreateTreatmentStageFile(

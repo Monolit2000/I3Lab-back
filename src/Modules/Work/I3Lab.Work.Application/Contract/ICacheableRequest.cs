@@ -8,4 +8,10 @@ namespace I3Lab.Treatments.Application.Contract
         string CacheKey { get; }
         DistributedCacheEntryOptions? Options { get; }
     }
+
+    public interface ICacheableRequest
+    {
+        string CacheKey { get; }
+        DistributedCacheEntryOptions? Options { get; }
+    }
 }

@@ -22,11 +22,26 @@ namespace I3Lab.Treatments.Domain.Treatments
             ExpiryDate = expiryDate;
         }
 
-        public static InvitationToken Generate(TimeSpan tokenLifetime)
+        public static InvitationToken Generate(TimeSpan tokenLifetime = default)
         {
-            var token = Guid.NewGuid().ToString();
-            var expiryDate = DateTime.UtcNow.Add(tokenLifetime);
+            //var token = Guid.NewGuid().ToString();
+            var token = GenerateRandomToken(7);
+            var expiryDate = DateTime.UtcNow.Add(tokenLifetime == default ? TimeSpan.FromHours(24) : tokenLifetime);
             return new InvitationToken(token, expiryDate);
+        }
+
+        private static string GenerateRandomToken(int length)
+        {
+            Random random = new Random();
+            //string characters = Guid.NewGuid().ToString("N");
+            string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            var token = new StringBuilder(length);
+            for (int i = 0; i < length; i++)
+            {
+                token.Append(characters[random.Next(characters.Length)]);
+            }
+            return token.ToString();
         }
 
         public Result<InvitationToken> Refresh(TimeSpan tokenLifetime)

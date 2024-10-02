@@ -9,7 +9,7 @@ namespace I3Lab.Treatments.Domain.Members
     {
         public ClinicId ClinicId { get; private set; }
         public MemberId Id { get; private set; }
-        public MemberRole MemberRole { get; private set; }
+       // public MemberRole MemberRole { get; private set; }
         public string Email { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
@@ -23,7 +23,6 @@ namespace I3Lab.Treatments.Domain.Members
         {
             Id = memberId;
             Email = email;
-            MemberRole = MemberRole.Doctor;
         }
 
         public static Member CreateNew(
@@ -32,16 +31,16 @@ namespace I3Lab.Treatments.Domain.Members
             return new Member(memberId, email);
         }
 
-        public Result ChangeRole(string newRoleValue)
-        {
-            var result = MemberRole.Create(newRoleValue);
-            if (result.IsFailed)
-                return Result.Fail(result.Errors);
+        //public Result ChangeRole(string newRoleValue)
+        //{
+        //    var result = MemberRole.Create(newRoleValue);
+        //    if (result.IsFailed)
+        //        return Result.Fail(result.Errors);
 
-            MemberRole = result.Value;
-            AddDomainEvent(new MemberRoleChengetDomainEvent(Id, result.Value));
-            return Result.Ok();
-        }
+        //    MemberRole = result.Value;
+        //    AddDomainEvent(new MemberRoleChengetDomainEvent(Id, result.Value));
+        //    return Result.Ok();
+        //}
     }
 }
 

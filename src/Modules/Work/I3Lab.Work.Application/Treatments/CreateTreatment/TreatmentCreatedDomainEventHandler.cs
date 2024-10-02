@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
                 notification.CreatorId));
 
             //await sender.Send(new CreateWorksCommand(
-            //        notification.TreatmentId, 
+            //        notification.TreatmentId,
             //        notification.CreatorId));
         }
     }

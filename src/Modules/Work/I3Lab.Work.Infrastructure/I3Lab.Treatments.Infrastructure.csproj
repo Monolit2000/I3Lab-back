@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Domain\TreatmentFile\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
 
-            var token = treatment.GenerateInvitationToken();
+            var token = treatment.GetInvitationToken();
 
             var invitationLink = $"/join-invite?token={token}";
 

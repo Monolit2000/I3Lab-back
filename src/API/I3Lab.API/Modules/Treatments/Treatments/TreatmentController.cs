@@ -20,8 +20,8 @@ namespace I3Lab.API.Modules.Treatments
     {
 
         [HttpGet("getAllTreatment")]
-        public async Task<IActionResult> GetAllTreatment([FromQuery]GetAllTreatmentQuery getAllTreatmentQuery)
-            => HandleResult(await mediator.Send(getAllTreatmentQuery));
+        public async Task<IActionResult> GetAllTreatment()
+            => HandleResult(await mediator.Send(new GetAllTreatmentQuery()));
 
 
         [HttpPost("сreateTreatment")]

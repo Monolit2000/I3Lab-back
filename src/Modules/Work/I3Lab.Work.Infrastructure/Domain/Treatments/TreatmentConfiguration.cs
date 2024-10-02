@@ -36,6 +36,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
             {
                 b.ToTable("TreatmentMembers");
 
+                b.WithOwner().HasForeignKey(x => x.TreatmentId);
                 b.HasKey(wm => wm.Id);
 
                 b.Property(wm => wm.TreatmentId).IsRequired();
@@ -43,6 +44,11 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
                 b.Property(wm => wm.JoinDate).IsRequired();
 
                 b.Property(tm => tm.LeaveDate);
+
+                b.OwnsOne(tm => tm.Role, role =>
+                {
+                    role.Property(t => t.Value).HasColumnName("Role");
+                });
 
                 b.HasOne(vm => vm.Member)
                   .WithMany() 

@@ -1,18 +1,18 @@
 ﻿using FluentResults;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using I3Lab.Treatments.Application.Contract;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace I3Lab.Treatments.Application.Treatments.GetAllTreatment
 {
-    public class GetAllTreatmentQuery : IRequest<Result<List<TreatmentDto>>>
+    public class GetAllTreatmentQuery : /*IRequest<Result<List<TreatmentDto>>>,*/ ICacheableRequest<Result<List<TreatmentDto>>>
     {
         public GetAllTreatmentQuery()
         {
             
         }
+
+        public string CacheKey => "all-treatments";
+
+        public DistributedCacheEntryOptions Options => throw new NotImplementedException();
     }
 }

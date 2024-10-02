@@ -7,7 +7,7 @@ namespace I3Lab.Treatments.Domain.Treatments
     public class TreatmentMemberRole : ValueObject
     {
         public static TreatmentMemberRole Doctor => new TreatmentMemberRole(nameof(Doctor));
-        public static TreatmentMemberRole Assistant => new TreatmentMemberRole(nameof(Assistant));
+        public static TreatmentMemberRole Patient => new TreatmentMemberRole(nameof(Patient));
         public static TreatmentMemberRole Admin => new TreatmentMemberRole(nameof(Admin));
 
         public string Value { get; }
@@ -15,7 +15,6 @@ namespace I3Lab.Treatments.Domain.Treatments
         private static readonly HashSet<string> ValidRoles = new HashSet<string>
         {
             nameof(Doctor),
-            nameof(Assistant),
             nameof(Admin)
         };
 

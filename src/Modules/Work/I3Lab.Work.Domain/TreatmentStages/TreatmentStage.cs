@@ -14,7 +14,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
     {
         public TreatmentId TreatmentId { get; private set; }
         public Member Creator { get; private set; }
-        public Member Customer { get; private set; }
+        //public Member Customer { get; private set; }
 
         public readonly List<TreatmentStageFile> WorkFiles = [];
 
@@ -71,14 +71,14 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
             AddDomainEvent(new WorkAvatarImageSetDomainEvent(workFile));
         }
 
-        public Result AddCustomer(Member Customer, Member addedBy)
-        {
+        //public Result AddCustomer(Member Customer, Member addedBy)
+        //{
 
-            this.Customer = Customer;
-            AddDomainEvent(new CustomerAddedDomainEvent(Customer));
+        //    this.Customer = Customer;
+        //    AddDomainEvent(new CustomerAddedDomainEvent(Customer));
 
-            return Result.Ok();
-        }
+        //    return Result.Ok();
+        //}
 
         public Result ChangeWorkStatus(TreatmentStageStatus newStatus)
         {
@@ -92,7 +92,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
         private static bool IsMemberRoleValid(Member creator)
         {
-            return creator.MemberRole == MemberRole.Doctor || creator.MemberRole == MemberRole.Admin;
+            return true; /*creator.MemberRole == MemberRole.Doctor || creator.MemberRole == MemberRole.Admin;*/
         }
 
     }

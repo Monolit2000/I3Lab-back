@@ -12,8 +12,11 @@ namespace I3Lab.Treatments.Domain.Treatments
         public TreatmentMemberId Id { get; private set; }
         public Member Member { get; private set; }
 
-        //public TreatmentMemberRole TreatmentMemberRole { get; private set; }    
+          
         public TreatmentMemberAccessibilityType AccessibilityType { get; private set; }
+
+        public TreatmentMemberRole Role { get; private set; }
+
         public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
         public DateTime LeaveDate { get; private set; }
@@ -23,13 +26,15 @@ namespace I3Lab.Treatments.Domain.Treatments
         private TreatmentMember(
             TreatmentId treatmentId,
             Member member,
-            Member addedBy)
+            Member addedBy,
+            TreatmentMemberRole treatmentMemberRole)
         {
             Id = new TreatmentMemberId(Guid.NewGuid());
             TreatmentId = treatmentId;
             Member = member;
             AddedBy = addedBy;
             JoinDate = DateTime.UtcNow;
+            Role = treatmentMemberRole;
 
             AddDomainEvent(new TreatmentMemberAddedDomainEvent(treatmentId, member.Id));
         }
@@ -37,11 +42,13 @@ namespace I3Lab.Treatments.Domain.Treatments
         public static TreatmentMember CreateNew(
             TreatmentId treatmentId,
             Member memberId,
-            Member addedBy)
+            Member addedBy,
+            TreatmentMemberRole treatmentMemberRole)
             => new TreatmentMember(
                 treatmentId,
                 memberId,
-                addedBy);
+                addedBy,
+                treatmentMemberRole);
 
         public void Leave() 
             => LeaveDate = DateTime.UtcNow;

@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Properjsdhfgtysdf : Migration
+    public partial class sdfsdghj : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "work");
+                name: "treatment");
 
             migrationBuilder.CreateTable(
                 name: "InternalCommands",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -33,15 +33,14 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Members",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ClinicId = table.Column<Guid>(type: "uuid", nullable: true),
                     Email = table.Column<string>(type: "text", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: true),
-                    LastName = table.Column<string>(type: "text", nullable: true),
-                    MemberRole = table.Column<string>(type: "text", nullable: true)
+                    LastName = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,7 +49,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "TreatmentStageChats",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -64,7 +63,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Treatments",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -73,8 +72,9 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     TreatmentTitel = table.Column<string>(type: "text", nullable: true),
                     TreatmentDate_TreatmentStarted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TreatmentDate_TreatmentFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    IsCanceled = table.Column<bool>(type: "boolean", nullable: false),
-                    IsFinished = table.Column<bool>(type: "boolean", nullable: false)
+                    TreatmentStatus = table.Column<string>(type: "text", nullable: true),
+                    InvitationToken = table.Column<string>(type: "text", nullable: true),
+                    InviteTokenExpiryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,20 +82,20 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_Treatments_Members_CreatorId",
                         column: x => x.CreatorId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Treatments_Members_PatientId",
                         column: x => x.PatientId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "ChatMembers",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -108,7 +108,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_ChatMembers_TreatmentStageChats_TreatmentStageChatId",
                         column: x => x.TreatmentStageChatId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "TreatmentStageChats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -116,7 +116,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "BlobFiles",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -137,14 +137,14 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_BlobFiles_Treatments_TreatmentId",
                         column: x => x.TreatmentId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Treatments",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TreatmentInvites",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -152,7 +152,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     MemberToInviteId = table.Column<Guid>(type: "uuid", nullable: false),
                     InviterId = table.Column<Guid>(type: "uuid", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: true),
-                    InviteToken = table.Column<string>(type: "text", nullable: true),
+                    InvitationToken = table.Column<string>(type: "text", nullable: true),
                     InviteTokenExpiryDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     OcurredOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -162,21 +162,21 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_TreatmentInvites_Members_InviterId",
                         column: x => x.InviterId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TreatmentInvites_Members_MemberToInviteId",
                         column: x => x.MemberToInviteId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TreatmentInvites_Treatments_TreatmentId",
                         column: x => x.TreatmentId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Treatments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -184,14 +184,15 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "TreatmentMembers",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TreatmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     MemberId = table.Column<Guid>(type: "uuid", nullable: false),
                     AccessibilityType = table.Column<string>(type: "text", nullable: true),
-                    AddedById = table.Column<Guid>(type: "uuid", nullable: false),
+                    Role = table.Column<string>(type: "text", nullable: true),
+                    AddedById = table.Column<Guid>(type: "uuid", nullable: true),
                     JoinDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LeaveDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -201,21 +202,20 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_TreatmentMembers_Members_AddedById",
                         column: x => x.AddedById,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TreatmentMembers_Members_MemberId",
                         column: x => x.MemberId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TreatmentMembers_Treatments_TreatmentId",
                         column: x => x.TreatmentId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Treatments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -223,7 +223,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.CreateTable(
                 name: "WorkChatMessages",
-                schema: "work",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -242,47 +242,27 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_WorkChatMessages_BlobFiles_FileResponceIdId",
                         column: x => x.FileResponceIdId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "BlobFiles",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_WorkChatMessages_Members_SenderId",
                         column: x => x.SenderId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_WorkChatMessages_TreatmentStageChats_WorkChatId",
                         column: x => x.WorkChatId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "TreatmentStageChats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TreatmentStageFile",
-                schema: "work",
-                columns: table => new
-                {
-                    WorkId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FileId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TreatmentStageFile", x => x.WorkId);
-                    table.ForeignKey(
-                        name: "FK_TreatmentStageFile_BlobFiles_FileId",
-                        column: x => x.FileId,
-                        principalSchema: "work",
-                        principalTable: "BlobFiles",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Works",
-                schema: "work",
+                name: "TreatmentStage",
+                schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -297,139 +277,159 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Works", x => x.Id);
+                    table.PrimaryKey("PK_TreatmentStage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Works_Members_CreatorId",
+                        name: "FK_TreatmentStage_Members_CreatorId",
                         column: x => x.CreatorId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Works_Members_CustomerId",
+                        name: "FK_TreatmentStage_Members_CustomerId",
                         column: x => x.CustomerId,
-                        principalSchema: "work",
+                        principalSchema: "treatment",
                         principalTable: "Members",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TreatmentStageFile",
+                schema: "treatment",
+                columns: table => new
+                {
+                    WorkId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FileId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TreatmentStageFile", x => x.WorkId);
                     table.ForeignKey(
-                        name: "FK_Works_TreatmentStageFile_TreatmentStageAvatarImageWorkId",
-                        column: x => x.TreatmentStageAvatarImageWorkId,
-                        principalSchema: "work",
-                        principalTable: "TreatmentStageFile",
-                        principalColumn: "WorkId");
+                        name: "FK_TreatmentStageFile_BlobFiles_FileId",
+                        column: x => x.FileId,
+                        principalSchema: "treatment",
+                        principalTable: "BlobFiles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TreatmentStageFile_TreatmentStage_WorkId",
+                        column: x => x.WorkId,
+                        principalSchema: "treatment",
+                        principalTable: "TreatmentStage",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BlobFiles_TreatmentId",
-                schema: "work",
+                schema: "treatment",
                 table: "BlobFiles",
                 column: "TreatmentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChatMembers_TreatmentStageChatId",
-                schema: "work",
+                schema: "treatment",
                 table: "ChatMembers",
                 column: "TreatmentStageChatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentInvites_InviterId",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentInvites",
                 column: "InviterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentInvites_MemberToInviteId",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentInvites",
                 column: "MemberToInviteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentInvites_TreatmentId",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentInvites",
                 column: "TreatmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentMembers_AddedById",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentMembers",
                 column: "AddedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentMembers_MemberId",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentMembers",
                 column: "MemberId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentMembers_TreatmentId",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentMembers",
                 column: "TreatmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Treatments_CreatorId",
-                schema: "work",
+                schema: "treatment",
                 table: "Treatments",
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Treatments_PatientId",
-                schema: "work",
+                schema: "treatment",
                 table: "Treatments",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TreatmentStage_CreatorId",
+                schema: "treatment",
+                table: "TreatmentStage",
+                column: "CreatorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreatmentStage_CustomerId",
+                schema: "treatment",
+                table: "TreatmentStage",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreatmentStage_TreatmentStageAvatarImageWorkId",
+                schema: "treatment",
+                table: "TreatmentStage",
+                column: "TreatmentStageAvatarImageWorkId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TreatmentStageFile_FileId",
-                schema: "work",
+                schema: "treatment",
                 table: "TreatmentStageFile",
                 column: "FileId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkChatMessages_FileResponceIdId",
-                schema: "work",
+                schema: "treatment",
                 table: "WorkChatMessages",
                 column: "FileResponceIdId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkChatMessages_SenderId",
-                schema: "work",
+                schema: "treatment",
                 table: "WorkChatMessages",
                 column: "SenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkChatMessages_WorkChatId",
-                schema: "work",
+                schema: "treatment",
                 table: "WorkChatMessages",
                 column: "WorkChatId");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Works_CreatorId",
-                schema: "work",
-                table: "Works",
-                column: "CreatorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Works_CustomerId",
-                schema: "work",
-                table: "Works",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Works_TreatmentStageAvatarImageWorkId",
-                schema: "work",
-                table: "Works",
-                column: "TreatmentStageAvatarImageWorkId");
-
             migrationBuilder.AddForeignKey(
-                name: "FK_TreatmentStageFile_Works_WorkId",
-                schema: "work",
-                table: "TreatmentStageFile",
-                column: "WorkId",
-                principalSchema: "work",
-                principalTable: "Works",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                name: "FK_TreatmentStage_TreatmentStageFile_TreatmentStageAvatarImage~",
+                schema: "treatment",
+                table: "TreatmentStage",
+                column: "TreatmentStageAvatarImageWorkId",
+                principalSchema: "treatment",
+                principalTable: "TreatmentStageFile",
+                principalColumn: "WorkId");
         }
 
         /// <inheritdoc />
@@ -437,72 +437,67 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "FK_BlobFiles_Treatments_TreatmentId",
-                schema: "work",
+                schema: "treatment",
                 table: "BlobFiles");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Works_Members_CreatorId",
-                schema: "work",
-                table: "Works");
+                name: "FK_TreatmentStage_Members_CreatorId",
+                schema: "treatment",
+                table: "TreatmentStage");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Works_Members_CustomerId",
-                schema: "work",
-                table: "Works");
+                name: "FK_TreatmentStage_Members_CustomerId",
+                schema: "treatment",
+                table: "TreatmentStage");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TreatmentStageFile_BlobFiles_FileId",
-                schema: "work",
-                table: "TreatmentStageFile");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_TreatmentStageFile_Works_WorkId",
-                schema: "work",
-                table: "TreatmentStageFile");
+                name: "FK_TreatmentStage_TreatmentStageFile_TreatmentStageAvatarImage~",
+                schema: "treatment",
+                table: "TreatmentStage");
 
             migrationBuilder.DropTable(
                 name: "ChatMembers",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "InternalCommands",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "TreatmentInvites",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "TreatmentMembers",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "WorkChatMessages",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "TreatmentStageChats",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "Treatments",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "Members",
-                schema: "work");
-
-            migrationBuilder.DropTable(
-                name: "BlobFiles",
-                schema: "work");
-
-            migrationBuilder.DropTable(
-                name: "Works",
-                schema: "work");
+                schema: "treatment");
 
             migrationBuilder.DropTable(
                 name: "TreatmentStageFile",
-                schema: "work");
+                schema: "treatment");
+
+            migrationBuilder.DropTable(
+                name: "BlobFiles",
+                schema: "treatment");
+
+            migrationBuilder.DropTable(
+                name: "TreatmentStage",
+                schema: "treatment");
         }
     }
 }

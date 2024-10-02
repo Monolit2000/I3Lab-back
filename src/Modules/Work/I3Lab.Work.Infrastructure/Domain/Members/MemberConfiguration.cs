@@ -15,11 +15,11 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             builder.Property(e => e.Email)
                 .IsRequired();
 
-            builder.ComplexProperty(o => o.MemberRole, roleBuilder =>
-            {
-                roleBuilder.IsRequired();
-                roleBuilder.Property(p => p.Value).HasColumnName("MemberRole");
-            });
+            //builder.ComplexProperty(o => o.MemberRole, roleBuilder =>
+            //{
+            //    roleBuilder.IsRequired();
+            //    roleBuilder.Property(p => p.Value).HasColumnName("MemberRole");
+            //});
 
             builder.Property(m => m.ClinicId).IsRequired(false);
 

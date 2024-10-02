@@ -1,12 +1,12 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.BlobFiles;
 using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.Treatments.Errors;
 using I3Lab.Treatments.Domain.Treatments.Events;
 using I3Lab.Treatments.Domain.Treatments.Rules;
-using I3Lab.Treatments.Domain.TreatmentStages;
 
 namespace I3Lab.Treatments.Domain.Treatments
 {
@@ -39,11 +39,11 @@ namespace I3Lab.Treatments.Domain.Treatments
             Titel = titel;
             TreatmentDate = TreatmentDate.Start();
             Status = TreatmentStatus.Active;
-            InvitationToken = InvitationToken.Generate(TimeSpan.FromHours(24));
+            InvitationToken = InvitationToken.Generate();
 
-            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, creator, creator));
+            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, creator, creator, TreatmentMemberRole.Doctor));
 
-            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, patient, creator));
+            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, patient, creator, TreatmentMemberRole.Patient));
 
             AddDomainEvent(new TreatmentCreatedDomainEvent(creator.Id.Value, Id.Value));
         }
@@ -61,7 +61,7 @@ namespace I3Lab.Treatments.Domain.Treatments
             if (result.IsFailed)
                 return result;
 
-            var treatmentMember = TreatmentMember.CreateNew(this.Id, member, addedBy);
+            var treatmentMember = TreatmentMember.CreateNew(this.Id, member, addedBy, TreatmentMemberRole.Doctor);
             TreatmentMembers.Add(treatmentMember);
 
             return Result.Ok();
@@ -90,11 +90,11 @@ namespace I3Lab.Treatments.Domain.Treatments
             return InvitationToken.Validate(token);
         }
 
-        public string GenerateInvitationToken(TimeSpan linkLifetime = default)
+        public string GetInvitationToken(TimeSpan linkLifetime = default)
         {
             if (InvitationToken == null || InvitationToken.IsExpired())
-                InvitationToken = InvitationToken.Generate(linkLifetime == default ? TimeSpan.FromHours(24) : linkLifetime);
-
+                InvitationToken = InvitationToken.Generate(linkLifetime);
+            
             return InvitationToken.Token;
         }
 

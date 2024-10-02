@@ -10,11 +10,11 @@ using I3Lab.Users.Infrastructure.Persistence.Extensions;
 using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
-
+using I3Lab.Clinics.Infrastructure.Startup;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;
-using System.Reflection.PortableExecutable;
+using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,7 +75,8 @@ builder.Services
     .AddUserModule(builder.Configuration)
     .AddWorkModule(builder.Configuration)
     .AddDoctorModule(builder.Configuration)
-    .AddAdministrationModule(builder.Configuration);
+    .AddAdministrationModule(builder.Configuration)
+    .AddClinicModule(builder.Configuration);
 
 builder.Services.AddMassTransitInMemoryEventBus(builder.Configuration);
 
@@ -92,11 +93,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    app.ClearDbContextMigrations();
-
+    //app.ClearDbContextMigrations();
+   
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();
     app.ApplyDoctorContextMigrations();
+    app.ApplyClinicContextMigrations();
 }
 
 app.UseHttpsRedirection();

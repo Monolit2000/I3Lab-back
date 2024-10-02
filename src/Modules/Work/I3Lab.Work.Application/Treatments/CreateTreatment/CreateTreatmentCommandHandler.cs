@@ -35,7 +35,10 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 
             await tretmentRepository.SaveChangesAsync();
 
-            var treatmentDto = new TreatmentDto();
+            var treatmentDto = new TreatmentDto()
+            {
+                Id = treatment.Id.Value
+            };
 
             return treatmentDto;
         }

@@ -90,15 +90,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.ComplexProperty<Dictionary<string, object>>("MemberRole", "I3Lab.Treatments.Domain.Members.Member.MemberRole#MemberRole", b1 =>
-                        {
-                            b1.IsRequired();
-
-                            b1.Property<string>("Value")
-                                .HasColumnType("text")
-                                .HasColumnName("MemberRole");
-                        });
-
                     b.HasKey("Id");
 
                     b.ToTable("Members", "treatment");
@@ -364,7 +355,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.Property<string>("Token")
                                 .HasColumnType("text")
-                                .HasColumnName("InviteToken");
+                                .HasColumnName("InvitationToken");
 
                             b1.HasKey("TreatmentInviteId");
 
@@ -573,7 +564,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("PatientId");
 
-                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentInvites.InviteToken", "InviteToken", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.Treatments.InvitationToken", "InvitationToken", b1 =>
                         {
                             b1.Property<Guid>("TreatmentId")
                                 .HasColumnType("uuid");
@@ -584,7 +575,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.Property<string>("Token")
                                 .HasColumnType("text")
-                                .HasColumnName("InviteToken");
+                                .HasColumnName("InvitationToken");
 
                             b1.HasKey("TreatmentId");
 
@@ -673,11 +664,30 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                         .HasForeignKey("TreatmentMemberId");
                                 });
 
+                            b1.OwnsOne("I3Lab.Treatments.Domain.Treatments.TreatmentMemberRole", "Role", b2 =>
+                                {
+                                    b2.Property<Guid>("TreatmentMemberId")
+                                        .HasColumnType("uuid");
+
+                                    b2.Property<string>("Value")
+                                        .HasColumnType("text")
+                                        .HasColumnName("Role");
+
+                                    b2.HasKey("TreatmentMemberId");
+
+                                    b2.ToTable("TreatmentMembers", "treatment");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("TreatmentMemberId");
+                                });
+
                             b1.Navigation("AccessibilityType");
 
                             b1.Navigation("AddedBy");
 
                             b1.Navigation("Member");
+
+                            b1.Navigation("Role");
                         });
 
                     b.OwnsOne("I3Lab.Treatments.Domain.Treatments.TreatmentStatus", "Status", b1 =>
@@ -718,7 +728,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.Navigation("Creator");
 
-                    b.Navigation("InviteToken");
+                    b.Navigation("InvitationToken");
 
                     b.Navigation("Patient");
 

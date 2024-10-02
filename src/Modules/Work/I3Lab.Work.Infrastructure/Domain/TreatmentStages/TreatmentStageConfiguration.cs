@@ -28,8 +28,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
 
             // builder.Property(e => e.Customer).IsRequired();
 
-            builder.HasOne(e => e.Customer)
-                  .WithMany();
+            //builder.HasOne(e => e.Customer)
+            //      .WithMany();
 
             builder.HasMany(e => e.WorkFiles)
                 .WithOne()
