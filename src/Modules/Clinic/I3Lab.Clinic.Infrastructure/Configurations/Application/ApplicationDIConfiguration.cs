@@ -1,11 +1,8 @@
 ﻿using I3Lab.Clinics.Application.Conruct;
+using I3Lab.Clinics.Domain.Clnics;
+using I3Lab.Clinics.Infrastructure.Domain.Clinics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Clinics.Infrastructure.Configurations.Application
 {
@@ -21,6 +18,8 @@ namespace I3Lab.Clinics.Infrastructure.Configurations.Application
                 //cfg.RegisterServicesFromAssembly(typeof(ProcessInternalCommandsCommandHandler).Assembly);
 
             });
+
+            services.AddScoped<IClinicRepository, ClinicRepository>();
 
             return services;
         }
