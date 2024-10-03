@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MassTransit.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,7 @@ namespace I3Lab.Treatments.Application.Treatments
         public DateTime TreatmentDate { get; set; }
         public Guid CreatorId { get; set; }
         public Guid PatientId { get; set; }
+
+        public string IvniteToken { get; set; }
     }
 }

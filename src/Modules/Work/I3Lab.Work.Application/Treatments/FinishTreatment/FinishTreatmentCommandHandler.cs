@@ -11,11 +11,13 @@ namespace I3Lab.Treatments.Application.Treatments.FinishTreatment
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
 
-            treatment.Finish();
+            var result = treatment.Finish();
+            if (result.IsFailed)
+                return result;
 
             await treatmentRepository.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok();
+            return result;
         }
     }
 }

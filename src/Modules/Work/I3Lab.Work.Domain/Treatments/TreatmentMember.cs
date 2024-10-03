@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Domain.Treatments
 
         public TreatmentMemberRole Role { get; private set; }
 
-        public Member AddedBy { get; private set; }
+        //public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
         public DateTime LeaveDate { get; private set; }
 
@@ -26,13 +26,11 @@ namespace I3Lab.Treatments.Domain.Treatments
         private TreatmentMember(
             TreatmentId treatmentId,
             Member member,
-            Member addedBy,
             TreatmentMemberRole treatmentMemberRole)
         {
             Id = new TreatmentMemberId(Guid.NewGuid());
             TreatmentId = treatmentId;
             Member = member;
-            AddedBy = addedBy;
             JoinDate = DateTime.UtcNow;
             Role = treatmentMemberRole;
 
@@ -42,12 +40,10 @@ namespace I3Lab.Treatments.Domain.Treatments
         public static TreatmentMember CreateNew(
             TreatmentId treatmentId,
             Member memberId,
-            Member addedBy,
             TreatmentMemberRole treatmentMemberRole)
             => new TreatmentMember(
                 treatmentId,
                 memberId,
-                addedBy,
                 treatmentMemberRole);
 
         public void Leave() 

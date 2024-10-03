@@ -13,22 +13,20 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
 {
     public class AddTreatmentMemberCommandHandler(
         IMemberRepository memberRepository,
-        ITreatmentRepository tretmentRepository) : IRequestHandler<AddTreatmentMemberCommand, Result>
+        ITreatmentRepository treatmentRepository) : IRequestHandler<AddTreatmentMemberCommand, Result>
     {
         public async Task<Result> Handle(AddTreatmentMemberCommand request, CancellationToken cancellationToken)
         {
-            var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
+            var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
             var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
 
-            var invaiter = await memberRepository.GetMemberByIdAsync(new MemberId(request.InvaiterId));
-            
-            var result = treatment.AddToTreatmentMembers(member, invaiter);
+            var result = treatment.AddToTreatmentMembers(member);
 
             if (result.IsFailed)
                 return result; 
 
-            await tretmentRepository.SaveChangesAsync();
+            await treatmentRepository.SaveChangesAsync();
 
             return Result.Ok();
         }

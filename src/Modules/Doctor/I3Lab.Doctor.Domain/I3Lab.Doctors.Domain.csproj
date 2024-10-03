@@ -15,9 +15,4 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DoctorCreationProposals\Rules\" />
-    <Folder Include="Doctors\Errors\" />
-  </ItemGroup>
-
 </Project>

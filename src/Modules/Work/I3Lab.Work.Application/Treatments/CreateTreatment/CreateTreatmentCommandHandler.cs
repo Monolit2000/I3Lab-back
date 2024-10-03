@@ -24,12 +24,10 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
             if (creator is null)
                 return Result.Fail("patient is null");
 
-            var titel = TreatmentTitel.Create(request.TreatmentTitel);
-
             var treatment = Treatment.CreateNew(
                 creator, 
-                patient, 
-                titel);
+                patient,
+                TreatmentTitel.Create(request.TreatmentTitel));
 
             await tretmentRepository.AddAsync(treatment);
 
@@ -37,7 +35,8 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 
             var treatmentDto = new TreatmentDto()
             {
-                Id = treatment.Id.Value
+                Id = treatment.Id.Value,
+                IvniteToken = treatment.GetInvitationToken()
             };
 
             return treatmentDto;

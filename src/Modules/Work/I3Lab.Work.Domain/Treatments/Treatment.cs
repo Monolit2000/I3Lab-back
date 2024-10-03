@@ -14,6 +14,7 @@ namespace I3Lab.Treatments.Domain.Treatments
     {
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
+
         public readonly List<TreatmentMember> TreatmentMembers = [];
 
         public TreatmentId Id { get; }
@@ -41,9 +42,9 @@ namespace I3Lab.Treatments.Domain.Treatments
             Status = TreatmentStatus.Active;
             InvitationToken = InvitationToken.Generate();
 
-            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, creator, creator, TreatmentMemberRole.Doctor));
+            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, creator, TreatmentMemberRole.Doctor));
 
-            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, patient, creator, TreatmentMemberRole.Patient));
+            TreatmentMembers.Add(TreatmentMember.CreateNew(Id, patient, TreatmentMemberRole.Patient));
 
             AddDomainEvent(new TreatmentCreatedDomainEvent(creator.Id.Value, Id.Value));
         }
@@ -55,13 +56,13 @@ namespace I3Lab.Treatments.Domain.Treatments
             => await TreatmentStage.CreateBasedOnTreatmentAsync(creator, this.Id, stageTitel);
 
 
-        public Result AddToTreatmentMembers(Member member, Member addedBy)
+        public Result AddToTreatmentMembers(Member member)
         {
             var result = CheckRule(new MemberMustNotBeInTreatmentRule(TreatmentMembers, member.Id));
             if (result.IsFailed)
                 return result;
 
-            var treatmentMember = TreatmentMember.CreateNew(this.Id, member, addedBy, TreatmentMemberRole.Doctor);
+            var treatmentMember = TreatmentMember.CreateNew(this.Id, member, TreatmentMemberRole.Doctor);
             TreatmentMembers.Add(treatmentMember);
 
             return Result.Ok();

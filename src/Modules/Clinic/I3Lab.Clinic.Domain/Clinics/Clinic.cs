@@ -52,7 +52,7 @@ namespace I3Lab.Clinics.Domain.Clinics
             if (ClinicDoctors.Any(d => d.DoctorId == doctorId))
                 throw new InvalidOperationException("Doctor already exists in this clinic.");
 
-            ClinicDoctors.Add(ClinicDoctor.Create(doctorId));
+            ClinicDoctors.Add(ClinicDoctor.Create(this.Id, doctorId));
         }
 
         public void RemoveDoctor(DoctorId doctorId)

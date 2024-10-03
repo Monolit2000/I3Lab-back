@@ -17,18 +17,6 @@ namespace I3Lab.Doctors.Domain.Doctors
 
         private Doctor() { }
 
-        internal static Doctor CreateBaseOnProposal(
-            DoctorName name,
-            Email email,
-            PhoneNumber phoneNumber,
-            DoctorAvatar doctorAvatar)
-        {
-            return new Doctor(
-                name,
-                email,
-                phoneNumber,
-                doctorAvatar);
-        }
 
         private Doctor(
             DoctorName name,
@@ -45,6 +33,16 @@ namespace I3Lab.Doctors.Domain.Doctors
             AddDomainEvent(new DoctorCreatedDomainEvent(Id.Value, Name.FirstName, Name.LastName)); 
         }
 
+        public static Doctor CreateBaseOnProposal(
+            DoctorName name, 
+            Email email,
+            PhoneNumber phoneNumber, 
+            DoctorAvatar doctorAvatar) 
+            => new Doctor(
+                name, 
+                email, 
+                phoneNumber, 
+                doctorAvatar);
 
         public Result AddClinic(Clinic clinic)
         {

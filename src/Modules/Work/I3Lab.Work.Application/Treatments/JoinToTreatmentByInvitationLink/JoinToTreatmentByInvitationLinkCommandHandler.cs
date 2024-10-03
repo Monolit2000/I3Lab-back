@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using FluentResults;
 using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Domain.Members;
 
 namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink
 {
     public class JoinToTreatmentByInvitationLinkCommandHandler(
+        IMemberRepository memberRepository,
         ITreatmentRepository treatmentRepository) : IRequestHandler<JoinToTreatmentByInvitationLinkCommand, Result>
     {
         public async Task<Result> Handle(JoinToTreatmentByInvitationLinkCommand request, CancellationToken cancellationToken)
@@ -18,9 +20,16 @@ namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLin
             if (validateResult.IsFailed)
                 return validateResult;
 
+            var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
 
+            var result = treatment.AddToTreatmentMembers(member);
 
-            throw new NotImplementedException();
+            if (result.IsFailed)
+                return result;
+
+            await treatmentRepository.SaveChangesAsync();
+
+            return result;  
         }
     }
 }
