@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +12,13 @@ namespace I3Lab.Treatments.Domain.WorkDirectorys
     {
         public WorkDirectoryId WorkCatalogId { get; private set; }
 
-        public BlobFile FileId { get; private set; }
+        public TreatmentFile FileId { get; private set; }
 
         public WorkDirectoryFile() { } // For EF Core
 
         public WorkDirectoryFile(
             WorkDirectoryId workCatalogId,
-            BlobFile fileId)
+            TreatmentFile fileId)
         {
             WorkCatalogId = workCatalogId; 
             FileId = fileId;    
@@ -26,7 +26,7 @@ namespace I3Lab.Treatments.Domain.WorkDirectorys
 
         internal static WorkDirectoryFile CreateNew(
             WorkDirectoryId workCatalogId,
-            BlobFile fileId)
+            TreatmentFile fileId)
         {
             return new WorkDirectoryFile(
                 workCatalogId, 

@@ -18,28 +18,28 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
         public async Task<TreatmentStage> GetByIdAsync(TreatmentStageId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
-                .Include(w => w.WorkFiles)
+                .Include(w => w.TreatmentStageFiles)
                 .FirstOrDefaultAsync(w => w.Id == id);
         }
 
         public async Task<IEnumerable<TreatmentStage>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.Works
-                .Include(w => w.WorkFiles)
+                .Include(w => w.TreatmentStageFiles)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<TreatmentStage>> GetAllByMemberIdAsync(MemberId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
-                .Include(w => w.WorkFiles)
+                .Include(w => w.TreatmentStageFiles)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<TreatmentStage>> GetAllByTreatmentIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
         {
             return await _context.Works
-                .Include(w => w.WorkFiles)
+                .Include(w => w.TreatmentStageFiles)
                 .ToListAsync();
         }
 

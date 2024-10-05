@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages.Errors;
@@ -16,7 +16,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
         public Member Creator { get; private set; }
         //public Member Customer { get; private set; }
 
-        public readonly List<TreatmentStageFile> WorkFiles = [];
+        public readonly List<TreatmentStageFile> TreatmentStageFiles = [];
 
         public TreatmentStageId Id { get; private set; }
         public TreatmentStageTitel Titel { get; private set; }
@@ -53,16 +53,16 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
             return Task.FromResult(Result.Ok(treatmentStage));
         }
 
-        public BlobFile CreateTreatmentStageFile(BlobFileUrl url, ContentType contentType, BlobFileType fileType) 
-            => BlobFile.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, url, contentType, fileType);
+        public TreatmentFile CreateTreatmentStageFile(BlobFileUrl url, ContentType contentType, BlobFileType fileType) 
+            => TreatmentFile.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, contentType, url, 32);
 
         public TreatmentStageChat CreateTreatmentStageChat(List<Member> members) 
             => TreatmentStageChat.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, members);
 
-        public void AddWorkFile(TreatmentStageId workId, BlobFile fileId)
+        public void AddWorkFile(TreatmentStageId workId, TreatmentFile fileId)
         {
             var newWorkFile = TreatmentStageFile.CreateNew(workId, fileId);
-            WorkFiles.Add(newWorkFile);
+            TreatmentStageFiles.Add(newWorkFile);
         }
 
         public void SetWorkAvatarImage(TreatmentStageFile workFile)

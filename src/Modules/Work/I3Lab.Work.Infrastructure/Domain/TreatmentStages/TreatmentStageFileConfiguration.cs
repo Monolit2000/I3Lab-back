@@ -13,14 +13,14 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
     {
         public void Configure(EntityTypeBuilder<TreatmentStageFile> builder)
         {
-            builder.HasKey(wf => wf.WorkId);
+            builder.HasKey(wf => wf.TreatmentStageId);
 
            // builder.Property(wf => wf.File).IsRequired();
 
             builder.HasOne(wf => wf.File)
               .WithMany();
 
-            builder.Property(wf => wf.WorkId).IsRequired();
+           // builder.Property(wf => wf.TreatmentStageId).IsRequired();
 
             //builder.Property(wf => wf.ContainerName).IsRequired();
 

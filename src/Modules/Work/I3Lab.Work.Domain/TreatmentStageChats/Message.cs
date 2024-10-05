@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
 
@@ -10,7 +10,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
     {
         public TreatmentStageChatId WorkChatId { get; private set; }
         public MemberId SenderId { get; private set; }
-        public BlobFile FileResponceId { get; private set; }
+        public TreatmentFile FileResponceId { get; private set; }
         public MessageId Id { get; private set; }
         public string MessageText { get; private set; }
         public bool IsEdited { get; private set; }
@@ -24,7 +24,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         private Message(
             MemberId senderId,
             string messageText,
-            BlobFile fileResponceId = null,
+            TreatmentFile fileResponceId = null,
             MessageId repliedToMessageId = null)
         {
             Id = new MessageId(Guid.NewGuid());
@@ -60,10 +60,10 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
                 repliedToMessageId: repliedToMessageId);
         }
 
-        public static Message CreateNewResponceToFileMessage(
+        public static Message CreateResponceToFileMessage(
             MemberId senderId,
             string messageText,
-            BlobFile blobFileId,
+            TreatmentFile blobFileId,
             MessageId repliedToMessageId = null)
         {
             return new Message(

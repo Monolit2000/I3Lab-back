@@ -2,7 +2,7 @@
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.WorkCatalogs;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageComments
 {
@@ -40,7 +40,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageComments
                 content); 
         }
 
-        public void PinFile(TreatmentStageCommentId workCommentId, BlobFile fileId)
+        public void PinFile(TreatmentStageCommentId workCommentId, TreatmentFile fileId)
         {
             var newPineFile = PinedFile.CreateNew(workCommentId, fileId);    
 

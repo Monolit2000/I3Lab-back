@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using I3Lab.Treatments.Domain.TreatmentStages;
-using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.Treatments;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using I3Lab.Treatments.Domain.BlobFiles;
 
 
 namespace I3Lab.Treatments.Infrastructure.Domain.Works
@@ -31,9 +26,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
             //builder.HasOne(e => e.Customer)
             //      .WithMany();
 
-            builder.HasMany(e => e.WorkFiles)
+            builder.HasMany(e => e.TreatmentStageFiles)
                 .WithOne()
-                .HasForeignKey(f => f.WorkId)
+                .HasForeignKey(f => f.TreatmentStageId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
 
@@ -58,7 +53,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
             //    b.Property(date => date.StageFinished);
             //});
 
-            //builder.OwnsMany(e => e.WorkFiles, b =>
+            //builder.OwnsMany(e => e.TreatmentStageFiles, b =>
             //{
 
             //    b.HasKey(wf => wf.File);

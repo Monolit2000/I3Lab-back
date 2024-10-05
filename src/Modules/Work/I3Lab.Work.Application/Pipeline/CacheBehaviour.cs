@@ -5,9 +5,9 @@ using I3Lab.BuildingBlocks.Infrastructure.Cache;
 
 namespace I3Lab.Treatments.Application.Pipeline
 {
-    public class CacheBehaviour<TRequest, TResponse>(IInMemoryCacheService _cacheService) : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : ICacheableRequest
-
+    public class CacheBehaviour<TRequest, TResponse>(
+        IInMemoryCacheService _cacheService) : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : ICacheableRequest
     {
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)

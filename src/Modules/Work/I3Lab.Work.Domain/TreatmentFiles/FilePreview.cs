@@ -9,12 +9,12 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
 {
     public class FilePreview : ValueObject
     {
-        public string BlobFileUrl { get; }
+        public string Url { get; }
 
-        private FilePreview(string url) 
-            => BlobFileUrl = url;
+        private FilePreview(string url)
+        => Url =url;
 
-        public static FilePreview Create(string url) 
-            => new FilePreview(url);   
+        public static FilePreview Create(string url)
+            => new FilePreview(url);
     }
 }

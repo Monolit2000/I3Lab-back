@@ -1,6 +1,11 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Domain.TreatmentFiles
+namespace I3Lab.Treatments.Domain.TreatmentFils
 {
     public class ContentType : ValueObject
     {
@@ -8,10 +13,10 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
 
         public ContentType(string value)
             => Value = value;
-
+                
         public static ContentType Create(string value)
         {
-            return new ContentType(value);
+            return new ContentType(value);   
         }
     }
 }

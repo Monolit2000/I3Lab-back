@@ -115,7 +115,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlobFiles",
+                name: "TreatmentFils",
                 schema: "treatment",
                 columns: table => new
                 {
@@ -243,7 +243,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         name: "FK_WorkChatMessages_BlobFiles_FileResponceIdId",
                         column: x => x.FileResponceIdId,
                         principalSchema: "treatment",
-                        principalTable: "BlobFiles",
+                        principalTable: "TreatmentFils",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_WorkChatMessages_Members_SenderId",
@@ -308,7 +308,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         name: "FK_TreatmentStageFile_BlobFiles_FileId",
                         column: x => x.FileId,
                         principalSchema: "treatment",
-                        principalTable: "BlobFiles",
+                        principalTable: "TreatmentFils",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TreatmentStageFile_TreatmentStage_WorkId",
@@ -322,7 +322,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_BlobFiles_TreatmentId",
                 schema: "treatment",
-                table: "BlobFiles",
+                table: "TreatmentFils",
                 column: "TreatmentId",
                 unique: true);
 
@@ -429,7 +429,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 column: "TreatmentStageAvatarImageWorkId",
                 principalSchema: "treatment",
                 principalTable: "TreatmentStageFile",
-                principalColumn: "WorkId");
+                principalColumn: "TreatmentStageId");
         }
 
         /// <inheritdoc />
@@ -438,7 +438,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
             migrationBuilder.DropForeignKey(
                 name: "FK_BlobFiles_Treatments_TreatmentId",
                 schema: "treatment",
-                table: "BlobFiles");
+                table: "TreatmentFils");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_TreatmentStage_Members_CreatorId",
@@ -492,7 +492,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 schema: "treatment");
 
             migrationBuilder.DropTable(
-                name: "BlobFiles",
+                name: "TreatmentFils",
                 schema: "treatment");
 
             migrationBuilder.DropTable(

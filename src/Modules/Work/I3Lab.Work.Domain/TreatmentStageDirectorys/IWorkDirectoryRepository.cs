@@ -1,10 +1,10 @@
-﻿using I3Lab.Treatments.Domain.BlobFiles;
+﻿using I3Lab.Treatments.Domain.TreatmentFils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using File = I3Lab.Treatments.Domain.BlobFiles.BlobFile;
+using File = I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile;
 
 namespace I3Lab.Treatments.Domain.WorkDirectorys
 {

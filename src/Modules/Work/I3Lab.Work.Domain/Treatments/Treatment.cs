@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.Treatments.Errors;
@@ -19,7 +19,7 @@ namespace I3Lab.Treatments.Domain.Treatments
 
         public TreatmentId Id { get; }
         public TreatmentTitel Titel { get; private set; }
-        public BlobFile TreatmentPreview { get; private set; }
+        public TreatmentFile TreatmentPreview { get; private set; }
         public TreatmentDate TreatmentDate { get; private set; }
         public TreatmentStatus Status { get; private set; }
         public InvitationToken InvitationToken { get; private set; }
@@ -129,7 +129,7 @@ namespace I3Lab.Treatments.Domain.Treatments
             return Result.Ok();
         }
 
-        public void AddPreview(BlobFile fileId)
+        public void AddPreview(TreatmentFile fileId)
         {
             TreatmentPreview = fileId;
         }

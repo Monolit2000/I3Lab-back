@@ -18,6 +18,6 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
         public string WorkAvatarImageUrl { get; set; }
 
         //public List<WorkMemberDto> TreatmentAccebilityMembers { get; set; } = new List<WorkMemberDto>();
-        //public List<TreatmentStageFileDto> WorkFiles { get; set; } = new List<TreatmentStageFileDto>();
+        //public List<TreatmentStageFileDto> TreatmentStageFiles { get; set; } = new List<TreatmentStageFileDto>();
     }
 }

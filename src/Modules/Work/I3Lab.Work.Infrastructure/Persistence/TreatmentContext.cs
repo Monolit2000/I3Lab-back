@@ -1,15 +1,9 @@
-﻿using I3Lab.Treatments.Domain.BlobFiles;
+﻿using Microsoft.EntityFrameworkCore;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Infrastructure.Domain.Works;
-using I3Lab.Treatments.Infrastructure.Domain.Members;
-using Microsoft.EntityFrameworkCore;
-using I3Lab.Treatments.Infrastructure.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.Treatments;
-using I3Lab.Treatments.Infrastructure.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
-using I3Lab.Treatments.Infrastructure.Domain.WorkChats;
-using I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites;
 using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
 
 namespace I3Lab.Treatments.Infrastructure.Persistence
@@ -27,7 +21,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
         public DbSet<Member> Members { get; set; }
 
-        public DbSet<BlobFile> BlobFiles { get; set; }
+        public DbSet<TreatmentFile> BlobFiles { get; set; }
 
         public TreatmentContext(DbContextOptions<TreatmentContext> options) : base(options)
         {
@@ -39,31 +33,24 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
             modelBuilder.HasDefaultSchema("treatment");
 
-            modelBuilder.ApplyConfiguration(new MemberConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TreatmentContext).Assembly);
 
-            modelBuilder.ApplyConfiguration(new TreatmentStageConfiguration());
 
-            modelBuilder.ApplyConfiguration(new WorkChatConfiguration());
+            //modelBuilder.ApplyConfiguration(new MemberConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new ChatMessageConfiguration());
+            //modelBuilder.ApplyConfiguration(new TreatmentStageConfiguration());
 
-            modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
+            //modelBuilder.ApplyConfiguration(new WorkChatConfiguration());
 
-            modelBuilder.ApplyConfiguration(new TreatmentStageFileConfiguration());
+            //modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
 
-            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
-            
-            modelBuilder.ApplyConfiguration(new TreatmentInviteConfiguration());
-
-            //modelBuilder.Ignore<TreatmentInvite>();
+            //modelBuilder.ApplyConfiguration(new TreatmentStageFileConfiguration());
 
             //modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
-
-
-            //modelBuilder.Ignore<Treatment>();
+            
+            //modelBuilder.ApplyConfiguration(new TreatmentInviteConfiguration());
 
         }
     }
 }
 
-            //modelBuilder.ApplyConfiguration(new WorkDirectoryConfiguration());

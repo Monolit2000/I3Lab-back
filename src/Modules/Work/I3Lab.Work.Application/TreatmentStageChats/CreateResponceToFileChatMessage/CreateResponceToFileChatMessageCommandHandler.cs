@@ -1,5 +1,5 @@
 ﻿using FluentResults;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.TreatmentStages;

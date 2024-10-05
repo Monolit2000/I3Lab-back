@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.TreatmentStageComments;
 using I3Lab.Treatments.Domain.TreatmentStageComments.Events;
 
@@ -8,13 +8,13 @@ namespace I3Lab.Treatments.Domain.WorkCatalogs
     public class PinedFile : Entity
     {
         public TreatmentStageCommentId WorkCommentId { get; private set; }
-        public BlobFile FileId { get; private set; }
+        public TreatmentFile FileId { get; private set; }
 
         public PinedFile() { } // For EF Core 
 
         private PinedFile(
             TreatmentStageCommentId workCommentId,
-            BlobFile fileId)
+            TreatmentFile fileId)
         {
             WorkCommentId = workCommentId;
             FileId = fileId;
@@ -24,7 +24,7 @@ namespace I3Lab.Treatments.Domain.WorkCatalogs
         
         public static PinedFile CreateNew(
             TreatmentStageCommentId workCommentId, 
-            BlobFile fileId)
+            TreatmentFile fileId)
         {
             return new PinedFile(
                 workCommentId, 

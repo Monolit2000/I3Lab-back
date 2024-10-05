@@ -1,13 +1,8 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Domain.TreatmentFiles
+namespace I3Lab.Treatments.Domain.TreatmentFils
 {
     public class BlobFilePath : ValueObject
     {
@@ -34,15 +29,15 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
         // Factory method to create BlobFilePath with validation
         public static Result<BlobFilePath> Create(string containerName, string fileName, string blobDirectoryName = default)
         {
-            var validateResult = ValidatePath(containerName, fileName, blobDirectoryName);
+            var validateResult = Validate(containerName, fileName, blobDirectoryName);
             if (validateResult.IsFailed)
-                return validateResult;
+                return validateResult;  
 
             return Result.Ok(new BlobFilePath(containerName, blobDirectoryName, fileName));
         }
 
         // Method to validate the current BlobFilePath instance
-        private static Result ValidatePath(string containerName, string fileName, string blobDirectoryName = default)
+        public static Result Validate(string containerName, string fileName, string blobDirectoryName = default)
         {
             if (string.IsNullOrWhiteSpace(containerName))
                 return Result.Fail("Container name cannot be empty.");
@@ -60,3 +55,38 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
         }
     }
 }
+
+
+
+
+
+
+
+//using I3Lab.BuildingBlocks.Domain;
+
+//namespace I3Lab.Treatments.Domain.TreatmentFils
+//{
+//    public class BlobFilePath : ValueObject
+//    {
+//        public string ContainerName { get; private set; }
+
+//        // FileName it's a BlobFileId value
+//        public string FileName { get; private set; }
+//        public string BlobDirectoryName { get; private set; }
+
+//        private BlobFilePath(
+//            string containerName,
+//            string blobDirectoryName,
+//            string fileName)
+//        {
+//            ContainerName = containerName;
+//            FileName = fileName;
+//            BlobDirectoryName = blobDirectoryName;
+//        }
+
+//        public static BlobFilePath Create(string containerName, string fileName, string blobDirectoryName = default)
+//        {
+//            return new BlobFilePath(containerName, fileName, blobDirectoryName);
+//        }
+//    }
+//}

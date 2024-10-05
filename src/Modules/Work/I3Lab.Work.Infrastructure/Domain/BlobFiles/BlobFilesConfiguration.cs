@@ -1,4 +1,4 @@
-﻿using I3Lab.Treatments.Domain.BlobFiles;
+﻿using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
 {
-    public class BlobFileConfiguration : IEntityTypeConfiguration<BlobFile>
+    public class BlobFileConfiguration : IEntityTypeConfiguration<TreatmentFile>
     {
-        public void Configure(EntityTypeBuilder<BlobFile> builder)
+        public void Configure(EntityTypeBuilder<TreatmentFile> builder)
         {
             builder.HasKey(bf => bf.Id);
 
@@ -21,33 +21,24 @@ namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
 
             builder.Property(bf => bf.TreatmentId).IsRequired(false);
 
-            builder.OwnsOne(bf => bf.Path);
+            builder.OwnsOne(bf => bf.BlobFilePath);
 
             builder.OwnsOne(bf => bf.ContentType, b =>
             {
                 b.Property(a => a.Value).HasColumnName("ContentType").IsRequired(false);
             });
 
+            builder.OwnsOne(tf => tf.FilePreview, b =>
+            {
+                b.Property(a => a.Url).HasColumnName("PreviewUrl").IsRequired(false);
+            });
+
             builder.OwnsOne(bf => bf.Url, b =>
             {
                 b.Property(a => a.Value).HasColumnName("Url").IsRequired();
             });
-
-            //builder.OwnsOne(bf => bf.Path, path =>
-            //{
-            //    path.Property(p => p.ContainerName).HasColumnName("ContainerName");
-            //    path.Property(p => p.BlobDirectoryName).HasColumnName("BlobDirectoryName");
-            //    path.Property(p => p.FileName).HasColumnName("FileName");
-            //});
-
-            //builder.Property(bf => bf.Path).HasColumnName("BlobFilePath").IsRequired();
+      
             builder.Property(bf => bf.CreateDate).IsRequired();
-
-
-            builder.OwnsOne(bf => bf.Accessibilitylevel, b =>
-            {
-                b.Property(a => a.Value).HasColumnName("Accessibilitylevel").IsRequired();
-            });
 
             builder.OwnsOne(bf => bf.FileType, b =>
             {

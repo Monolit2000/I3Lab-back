@@ -1,45 +1,49 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Treatments.Domain.TreatmentFiles;
+using I3Lab.Treatments.Domain.TreatmentFiles.Events;
+using I3Lab.Treatments.Domain.TreatmentFils.Events;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
-using I3Lab.Treatments.Domain.WorkCatalogs.Events;
 
-namespace I3Lab.Treatments.Domain.TreatmentFiles
+namespace I3Lab.Treatments.Domain.TreatmentFils
 {
     public class TreatmentFile : Entity, IAggregateRoot
     {
         public TreatmentId TreatmentId { get; private set; }
         public TreatmentStageId TreatmentStageId { get; private set; }
 
-        public TreatmentFilesId Id {  get; }   
+        public TreatmentFileId Id { get; }
         public BlobFilePath BlobFilePath { get; private set; }
-        public FilePreview FilePreview { get; private set; } 
-        public BlobFileType BlobFileType { get; private set; }
+        public FilePreview FilePreview { get; private set; }
+        public BlobFileType FileType { get; private set; }
         public ContentType ContentType { get; set; }
         public BlobFileUrl Url { get; private set; }
         public double MbSize { get; private set; }
         public DateTime CreateDate { get; private set; }
 
         public TreatmentFile() { } //For Ef core
-        
+
         private TreatmentFile(
             TreatmentId treatmentId,
             TreatmentStageId treatmentStageId,
-            BlobFileType blobFileType,
+            ContentType blobFileType,
             BlobFileUrl url,
             double mbSize,
             FilePreview filePreview = null)
         {
-            Id = new TreatmentFilesId(Guid.NewGuid());
+            Id = new TreatmentFileId(Guid.NewGuid());
             TreatmentId = treatmentId;
             TreatmentStageId = treatmentStageId;
             FilePreview = filePreview;
-            BlobFileType = blobFileType;
+            ContentType = blobFileType;
             Url = url;
             CreateDate = DateTime.UtcNow;
             MbSize = mbSize;
+
+            AddDomainEvent(new TreatmentFileCreatedDomainEvent());
         }
 
-        public static TreatmentFile CreateBaseOnTreatmentStage(TreatmentId treatmentId, TreatmentStageId treatmentStageId, BlobFileType type, BlobFileUrl url, double mdSize) 
+        public static TreatmentFile CreateBaseOnTreatmentStage(TreatmentId treatmentId, TreatmentStageId treatmentStageId, ContentType type, BlobFileUrl url, double mdSize)
             => new TreatmentFile(treatmentId, treatmentStageId, type, url, mdSize);
 
     }

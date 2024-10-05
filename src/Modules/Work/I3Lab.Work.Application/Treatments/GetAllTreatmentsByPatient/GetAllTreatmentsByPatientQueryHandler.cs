@@ -16,7 +16,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient
     {
         public async Task<Result<List<TreatmentDto>>> Handle(GetAllTreatmentsByPatientQuery request, CancellationToken cancellationToken)
         {
-            var treatments = await treatmentRepository.GetAllByPatientAsync(new MemberId(request.PatientId));
+            var treatments = await treatmentRepository.GetAllByMemberIdAsync(new MemberId(request.PatientId));
 
             if (treatments == null || !treatments.Any())
                 return Result.Fail("No treatments found for the patient.");

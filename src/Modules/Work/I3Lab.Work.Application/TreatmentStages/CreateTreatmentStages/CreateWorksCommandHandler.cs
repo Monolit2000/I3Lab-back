@@ -10,8 +10,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
     public class CreateWorksCommandHandler(
         IMemberRepository memberRepository,
         ITreatmentRepository tretmentRepository,
-        ITreatmentStageRepository workRepository,
-        IMemberContext memberContext) : IRequestHandler<CreateWorksCommand>
+        ITreatmentStageRepository workRepository) : IRequestHandler<CreateWorksCommand>
     {
 
         public List<string> BaseWorkTitels = new List<string>() { "1", "2", "3", "4" };
@@ -25,7 +24,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
             if (creator == null)
                 return;
-
+               
             foreach (var titel in BaseWorkTitels)
             {
                 var workResult = await TreatmentStage.CreateBasedOnTreatmentAsync(

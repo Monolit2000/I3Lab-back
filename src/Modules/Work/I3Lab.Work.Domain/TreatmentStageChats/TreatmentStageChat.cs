@@ -4,7 +4,7 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats.Events;
 using I3Lab.Treatments.Domain.Treatments;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.TreatmentStageChats.Rules;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 
@@ -83,7 +83,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
             return Result.Ok();
         }
 
-        public Result AddResponseToFileMessage(MemberId senderId, BlobFile fileResponceId, string messageText = "", MessageId repliedToMessageId = null)
+        public Result AddResponseToFileMessage(MemberId senderId, TreatmentFile fileResponceId, string messageText = "", MessageId repliedToMessageId = null)
         {
             var result = CheckRules(
                 new SenderMustBeChatMemberRule(ChatMembers, senderId),
@@ -91,7 +91,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
             if (result.IsFailed)
                 return result;
 
-            var newMessage = Message.CreateNewResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
+            var newMessage = Message.CreateResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
             Messages.Add(newMessage);
 
             return Result.Ok();
@@ -182,7 +182,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
 //    return Result.Ok();
 //}
 
-//public Result AddResponseToFileMessage(MemberId senderId, BlobFile fileResponceId, string messageText = "", MessageId repliedToMessageId = null)
+//public Result AddResponseToFileMessage(MemberId senderId, TreatmentFile fileResponceId, string messageText = "", MessageId repliedToMessageId = null)
 //{
 //    if (ChatMembers.All(p => p.MemberId != senderId))
 //        return Result.Fail("Sender is not a member in the chat.");
@@ -194,7 +194,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
 //            return Result.Fail("Replied message not found.");
 //    }
 
-//    var newMessage = Message.CreateNewResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
+//    var newMessage = Message.CreateResponceToFileMessage(senderId, messageText, fileResponceId, repliedToMessageId);
 //    Messages.Add(newMessage);
 
 //    return Result.Ok();

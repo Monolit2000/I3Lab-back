@@ -35,14 +35,14 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
             return treatment;
         }
 
-        public async Task<List<Treatment>> GetAllByPatientAsync(MemberId patientId, CancellationToken cancellationToken = default)
+        public async Task<List<Treatment>> GetAllByMemberIdAsync(MemberId memberId, CancellationToken cancellationToken = default)
         {
             var treatments = await _context.Treatments
                 .AsSplitQuery() 
                 .Include(t => t.Patient)
                 .Include(t => t.TreatmentMembers)
                     .ThenInclude(tm => tm.Member)
-                .Where(t => t.Patient.Id == patientId)
+                .Where(t => t.Patient.Id == memberId)
                 .ToListAsync(cancellationToken);
 
             return treatments;

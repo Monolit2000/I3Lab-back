@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
-using I3Lab.Treatments.Application.BlobFiles.AddBlobFile;
-using I3Lab.Treatments.Application.BlobFiles.GetBlobFile;
+using I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile;
+using I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFile;
 using Microsoft.AspNetCore.Http;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
-using I3Lab.Treatments.Application.BlobFiles.GetBlobFilesByWorkId;
+using I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByWorkId;
 
 namespace I3Lab.API.Modules.Treatments.Files
 {
@@ -35,7 +35,7 @@ namespace I3Lab.API.Modules.Treatments.Files
 
             var file = stream;
 
-            var createBlobFileCommand = new CreateBlobFileCommand(
+            var createBlobFileCommand = new CreateTreatmentFileCommand(
                 uploadWorkFileRequest.WorkId, 
                 uploadWorkFileRequest.FileName);
 
@@ -47,7 +47,7 @@ namespace I3Lab.API.Modules.Treatments.Files
         }
 
         [HttpGet("downloadWorkFile")]
-        public async Task<IResult> DownloadWorkFile(GetBlobFileStreamQuerie getBlobFileStreamQuerie)
+        public async Task<IResult> DownloadWorkFile(GetTreatmentFileStreamQuerie getBlobFileStreamQuerie)
         {
             var fileResponce = await _mediator.Send(getBlobFileStreamQuerie);
 
@@ -59,7 +59,7 @@ namespace I3Lab.API.Modules.Treatments.Files
 
 
         [HttpGet("downloadWithDeatelsWorkFile")]
-        public async Task<IActionResult> DownloadWithDeatelsWorkFile(GetBlobFileStreamQuerie getBlobFileStreamQuerie)
+        public async Task<IActionResult> DownloadWithDeatelsWorkFile(GetTreatmentFileStreamQuerie getBlobFileStreamQuerie)
         {
             var filrResponce = await _mediator.Send(getBlobFileStreamQuerie);
 
@@ -71,7 +71,7 @@ namespace I3Lab.API.Modules.Treatments.Files
 
 
         [HttpGet("getAllBlobFilesByWorkId")]
-        public async Task<IActionResult> GetAllBlobFilesByWorkId(GetAllBlobFilesByWorkIdCommand getAllBlobFilesByWorkIdCommand)
+        public async Task<IActionResult> GetAllBlobFilesByWorkId(GetAllBlobFilesByTreatmentStageIdCommand getAllBlobFilesByWorkIdCommand)
         {
             return HandleResult(await _mediator.Send(getAllBlobFilesByWorkIdCommand));
         }

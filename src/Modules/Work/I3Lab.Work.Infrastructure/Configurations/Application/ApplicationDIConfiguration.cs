@@ -1,7 +1,7 @@
 ﻿using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Treatments.Application.Contract;
 using I3Lab.Treatments.Application.Pipeline;
-using I3Lab.Treatments.Domain.BlobFiles;
+using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.Treatments;
@@ -18,6 +18,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using I3Lab.Treatments.Infrastructure.Cache;
+using I3Lab.BuildingBlocks.Infrastructure.PublishStrategies;
 namespace I3Lab.Treatments.Infrastructure.Configurations.Application
 {
     public static class ApplicationDIConfiguration
@@ -30,6 +31,7 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Application
             {
                 cfg.RegisterServicesFromAssembly(typeof(WorkModule).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(ProcessInternalCommandsCommandHandler).Assembly);
+                cfg.NotificationPublisher = new ParallelNoWaitPublisher();
 
             });
 
