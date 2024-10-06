@@ -9,14 +9,14 @@ namespace I3Lab.Clinics.Domain.Clinics
 {
     public class ClinicName : ValueObject
     {
-        public string Name { get; set; }
+        public string Value { get; private set; }
 
-        private ClinicName(string name)
-            => Name = name;
+        private ClinicName(string value)
+            => Value = value;
 
-        public static ClinicName Create(string name)
+        public static ClinicName Create(string value)
         {
-            return new ClinicName(name);
+            return new ClinicName(value);
         }
     }
 }

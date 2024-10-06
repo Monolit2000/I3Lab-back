@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     [DbContext(typeof(TreatmentContext))]
-    [Migration("20240930140356_sdfsdghj")]
-    partial class sdfsdghj
+    [Migration("20241006035308_newMigration")]
+    partial class newMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,28 +53,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.ToTable("InternalCommands", "treatment");
                 });
 
-            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("TreatmentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TreatmentStageId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TreatmentId")
-                        .IsUnique();
-
-                    b.ToTable("TreatmentFils", "treatment");
-                });
-
             modelBuilder.Entity("I3Lab.Treatments.Domain.Members.Member", b =>
                 {
                     b.Property<Guid>("Id")
@@ -96,6 +74,31 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Members", "treatment");
+                });
+
+            modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<double>("MbSize")
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid?>("TreatmentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("TreatmentStageId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TreatmentId")
+                        .IsUnique();
+
+                    b.ToTable("BlobFiles", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInvite", b =>
@@ -150,13 +153,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("CreatorId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid?>("CustomerId")
-                        .HasColumnType("uuid");
-
                     b.Property<Guid?>("TreatmentId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("TreatmentStageAvatarImageWorkId")
                         .HasColumnType("uuid");
 
                     b.ComplexProperty<Dictionary<string, object>>("TreatmentStageStatus", "I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage.TreatmentStageStatus#TreatmentStageStatus", b1 =>
@@ -172,10 +169,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.HasIndex("CreatorId");
 
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("TreatmentStageAvatarImageWorkId");
-
                     b.ToTable("TreatmentStage", "treatment");
                 });
 
@@ -190,9 +183,15 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("FileId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("TreatmentStageId1")
+                        .HasColumnType("uuid");
+
                     b.HasKey("TreatmentStageId");
 
                     b.HasIndex("FileId");
+
+                    b.HasIndex("TreatmentStageId1")
+                        .IsUnique();
 
                     b.ToTable("TreatmentStageFile", "treatment");
                 });
@@ -223,27 +222,26 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         .WithOne("TreatmentPreview")
                         .HasForeignKey("I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile", "TreatmentId");
 
-                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.Accessibilitylevel", "Accessibilitylevel", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFiles.FilePreview", "FilePreview", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("TreatmentFileId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<string>("Value")
-                                .IsRequired()
+                            b1.Property<string>("Url")
                                 .HasColumnType("text")
-                                .HasColumnName("Accessibilitylevel");
+                                .HasColumnName("PreviewUrl");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("TreatmentFils", "treatment");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("TreatmentFileId");
                         });
 
-                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.BlobFilePath", "Path", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.BlobFilePath", "BlobFilePath", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("TreatmentFileId")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("BlobDirectoryName")
@@ -255,17 +253,17 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                             b1.Property<string>("FileName")
                                 .HasColumnType("text");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("TreatmentFils", "treatment");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("TreatmentFileId");
                         });
 
-                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.FileType", "FileType", b1 =>
+                    b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.BlobFileType", "FileType", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("TreatmentFileId")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
@@ -273,17 +271,17 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("FileType");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("TreatmentFils", "treatment");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("TreatmentFileId");
                         });
 
                     b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.BlobFileUrl", "Url", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("TreatmentFileId")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
@@ -291,38 +289,38 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 .HasColumnType("text")
                                 .HasColumnName("Url");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("TreatmentFils", "treatment");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("TreatmentFileId");
                         });
 
                     b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFils.ContentType", "ContentType", b1 =>
                         {
-                            b1.Property<Guid>("BlobFileId")
+                            b1.Property<Guid>("TreatmentFileId")
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
                                 .HasColumnType("text")
                                 .HasColumnName("ContentType");
 
-                            b1.HasKey("BlobFileId");
+                            b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("TreatmentFils", "treatment");
+                            b1.ToTable("BlobFiles", "treatment");
 
                             b1.WithOwner()
-                                .HasForeignKey("BlobFileId");
+                                .HasForeignKey("TreatmentFileId");
                         });
 
-                    b.Navigation("Accessibilitylevel");
+                    b.Navigation("BlobFilePath");
 
                     b.Navigation("ContentType");
 
-                    b.Navigation("FileType");
+                    b.Navigation("FilePreview");
 
-                    b.Navigation("Path");
+                    b.Navigation("FileType");
 
                     b.Navigation("Url");
                 });
@@ -486,14 +484,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         .WithMany()
                         .HasForeignKey("CreatorId");
 
-                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageFile", "TreatmentStageAvatarImage")
-                        .WithMany()
-                        .HasForeignKey("TreatmentStageAvatarImageWorkId");
-
                     b.OwnsOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageDate", "TreatmentStageDate", b1 =>
                         {
                             b1.Property<Guid>("TreatmentStageId")
@@ -533,11 +523,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.Navigation("Creator");
 
-                    b.Navigation("Customer");
-
                     b.Navigation("Titel");
-
-                    b.Navigation("TreatmentStageAvatarImage");
 
                     b.Navigation("TreatmentStageDate");
                 });
@@ -553,6 +539,10 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         .HasForeignKey("TreatmentStageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", null)
+                        .WithOne("TreatmentStageAvatarImage")
+                        .HasForeignKey("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStageFile", "TreatmentStageId1");
 
                     b.Navigation("File");
                 });
@@ -612,9 +602,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                             b1.Property<Guid>("Id")
                                 .HasColumnType("uuid");
 
-                            b1.Property<Guid?>("AddedById")
-                                .HasColumnType("uuid");
-
                             b1.Property<DateTime>("JoinDate")
                                 .HasColumnType("timestamp with time zone");
 
@@ -629,17 +616,11 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("Id");
 
-                            b1.HasIndex("AddedById");
-
                             b1.HasIndex("MemberId");
 
                             b1.HasIndex("TreatmentId");
 
                             b1.ToTable("TreatmentMembers", "treatment");
-
-                            b1.HasOne("I3Lab.Treatments.Domain.Members.Member", "AddedBy")
-                                .WithMany()
-                                .HasForeignKey("AddedById");
 
                             b1.HasOne("I3Lab.Treatments.Domain.Members.Member", "Member")
                                 .WithMany()
@@ -685,8 +666,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                                 });
 
                             b1.Navigation("AccessibilityType");
-
-                            b1.Navigation("AddedBy");
 
                             b1.Navigation("Member");
 
@@ -746,6 +725,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage", b =>
                 {
+                    b.Navigation("TreatmentStageAvatarImage");
+
                     b.Navigation("TreatmentStageFiles");
                 });
 

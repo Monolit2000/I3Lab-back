@@ -10,6 +10,8 @@ using I3Lab.Treatments.Application.Treatments.GetTreatmentMembers;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient;
 using I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink;
+using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId;
+using I3Lab.API.Modules.Treatments.Treatments;
 
 namespace I3Lab.API.Modules.Treatments
 {
@@ -53,6 +55,11 @@ namespace I3Lab.API.Modules.Treatments
         public async Task<IActionResult> GetAllTreatmentsByPatient([FromQuery]GetAllTreatmentsByPatientQuery getAllTreatmentsByPatientQuery)
             => HandleResult(await mediator.Send(getAllTreatmentsByPatientQuery));
 
+
+        [HttpGet("getAllTreatmentsByMemberId")]
+        public async Task<IActionResult> GetAllTreatmentsByMemberId([FromQuery] GetAllTreatmentsByMemberIdRequest request)
+            => HandleResult(await mediator.Send(new GetAllTreatmentsByMemberIdQuery() { UserId = request.MemberId }));
+            
 
         [HttpPost("removeTreatmentMember")]
         public async Task<IActionResult> AddTreatmentMember(RemoveTreatmentMemberCommand removeTreatmentMemberCommand) 

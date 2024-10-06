@@ -3,9 +3,9 @@ using FluentResults;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 
-namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByUserId
+namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId
 {
-    public class GetAllTreatmentsByUserIdQueryHandler(
+    public class GetAllTreatmentsByMemberIdQueryHandler(
         ITreatmentRepository treatmentRepository) : IRequestHandler<GetAllTreatmentsByMemberIdQuery, Result<List<TreatmentDto>>>
     {
         public async Task<Result<List<TreatmentDto>>> Handle(GetAllTreatmentsByMemberIdQuery request, CancellationToken cancellationToken)

@@ -3,6 +3,7 @@ using FluentResults;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
+using I3Lab.Treatments.Application.Configuration.Errors;
 
 
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
@@ -14,7 +15,7 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
         public async Task<Result<TreatmentDto>> Handle(CreateTreatmentCommand request, CancellationToken cancellationToken)
         {
             if (!await tretmentRepository.IsNameUniqueAsync(request.TreatmentTitel))
-                return Result.Fail(TreatmentsErrors.NotUniqueName);
+                return Result.Fail(StatusCodeErrors.NotUnique(TreatmentsErrors.NotUniqueName));
 
             var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
             if (creator is null)

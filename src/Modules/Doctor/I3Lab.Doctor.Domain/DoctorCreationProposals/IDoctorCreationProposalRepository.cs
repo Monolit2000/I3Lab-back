@@ -1,24 +1,16 @@
 ﻿using I3Lab.Doctors.Domain.Doctors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Doctors.Domain.DoctorCreationProposals
 {
     public interface IDoctorCreationProposalRepository
     {
-        Task<DoctorCreationProposal> GetByIdAsync(DoctorCreationProposalId id);
-
-        Task AddAsync(DoctorCreationProposal proposal);
-
-        Task UpdateAsync(DoctorCreationProposal proposal);
-
-        Task DeleteAsync(DoctorCreationProposal proposal);
-
-        Task<IEnumerable<DoctorCreationProposal>> GetAllPendingAsync();
-
-        Task<bool> ExistByEmailAsync(Email email);
+        Task<IEnumerable<DoctorCreationProposal>> GetAllAsync(CancellationToken cancellationToken = default);
+        Task<DoctorCreationProposal> GetByIdAsync(DoctorCreationProposalId id, CancellationToken cancellationToken = default);
+        Task<IEnumerable<DoctorCreationProposal>> GetAllByStatusAsync(ConfirmationStatus status, CancellationToken cancellationToken = default);
+        Task AddAsync(DoctorCreationProposal proposal, CancellationToken cancellationToken = default);
+        Task UpdateAsync(DoctorCreationProposal proposal, CancellationToken cancellationToken = default);
+        Task DeleteAsync(DoctorCreationProposal proposal, CancellationToken cancellationToken = default);
+        Task<bool> ExistByEmailAsync(Email email, CancellationToken cancellationToken = default);
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

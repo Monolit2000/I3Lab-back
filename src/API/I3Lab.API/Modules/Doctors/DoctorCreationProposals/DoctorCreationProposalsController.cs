@@ -2,6 +2,8 @@
 using MediatR;
 using I3Lab.API.Modules.Base;
 using I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreationProposal;
+using I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposal;
+using I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus;
 
 namespace I3Lab.API.Modules.Doctors.DoctorCreationProposals
 {
@@ -26,9 +28,17 @@ namespace I3Lab.API.Modules.Doctors.DoctorCreationProposals
 
 
         [HttpPost("createDoctorCreationProposal")]
-        public async Task<IActionResult> CreateDoctorCreationProposal(CreateDoctorCreationProposalCommand createDoctorCreationProposalCommand)
-        {
-            return HandleResult(await _mediator.Send(createDoctorCreationProposalCommand));
-        }
+        public async Task<IActionResult> CreateDoctorCreationProposal(CreateDoctorCreationProposalCommand createDoctorCreationProposalCommand) 
+            => HandleResult(await _mediator.Send(createDoctorCreationProposalCommand));
+
+
+        [HttpGet("getAllDoctorCreationProposals")]
+        public async Task<IActionResult> GetAllDoctorCreationProposals()
+            => HandleResult(await _mediator.Send(new GetAllDoctorCreationProposalQuery()));
+
+
+        [HttpGet("getAllDoctorCreationProposalByStatus")]
+        public async Task<IActionResult> GetAllDoctorCreationProposalByStatus(GetAllDoctorCreationProposalByStatusQuery getAllDoctorCreationProposalByStatusQuery)
+            => HandleResult(await _mediator.Send(getAllDoctorCreationProposalByStatusQuery));
     }
 }

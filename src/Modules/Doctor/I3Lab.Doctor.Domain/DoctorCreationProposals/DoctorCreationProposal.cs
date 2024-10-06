@@ -1,25 +1,18 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Doctors.Domain.DoctorCreationProposals.Events;
 using I3Lab.Doctors.Domain.Doctors;
-using MassTransit.NewIdProviders;
-using MassTransit.Testing;
 
 namespace I3Lab.Doctors.Domain.DoctorCreationProposals
 {
     public class DoctorCreationProposal : Entity, IAggregateRoot
     {
+
         public DoctorCreationProposalId Id { get; }
-
         public DoctorName Name { get; private set; }
-        
         public Email Email { get; private set; }
-
         public PhoneNumber PhoneNumber { get; private set; }
-
         public ConfirmationStatus ConfirmationStatus { get; private set; }
-
         public DoctorAvatar DoctorAvatar { get; private set; }
-
         public DateTime CreatedAt { get; set; }
 
         private DoctorCreationProposal() { }

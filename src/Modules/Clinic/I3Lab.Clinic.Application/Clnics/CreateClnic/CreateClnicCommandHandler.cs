@@ -19,7 +19,7 @@ namespace I3Lab.Clinics.Application.Clnics.CreateClnic
 
 
             var clinic = Clinic.Create(
-                ClinicName.Create(request.ClinicAddress),
+                ClinicName.Create(request.ClinicName),
                 ClinicAddress.Create(request.ClinicAddress));
 
             await clinicRepository.AddAsync(clinic);

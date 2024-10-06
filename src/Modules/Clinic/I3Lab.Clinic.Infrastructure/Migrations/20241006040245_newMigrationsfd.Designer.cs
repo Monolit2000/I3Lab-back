@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Clinics.Infrastructure.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    [Migration("20241002011018_asddsfdsf")]
-    partial class asddsfdsf
+    [Migration("20241006040245_newMigrationsfd")]
+    partial class newMigrationsfd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,12 +60,33 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                                 .HasForeignKey("ClinicId");
                         });
 
+                    b.OwnsMany("I3Lab.Clinics.Domain.Clinics.ClinicDoctor", "ClinicDoctors", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<DateTime>("AddedAt")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<Guid>("ClinicId")
+                                .HasColumnType("uuid");
+
+                            b1.HasKey("DoctorId");
+
+                            b1.HasIndex("ClinicId");
+
+                            b1.ToTable("ClinicDoctors", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ClinicId");
+                        });
+
                     b.OwnsOne("I3Lab.Clinics.Domain.Clinics.ClinicName", "ClinicName", b1 =>
                         {
                             b1.Property<Guid>("ClinicId")
                                 .HasColumnType("uuid");
 
-                            b1.Property<string>("Name")
+                            b1.Property<string>("Value")
                                 .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("ClinicName");
@@ -98,6 +119,8 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
 
                     b.Navigation("Address")
                         .IsRequired();
+
+                    b.Navigation("ClinicDoctors");
 
                     b.Navigation("ClinicName")
                         .IsRequired();

@@ -12,13 +12,13 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
         public async Task Handle(TreatmentCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
 
-            //await commandsScheduler.EnqueueAsync(new CreateWorksCommand(
-            //    notification.TreatmentId,
-            //    notification.CreatorId));
+            await commandsScheduler.EnqueueAsync(new CreateWorksCommand(
+                notification.TreatmentId,
+                notification.CreatorId));
 
-            await sender.Send(new CreateWorksCommand(
-                    notification.TreatmentId,
-                    notification.CreatorId));
+            //await sender.Send(new CreateWorksCommand(
+            //        notification.TreatmentId,
+            //        notification.CreatorId));
         }
     }
 }

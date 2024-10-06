@@ -22,10 +22,6 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Domain
             return base.SavingChanges(eventData, result);
         }
 
-
-
-
-
         public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
             var context = eventData.Context;    
@@ -68,11 +64,6 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Domain
 
             return await base.SavingChangesAsync(eventData, result, cancellationToken);
         }
-
-
-
-
-
 
 
         //public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)

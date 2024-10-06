@@ -88,8 +88,6 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
 
             return inviteLink;
         }
-
-
         public Result ValidateInviteToken(string token)
         {
             if (InviteToken == null)
@@ -97,8 +95,5 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
 
             return InviteToken.Validate(token);
         }
-
     }
-
-   
 }

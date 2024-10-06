@@ -1,33 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.Contract
+namespace I3Lab.Treatments.Application.Configuration.Paginations
 {
-
-    public static class QueryableExtensions
-    {
-        public static async Task<PagedList<T>> ToPagedListAsync<T>(this IQueryable<T> query, int page, int pageSize)
-        {
-            var totalCount = await query.CountAsync();
-            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
-
-            return new PagedList<T>(items, page, pageSize, totalCount);
-        }
-
-        public static PagedList<T> ToPagedList<T>(this IEnumerable<T> enumerable, int page, int pageSize)
-        {
-            var totalCount = enumerable.Count();
-            var items = enumerable.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            return new PagedList<T>(items, page, pageSize, totalCount);
-        }
-    }
-
-
     public class PagedList<T>
     {
         public PagedList(List<T> items, int page, int pageSize, int totalCount)
@@ -50,6 +24,14 @@ namespace I3Lab.Treatments.Application.Contract
         {
             var totalCount = await query.CountAsync();
             var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            return new PagedList<T>(items, page, pageSize, totalCount);
+        }
+
+        public static PagedList<T> Create(IEnumerable<T> query, int page, int pageSize)
+        {
+            var totalCount = query.Count();
+            var items = query.Skip((page - 1) * pageSize).Take(pageSize).ToList();
 
             return new PagedList<T>(items, page, pageSize, totalCount);
         }

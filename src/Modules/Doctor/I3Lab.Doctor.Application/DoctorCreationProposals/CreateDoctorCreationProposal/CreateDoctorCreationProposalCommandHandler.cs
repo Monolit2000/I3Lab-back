@@ -2,6 +2,7 @@
 using I3Lab.Doctors.Domain.DoctorCreationProposals;
 using I3Lab.Doctors.Domain.Doctors;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreationProposal
 {
@@ -10,12 +11,11 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
     {
         public async Task<Result<DoctorCreationProposalDto>> Handle(CreateDoctorCreationProposalCommand request, CancellationToken cancellationToken)
         {
-
             var email = Email.Create(request.Email);
 
-            var exist = await doctorCreationProposalRepository.ExistByEmailAsync(email);
-            if (exist)
-                return Result.Fail($"Proposal with this email '{email}' already exist");
+            var isExist = await doctorCreationProposalRepository.ExistByEmailAsync(email, cancellationToken);
+            if (isExist)
+                return Result.Fail($"Proposal with this email '{email}' already isExist");
 
             var doctorCreationProposal = DoctorCreationProposal.CreateNew(
                 DoctorName.Create(request.FirstName, request.LastName),
@@ -23,7 +23,9 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
                 PhoneNumber.Create(request.PhoneNumber),
                 DoctorAvatar.Create( request.DoctorAvatar));
 
-            await doctorCreationProposalRepository.AddAsync(doctorCreationProposal);
+            await doctorCreationProposalRepository.AddAsync(doctorCreationProposal, cancellationToken);
+
+            await doctorCreationProposalRepository.SaveChangesAsync(cancellationToken);
 
             var doctorCreationProposalDto = new DoctorCreationProposalDto(doctorCreationProposal.Id.Value);
 

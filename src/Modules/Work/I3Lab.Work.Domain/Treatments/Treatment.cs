@@ -14,7 +14,6 @@ namespace I3Lab.Treatments.Domain.Treatments
     {
         public Member Creator { get; private set; }
         public Member Patient { get; private set; }
-
         public readonly List<TreatmentMember> TreatmentMembers = [];
 
         public TreatmentId Id { get; }

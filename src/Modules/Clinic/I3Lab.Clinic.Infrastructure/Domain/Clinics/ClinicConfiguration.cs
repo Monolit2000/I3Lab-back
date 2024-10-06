@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using I3Lab.Clinics.Domain.Doctors;
 using I3Lab.Clinics.Domain.Clinics;
 
 namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
@@ -11,30 +10,34 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
         {
             builder.HasKey(c => c.Id);
 
-            // Настройка ClinicName как ValueObject
-            builder.OwnsOne(c => c.ClinicName, cn =>
-            {
-                cn.Property(c => c.Name).HasColumnName("ClinicName").IsRequired();
-            });
 
-            // Настройка ClinicAddress как ValueObject
             builder.OwnsOne(c => c.Address, ca =>
             {
                 ca.Property(c => c.Value).HasColumnName("ClinicAddress").IsRequired();
             });
 
-            // Настройка ClinicStatus как ValueObject
+            builder.OwnsOne(c => c.ClinicName, cn =>
+            {
+                cn.Property(c => c.Value).HasColumnName("ClinicName").IsRequired();
+            });
+
             builder.OwnsOne(c => c.Status, cs =>
             {
                 cs.Property(s => s.Value).HasColumnName("ClinicStatus").IsRequired();
             });
 
-            // Настройка отношения с докторами
-            //builder.HasMany<DoctorId>(c => c.ClinicDoctors)
-            //    .WithMany()
-            //    .UsingEntity(j => j.ToTable("ClinicDoctors"));
+            builder.OwnsMany(c => c.ClinicDoctors, b =>
+            {
+                b.ToTable("ClinicDoctors");
 
-            // Настройка CreatedAt как обязательного поля
+                b.HasKey(x => x.DoctorId);
+
+                b.WithOwner().HasForeignKey(x => x.ClinicId);
+
+                b.Property(x => x.AddedAt).IsRequired();
+               
+            });
+
             builder.Property(c => c.CreatedAt)
                    .HasColumnName("CreatedAt")
                    .IsRequired();

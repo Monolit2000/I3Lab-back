@@ -1,15 +1,20 @@
 ﻿using MediatR;
 using FluentResults;
+using I3Lab.Doctors.Domain.Doctors;
 using I3Lab.Doctors.Domain.DoctorCreationProposals;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposal
+namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus
 {
-    public class GetAllDoctorCreationProposalQueryHandler(
-        IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<GetAllDoctorCreationProposalQuery, Result<List<DoctorCreationProposalDto>>>
+    public class GetAllDoctorCreationProposalByStatusQueryHandler(
+        IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<GetAllDoctorCreationProposalByStatusQuery, Result<List<DoctorCreationProposalDto>>>
     {
-        public async Task<Result<List<DoctorCreationProposalDto>>> Handle(GetAllDoctorCreationProposalQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<DoctorCreationProposalDto>>> Handle(GetAllDoctorCreationProposalByStatusQuery request, CancellationToken cancellationToken)
         {
-            var proposals = await doctorCreationProposalRepository.GetAllAsync();
+            var status = ConfirmationStatus.Create(request.Status);
+            if (status.IsFailed)
+                return Result.Fail("Invalid status");
+
+            var proposals = await doctorCreationProposalRepository.GetAllByStatusAsync(status.Value, cancellationToken);
 
             if (proposals == null || !proposals.Any())
                 return Result.Fail<List<DoctorCreationProposalDto>>("No pending proposals found");

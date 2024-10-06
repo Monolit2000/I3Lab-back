@@ -28,5 +28,9 @@
   <ItemGroup>
     <ProjectReference Include="..\I3Lab.Clinic.Application\I3Lab.Clinics.Application.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
   
 </Project>

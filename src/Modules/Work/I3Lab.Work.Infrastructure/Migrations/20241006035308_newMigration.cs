@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class sdfsdghj : Migration
+    public partial class newMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -94,6 +94,30 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TreatmentStage",
+                schema: "treatment",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
+                    TreatmentTitel = table.Column<string>(type: "text", nullable: true),
+                    TreatmentStageDate_StageStarted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    TreatmentStageDate_StageFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    TreatmentStageStatus = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TreatmentStage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TreatmentStage_Members_CreatorId",
+                        column: x => x.CreatorId,
+                        principalSchema: "treatment",
+                        principalTable: "Members",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChatMembers",
                 schema: "treatment",
                 columns: table => new
@@ -115,20 +139,21 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TreatmentFils",
+                name: "BlobFiles",
                 schema: "treatment",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TreatmentStageId = table.Column<Guid>(type: "uuid", nullable: false),
                     TreatmentId = table.Column<Guid>(type: "uuid", nullable: true),
+                    TreatmentStageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    BlobFilePath_ContainerName = table.Column<string>(type: "text", nullable: true),
+                    BlobFilePath_FileName = table.Column<string>(type: "text", nullable: true),
+                    BlobFilePath_BlobDirectoryName = table.Column<string>(type: "text", nullable: true),
+                    PreviewUrl = table.Column<string>(type: "text", nullable: true),
                     FileType = table.Column<string>(type: "text", nullable: true),
                     ContentType = table.Column<string>(type: "text", nullable: true),
-                    Accessibilitylevel = table.Column<string>(type: "text", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: true),
-                    Path_ContainerName = table.Column<string>(type: "text", nullable: true),
-                    Path_FileName = table.Column<string>(type: "text", nullable: true),
-                    Path_BlobDirectoryName = table.Column<string>(type: "text", nullable: true),
+                    MbSize = table.Column<double>(type: "double precision", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
@@ -190,21 +215,14 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     TreatmentId = table.Column<Guid>(type: "uuid", nullable: false),
                     MemberId = table.Column<Guid>(type: "uuid", nullable: false),
-                    AccessibilityType = table.Column<string>(type: "text", nullable: true),
                     Role = table.Column<string>(type: "text", nullable: true),
-                    AddedById = table.Column<Guid>(type: "uuid", nullable: true),
+                    AccessibilityType = table.Column<string>(type: "text", nullable: true),
                     JoinDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LeaveDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TreatmentMembers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TreatmentMembers_Members_AddedById",
-                        column: x => x.AddedById,
-                        principalSchema: "treatment",
-                        principalTable: "Members",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TreatmentMembers_Members_MemberId",
                         column: x => x.MemberId,
@@ -219,6 +237,40 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         principalTable: "Treatments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TreatmentStageFile",
+                schema: "treatment",
+                columns: table => new
+                {
+                    TreatmentStageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FileId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TreatmentStageId1 = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TreatmentStageFile", x => x.TreatmentStageId);
+                    table.ForeignKey(
+                        name: "FK_TreatmentStageFile_BlobFiles_FileId",
+                        column: x => x.FileId,
+                        principalSchema: "treatment",
+                        principalTable: "BlobFiles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TreatmentStageFile_TreatmentStage_TreatmentStageId",
+                        column: x => x.TreatmentStageId,
+                        principalSchema: "treatment",
+                        principalTable: "TreatmentStage",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TreatmentStageFile_TreatmentStage_TreatmentStageId1",
+                        column: x => x.TreatmentStageId1,
+                        principalSchema: "treatment",
+                        principalTable: "TreatmentStage",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -243,7 +295,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         name: "FK_WorkChatMessages_BlobFiles_FileResponceIdId",
                         column: x => x.FileResponceIdId,
                         principalSchema: "treatment",
-                        principalTable: "TreatmentFils",
+                        principalTable: "BlobFiles",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_WorkChatMessages_Members_SenderId",
@@ -260,69 +312,10 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TreatmentStage",
-                schema: "treatment",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    TreatmentId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreatorId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: true),
-                    TreatmentTitel = table.Column<string>(type: "text", nullable: true),
-                    TreatmentStageAvatarImageWorkId = table.Column<Guid>(type: "uuid", nullable: true),
-                    TreatmentStageDate_StageStarted = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    TreatmentStageDate_StageFinished = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    TreatmentStageStatus = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TreatmentStage", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TreatmentStage_Members_CreatorId",
-                        column: x => x.CreatorId,
-                        principalSchema: "treatment",
-                        principalTable: "Members",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TreatmentStage_Members_CustomerId",
-                        column: x => x.CustomerId,
-                        principalSchema: "treatment",
-                        principalTable: "Members",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TreatmentStageFile",
-                schema: "treatment",
-                columns: table => new
-                {
-                    WorkId = table.Column<Guid>(type: "uuid", nullable: false),
-                    FileId = table.Column<Guid>(type: "uuid", nullable: true),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TreatmentStageFile", x => x.WorkId);
-                    table.ForeignKey(
-                        name: "FK_TreatmentStageFile_BlobFiles_FileId",
-                        column: x => x.FileId,
-                        principalSchema: "treatment",
-                        principalTable: "TreatmentFils",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TreatmentStageFile_TreatmentStage_WorkId",
-                        column: x => x.WorkId,
-                        principalSchema: "treatment",
-                        principalTable: "TreatmentStage",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_BlobFiles_TreatmentId",
                 schema: "treatment",
-                table: "TreatmentFils",
+                table: "BlobFiles",
                 column: "TreatmentId",
                 unique: true);
 
@@ -349,12 +342,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 schema: "treatment",
                 table: "TreatmentInvites",
                 column: "TreatmentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TreatmentMembers_AddedById",
-                schema: "treatment",
-                table: "TreatmentMembers",
-                column: "AddedById");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentMembers_MemberId",
@@ -387,22 +374,17 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TreatmentStage_CustomerId",
-                schema: "treatment",
-                table: "TreatmentStage",
-                column: "CustomerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TreatmentStage_TreatmentStageAvatarImageWorkId",
-                schema: "treatment",
-                table: "TreatmentStage",
-                column: "TreatmentStageAvatarImageWorkId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TreatmentStageFile_FileId",
                 schema: "treatment",
                 table: "TreatmentStageFile",
                 column: "FileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreatmentStageFile_TreatmentStageId1",
+                schema: "treatment",
+                table: "TreatmentStageFile",
+                column: "TreatmentStageId1",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkChatMessages_FileResponceIdId",
@@ -421,40 +403,11 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 schema: "treatment",
                 table: "WorkChatMessages",
                 column: "WorkChatId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_TreatmentStage_TreatmentStageFile_TreatmentStageAvatarImage~",
-                schema: "treatment",
-                table: "TreatmentStage",
-                column: "TreatmentStageAvatarImageWorkId",
-                principalSchema: "treatment",
-                principalTable: "TreatmentStageFile",
-                principalColumn: "TreatmentStageId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_BlobFiles_Treatments_TreatmentId",
-                schema: "treatment",
-                table: "TreatmentFils");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_TreatmentStage_Members_CreatorId",
-                schema: "treatment",
-                table: "TreatmentStage");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_TreatmentStage_Members_CustomerId",
-                schema: "treatment",
-                table: "TreatmentStage");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_TreatmentStage_TreatmentStageFile_TreatmentStageAvatarImage~",
-                schema: "treatment",
-                table: "TreatmentStage");
-
             migrationBuilder.DropTable(
                 name: "ChatMembers",
                 schema: "treatment");
@@ -472,7 +425,19 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 schema: "treatment");
 
             migrationBuilder.DropTable(
+                name: "TreatmentStageFile",
+                schema: "treatment");
+
+            migrationBuilder.DropTable(
                 name: "WorkChatMessages",
+                schema: "treatment");
+
+            migrationBuilder.DropTable(
+                name: "TreatmentStage",
+                schema: "treatment");
+
+            migrationBuilder.DropTable(
+                name: "BlobFiles",
                 schema: "treatment");
 
             migrationBuilder.DropTable(
@@ -485,18 +450,6 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Members",
-                schema: "treatment");
-
-            migrationBuilder.DropTable(
-                name: "TreatmentStageFile",
-                schema: "treatment");
-
-            migrationBuilder.DropTable(
-                name: "TreatmentFils",
-                schema: "treatment");
-
-            migrationBuilder.DropTable(
-                name: "TreatmentStage",
                 schema: "treatment");
         }
     }

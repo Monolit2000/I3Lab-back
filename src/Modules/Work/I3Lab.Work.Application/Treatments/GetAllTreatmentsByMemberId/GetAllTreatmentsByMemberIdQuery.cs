@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByUserId
+namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId
 {
     public class GetAllTreatmentsByMemberIdQuery : IRequest<Result<List<TreatmentDto>>>, ICacheableRequest
     {
         public Guid UserId { get; set; }
 
-        public string CacheKey => $"allTreatmentsByMember{UserId}";
+        public string CacheKey => $"allTreatmentsByMemberId-{UserId}";
 
         public DistributedCacheEntryOptions Options => throw new NotImplementedException();
     }

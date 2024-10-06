@@ -93,7 +93,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 
-    //app.ClearDbContextMigrations();
+    app.ClearDbContextMigrations();
    
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();

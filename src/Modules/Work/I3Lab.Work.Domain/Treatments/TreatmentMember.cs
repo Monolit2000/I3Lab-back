@@ -13,9 +13,8 @@ namespace I3Lab.Treatments.Domain.Treatments
         public Member Member { get; private set; }
 
           
-        public TreatmentMemberAccessibilityType AccessibilityType { get; private set; }
-
         public TreatmentMemberRole Role { get; private set; }
+        public TreatmentMemberAccessibilityType AccessibilityType { get; private set; }
 
         //public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }

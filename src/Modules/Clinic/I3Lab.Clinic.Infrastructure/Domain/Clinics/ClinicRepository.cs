@@ -21,7 +21,7 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
                 .FirstOrDefaultAsync(c => c.Id == clinicId);
         }
 
-        public async Task<List<Clinic>> GetAll()
+        public async Task<List<Clinic>> GetAllAsync()
         {
             return await _context.Clinics
                 .Include(c => c.ClinicDoctors)
@@ -42,7 +42,7 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
 
         public async Task<bool> ExistByName(ClinicName clinicName)
         {
-            return await _context.Clinics.AnyAsync(c => c.ClinicName == clinicName);
+            return await _context.Clinics.AnyAsync(c => c.ClinicName.Value == clinicName.Value);
         }
     }
 }

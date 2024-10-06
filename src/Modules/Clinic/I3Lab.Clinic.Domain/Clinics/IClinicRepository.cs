@@ -8,7 +8,7 @@ namespace I3Lab.Clinics.Domain.Clnics
 
         Task<bool> ExistByName(ClinicName clinicName);
 
-        Task<List<Clinic>> GetAll();
+        Task<List<Clinic>> GetAllAsync();
 
         Task AddAsync(Clinic doctor);
 
