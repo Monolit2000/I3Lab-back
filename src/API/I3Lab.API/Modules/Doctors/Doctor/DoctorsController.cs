@@ -6,7 +6,7 @@ using I3Lab.Doctors.Application.Doctors.GetDoctorById;
 
 namespace I3Lab.API.Modules.Doctors.Doctor
 {
-    [Route("api/doctors")]
+    [Route("api/v{apiVersion:apiVersion}/doctors")]
     [ApiController]
     public class DoctorsController : BaseController
     {

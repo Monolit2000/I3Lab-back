@@ -1,17 +1,16 @@
-﻿using I3Lab.API.Modules.Base;
+﻿using MediatR;
+using I3Lab.API.Modules.Base;
+using Microsoft.AspNetCore.Mvc;
 using I3Lab.Users.Application.Login;
 using I3Lab.Users.Application.Register;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity.Core.Objects;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using Asp.Versioning;
 
 namespace I3Lab.API.Modules.Users
 {
-    [Route("api/authentication")]
-    [ApiController]
+    
+    [Route("api/v{apiVersion:apiVersion}/authentication")]
+    [ApiVersion(1)]
+    [ApiVersion(2)]
     public class AuthenticationController : BaseController
     {
         private readonly IMediator _mediator;

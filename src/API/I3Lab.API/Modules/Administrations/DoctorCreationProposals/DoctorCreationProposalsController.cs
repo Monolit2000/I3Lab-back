@@ -6,7 +6,7 @@ using I3Lab.Administration.Application.GetDoctorCreationProposals;
 
 namespace I3Lab.API.Modules.Administrations.DoctorCreationProposals
 {
-    [Route("api/administrations/doctorCreationProposals")]
+    [Route("api/v{apiVersion:apiVersion}/administrations/doctorCreationProposals")]
     [ApiController]
     public class DoctorCreationProposalsController : BaseController
     {

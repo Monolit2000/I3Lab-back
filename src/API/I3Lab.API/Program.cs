@@ -17,6 +17,8 @@ using OpenTelemetry.Metrics;
 using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
 using I3Lab.Modules.BlobFailes.Infrastructure.Startup;
 using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
+using Asp.Versioning;
+using I3Lab.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +70,27 @@ builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(J
 //    .AddApiEndpoints();
 
 
+builder.Services.AddApiVersioning(options =>
+{
+
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = ApiVersion.Default;  /*new ApiVersion(1);*/
+
+    options.ApiVersionReader = new UrlSegmentApiVersionReader();
+})
+    //.AddMvc()
+    .AddApiExplorer(options =>
+    {
+        options.GroupNameFormat = "'v'V";
+        options.SubstituteApiVersionInUrl = true;
+    });
+
+
+builder.Services.ConfigureOptions<ConfigureSwaggerGenOptions>();
+
+
+//ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
+//        new HeaderApiVersionReader());
 
 builder.Services.AddHttpContextAccessor();
 
@@ -94,7 +117,18 @@ ServiceFactory.Configure(app.Services);
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        var deacriptions = app.DescribeApiVersions();
+
+        foreach(var deacription in deacriptions)
+        {
+            string url = $"/swagger/{deacription.GroupName}/swagger.json";
+            string name = deacription.GroupName.ToUpperInvariant();
+
+            options.SwaggerEndpoint(url, name);
+        }
+    });
 
     app.ClearDbContextMigrations();
 

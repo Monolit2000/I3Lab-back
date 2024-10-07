@@ -1,26 +1,29 @@
 ﻿using MediatR;
+using Asp.Versioning;
 using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
+using I3Lab.API.Modules.Treatments.Treatments;
 using I3Lab.Treatments.Application.Treatments.RemoveMember;
 using I3Lab.Treatments.Application.Treatments.CreateTreatment;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatment;
 using I3Lab.Treatments.Application.Treatments.FinishTreatment;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentById;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentMembers;
-using I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient;
-using I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink;
+using I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId;
-using I3Lab.API.Modules.Treatments.Treatments;
+using I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink;
 
 namespace I3Lab.API.Modules.Treatments
 {
-    [Route("api/treatments")]
+    [Route("api/v{apiVersion:apiVersion}/treatments")]
     [ApiController]
+    [ApiVersion(1)]
     public class TreatmentController(
         IMediator mediator) : BaseController
     {
 
+        [MapToApiVersion(1)]
         [HttpGet("getAllTreatment")]
         public async Task<IActionResult> GetAllTreatment()
             => HandleResult(await mediator.Send(new GetAllTreatmentQuery()));
@@ -55,7 +58,7 @@ namespace I3Lab.API.Modules.Treatments
         public async Task<IActionResult> GetAllTreatmentsByPatient([FromQuery]GetAllTreatmentsByPatientQuery getAllTreatmentsByPatientQuery)
             => HandleResult(await mediator.Send(getAllTreatmentsByPatientQuery));
 
-
+        
         [HttpGet("getAllTreatmentsByMemberId")]
         public async Task<IActionResult> GetAllTreatmentsByMemberId([FromQuery] GetAllTreatmentsByMemberIdRequest request)
             => HandleResult(await mediator.Send(new GetAllTreatmentsByMemberIdQuery() { UserId = request.MemberId }));

@@ -10,7 +10,7 @@ using I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentIInviteByLink
 
 namespace I3Lab.API.Modules.Treatments.TreatmentInvites
 {
-    [Route("api/treatments/treatmentInvites")]
+    [Route("api/v{apiVersion:apiVersion}/treatments/treatmentInvites")]
     [ApiController]
     public class TreatmentInvitesController : BaseController
     {

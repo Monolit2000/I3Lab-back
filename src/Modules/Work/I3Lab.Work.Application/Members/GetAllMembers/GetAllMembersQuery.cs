@@ -1,8 +1,7 @@
-﻿using FluentResults;
+﻿using MediatR;
 using I3Lab.Treatments.Application.Contract;
-using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-
+using I3Lab.Treatments.Application.Configuration.CaheKeys.Members;
 
 namespace I3Lab.Treatments.Application.Members.GetAllMembers
 {
@@ -10,11 +9,9 @@ namespace I3Lab.Treatments.Application.Members.GetAllMembers
     {
         public GetAllMembersQuery()
         {
-            
         }
 
-        public string CacheKey => "all-members";
+        public string CacheKey => MembersCaheKeys.Members;
         public DistributedCacheEntryOptions Options => throw new NotImplementedException();
-
     }
 }

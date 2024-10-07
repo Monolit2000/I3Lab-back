@@ -12,7 +12,6 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
     {
         public async Task<List<Member>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            string key = $"members";
 
             return await memoryCache.GetOrCreateAsync(
                 MembersCaheKeys.Members, 

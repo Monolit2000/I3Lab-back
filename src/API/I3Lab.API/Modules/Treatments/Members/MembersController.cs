@@ -5,6 +5,8 @@ using I3Lab.Treatments.Application.Members.GetAllMembers;
 
 namespace I3Lab.API.Modules.Treatments.Members
 {
+    [Route("api/v{apiVersion:apiVersion}/treatments/members")]
+    [ApiController]
     public class MembersController : BaseController
     {
         private readonly IMediator _mediator;

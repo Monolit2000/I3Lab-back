@@ -9,7 +9,7 @@ using I3Lab.Clinics.Application.Clnics.GetClnicById;
 
 namespace I3Lab.API.Modules.Clinics.Clinics
 {
-    [Route("api/clinic")]
+    [Route("api/v{apiVersion:apiVersion}/clinics")]
     [ApiController]
     public class ClinicController(
         IMediator mediator) : BaseController

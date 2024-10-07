@@ -8,7 +8,7 @@ using I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProp
 namespace I3Lab.API.Modules.Doctors.DoctorCreationProposals
 {
 
-    [Route("api/doctors/doctorCreationProposals")]
+    [Route("api/v{apiVersion:apiVersion}/doctors/doctorCreationProposals")]
     [ApiController]
     public class DoctorCreationProposalsController : BaseController
     {

@@ -4,6 +4,7 @@ using MediatR;
 
 namespace I3Lab.API.Modules.Base
 {
+   
     public abstract class BaseController : ControllerBase
     {
         private IMediator? _mediator;

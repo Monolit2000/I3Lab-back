@@ -6,7 +6,7 @@ using I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById;
 
 namespace I3Lab.API.Modules.BlobFiles
 {
-    [Route("api/blobFiles")]
+    [Route("api/v{apiVersion:apiVersion}/blobFiles")]
     [ApiController]
     public class BlobFilesController(
         IMediator mediator) : BaseController

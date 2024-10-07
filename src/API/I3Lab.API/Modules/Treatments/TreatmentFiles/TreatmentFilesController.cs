@@ -8,7 +8,7 @@ using I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByWorkId;
 
 namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 {
-    [Route("api/treatmentFiles")]
+    [Route("api/v{apiVersion:apiVersion}/treatmentFiles")]
     [ApiController]
     public class TreatmentFilesController : BaseController
     {

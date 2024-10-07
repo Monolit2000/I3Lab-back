@@ -21,7 +21,7 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
                 return Result.Fail("Creator is null");
 
             var patient = await memberRepository.GetMemberByIdAsync(new MemberId(request.PatientId));
-            if (creator is null)
+            if (patient is null)
                 return Result.Fail("patient is null");
 
             var treatment = Treatment.CreateNew(

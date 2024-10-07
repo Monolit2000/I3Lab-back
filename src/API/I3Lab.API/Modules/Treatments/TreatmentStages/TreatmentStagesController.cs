@@ -8,7 +8,7 @@ using System.Reflection.Metadata;
 
 namespace I3Lab.API.Modules.Treatments.Work
 {
-    [Route("api/treatmentStages")]
+    [Route("api/v{apiVersion:apiVersion}/treatmentStages")]
     [ApiController]
     public class TreatmentStagesController(
         IMediator mediator) : BaseController

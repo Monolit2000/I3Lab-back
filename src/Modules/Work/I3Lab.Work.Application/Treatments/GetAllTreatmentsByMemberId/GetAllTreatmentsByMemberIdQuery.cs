@@ -10,11 +10,9 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId
 {
-    public class GetAllTreatmentsByMemberIdQuery : IRequest<Result<List<TreatmentDto>>>, ICacheableRequest
+    public class GetAllTreatmentsByMemberIdQuery : IRequest<Result<List<TreatmentDto>>>
     {
         public Guid UserId { get; set; }
-
-        public string CacheKey => $"allTreatmentsByMemberId-{UserId}";
 
         public DistributedCacheEntryOptions Options => throw new NotImplementedException();
     }

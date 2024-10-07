@@ -9,7 +9,7 @@ using I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWorkId
 namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 {
 
-    [Route("api/treatmentStageChats")]
+    [Route("api/v{apiVersion:apiVersion}/treatmentStageChats")]
     [ApiController]
     public class TreatmentStageChatsController : BaseController
     {
@@ -30,30 +30,22 @@ namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 
         [HttpPost("addMessage")]
         public async Task<IActionResult> AddMessage(AddMessageCommand addMessageCommand)
-        {
-            return HandleResult(await _mediator.Send(addMessageCommand));
+            => HandleResult(await _mediator.Send(addMessageCommand));
 
-        }
 
         [HttpPost("removeChatMessageCommand")]
         public async Task<IActionResult> AddChatMember(RemoveChatMessageCommand removeChatMessageCommand)
-        {
-            return HandleResult(await _mediator.Send(removeChatMessageCommand));
-        }
+            => HandleResult(await _mediator.Send(removeChatMessageCommand));
 
 
         [HttpPost("EditChatMessage")]
         public async Task<IActionResult> EditChatMessage(EditChatMessageCommand editChatMessageCommand)
-        {
-            return HandleResult(await _mediator.Send(editChatMessageCommand));
-        }
+            => HandleResult(await _mediator.Send(editChatMessageCommand));
 
 
         [HttpGet("getAllChatMessageByWorkId")]
         public async Task<IActionResult> GetAllChatMessageByWorkId([FromQuery] GetAllChatMessageByTreatmentStageIdQuery getAllChatMessageByWorkIdQuery)
-        {
-            return HandleResult(await _mediator.Send(getAllChatMessageByWorkIdQuery));
-        }
+            => HandleResult(await _mediator.Send(getAllChatMessageByWorkIdQuery));
 
     }
 }

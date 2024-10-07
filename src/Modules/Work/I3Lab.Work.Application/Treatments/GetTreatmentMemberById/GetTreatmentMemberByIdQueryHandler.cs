@@ -10,9 +10,9 @@ namespace I3Lab.Treatments.Application.Treatments.GetTreatmentMembers
     {
         public async Task<Result<TreatmentMemberDto>> Handle(GetTreatmentMemberByIdQuery request, CancellationToken cancellationToken)
         {
-            var tretment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
+            var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
 
-            var treatmentMember = tretment.TreatmentMembers.FirstOrDefault(tm => tm.Member.Id == new MemberId(request.TreatmentMemberId));
+            var treatmentMember = treatment.TreatmentMembers.FirstOrDefault(tm => tm.Member.Id == new MemberId(request.TreatmentMemberId));
 
             if (treatmentMember == null)
                 return Result.Fail("Member not found");
