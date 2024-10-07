@@ -7,6 +7,7 @@ using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages.Errors;
 using I3Lab.Treatments.Domain.TreatmentStages.Events;
 using I3Lab.Treatments.Domain.TreatmentStages;
+using System.Data;
 
 namespace I3Lab.Treatments.Domain.TreatmentStages
 {
@@ -14,10 +15,8 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
     {
         public TreatmentId TreatmentId { get; private set; }
         public Member Creator { get; private set; }
-        //public Member Customer { get; private set; }
 
         public readonly List<TreatmentStageFile> TreatmentStageFiles = [];
-
         public TreatmentStageId Id { get; private set; }
         public TreatmentStageTitel Titel { get; private set; }
         public TreatmentStageFile TreatmentStageAvatarImage  { get; private set; }
@@ -71,16 +70,16 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
             AddDomainEvent(new WorkAvatarImageSetDomainEvent(workFile));
         }
 
-        //public Result AddCustomer(Member Customer, Member addedBy)
-        //{
+        public Result Close()
+        {
+            TreatmentStageStatus = TreatmentStageStatus.Closed;
 
-        //    this.Customer = Customer;
-        //    AddDomainEvent(new CustomerAddedDomainEvent(Customer));
+            AddDomainEvent(new TreatmentStageClosedDomainEvent(Id));
+            return Result.Ok();
+        }
 
-        //    return Result.Ok();
-        //}
 
-        public Result ChangeWorkStatus(TreatmentStageStatus newStatus)
+        public Result ChangeStatus(TreatmentStageStatus newStatus)
         {
             if (TreatmentStageStatus == newStatus)
                 return Result.Ok(); 

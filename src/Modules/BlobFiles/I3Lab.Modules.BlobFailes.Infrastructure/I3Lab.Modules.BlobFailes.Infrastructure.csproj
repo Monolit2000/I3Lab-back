@@ -29,4 +29,8 @@
     <ProjectReference Include="..\I3Lab.Modules.BlobFailes.Application\I3Lab.Modules.BlobFailes.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

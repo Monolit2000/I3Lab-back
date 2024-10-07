@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using FluentResults;
-using I3Lab.Clinics.Domain.Clnics;
+using I3Lab.Clinics.Domain.Clinics;
+using Microsoft.Extensions.Azure;
 
 namespace I3Lab.Clinics.Application.Clnics.GetAllClnics
 {

@@ -1,6 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.Clinics.Domain.Clinics;
-using I3Lab.Clinics.Domain.Clnics;
+using I3Lab.Clinics.Domain.Clinics;
 using MediatR;
 
 namespace I3Lab.Clinics.Application.Clnics.GetClnicById

@@ -40,6 +40,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
         {
             return await _context.Works
                 .Include(w => w.TreatmentStageFiles)
+                .Where(x => x.TreatmentId == id)
                 .ToListAsync();
         }
 

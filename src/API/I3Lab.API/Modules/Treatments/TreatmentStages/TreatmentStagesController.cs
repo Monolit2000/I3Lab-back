@@ -1,26 +1,25 @@
-﻿using I3Lab.API.Modules.Users;
+﻿using I3Lab.API.Modules.Base;
+using I3Lab.API.Modules.Users;
+using I3Lab.Treatments.Application.TreatmentStages.CloseTreatmentStage;
+using I3Lab.Treatments.Application.TreatmentStages.GetTreatmentStageByTreatmentId;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace I3Lab.API.Modules.Treatments.Work
 {
     [Route("api/treatmentStages")]
     [ApiController]
-    public class TreatmentStagesController : ControllerBase
+    public class TreatmentStagesController(
+        IMediator mediator) : BaseController
     {
-        private readonly IMediator _mediator;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger<TreatmentStagesController> _logger;
 
-        public TreatmentStagesController(
-            IMediator mediator,
-            IHttpContextAccessor httpContextAccessor,
-            ILogger<TreatmentStagesController> logger)
-        {
-            _mediator = mediator;
-            _httpContextAccessor = httpContextAccessor;
-            _logger = logger;
-        }
+        [HttpPost("closeTreatmentStage")]
+        public async Task<IActionResult> CloseTreatmentStage(CloseTreatmentStageCommand closeTreatmentStageCommand)
+            => HandleResult(await mediator.Send(closeTreatmentStageCommand));
 
+        [HttpGet("getTreatmentStageByTreatmentId")]
+        public async Task<IActionResult> GetTreatmentStageByTreatmentId([FromQuery] GetTreatmentStageByTreatmentIdQuery getTreatmentStageByTreatmentIdQuery)
+            => HandleResult(await mediator.Send(getTreatmentStageByTreatmentIdQuery));
     }
 }

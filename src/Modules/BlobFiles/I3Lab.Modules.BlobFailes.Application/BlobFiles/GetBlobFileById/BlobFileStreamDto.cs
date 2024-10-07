@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFile
+namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById
 {
     public class BlobFileStreamDto
     {

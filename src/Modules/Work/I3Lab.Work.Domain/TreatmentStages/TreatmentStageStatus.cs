@@ -8,6 +8,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
         public static TreatmentStageStatus Pending => new TreatmentStageStatus(nameof(Pending));
         public static TreatmentStageStatus Active => new TreatmentStageStatus(nameof(Active));
         public static TreatmentStageStatus Completed => new TreatmentStageStatus(nameof(Completed));
+        public static TreatmentStageStatus Closed => new TreatmentStageStatus(nameof(Closed));
 
         public string Value { get; }
 
@@ -30,5 +31,10 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
             return new TreatmentStageStatus(value);
         }
+
+        public bool IsActive => Value == nameof(Active);
+        public bool IsCompleted => Value == nameof(Completed);
+        public bool IsClosed => Value == nameof(Closed);
+        public bool IsPending => Value == nameof(Pending);
     }
 }

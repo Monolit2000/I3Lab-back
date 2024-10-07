@@ -9,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
+namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles
 {
-    public class BlobFileConfiguration : IEntityTypeConfiguration<TreatmentFile>
+    public class TreatmentFileConfiguration : IEntityTypeConfiguration<TreatmentFile>
     {
         public void Configure(EntityTypeBuilder<TreatmentFile> builder)
         {
+            builder.ToTable("TreatmentFiles");
+
             builder.HasKey(bf => bf.Id);
 
             builder.Property(bf => bf.TreatmentStageId).IsRequired();

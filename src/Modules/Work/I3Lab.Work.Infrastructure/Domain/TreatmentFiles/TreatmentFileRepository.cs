@@ -3,13 +3,13 @@ using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace I3Lab.Treatments.Infrastructure.Domain.BlobFiles
+namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles
 {
-    public class BlobFileRepository : IBlobFileRepository
+    public class TreatmentFileRepository : IBlobFileRepository
     {
         private readonly TreatmentContext _context;
 
-        public BlobFileRepository(TreatmentContext context, CancellationToken cancellationToken = default)
+        public TreatmentFileRepository(TreatmentContext context, CancellationToken cancellationToken = default)
         {
             _context = context;
         }

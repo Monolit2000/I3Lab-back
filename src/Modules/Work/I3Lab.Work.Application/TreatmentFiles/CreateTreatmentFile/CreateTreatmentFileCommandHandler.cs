@@ -3,7 +3,7 @@ using FluentResults;
 using I3Lab.Treatments.Domain.TreatmentFils;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
-using System.Linq.Expressions;
+using I3Lab.Treatments.Application.Configuration.Errors;
 
 namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
 {
@@ -17,10 +17,7 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
             var treatmentStage = await workRepository.GetByIdAsync(new TreatmentStageId(request.WorkId), cancellationToken);
 
             if (treatmentStage == null)
-                return Result.Fail("TreatmentStage not found");
-
-           
-
+                return Result.Fail(StatusCodeErrors.ResourceNotFound("TreatmentStage not found"));
 
             //Use TreatmentFile module
             var uploadFileResponce = await blobService.UploadAsync(request.Stream, request.ContentType);

@@ -1,4 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Domain;
+﻿using FluentResults;
+using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.Doctors;
 
 namespace I3Lab.Clinics.Domain.Clinics
@@ -8,9 +9,9 @@ namespace I3Lab.Clinics.Domain.Clinics
         public List<ClinicDoctor> ClinicDoctors = [];
 
         public ClinicId Id { get; private set; }
-        public ClinicName ClinicName { get; private set; }
-        public ClinicAddress Address { get; private set; }
         public ClinicStatus Status { get; set; }
+        public ClinicAddress Address { get; private set; }
+        public ClinicName ClinicName { get; private set; }
 
         public DateTime CreatedAt { get; private set; }
 
@@ -47,12 +48,13 @@ namespace I3Lab.Clinics.Domain.Clinics
             ClinicName = newName;
         }
 
-        public void AddDoctor(DoctorId doctorId)
+        public Result AddDoctor(DoctorId doctorId)
         {
             if (ClinicDoctors.Any(d => d.DoctorId == doctorId))
-                throw new InvalidOperationException("Doctor already exists in this clinic.");
+                return Result.Fail("Doctor already exists in this clinic.");
 
             ClinicDoctors.Add(ClinicDoctor.Create(this.Id, doctorId));
+            return Result.Ok(); 
         }
 
         public void RemoveDoctor(DoctorId doctorId)

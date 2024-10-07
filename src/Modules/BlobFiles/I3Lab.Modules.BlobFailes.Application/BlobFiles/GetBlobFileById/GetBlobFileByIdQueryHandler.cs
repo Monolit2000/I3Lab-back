@@ -3,13 +3,13 @@ using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles;
 using MediatR;
 
-namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFile
+namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById
 {
-    public class GetBlobFileQueryHandler(
+    public class GetBlobFileByIdQueryHandler(
         IBlobService blobService,
-        IBlobFileRepository blobFileRepository) : IRequestHandler<GetBlobFileQuery, Result<BlobFileStreamDto>>
+        IBlobFileRepository blobFileRepository) : IRequestHandler<GetBlobFileByIdQuery, Result<BlobFileStreamDto>>
     {
-        public async Task<Result<BlobFileStreamDto>> Handle(GetBlobFileQuery request, CancellationToken cancellationToken)
+        public async Task<Result<BlobFileStreamDto>> Handle(GetBlobFileByIdQuery request, CancellationToken cancellationToken)
         {
             var blobFile = await blobFileRepository.GetByIdAsync(new BlobFileId(request.BlobFileId));
 

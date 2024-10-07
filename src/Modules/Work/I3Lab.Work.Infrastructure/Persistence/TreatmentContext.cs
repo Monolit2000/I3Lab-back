@@ -10,18 +10,13 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 {
     public class TreatmentContext : DbContext
     {
-        public DbSet<TreatmentStageChat> WorkChats { get; set; }
-
-        public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
-
-        public DbSet<Treatments.Domain.TreatmentStages.TreatmentStage> Works { get; set; }
-
-        public DbSet<InternalCommand> InternalCommands { get; set; }
-
-        public DbSet<Member> Members { get; set; }
-
         public DbSet<TreatmentFile> BlobFiles { get; set; }
+        public DbSet<TreatmentStageChat> WorkChats { get; set; }
+        public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
+        public DbSet<InternalCommand> InternalCommands { get; set; }
+        public DbSet<Treatments.Domain.TreatmentStages.TreatmentStage> Works { get; set; }
+        public DbSet<Member> Members { get; set; }
 
         public TreatmentContext(DbContextOptions<TreatmentContext> options) : base(options)
         {
@@ -42,7 +37,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
             //modelBuilder.ApplyConfiguration(new WorkChatConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
+            //modelBuilder.ApplyConfiguration(new TreatmentFileConfiguration());
 
             //modelBuilder.ApplyConfiguration(new TreatmentStageFileConfiguration());
 

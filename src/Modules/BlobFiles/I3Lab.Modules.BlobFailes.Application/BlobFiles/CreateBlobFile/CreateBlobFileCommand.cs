@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFile;
+using I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById;
 
 namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
 {

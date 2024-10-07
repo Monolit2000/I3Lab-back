@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Clinics.Application.Conruct
+namespace I3Lab.Clinics.Application.Contruct
 {
     public interface IClinicModule
     {

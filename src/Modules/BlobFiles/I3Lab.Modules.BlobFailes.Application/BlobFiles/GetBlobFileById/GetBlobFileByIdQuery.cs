@@ -6,18 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFile
+namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById
 {
-    public class GetBlobFileQuery : IRequest<Result<BlobFileStreamDto>>
+    public class GetBlobFileByIdQuery : IRequest<Result<BlobFileStreamDto>>
     {
         public Guid BlobFileId { get; set; }
 
-        public GetBlobFileQuery()
+        public GetBlobFileByIdQuery()
         {
 
         }
       
-        public GetBlobFileQuery(Guid blobFileId)
+        public GetBlobFileByIdQuery(Guid blobFileId)
         {
             BlobFileId = blobFileId;
         }

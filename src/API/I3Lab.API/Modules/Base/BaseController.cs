@@ -87,7 +87,7 @@ namespace I3Lab.API.Modules.Base
 //            {
 //                return BadRequest(result.Reasons);
 //            }
-//            return Ok(result.Value);
+//            return Ok(result.FullAddress);
 //        }
 
 //        protected ActionResult HandleResult(Result result)
@@ -106,7 +106,7 @@ namespace I3Lab.API.Modules.Base
 //                return BadRequest(result.Reasons.Select(r => r.Message));
 //            }
 
-//            return Ok(result.Value);
+//            return Ok(result.FullAddress);
 //        }
 //    }
 //}

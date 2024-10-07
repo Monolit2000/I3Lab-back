@@ -9,7 +9,7 @@ namespace I3Lab.Administration.Domain.DoctorCreationProposals
     public interface IDoctorCreationProposalRepository
     {
         Task<DoctorCreationProposal?> GetByIdAsync(DoctorCreationProposalId id);
-
+        Task<bool> ExistByName(DoctorName doctorName);
         Task AddAsync(DoctorCreationProposal proposal);
 
         Task UpdateAsync(DoctorCreationProposal proposal);

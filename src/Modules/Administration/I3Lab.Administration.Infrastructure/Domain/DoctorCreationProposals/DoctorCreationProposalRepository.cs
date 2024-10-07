@@ -1,5 +1,6 @@
 ﻿using I3Lab.Administration.Domain.DoctorCreationProposals;
 using I3Lab.Administration.Infrastructure.Persistence;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace I3Lab.Administration.Infrastructure.Domain.DoctorCreationProposals
@@ -17,6 +18,12 @@ namespace I3Lab.Administration.Infrastructure.Domain.DoctorCreationProposals
         {
             return await _context.DoctorCreationProposals
                 .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+
+        public async Task<bool> ExistByName(DoctorName doctorName)
+        {
+            return await _context.DoctorCreationProposals.AnyAsync(d => d.Name == doctorName);
         }
 
         public async Task AddAsync(DoctorCreationProposal proposal)

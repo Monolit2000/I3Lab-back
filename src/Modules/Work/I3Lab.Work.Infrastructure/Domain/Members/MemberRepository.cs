@@ -1,11 +1,6 @@
 ﻿using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.Members
 {
@@ -18,61 +13,52 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-
-        public async Task<List<Member>> GetAllAsync()
+        public async Task<List<Member>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            var members = await _context.Members.ToListAsync();
-
-            return members;
+            return await _context.Members.ToListAsync(cancellationToken);
         }
 
-        public async Task<Member> GetMemberByIdAsync(MemberId id)
+        public async Task<Member> GetMemberByIdAsync(MemberId id, CancellationToken cancellationToken = default)
         {
-            var member = await _context.Members
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            return member;
+            return await _context.Members
+                .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
         }
 
-        public async Task<Member> GetByEmailAsync(string email)
+        public async Task<Member> GetByEmailAsync(string email, CancellationToken cancellationToken = default)
         {
-            var member = await _context.Members.FirstOrDefaultAsync(m => m.Email == email);
-
-            return member;
+            return await _context.Members.FirstOrDefaultAsync(m => m.Email == email, cancellationToken);
         }
 
-
-        public async Task<bool> IsEmailTakenAsync(string email)
+        public async Task<bool> IsEmailTakenAsync(string email, CancellationToken cancellationToken = default)
         {
-            return await _context.Members.AnyAsync(m => m.Email == email);
+            return await _context.Members.AnyAsync(m => m.Email == email, cancellationToken);
         }
 
-        public async Task AddAsync(Member member)
+        public async Task AddAsync(Member member, CancellationToken cancellationToken = default)
         {
-            await _context.Members.AddAsync(member);
-            await _context.SaveChangesAsync();
+            await _context.Members.AddAsync(member, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task UpdateAsync(Member member)
+        public async Task UpdateAsync(Member member, CancellationToken cancellationToken = default)
         {
             _context.Members.Update(member);
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task DeleteAsync(MemberId id)
+        public async Task DeleteAsync(MemberId id, CancellationToken cancellationToken = default)
         {
-            var member = await GetMemberByIdAsync(id);
+            var member = await GetMemberByIdAsync(id, cancellationToken);
             if (member != null)
             {
                 _context.Members.Remove(member);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
 
-        public async Task SaveChangesAsync()
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }
-

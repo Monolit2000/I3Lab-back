@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     [DbContext(typeof(TreatmentContext))]
-    [Migration("20241006035308_newMigration")]
-    partial class newMigration
+    [Migration("20241006211628_sdfsdfsfdf")]
+    partial class sdfsdfsfdf
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,7 +98,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.HasIndex("TreatmentId")
                         .IsUnique();
 
-                    b.ToTable("BlobFiles", "treatment");
+                    b.ToTable("TreatmentFiles", "treatment");
                 });
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInvite", b =>
@@ -233,7 +233,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("BlobFiles", "treatment");
+                            b1.ToTable("TreatmentFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentFileId");
@@ -255,7 +255,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("BlobFiles", "treatment");
+                            b1.ToTable("TreatmentFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentFileId");
@@ -273,7 +273,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("BlobFiles", "treatment");
+                            b1.ToTable("TreatmentFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentFileId");
@@ -291,7 +291,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("BlobFiles", "treatment");
+                            b1.ToTable("TreatmentFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentFileId");
@@ -308,7 +308,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                             b1.HasKey("TreatmentFileId");
 
-                            b1.ToTable("BlobFiles", "treatment");
+                            b1.ToTable("TreatmentFiles", "treatment");
 
                             b1.WithOwner()
                                 .HasForeignKey("TreatmentFileId");

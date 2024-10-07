@@ -1,6 +1,6 @@
 ﻿using I3Lab.Clinics.Domain.Clinics;
 
-namespace I3Lab.Clinics.Domain.Clnics
+namespace I3Lab.Clinics.Domain.Clinics
 {
     public interface IClinicRepository
     {
@@ -14,6 +14,6 @@ namespace I3Lab.Clinics.Domain.Clnics
 
         Task DeleteAsync(Clinic doctor);
 
-
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

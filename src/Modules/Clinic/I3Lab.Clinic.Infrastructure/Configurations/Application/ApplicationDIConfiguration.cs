@@ -1,5 +1,5 @@
-﻿using I3Lab.Clinics.Application.Conruct;
-using I3Lab.Clinics.Domain.Clnics;
+﻿using I3Lab.Clinics.Application.Contruct;
+using I3Lab.Clinics.Domain.Clinics;
 using I3Lab.Clinics.Infrastructure.Domain.Clinics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

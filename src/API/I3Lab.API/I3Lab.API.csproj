@@ -34,6 +34,7 @@
     <ProjectReference Include="..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Administration\I3Lab.Administration.Application\I3Lab.Administration.Application.csproj" />
     <ProjectReference Include="..\..\Modules\Administration\I3Lab.Administration.Infrastructure\I3Lab.Administration.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\BlobFiles\I3Lab.Modules.BlobFailes.Infrastructure\I3Lab.Modules.BlobFailes.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Clinic\I3Lab.Clinic.Application\I3Lab.Clinics.Application.csproj" />
     <ProjectReference Include="..\..\Modules\Clinic\I3Lab.Clinic.Infrastructure\I3Lab.Clinics.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Doctor\I3Lab.Doctor.Infrastructure\I3Lab.Doctors.Infrastructure.csproj" />

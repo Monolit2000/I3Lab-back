@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class newMigration : Migration
+    public partial class sdfsdfsfdf : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -139,7 +139,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlobFiles",
+                name: "TreatmentFiles",
                 schema: "treatment",
                 columns: table => new
                 {
@@ -158,9 +158,9 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BlobFiles", x => x.Id);
+                    table.PrimaryKey("PK_TreatmentFiles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BlobFiles_Treatments_TreatmentId",
+                        name: "FK_TreatmentFiles_Treatments_TreatmentId",
                         column: x => x.TreatmentId,
                         principalSchema: "treatment",
                         principalTable: "Treatments",
@@ -253,10 +253,10 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_TreatmentStageFile", x => x.TreatmentStageId);
                     table.ForeignKey(
-                        name: "FK_TreatmentStageFile_BlobFiles_FileId",
+                        name: "FK_TreatmentStageFile_TreatmentFiles_FileId",
                         column: x => x.FileId,
                         principalSchema: "treatment",
-                        principalTable: "BlobFiles",
+                        principalTable: "TreatmentFiles",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TreatmentStageFile_TreatmentStage_TreatmentStageId",
@@ -292,16 +292,16 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_WorkChatMessages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_WorkChatMessages_BlobFiles_FileResponceIdId",
-                        column: x => x.FileResponceIdId,
-                        principalSchema: "treatment",
-                        principalTable: "BlobFiles",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_WorkChatMessages_Members_SenderId",
                         column: x => x.SenderId,
                         principalSchema: "treatment",
                         principalTable: "Members",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_WorkChatMessages_TreatmentFiles_FileResponceIdId",
+                        column: x => x.FileResponceIdId,
+                        principalSchema: "treatment",
+                        principalTable: "TreatmentFiles",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_WorkChatMessages_TreatmentStageChats_WorkChatId",
@@ -313,17 +313,17 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlobFiles_TreatmentId",
-                schema: "treatment",
-                table: "BlobFiles",
-                column: "TreatmentId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ChatMembers_TreatmentStageChatId",
                 schema: "treatment",
                 table: "ChatMembers",
                 column: "TreatmentStageChatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreatmentFiles_TreatmentId",
+                schema: "treatment",
+                table: "TreatmentFiles",
+                column: "TreatmentId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TreatmentInvites_InviterId",
@@ -437,7 +437,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 schema: "treatment");
 
             migrationBuilder.DropTable(
-                name: "BlobFiles",
+                name: "TreatmentFiles",
                 schema: "treatment");
 
             migrationBuilder.DropTable(

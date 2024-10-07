@@ -8,6 +8,7 @@ namespace I3Lab.Modules.BlobFailes.Infrastructure.Domain.BlobFiles
     {
         public void Configure(EntityTypeBuilder<BlobFile> builder)
         {
+            builder.ToTable("BlobFiles");
 
             builder.HasKey(bf => bf.Id);
 

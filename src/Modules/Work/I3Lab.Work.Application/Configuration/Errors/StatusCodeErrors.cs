@@ -4,9 +4,6 @@ namespace I3Lab.Treatments.Application.Configuration.Errors
 {
     public static class StatusCodeErrors
     {
-        public static IError ResourceNotFound => new Error("ResourceNotFound")
-         .WithMetadata("StatusCode", 404);
-
         public static IError Unauthorized => new Error("Unauthorized")
             .WithMetadata("StatusCode", 401);
 
@@ -21,6 +18,8 @@ namespace I3Lab.Treatments.Application.Configuration.Errors
 
         public static IError NotUnique(string message) => new Error(message)
             .WithMetadata("StatusCode", 409);
+        public static IError ResourceNotFound(string message = "ResourceNotFound") => new Error(message)
+         .WithMetadata("StatusCode", 404);
 
     }
 }

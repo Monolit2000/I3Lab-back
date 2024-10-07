@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediatR;
 using FluentResults;
-using I3Lab.Clinics.Domain.Clnics;
+using I3Lab.Clinics.Domain.Clinics;
 
 namespace I3Lab.Clinics.Application.Clnics.CreateClnic
 {

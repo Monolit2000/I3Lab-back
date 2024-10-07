@@ -16,6 +16,8 @@ namespace I3Lab.Modules.BlobFailes.Infrastructure.Persistence
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.HasDefaultSchema("blobFile");
+
             modelBuilder.ApplyConfiguration(new BlobFileConfiguration());
 
         }

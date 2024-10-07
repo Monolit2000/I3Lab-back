@@ -11,12 +11,12 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
 
         public Stream Stream { get; set; }
 
-        public CreateTreatmentFileCommand(
-            Guid workId,
-            string fileName)
-        {
-            FileName = fileName;
-            WorkId = workId;
-        }
+        //public CreateTreatmentFileCommand(
+        //    Guid workId,
+        //    string fileName)
+        //{
+        //    FileName = fileName;
+        //    WorkId = workId;
+        //}
     }
 }

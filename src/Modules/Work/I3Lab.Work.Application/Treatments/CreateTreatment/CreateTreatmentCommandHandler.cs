@@ -2,9 +2,8 @@
 using FluentResults;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 using I3Lab.Treatments.Application.Configuration.Errors;
-
+using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {

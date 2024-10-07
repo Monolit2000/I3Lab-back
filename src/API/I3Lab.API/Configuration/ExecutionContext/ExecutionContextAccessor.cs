@@ -34,10 +34,10 @@ namespace I3Lab.API.Configuration.ExecutionContext
                 //    .User?
                 //    .Claims?
                 //    .SingleOrDefault(x => x.Type == "sub")?
-                //    .Value != null)
+                //    .FullAddress != null)
                 //{
                 //    return Guid.Parse(_httpContextAccessor.HttpContext.User.Claims.Single(
-                //        x => x.Type == "sub").Value);
+                //        x => x.Type == "sub").FullAddress);
                 //}
 
                 throw new ApplicationException("User context is not available");

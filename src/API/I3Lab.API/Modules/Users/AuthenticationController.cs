@@ -35,7 +35,7 @@ namespace I3Lab.API.Modules.Users
         //public async Task<IActionResult> Test( )
         //{
 
-        //    var test = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+        //    var test = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.FullAddress;
         //    return Ok(test);
         //}
 
@@ -48,7 +48,7 @@ namespace I3Lab.API.Modules.Users
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginCommand loginCommand)
         {
-            //_httpContext.Response.Cookies.Append("token", responce.Value.Token);
+            //_httpContext.Response.Cookies.Append("token", responce.FullAddress.Token);
             return HandleResult(await _mediator.Send(loginCommand));
         }
 

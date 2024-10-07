@@ -9,7 +9,7 @@ namespace I3Lab.Modules.BlobFailes.Infrastructure.Startup
 {
     public static class BlobFileModuleStartup
     {
-        public static IServiceCollection AddWorkModule(
+        public static IServiceCollection AddBlobFileModule(
       this IServiceCollection services, IConfiguration configuration)
         {
 

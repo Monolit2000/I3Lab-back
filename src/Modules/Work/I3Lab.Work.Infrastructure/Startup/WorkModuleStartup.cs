@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using I3Lab.BuildingBlocks.Infrastructure.Domain;
 using I3Lab.Treatments.Infrastructure.Domain.Members;
-using I3Lab.Treatments.Infrastructure.Domain.BlobFiles;
+using I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles;
 using I3Lab.Treatments.Infrastructure.Domain.Treatments;
 using I3Lab.Treatments.Infrastructure.Configurations.EventBus;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;

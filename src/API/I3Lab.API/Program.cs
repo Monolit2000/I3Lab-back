@@ -15,6 +15,8 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;
 using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
+using I3Lab.Modules.BlobFailes.Infrastructure.Startup;
+using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,7 +78,8 @@ builder.Services
     .AddWorkModule(builder.Configuration)
     .AddDoctorModule(builder.Configuration)
     .AddAdministrationModule(builder.Configuration)
-    .AddClinicModule(builder.Configuration);
+    .AddClinicModule(builder.Configuration)
+    .AddBlobFileModule(builder.Configuration);
 
 builder.Services.AddMassTransitInMemoryEventBus(builder.Configuration);
 
@@ -94,11 +97,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 
     app.ClearDbContextMigrations();
-   
+
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();
     app.ApplyDoctorContextMigrations();
     app.ApplyClinicContextMigrations();
+
+    app.ApplyBlobFaileContextMigrations();
 }
 
 app.UseHttpsRedirection();
