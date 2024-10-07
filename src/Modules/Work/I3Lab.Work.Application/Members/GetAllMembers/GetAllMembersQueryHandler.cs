@@ -13,7 +13,6 @@ namespace I3Lab.Treatments.Application.Members.GetAllMembers
     {
         public async Task<List<MemberDto>> Handle(GetAllMembersQuery request, CancellationToken cancellationToken)
         {
-
             var members = await memberRepository.GetAllAsync();
 
             var membersDto = members.Select(x => new MemberDto

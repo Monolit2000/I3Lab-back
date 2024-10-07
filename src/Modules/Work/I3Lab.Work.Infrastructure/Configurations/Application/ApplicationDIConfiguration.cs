@@ -46,7 +46,7 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Application
             services.AddScoped<IMemberContext, MemberContext>();
 
             services.AddScoped<IMemberRepository, MemberRepository>();
-            services.Decorate<IMemberRepository, CacheMemberRepository>();
+            //services.Decorate<IMemberRepository, CacheMemberRepository>();
 
             services.AddScoped<IBlobFileRepository, TreatmentFileRepository>();
             services.AddScoped<ITreatmentRepository, TretmentRepository>();

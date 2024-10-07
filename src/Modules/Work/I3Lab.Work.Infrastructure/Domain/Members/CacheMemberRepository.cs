@@ -1,5 +1,4 @@
 ﻿using I3Lab.BuildingBlocks.Application.Cache;
-using I3Lab.Treatments.Application.Contract.Repositorys;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Infrastructure.Configurations.CaheKeys.Members;
 using Microsoft.Extensions.Caching.Memory;

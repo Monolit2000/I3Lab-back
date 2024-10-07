@@ -1,4 +1,5 @@
 ﻿using FluentResults;
+using I3Lab.Treatments.Application.Configuration.CaheKeys.Members;
 using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Treatments.Application.Contract;
 
@@ -10,7 +11,7 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
 
         public Guid UserId { get; }
 
-        public string CacheKey => "AllMembers";
+        public string CacheKey => MembersCaheKeys.Members;
 
         public CreateMemberCommand(
            Guid userId, string email)
