@@ -13,7 +13,7 @@ namespace I3Lab.Clinics.Domain.Doctors
         public DateTime ClincAddedAt {  get; set; }
 
         private ClinicDoctor() { } //For Ef Core
-        public ClinicDoctor(ClinicId clinicId, DoctorId doctorId)
+        public ClinicDoctor(DoctorId doctorId, ClinicId clinicId)
         {
             ClinicId = clinicId;
             DoctorId = doctorId;
@@ -21,12 +21,12 @@ namespace I3Lab.Clinics.Domain.Doctors
         }
 
         public static ClinicDoctor Create(
-            ClinicId clinicId,
-            DoctorId doctorId)
+            DoctorId doctorId,
+            ClinicId clinicId)
         {
             return new ClinicDoctor(
-                clinicId,
-                doctorId);
+                doctorId,
+                clinicId);
         }
     }
 }

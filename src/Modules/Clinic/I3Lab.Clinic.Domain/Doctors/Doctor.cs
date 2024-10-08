@@ -2,12 +2,13 @@
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.Clinics;
 using I3Lab.Clinics.Domain.Doctors.Events;
+using I3Lab.Clinics.Domain.Doctors;
 
 namespace I3Lab.Clinics.Domain.Doctors
 {
     public class Doctor : Entity, IAggregateRoot
     {
-        public readonly List<CliniacDoctor> Clinics = [];
+        public readonly List<ClinicDoctor> Clinics = [];
 
         public DoctorId Id { get; private set; }
         public DoctorName Name { get; private set; }
@@ -49,11 +50,10 @@ namespace I3Lab.Clinics.Domain.Doctors
             if (clinic == null)
                 return Result.Fail("Clinic cannot be null.");
 
-            if (Clinics.Any(c => c.Id == clinic.Id))
+            if (Clinics.Any(c => c.ClinicId == clinic.Id))
                 return Result.Fail("Clinic is already associated with this doctor.");
 
-            Clinics.Add(clinic);
-            // Optionally add domain event
+            Clinics.Add(ClinicDoctor.Create(this.Id, clinic.Id));
             // AddDomainEvent(new ClinicAddedToDoctorDomainEvent(this.Id, clinic.Id));
             return Result.Ok();
 
