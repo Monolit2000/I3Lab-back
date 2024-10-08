@@ -7,7 +7,7 @@ using Asp.Versioning;
 
 namespace I3Lab.API.Modules.Users
 {
-    
+    [ApiController]
     [Route("api/v{apiVersion:apiVersion}/authentication")]
     [ApiVersion(1)]
     [ApiVersion(2)]

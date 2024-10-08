@@ -9,9 +9,8 @@ namespace I3Lab.Doctors.Domain.Clinics
         public ClinicName ClinicName { get; private set; }
         public ClinicAddress Address { get; private set; }
 
-        private readonly List<Doctor> _doctors = [];
-        public IReadOnlyCollection<Doctor> Doctors => _doctors.AsReadOnly();
-
+        private readonly List<Doctor> Doctors = [];
+        
         public DateTime CreatedAt { get; private set; }
         public static Clinic Create(
             ClinicName clinicName,
@@ -53,19 +52,19 @@ namespace I3Lab.Doctors.Domain.Clinics
 
         public void AddDoctor(Doctor doctor)
         {
-            if (_doctors.Any(d => d.Id == doctor.Id))
+            if (Doctors.Any(d => d.Id == doctor.Id))
                 throw new InvalidOperationException("Doctor already exists in this clinic.");
 
-            _doctors.Add(doctor);
+            Doctors.Add(doctor);
         }
 
         public void RemoveDoctor(DoctorId doctorId)
         {
-            var doctor = _doctors.FirstOrDefault(d => d.Id == doctorId);
+            var doctor = Doctors.FirstOrDefault(d => d.Id == doctorId);
             if (doctor == null)
                 throw new InvalidOperationException("Doctor does not exist in this clinic.");
 
-            _doctors.Remove(doctor);
+            Doctors.Remove(doctor);
         }
     }
 }

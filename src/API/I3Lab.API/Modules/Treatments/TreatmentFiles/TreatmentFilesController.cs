@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
-using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFile;
 using I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile;
 using I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByWorkId;
@@ -10,24 +9,9 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 {
     [Route("api/v{apiVersion:apiVersion}/treatmentFiles")]
     [ApiController]
-    public class TreatmentFilesController : BaseController
+    public class TreatmentFilesController(
+        IMediator mediator) : BaseController
     {
-        private readonly IMediator _mediator;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ILogger<TreatmentFilesController> _logger;
-        private readonly IBlobService _blobService;
-
-        public TreatmentFilesController(
-            IMediator mediator,
-            IHttpContextAccessor httpContextAccessor,
-            ILogger<TreatmentFilesController> logger,
-            IBlobService blobService)
-        {
-            _mediator = mediator;
-            _httpContextAccessor = httpContextAccessor;
-            _logger = logger;
-            _blobService = blobService;
-        }
 
         [HttpPost("uploadWorkFile")]
         public async Task<IActionResult> UploadTreatmentFile(IFormFile formFile, UploadWorkFileRequest uploadWorkFileRequest)
@@ -36,7 +20,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 
             var file = stream;
 
-            return HandleResult(await _mediator.Send(new CreateTreatmentFileCommand 
+            return HandleResult(await mediator.Send(new CreateTreatmentFileCommand 
             { 
                 WorkId = uploadWorkFileRequest.WorkId,
                 FileName = uploadWorkFileRequest.FileName, 
@@ -48,7 +32,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
         [HttpGet("downloadWorkFile")]
         public async Task<IResult> DownloadTreatmentFile(GetTreatmentFileStreamQuerie getBlobFileStreamQuerie)
         {
-            var fileResponce = await _mediator.Send(getBlobFileStreamQuerie);
+            var fileResponce = await mediator.Send(getBlobFileStreamQuerie);
 
             if (fileResponce.IsFailed)
                 return Results.Empty;
@@ -60,7 +44,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
         [HttpGet("downloadWithDeatelsWorkFile")]
         public async Task<IActionResult> DownloadWithDeatelsTreatmentFile(GetTreatmentFileStreamQuerie getBlobFileStreamQuerie)
         {
-            var filrResponce = await _mediator.Send(getBlobFileStreamQuerie);
+            var filrResponce = await mediator.Send(getBlobFileStreamQuerie);
 
             if (filrResponce.IsFailed)
                 return HandleResult(filrResponce);
@@ -71,7 +55,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 
         [HttpGet("getAllBlobFilesByWorkId")]
         public async Task<IActionResult> GetAllTreatmentFilesByTreatmentId(GetAllBlobFilesByTreatmentStageIdCommand getAllBlobFilesByWorkIdCommand) 
-            => HandleResult(await _mediator.Send(getAllBlobFilesByWorkIdCommand));
+            => HandleResult(await mediator.Send(getAllBlobFilesByWorkIdCommand));
 
     }
 }
