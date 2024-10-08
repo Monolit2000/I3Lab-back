@@ -10,6 +10,8 @@ namespace I3Lab.Clinics.Domain.Clinics
 
         public DateTime AddedAt { get; set; }
 
+        public DateTime? RemovedAt { get; set; }     
+
         private ClinicDoctor() { } // For EF Core
             
         public ClinicDoctor(ClinicId clinicId, DoctorId doctorId)

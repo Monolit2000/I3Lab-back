@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MassTransit;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using I3Lab.Clinics.Application.Contruct;   
 
 namespace I3Lab.Clinics.Infrastructure.Configurations.EventBus
 {
-    internal class EventBusDIConfiguration
+    public static class EventBusDIConfiguration
     {
+        public static IServiceCollection AddMassTransitEventBus(
+            this IServiceCollection service, IConfiguration configuration)
+        {
+            service.AddMassTransit(busConfiguration
+                => busConfiguration.AddConsumers(typeof(IClinicModule).Assembly));
+
+            return service;
+        }
     }
 }
