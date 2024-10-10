@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Domain.TreatmentFils
+namespace I3Lab.Treatments.Domain.TreatmentFiles
 {
     public class ContentType : ValueObject
     {

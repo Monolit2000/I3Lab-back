@@ -1,10 +1,5 @@
-﻿using I3Lab.BuildingBlocks.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
+using I3Lab.BuildingBlocks.Infrastructure;
 using I3Lab.Modules.BlobFailes.Application.Contract;
 
 namespace I3Lab.Modules.BlobFailes.Infrastructure.Processing

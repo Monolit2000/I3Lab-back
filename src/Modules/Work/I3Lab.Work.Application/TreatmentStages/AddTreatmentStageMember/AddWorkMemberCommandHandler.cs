@@ -23,15 +23,15 @@ namespace I3Lab.Treatments.Application.Works.AddWorkMember
     //            return Result.Fail("TreatmentStage not found");
 
     //        var addWorkMemberResult = work.AddWorkMember(
-    //            new MemberId(request.MemberId), 
-    //            new MemberId(request.AddedByMemberId));
+    //            new SenderId(request.SenderId), 
+    //            new SenderId(request.AddedByMemberId));
 
     //        if (addWorkMemberResult.IsFailed)
     //            return addWorkMemberResult;
 
     //        await workRepository.SaveChangesAsync();
 
-    //        return new WorkMemberDto(work.Id.Value, request.MemberId);
+    //        return new WorkMemberDto(work.Id.Value, request.SenderId);
     //    }
     //}
 }

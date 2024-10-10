@@ -1,6 +1,6 @@
 ﻿using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Treatments.Application.Contract;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.Treatments;
@@ -48,7 +48,7 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Application
             services.AddScoped<IMemberRepository, MemberRepository>();
             //services.Decorate<IMemberRepository, CacheMemberRepository>();
 
-            services.AddScoped<IBlobFileRepository, TreatmentFileRepository>();
+            services.AddScoped<ITreatmentFileRepository, TreatmentFileRepository>();
             services.AddScoped<ITreatmentRepository, TretmentRepository>();
             services.AddScoped<ITreatmentStageRepository, TreatmentStageRepository>();
             services.AddScoped<ITreatmentInviteRepository, TreatmentInviteRepository>();

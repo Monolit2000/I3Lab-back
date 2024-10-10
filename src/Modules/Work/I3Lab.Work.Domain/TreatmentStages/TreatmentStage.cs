@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages.Errors;

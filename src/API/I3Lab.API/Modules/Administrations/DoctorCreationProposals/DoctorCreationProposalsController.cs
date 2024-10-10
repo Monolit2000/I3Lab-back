@@ -30,7 +30,7 @@ namespace I3Lab.API.Modules.Administrations.DoctorCreationProposals
             return HandleResult(await _mediator.Send(getAllDoctorCreationProposalsQuery));
         }
 
-        [HttpPost("confirmDoctorCreationProposal")]
+        [HttpPut("confirmDoctorCreationProposal")]
         public async Task<IActionResult> ConfirmDoctorCreationProposal(ConfirmDoctorCreationProposCommand confirmDoctorCreationProposalCommand)
         {
             return HandleResult(await _mediator.Send(confirmDoctorCreationProposalCommand));

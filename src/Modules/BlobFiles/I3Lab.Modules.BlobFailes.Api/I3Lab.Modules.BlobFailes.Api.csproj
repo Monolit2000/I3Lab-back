@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\I3Lab.Modules.BlobFailes.Application\I3Lab.Modules.BlobFailes.Application.csproj" />
+  </ItemGroup>
+
 </Project>

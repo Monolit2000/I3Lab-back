@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
@@ -11,7 +11,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
     public class TreatmentContext : DbContext
     {
         public DbSet<Treatment> Treatments { get; set; }
-        public DbSet<TreatmentFile> BlobFiles { get; set; }
+        public DbSet<TreatmentFile> TreatmentFiles { get; set; }
         public DbSet<TreatmentStageChat> WorkChats { get; set; }
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<InternalCommand> InternalCommands { get; set; }

@@ -23,8 +23,6 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\I3Lab.Work.Application\I3Lab.Works.Application.csproj" />
-  </ItemGroup>
+
 
 </Project>

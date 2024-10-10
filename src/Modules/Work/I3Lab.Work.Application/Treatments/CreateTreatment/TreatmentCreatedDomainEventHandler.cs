@@ -6,12 +6,11 @@ using MediatR;
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
     public class TreatmentCreatedDomainEventHandler(
-        ICommandsScheduler commandsScheduler,
-        ISender sender) : INotificationHandler<TreatmentCreatedDomainEvent>
+        ISender sender, 
+        ICommandsScheduler commandsScheduler) : INotificationHandler<TreatmentCreatedDomainEvent>
     {
         public async Task Handle(TreatmentCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-
             await commandsScheduler.EnqueueAsync(new CreateWorksCommand(
                 notification.TreatmentId,
                 notification.CreatorId));

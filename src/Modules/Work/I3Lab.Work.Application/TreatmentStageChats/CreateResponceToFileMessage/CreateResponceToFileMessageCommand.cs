@@ -13,6 +13,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreateResponceToFileM
     {
         public Guid WorkId { get; set; }
         public Guid MemberId { get; set; }
+        public Guid FileId { get; set; }    
         public string Message { get; set; }
 
         public CreateResponceToFileMessageCommand(

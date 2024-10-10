@@ -1,7 +1,7 @@
-﻿using FluentResults;
-using I3Lab.BuildingBlocks.Application.BlobStorage;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles;
-using MediatR;
+using I3Lab.BuildingBlocks.Application.BlobStorage;
 
 namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById
 {

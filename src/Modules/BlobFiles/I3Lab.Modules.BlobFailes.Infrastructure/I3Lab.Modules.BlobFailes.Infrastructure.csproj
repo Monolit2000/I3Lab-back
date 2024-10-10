@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\I3Lab.Modules.BlobFailes.Api\I3Lab.Modules.BlobFailes.Api.csproj" />
     <ProjectReference Include="..\I3Lab.Modules.BlobFailes.Application\I3Lab.Modules.BlobFailes.Application.csproj" />
   </ItemGroup>
 

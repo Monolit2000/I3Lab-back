@@ -1,5 +1,5 @@
 ﻿using FluentResults;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByType
 {
     public class GetTreatmentFilesByTypeQueryHandler(
-        IBlobFileRepository blobFileRepository) : IRequestHandler<GetTreatmentFilesByTypeQuery, Result<TreatmentFilesDto>>
+        ITreatmentFileRepository blobFileRepository) : IRequestHandler<GetTreatmentFilesByTypeQuery, Result<TreatmentFilesDto>>
     {
         public async Task<Result<TreatmentFilesDto>> Handle(GetTreatmentFilesByTypeQuery request, CancellationToken cancellationToken)
         {

@@ -1,22 +1,22 @@
 ﻿using FluentResults;
+using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.RemoveBlobFile
 {
     public class RemoveBlobFileCommandHandler(
+        IBlobService blobService,
         IBlobFileRepository blobFileRepository) : IRequestHandler<RemoveBlobFileCommand, Result>
     {
         public async Task<Result> Handle(RemoveBlobFileCommand request, CancellationToken cancellationToken)
         {
-            await blobFileRepository.DeleteAsync(new BlobFileId(request.BlobFileId));
+            await blobService.DeleteAsync(request.BlobFileId, cancellationToken);
 
-            await blobFileRepository.SaveChangesAsync();
+            await blobFileRepository.DeleteAsync(new BlobFileId(request.BlobFileId), cancellationToken);
+
+            await blobFileRepository.SaveChangesAsync(cancellationToken);
 
             return Result.Ok();
         }

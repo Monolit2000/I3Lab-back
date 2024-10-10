@@ -1,10 +1,10 @@
-﻿using I3Lab.Treatments.Domain.TreatmentFils;
+﻿using I3Lab.Treatments.Domain.TreatmentFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using File = I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile;
+using File = I3Lab.Treatments.Domain.TreatmentFiles.TreatmentFile;
 
 namespace I3Lab.Treatments.Domain.WorkDirectorys
 {

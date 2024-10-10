@@ -1,6 +1,6 @@
 ﻿using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.Treatments;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Treatments.Application.Contract;

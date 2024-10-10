@@ -1,7 +1,7 @@
 ﻿//using FluentResults;
 //using System.Text.RegularExpressions;
 
-//namespace I3Lab.Treatments.Domain.TreatmentFils
+//namespace I3Lab.Treatments.Domain.TreatmentFiles
 //{
 //    public class BlobFileUrl
 //    {
@@ -53,7 +53,7 @@
 
 
 
-namespace I3Lab.Treatments.Domain.TreatmentFils
+namespace I3Lab.Treatments.Domain.TreatmentFiles
 {
     public class BlobFileUrl
     {

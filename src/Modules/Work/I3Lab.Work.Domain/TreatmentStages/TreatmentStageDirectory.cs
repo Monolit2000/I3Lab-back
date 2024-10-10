@@ -1,5 +1,5 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using TreatmentFile = I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile;
+using TreatmentFile = I3Lab.Treatments.Domain.TreatmentFiles.TreatmentFile;
 
 namespace I3Lab.Treatments.Domain.TreatmentStages
 {

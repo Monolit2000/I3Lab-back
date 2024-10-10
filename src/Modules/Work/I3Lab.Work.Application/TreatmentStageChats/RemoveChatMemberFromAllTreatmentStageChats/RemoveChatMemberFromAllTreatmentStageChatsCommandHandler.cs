@@ -32,5 +32,5 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMemberWithA
 //{
 //    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.Id, cancellationToken);
 
-//    treatmentStageChat.RemoveChatMember(request.MemberId);
+//    treatmentStageChat.RemoveChatMember(request.SenderId);
 //});

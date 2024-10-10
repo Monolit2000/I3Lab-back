@@ -10,7 +10,7 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFile
 {
     public class GetTreatmentFileStreamQuerie : IRequest<Result<TreatmentFileDto>>
     {
-        public Guid BlobFileId { get; set; }
+        public Guid TreatmentFileId { get; set; }
 
 
         public GetTreatmentFileStreamQuerie()
@@ -20,7 +20,7 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFile
 
         public GetTreatmentFileStreamQuerie(Guid blobFileId)
         {
-            BlobFileId = blobFileId;
+            TreatmentFileId = blobFileId;
         }
 
     }

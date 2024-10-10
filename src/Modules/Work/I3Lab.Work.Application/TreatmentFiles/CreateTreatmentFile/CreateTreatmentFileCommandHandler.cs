@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using FluentResults;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Treatments.Application.Configuration.Errors;
@@ -9,7 +9,7 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
 {
     public class CreateTreatmentFileCommandHandler(
         ITreatmentStageRepository workRepository,
-        IBlobFileRepository blobFileRepository,
+        ITreatmentFileRepository blobFileRepository,
         IBlobService blobService) : IRequestHandler<CreateTreatmentFileCommand, Result<TreatmentFileDto>>
     {
         public async Task<Result<TreatmentFileDto>> Handle(CreateTreatmentFileCommand request, CancellationToken cancellationToken)

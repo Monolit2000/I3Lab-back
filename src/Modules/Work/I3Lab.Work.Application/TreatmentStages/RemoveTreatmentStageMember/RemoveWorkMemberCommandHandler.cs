@@ -21,7 +21,7 @@
 //                return Result.Fail<WorkMemberDto>("TreatmentStage not found.");
 //            }
 
-//            var workMember = work.TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member == new MemberId(request.MemberId));
+//            var workMember = work.TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member == new SenderId(request.SenderId));
 
 //            if (workMember == null)
 //            {
@@ -34,7 +34,7 @@
 
 //            var workMemberDto = new WorkMemberDto(
 //                workMember.TreatmentStageId.Value,
-//                workMember.MemberId.Value,
+//                workMember.SenderId.Value,
 //                workMember.AddedBy.Value,
 //                workMember.JoinDate
 //            );

@@ -1,12 +1,12 @@
 ﻿using FluentResults;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
 namespace I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByWorkId
 {
     public class GetAllBlobFilesByTreatmentStageIdCommandHandler(
-        IBlobFileRepository blobFileRepository) : IRequestHandler<GetAllBlobFilesByTreatmentStageIdCommand, Result<List<BlobFileDto>>>
+        ITreatmentFileRepository blobFileRepository) : IRequestHandler<GetAllBlobFilesByTreatmentStageIdCommand, Result<List<BlobFileDto>>>
     {
         public async Task<Result<List<BlobFileDto>>> Handle(GetAllBlobFilesByTreatmentStageIdCommand request, CancellationToken cancellationToken)
         {

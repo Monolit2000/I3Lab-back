@@ -1,4 +1,4 @@
-﻿using I3Lab.Treatments.Domain.TreatmentFils;
+﻿using I3Lab.Treatments.Domain.TreatmentFiles;
 
 namespace I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByType
 {

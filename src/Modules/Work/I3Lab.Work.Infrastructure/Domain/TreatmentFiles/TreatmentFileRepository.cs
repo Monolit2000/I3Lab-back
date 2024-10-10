@@ -1,11 +1,11 @@
-﻿using I3Lab.Treatments.Domain.TreatmentFils;
+﻿using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles
 {
-    public class TreatmentFileRepository : IBlobFileRepository
+    public class TreatmentFileRepository : ITreatmentFileRepository
     {
         private readonly TreatmentContext _context;
 
@@ -14,46 +14,46 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles
             _context = context;
         }
 
-        public async Task<TreatmentFile> GetByIdAsync(BlobFileId id, CancellationToken cancellationToken = default)
+        public async Task<TreatmentFile> GetByIdAsync(TreatmentFileId id, CancellationToken cancellationToken = default)
         {
-            return await _context.BlobFiles
+            return await _context.TreatmentFiles
                 .FirstOrDefaultAsync(bf => bf.Id == id);
         }
 
         public async Task<IEnumerable<TreatmentFile>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.BlobFiles.ToListAsync();
+            return await _context.TreatmentFiles.ToListAsync();
         }
 
         public async Task AddAsync(TreatmentFile blobFile, CancellationToken cancellationToken = default)
         {
-            await _context.BlobFiles.AddAsync(blobFile);
+            await _context.TreatmentFiles.AddAsync(blobFile);
         }
 
         public async Task UpdateAsync(TreatmentFile blobFile, CancellationToken cancellationToken = default)
         {
-            _context.BlobFiles.Update(blobFile);
+            _context.TreatmentFiles.Update(blobFile);
         }
 
-        public async Task DeleteAsync(BlobFileId id, CancellationToken cancellationToken = default)
+        public async Task DeleteAsync(TreatmentFileId id, CancellationToken cancellationToken = default)
         {
             var blobFile = await GetByIdAsync(id);
             if (blobFile != null)
             {
-                _context.BlobFiles.Remove(blobFile);
+                _context.TreatmentFiles.Remove(blobFile);
             }
         }
 
         public async Task<IEnumerable<TreatmentFile>> GetAllByTreatmentStageIdAsync(TreatmentStageId treatmentStageIdId, CancellationToken cancellationToken = default)
         {
-            return await _context.BlobFiles
+            return await _context.TreatmentFiles
                 .Where(bf => bf.TreatmentStageId == treatmentStageIdId)
                 .ToListAsync();
         }
 
         public async Task<List<TreatmentFile>> GetAllTypeAndTreatmentStageIdAsync(BlobFileType fileType, TreatmentStageId treatmentStageIdId, CancellationToken cancellationToken = default)
         {
-            return await _context.BlobFiles
+            return await _context.TreatmentFiles
                 .Where(bf => bf.TreatmentStageId == treatmentStageIdId)
                 .Where(bf => bf.FileType == fileType)
                 .ToListAsync();

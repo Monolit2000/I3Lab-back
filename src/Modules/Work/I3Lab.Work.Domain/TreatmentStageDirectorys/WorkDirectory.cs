@@ -1,6 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.TreatmentFils;
-using TreatmentFile = I3Lab.Treatments.Domain.TreatmentFils.TreatmentFile;
+using I3Lab.Treatments.Domain.TreatmentFiles;
+using TreatmentFile = I3Lab.Treatments.Domain.TreatmentFiles.TreatmentFile;
 
 namespace I3Lab.Treatments.Domain.WorkDirectorys
 {

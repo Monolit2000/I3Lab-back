@@ -2,7 +2,7 @@
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.WorkCatalogs;
-using I3Lab.Treatments.Domain.TreatmentFils;
+using I3Lab.Treatments.Domain.TreatmentFiles;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageComments
 {

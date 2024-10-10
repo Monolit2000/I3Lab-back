@@ -1,11 +1,9 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
-using I3Lab.Treatments.Domain.TreatmentFiles;
-using I3Lab.Treatments.Domain.TreatmentFiles.Events;
-using I3Lab.Treatments.Domain.TreatmentFils.Events;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
+using I3Lab.Treatments.Domain.TreatmentFiles.Events;
 
-namespace I3Lab.Treatments.Domain.TreatmentFils
+namespace I3Lab.Treatments.Domain.TreatmentFiles
 {
     public class TreatmentFile : Entity, IAggregateRoot
     {

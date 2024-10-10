@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Domain.TreatmentFils.Events
+namespace I3Lab.Treatments.Domain.TreatmentFiles.Events
 {
     public class RestoredToHotAccessibilitylevelDomainEvent : DomainEventBase
     {

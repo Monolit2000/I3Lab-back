@@ -6,6 +6,7 @@ namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
     public class BlobFile : Entity, IAggregateRoot
     {
         public BlobFileId Id { get; private set; }
+        //public Guid BlobFileGroupId { get; set; }
         public ContentType ContentType { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
         public BlobFileUrl Url { get; private set; }
@@ -29,7 +30,13 @@ namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
         }
 
         public static BlobFile Create(BlobFileUrl url, ContentType ContentType)
+            => new BlobFile(ContentType, url);  
+        
+        public static BlobFile CreateAvatarImage(BlobFileUrl url, ContentType ContentType)
             => new BlobFile(ContentType, url);
+
+        public static BlobFile Create3DScan(BlobFileUrl url, ContentType ContentType)
+           => new BlobFile(ContentType, url);
 
         public void ChegeBlobFilePath(BlobFilePath blobFilePath, BlobFileUrl url)
         {

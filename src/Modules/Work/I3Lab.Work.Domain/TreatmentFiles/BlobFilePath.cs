@@ -2,7 +2,7 @@
 using I3Lab.BuildingBlocks.Domain;
 using System.Text.RegularExpressions;
 
-namespace I3Lab.Treatments.Domain.TreatmentFils
+namespace I3Lab.Treatments.Domain.TreatmentFiles
 {
     public class BlobFilePath : ValueObject
     {
@@ -64,7 +64,7 @@ namespace I3Lab.Treatments.Domain.TreatmentFils
 
 //using I3Lab.BuildingBlocks.Domain;
 
-//namespace I3Lab.Treatments.Domain.TreatmentFils
+//namespace I3Lab.Treatments.Domain.TreatmentFiles
 //{
 //    public class BlobFilePath : ValueObject
 //    {

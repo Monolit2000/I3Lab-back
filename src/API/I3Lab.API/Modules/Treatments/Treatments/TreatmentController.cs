@@ -20,7 +20,6 @@ namespace I3Lab.API.Modules.Treatments
     [ApiVersion(2)]
     [ApiController]
     [Route("api/v{apiVersion:apiVersion}/treatments")]
-    
     public class TreatmentController(
         IMediator mediator) : BaseController
     {
@@ -43,12 +42,11 @@ namespace I3Lab.API.Modules.Treatments
 
         [MapToApiVersion(1)]
 
-        [HttpPost("finishTreatment")]
+        [HttpPut("finishTreatment")]
         public async Task<IActionResult> FinishTreatment(FinishTreatmentCommand finishTreatmentCommand)
             => HandleResult(await mediator.Send(finishTreatmentCommand));
 
         [MapToApiVersion(1)]
-
         [HttpGet("getTreatmentById")]
         public async Task<IActionResult> GetTreatmentById([FromQuery] GetTreatmentByIdQuery getTreatmentByIdQuery)
             => HandleResult(await mediator.Send(getTreatmentByIdQuery));
@@ -74,7 +72,7 @@ namespace I3Lab.API.Modules.Treatments
             => HandleResult(await mediator.Send(new GetAllTreatmentsByMemberIdQuery() { UserId = request.MemberId }));
 
         [MapToApiVersion(1)]
-        [HttpPost("removeTreatmentMember")]
+        [HttpPut("removeTreatmentMember")]
         public async Task<IActionResult> AddTreatmentMember(RemoveTreatmentMemberCommand removeTreatmentMemberCommand) 
             => HandleResult(await mediator.Send(removeTreatmentMemberCommand));
 
@@ -84,7 +82,7 @@ namespace I3Lab.API.Modules.Treatments
             => HandleResult(await mediator.Send(getTreatmentJoinLinkCommand));
 
         [MapToApiVersion(1)]
-        [HttpPost("joinToTreatmentByInvitationLink")]
+        [HttpPut("joinToTreatmentByInvitationLink")]
         public async Task<IActionResult> JoinToTreatmentByInvitationLink(JoinToTreatmentByInvitationLinkCommand joinToTreatmentByInvitationLinkCommand)
             => HandleResult(await mediator.Send(joinToTreatmentByInvitationLinkCommand));
     }

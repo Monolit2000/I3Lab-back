@@ -14,7 +14,7 @@ namespace I3Lab.API.Modules.Treatments.Work
         IMediator mediator) : BaseController
     {
 
-        [HttpPost("closeTreatmentStage")]
+        [HttpPut("closeTreatmentStage")]
         public async Task<IActionResult> CloseTreatmentStage(CloseTreatmentStageCommand closeTreatmentStageCommand)
             => HandleResult(await mediator.Send(closeTreatmentStageCommand));
 

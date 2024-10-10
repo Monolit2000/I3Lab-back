@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
 
-namespace I3Lab.Treatments.Domain.TreatmentFils
+namespace I3Lab.Treatments.Domain.TreatmentFiles
 {
     public class Accessibilitylevel : ValueObject
     {
