@@ -19,7 +19,7 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
-            var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
+            var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
 
             var result = treatment.AddToTreatmentMembers(member);
 

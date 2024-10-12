@@ -21,7 +21,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
             if (treatment == null)
                 return; 
 
-            var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
+            var creator = await memberRepository.GetAsync(new MemberId(request.CreatorId));
             if (creator == null)
                 return;
                

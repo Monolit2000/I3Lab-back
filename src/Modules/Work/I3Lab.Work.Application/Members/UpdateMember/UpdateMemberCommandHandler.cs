@@ -9,7 +9,7 @@ namespace I3Lab.Treatments.Application.Members.UpdateMember
     {
         public async Task<Result> Handle(UpdateMemberCommand request, CancellationToken cancellationToken)
         {
-            var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
+            var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
 
             throw new NotImplementedException();
         }

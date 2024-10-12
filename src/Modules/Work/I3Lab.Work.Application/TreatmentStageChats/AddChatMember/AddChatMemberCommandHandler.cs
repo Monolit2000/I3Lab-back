@@ -22,7 +22,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMember
             if (treatmentStageChat == null)
                 return;
 
-            var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
+            var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
 
             treatmentStageChat.AddChatMember(member);
 

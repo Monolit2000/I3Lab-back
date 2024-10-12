@@ -20,9 +20,9 @@ namespace I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite
         {
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
-            var memberToInvite = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberToInviteId));
+            var memberToInvite = await memberRepository.GetAsync(new MemberId(request.MemberToInviteId));
 
-            var inviter = await memberRepository.GetMemberByIdAsync(new MemberId(request.InviterId));
+            var inviter = await memberRepository.GetAsync(new MemberId(request.InviterId));
 
             var treatmentInvaite = treatment.Invite(memberToInvite, inviter);
 

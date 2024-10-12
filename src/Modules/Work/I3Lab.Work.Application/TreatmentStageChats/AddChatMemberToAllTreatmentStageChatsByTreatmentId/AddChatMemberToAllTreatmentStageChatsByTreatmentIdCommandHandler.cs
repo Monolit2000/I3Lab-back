@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTre
             if (treatmentStages.Any() is false)
                 return;
 
-            var member = await memberRepository.GetMemberByIdAsync(request.MemberId);
+            var member = await memberRepository.GetAsync(request.MemberId);
 
             if (member is null)
                 return;

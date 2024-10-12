@@ -18,7 +18,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             return await _context.Members.ToListAsync(cancellationToken);
         }
 
-        public async Task<Member> GetMemberByIdAsync(MemberId id, CancellationToken cancellationToken = default)
+        public async Task<Member> GetAsync(MemberId id, CancellationToken cancellationToken = default)
         {
             return await _context.Members
                 .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
@@ -46,14 +46,12 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task DeleteAsync(MemberId id, CancellationToken cancellationToken = default)
+        public async Task DeleteByIdIfExistAsync(MemberId id, CancellationToken cancellationToken = default)
         {
-            var member = await GetMemberByIdAsync(id, cancellationToken);
+            var member = await GetAsync(id, cancellationToken);
+
             if (member != null)
-            {
-                _context.Members.Remove(member);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
+                _context.Members.Remove(member);            
         }
 
         public async Task SaveChangesAsync(CancellationToken cancellationToken = default)

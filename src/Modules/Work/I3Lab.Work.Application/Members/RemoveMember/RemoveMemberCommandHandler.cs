@@ -1,18 +1,18 @@
-﻿using FluentResults;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using FluentResults;
+using I3Lab.Treatments.Domain.Members;
 
 namespace I3Lab.Treatments.Application.Members.RemoveMember
 {
-    public class RemoveMemberCommandHandler : IRequestHandler<RemoveMemberCommand, Result>
+    public class RemoveMemberCommandHandler(IMemberRepository memberRepository) : IRequestHandler<RemoveMemberCommand, Result>
     {
-        public Task<Result> Handle(RemoveMemberCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RemoveMemberCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await memberRepository.DeleteByIdIfExistAsync(new MemberId(request.MemberId), cancellationToken);
+
+            await memberRepository.SaveChangesAsync(cancellationToken);
+
+            return Result.Ok();
         }
     }
 }

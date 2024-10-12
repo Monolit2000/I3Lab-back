@@ -28,9 +28,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             return decorated.GetByEmailAsync(email, cancellationToken);
         }
 
-        public Task<Member> GetMemberByIdAsync(MemberId id, CancellationToken cancellationToken = default)
+        public Task<Member> GetAsync(MemberId id, CancellationToken cancellationToken = default)
         {
-            return decorated.GetMemberByIdAsync(id, cancellationToken);
+            return decorated.GetAsync(id, cancellationToken);
         }
 
         public Task AddAsync(Member member, CancellationToken cancellationToken = default)
@@ -38,9 +38,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Members
             return decorated.AddAsync(member, cancellationToken);
         }
 
-        public Task DeleteAsync(MemberId id, CancellationToken cancellationToken = default)
+        public Task DeleteByIdIfExistAsync(MemberId id, CancellationToken cancellationToken = default)
         {
-            return decorated.DeleteAsync(id, cancellationToken);
+            return decorated.DeleteByIdIfExistAsync(id, cancellationToken);
         }
 
         public Task<bool> IsEmailTakenAsync(string email, CancellationToken cancellationToken = default)

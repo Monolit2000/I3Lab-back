@@ -12,7 +12,7 @@
 //        public async Task<Result<TreatmentStageDto>> Handle(CreateTreatmentStageCommand request, CancellationToken cancellationToken)
 //        {
 
-//            var creator = await memberRepository.GetMemberByIdAsync(new SenderId(request.CreatorId));
+//            var creator = await memberRepository.GetAsync(new SenderId(request.CreatorId));
 //            if (creator == null)
 //                return;
 

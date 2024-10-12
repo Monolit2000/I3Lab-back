@@ -16,11 +16,11 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
             if (!await tretmentRepository.IsNameUniqueAsync(request.TreatmentTitel))
                 return Result.Fail(StatusCodeErrors.NotUnique(TreatmentsErrors.NotUniqueName));
 
-            var creator = await memberRepository.GetMemberByIdAsync(new MemberId(request.CreatorId));
+            var creator = await memberRepository.GetAsync(new MemberId(request.CreatorId));
             if (creator is null)
                 return Result.Fail("Creator is null");
 
-            var patient = await memberRepository.GetMemberByIdAsync(new MemberId(request.PatientId));
+            var patient = await memberRepository.GetAsync(new MemberId(request.PatientId));
             if (patient is null)
                 return Result.Fail("patient is null");
 

@@ -37,7 +37,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 
 
         [MapToApiVersion(2)]
-        [HttpPost("CreateMessage")]
+        [HttpPost("createMessage")]
         public async Task<IActionResult> CreateMessage(AddMessageCommand addMessageCommand)
          => HandleResult(await _mediator.Send(addMessageCommand));
 

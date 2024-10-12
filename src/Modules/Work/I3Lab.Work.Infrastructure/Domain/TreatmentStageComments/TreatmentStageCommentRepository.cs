@@ -16,7 +16,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkComments
         //    _context = context;
         //}
 
-        //public async Task<WorkComment> GetMemberByIdAsync(TreatmentStageCommentId id)
+        //public async Task<WorkComment> GetAsync(TreatmentStageCommentId id)
         //{
         //    var workComment = await _context.TreatmentStageComments
         //        .Include(wc => wc.PinedFiles)
@@ -52,9 +52,9 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkComments
         //    await _context.SaveChangesAsync();
         //}
 
-        //public async Task DeleteAsync(TreatmentStageCommentId id)
+        //public async Task DeleteByIdIfExistAsync(TreatmentStageCommentId id)
         //{
-        //    var workComment = await GetMemberByIdAsync(id);
+        //    var workComment = await GetAsync(id);
         //    if (workComment != null)
         //    {
         //        _context.TreatmentStageComments.Remove(workComment);

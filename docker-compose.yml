@@ -41,6 +41,23 @@ services:
       - default
     restart: always
 
+
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: postgres-db-pgadmin
+    environment:
+        PGADMIN_DEFAULT_EMAIL: admin@admin.com  
+        PGADMIN_DEFAULT_PASSWORD: admin         
+    ports:
+        - "5050:80"
+    depends_on:
+        - postgres-db
+    networks:
+        - default
+    restart: always
+
+
   i3lab.seq:
     image: datalust/seq:latest
     container_name: i3lab-seq

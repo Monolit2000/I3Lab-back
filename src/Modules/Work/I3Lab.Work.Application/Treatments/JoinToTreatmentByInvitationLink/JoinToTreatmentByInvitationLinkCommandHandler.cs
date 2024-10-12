@@ -20,7 +20,7 @@ namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLin
             if (validateResult.IsFailed)
                 return validateResult;
 
-            var member = await memberRepository.GetMemberByIdAsync(new MemberId(request.MemberId));
+            var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
 
             var result = treatment.AddToTreatmentMembers(member);
 
