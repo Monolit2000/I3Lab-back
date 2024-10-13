@@ -96,36 +96,3 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
     }
 }
-//private bool IsWorkMamberIdContainInWorkMembersList(MemberId memberId)
-//{
-//    var workMember = TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
-
-//    if (workMember == null)
-//      return false;
-
-//    return true;    
-//}
-
-//public Result AddWorkMember(Member memberId, Member addedBy)
-//{
-//    if(IsWorkMamberIdContainInWorkMembersList(addedBy.Id))
-//        return Result.Fail(WorkErrors.WorkMemberNotFoundError);
-
-//    var newWorkMember = WorkMember.CreateBaseOnTreatmentStage(this.Id, memberId, addedBy);
-//    TreatmentAccebilityMembers.Add(newWorkMember);
-
-//    AddDomainEvent(new WorkMemberAddedDomainEvent(this.Id, memberId, addedBy));
-//    return Result.Ok();
-//}
-
-//public Result RemoveWorkMember(MemberId memberId, MemberId removedBy)
-//{
-//    var workMember = TreatmentAccebilityMembers.FirstOrDefault(wm => wm.Member.Id == memberId);
-//    if (workMember == null)
-//        return Result
-//            .Fail(WorkErrors.WorkMemberNotFoundError);
-
-//    TreatmentAccebilityMembers.Remove(workMember);
-//    AddDomainEvent(new WorkMemberRemovedDomainEvent(Id, memberId, removedBy));
-//    return Result.Ok();
-//}

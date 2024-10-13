@@ -1,14 +1,7 @@
 ﻿using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.Treatments;
-using I3Lab.Treatments.Domain.TreatmentStages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles
 {
@@ -26,8 +19,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentFiles
 
             builder.HasOne<Treatment>()
                .WithMany()
-               .HasForeignKey(bf => bf.TreatmentId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .HasForeignKey(bf => bf.TreatmentId);
+               //.OnDelete(DeleteBehavior.Restrict);
 
             builder.OwnsOne(bf => bf.BlobFilePath);
 

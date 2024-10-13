@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Clinics.Domain.Clinics.Events;
 using I3Lab.Clinics.Domain.Doctors;
 
 namespace I3Lab.Clinics.Domain.Clinics
@@ -54,6 +55,7 @@ namespace I3Lab.Clinics.Domain.Clinics
                 return Result.Fail("Doctor already exists in this clinic.");
 
             ClinicDoctors.Add(ClinicDoctor.Create(this.Id, doctorId));
+            AddDomainEvent(new ClinicDoctorAddedDomainEvent(doctorId, this.Id));
             return Result.Ok(); 
         }
 

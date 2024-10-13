@@ -13,7 +13,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.BlobStorage
 
         public IConfiguration _configuration;
 
-        private const string ContainerName = "test";
+        private const string ContainerName = "newtest";
 
         public BlobService(
             BlobServiceClient blobServiceClient,

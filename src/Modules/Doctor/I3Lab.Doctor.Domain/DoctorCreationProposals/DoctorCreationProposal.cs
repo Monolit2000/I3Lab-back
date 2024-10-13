@@ -6,7 +6,6 @@ namespace I3Lab.Doctors.Domain.DoctorCreationProposals
 {
     public class DoctorCreationProposal : Entity, IAggregateRoot
     {
-
         public DoctorCreationProposalId Id { get; }
         public DoctorName Name { get; private set; }
         public Email Email { get; private set; }

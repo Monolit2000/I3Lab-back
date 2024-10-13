@@ -1,6 +1,6 @@
-﻿using FluentResults;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Treatments.Domain.TreatmentInvites;
-using MediatR;
 
 namespace I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentInvite
 {

@@ -1,8 +1,8 @@
-﻿using FluentResults;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.TreatmentStages;
-using MediatR;
+using I3Lab.Treatments.Domain.TreatmentStageChats;
 
 namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
 {
