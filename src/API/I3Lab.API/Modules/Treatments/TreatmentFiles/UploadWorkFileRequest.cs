@@ -2,8 +2,11 @@
 {
     public class UploadWorkFileRequest
     {
-        public Guid WorkId { get; set; }
+        public Guid TreatmentId { get; set; }
         public string FileName { get; set; }
+
+         public IFormFile formFile {  get; set; }
+
 
         public UploadWorkFileRequest()
         {
@@ -14,7 +17,7 @@
             string fileName)
         {
             FileName = fileName;
-            WorkId = workId;
+            TreatmentId = workId;
         }
     }
 }

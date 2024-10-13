@@ -4,6 +4,7 @@ using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles;
 using I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById;
 
+
 namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
 {
     public class CreateBlobFileCommandHandler(
@@ -24,6 +25,7 @@ namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
 
             var blobFileDto = new BlobFileDto(
                 newBlobFile.Id.Value,
+                uploadFileResponce.Uri,
                 newBlobFile.Path.FileName,
                 newBlobFile.CreateDate,
                 newBlobFile.Accessibilitylevel.Value);

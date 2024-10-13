@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using I3Lab.Modules.BlobFailes.Infrastructure.Domain.BlobFiles;
 using I3Lab.Modules.BlobFailes.Domain.BlobFiles;
+using I3Lab.Modules.BlobFailes.Api;
+using I3Lab.Modules.BlobFailes.Infrastructure.Api;
 
 namespace I3Lab.Modules.BlobFailes.Infrastructure.Configurations.Application
 {
@@ -24,6 +26,7 @@ namespace I3Lab.Modules.BlobFailes.Infrastructure.Configurations.Application
 
             //services.AddScoped<ICommandsScheduler, CommandsScheduler>();
 
+            services.AddScoped<IBlobFilesApi, BlobFilesApi>();
             services.AddScoped<IBlobFileRepository, BlobFileRepository>();
 
             return services;

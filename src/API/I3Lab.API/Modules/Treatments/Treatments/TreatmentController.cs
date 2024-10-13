@@ -3,7 +3,7 @@ using Asp.Versioning;
 using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
 using I3Lab.API.Modules.Treatments.Treatments;
-using I3Lab.Treatments.Application.Treatments.RemoveMember;
+using I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember;
 using I3Lab.Treatments.Application.Treatments.CreateTreatment;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatment;
 using I3Lab.Treatments.Application.Treatments.FinishTreatment;

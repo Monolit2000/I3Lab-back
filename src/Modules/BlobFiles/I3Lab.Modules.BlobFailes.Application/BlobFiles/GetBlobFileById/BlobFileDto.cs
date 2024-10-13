@@ -10,16 +10,19 @@ namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.GetBlobFileById
     {
         public Guid Id { get; set; }
         public string FileName { get; set; }
+        public string Uri { get; set; }
         public DateTime CreateDate { get; set; }
         public string Accessibilitylevel { get; set; }
 
         public BlobFileDto(
             Guid id,
+            string uri,
             string fileName,
             DateTime createDate,
             string accessibilityLevel)
         {
             Id = id;
+            Uri = uri;
             FileName = fileName;
             CreateDate = createDate;
             Accessibilitylevel = accessibilityLevel;

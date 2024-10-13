@@ -16,11 +16,10 @@ namespace I3Lab.Modules.BlobFailes.Application.BlobFiles.CreateBlobFile
 
         public Stream Stream { get; set; }
 
-        public CreateBlobFileCommand(
-            Guid workId,
-            string fileName)
+        public CreateBlobFileCommand()
         {
-            FileName = fileName;
+            
         }
+
     }
 }

@@ -12,13 +12,13 @@ namespace I3Lab.API.Modules.BlobFiles
         IMediator mediator) : BaseController
     {
 
-        [HttpPost("createBlobFile")]
-        public async Task<IActionResult> CreateBlobFile(CreateBlobFileCommand createBlobFileCommand)
-         => HandleResult(await mediator.Send(createBlobFileCommand));
+        //[HttpPost("createBlobFile")]
+        //public async Task<IActionResult> CreateBlobFile(CreateBlobFileCommand createBlobFileCommand)
+        // => HandleResult(await mediator.Send(createBlobFileCommand));
 
 
-        [HttpGet("getBlobFileById")]
-        public async Task<IActionResult> GetBlobFileById([FromQuery] GetBlobFileByIdQuery getBlobFileByIdQuery)
-           => HandleResult(await mediator.Send(getBlobFileByIdQuery));
+        //[HttpGet("getBlobFileById")]
+        //public async Task<IActionResult> GetBlobFileById([FromQuery] GetBlobFileByIdQuery getBlobFileByIdQuery)
+        //   => HandleResult(await mediator.Send(getBlobFileByIdQuery));
     }
 }

@@ -14,18 +14,18 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
     {
 
         [HttpPost("uploadWorkFile")]
-        public async Task<IActionResult> UploadTreatmentFile(IFormFile formFile, UploadWorkFileRequest uploadWorkFileRequest)
+        public async Task<IActionResult> UploadTreatmentFile(UploadWorkFileRequest uploadWorkFileRequest)
         {
-            using Stream stream = formFile.OpenReadStream();    
+            using Stream stream = uploadWorkFileRequest.formFile.OpenReadStream();    
 
             var file = stream;
 
             return HandleResult(await mediator.Send(new CreateTreatmentFileCommand 
             { 
-                WorkId = uploadWorkFileRequest.WorkId,
+                WorkId = uploadWorkFileRequest.TreatmentId,
                 FileName = uploadWorkFileRequest.FileName, 
                 Stream = stream,
-                ContentType = formFile.ContentType
+                ContentType = uploadWorkFileRequest.formFile.ContentType
             }));                                                                                                                                             
         }
 

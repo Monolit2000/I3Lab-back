@@ -32,7 +32,7 @@ namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
         }
 
         // Factory method to create BlobFilePath with validation
-        public static Result<BlobFilePath> Create(string containerName, string fileName, string blobDirectoryName = default)
+        public static Result<BlobFilePath> Create(string containerName, string fileName, string blobDirectoryName = "sdfdf")
         {
             var validateResult = Validate(containerName, fileName, blobDirectoryName);
             if (validateResult.IsFailed)
