@@ -104,7 +104,7 @@ builder.Services
     .AddClinicModule(builder.Configuration)
     .AddBlobFileModule(builder.Configuration);
 
-builder.Services.AddMassTransitInMemoryEventBus(builder.Configuration);
+builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
 
 
 

@@ -1,20 +1,16 @@
-﻿using FluentResults;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.Treatments;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using I3Lab.Treatments.Domain.TreatmentInvites;
+
 
 namespace I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite
 {
     public class CreateTreatmentInviteCommandHandler(
+        IMemberRepository memberRepository, 
         ITreatmentRepository tretmentRepository, 
-        ITreatmentInviteRepository treatmentInviteRepository,
-        IMemberRepository memberRepository) : IRequestHandler<CreateTreatmentInviteCommand, Result<TreatmentInviteDto>>
+        ITreatmentInviteRepository treatmentInviteRepository) : IRequestHandler<CreateTreatmentInviteCommand, Result<TreatmentInviteDto>>
     {
         public async Task<Result<TreatmentInviteDto>> Handle(CreateTreatmentInviteCommand request, CancellationToken cancellationToken)
         {

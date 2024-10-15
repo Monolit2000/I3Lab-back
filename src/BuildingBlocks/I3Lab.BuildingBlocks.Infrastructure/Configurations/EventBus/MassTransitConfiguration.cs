@@ -5,8 +5,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus
 {
-    public static class RabbitMQConfiguration
+    public static class MassTransitConfiguration
     {
+        public static IServiceCollection AddMassTransitInMemoryEventBus(
+            this IServiceCollection services, IConfiguration configuration)
+        {
+
+            services.AddMassTransit(busConfiguration =>
+            {
+                busConfiguration.SetKebabCaseEndpointNameFormatter();
+
+                busConfiguration.UsingInMemory((context, config) => config.ConfigureEndpoints(context));
+            });
+
+
+            services.AddHostedService<MassageLoopPublisher>();
+
+            return services;
+        }
+
         public static IServiceCollection AddMassTransitRabbitMqEventBus(
            this IServiceCollection services, IConfiguration configuration)
         {
@@ -24,8 +41,6 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus
                     });
 
                     configurator.ConfigureEndpoints(context);
-
-
                 });
             });
 
