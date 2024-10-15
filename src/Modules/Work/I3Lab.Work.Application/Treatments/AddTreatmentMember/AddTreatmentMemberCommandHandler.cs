@@ -22,13 +22,12 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
             var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
 
             var result = treatment.AddToTreatmentMembers(member);
-
             if (result.IsFailed)
                 return result; 
 
             await treatmentRepository.SaveChangesAsync();
 
-            return Result.Ok();
+            return result;
         }
     }
 }

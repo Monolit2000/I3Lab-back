@@ -2,7 +2,6 @@
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.Clinics;
 using I3Lab.Clinics.Domain.Doctors.Events;
-using I3Lab.Clinics.Domain.Doctors;
 
 namespace I3Lab.Clinics.Domain.Doctors
 {
@@ -53,8 +52,8 @@ namespace I3Lab.Clinics.Domain.Doctors
             if (Clinics.Any(c => c.ClinicId == clinic.Id))
                 return Result.Fail("Clinic is already associated with this doctor.");
 
-            Clinics.Add(ClinicDoctor.Create(this.Id, clinic.Id));
-            // AddDomainEvent(new ClinicAddedToDoctorDomainEvent(this.Id, clinic.Id));
+            Clinics.Add(ClinicDoctor.Create(clinic.Id, this.Id));
+            AddDomainEvent(new ClinicAddedToDoctorDomainEvent(this.Id, clinic.Id));
             return Result.Ok();
 
         }

@@ -17,8 +17,12 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatment
             return treatmens.Select(treatment => new TreatmentDto
             {
                 Id = treatment.Id.Value,
+                Title = treatment.Titel.Value,
+                Status = treatment.Status.Value,
+                TreatmentDate = treatment.TreatmentDate.TreatmentStarted,
                 CreatorId = treatment.Creator.Id.Value,
                 PatientId = treatment.Patient.Id.Value,
+                IvniteToken = treatment.InvitationToken?.Token
             }).ToList();
         }
     }

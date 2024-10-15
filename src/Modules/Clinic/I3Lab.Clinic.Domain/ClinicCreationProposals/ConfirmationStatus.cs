@@ -1,16 +1,10 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace I3Lab.Clinics.Domain.ClinicCreationProposals
 {
     public class ConfirmationStatus : ValueObject
     {
-
         public static ConfirmationStatus Confirmed = new ConfirmationStatus(nameof(Confirmed));
 
         public static ConfirmationStatus Validation = new ConfirmationStatus(nameof(Validation));
@@ -18,7 +12,6 @@ namespace I3Lab.Clinics.Domain.ClinicCreationProposals
         public static ConfirmationStatus Rejected = new ConfirmationStatus(nameof(Rejected));
 
         public string Value { get; }
-
 
         private static readonly HashSet<string> ValidStatuses = new HashSet<string>
         {
@@ -37,6 +30,5 @@ namespace I3Lab.Clinics.Domain.ClinicCreationProposals
 
             return new ConfirmationStatus(value);
         }
-
     }
 }

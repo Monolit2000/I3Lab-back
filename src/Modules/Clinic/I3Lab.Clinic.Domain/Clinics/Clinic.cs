@@ -2,17 +2,18 @@
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.Clinics.Events;
 using I3Lab.Clinics.Domain.Doctors;
+using System.Net.Http.Headers;
 
 namespace I3Lab.Clinics.Domain.Clinics
 {
     public class Clinic : Entity, IAggregateRoot
     {
-        public List<ClinicDoctor> ClinicDoctors = [];
+        public readonly List<ClinicDoctor> ClinicDoctors  = [];
 
         public ClinicId Id { get; private set; }
         public ClinicStatus Status { get; set; }
         public ClinicAddress Address { get; private set; }
-        public ClinicName ClinicName { get; private set; }
+        public ClinicName ClinicName { get; private set; } 
 
         public DateTime CreatedAt { get; private set; }
 
@@ -55,7 +56,7 @@ namespace I3Lab.Clinics.Domain.Clinics
                 return Result.Fail("Doctor already exists in this clinic.");
 
             ClinicDoctors.Add(ClinicDoctor.Create(this.Id, doctorId));
-            AddDomainEvent(new ClinicDoctorAddedDomainEvent(doctorId, this.Id));
+            AddDomainEvent(new ClinicDoctorAddedDomainEvent(this.Id, doctorId));
             return Result.Ok(); 
         }
 
@@ -65,6 +66,7 @@ namespace I3Lab.Clinics.Domain.Clinics
             if (doctor == null)
                 throw new InvalidOperationException("Doctor does not exist in this clinic.");
 
+            AddDomainEvent(new ClinicDoctorRemovedDomainEvent(this.Id, doctorId));
             ClinicDoctors.Remove(doctor);
         }
     }

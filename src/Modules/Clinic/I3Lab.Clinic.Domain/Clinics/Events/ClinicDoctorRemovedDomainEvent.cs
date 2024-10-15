@@ -1,14 +1,14 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.Doctors;
 
-namespace I3Lab.Clinics.Domain.Clinics.Events
+namespace I3Lab.Clinics.Domain.Clinics
 {
-    public class ClinicDoctorAddedDomainEvent : DomainEventBase
+    public class ClinicDoctorRemovedDomainEvent : DomainEventBase
     {
         public ClinicId ClinicId { get; set; }
         public DoctorId DoctorId { get; set; }
 
-        public ClinicDoctorAddedDomainEvent(
+        public ClinicDoctorRemovedDomainEvent(
             ClinicId clinicId,
             DoctorId doctorId)
         {

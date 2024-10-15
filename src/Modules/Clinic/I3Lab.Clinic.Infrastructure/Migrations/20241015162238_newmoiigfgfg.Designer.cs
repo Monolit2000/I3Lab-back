@@ -3,6 +3,7 @@ using System;
 using I3Lab.Clinics.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Clinics.Infrastructure.Migrations
 {
     [DbContext(typeof(ClinicContext))]
-    partial class ClinicContextModelSnapshot : ModelSnapshot
+    [Migration("20241015162238_newmoiigfgfg")]
+    partial class newmoiigfgfg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,7 +222,7 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
             modelBuilder.Entity("I3Lab.Clinics.Domain.Clinics.ClinicDoctor", b =>
                 {
                     b.HasOne("I3Lab.Clinics.Domain.Clinics.Clinic", null)
-                        .WithMany("ClinicDoctors")
+                        .WithMany()
                         .HasForeignKey("ClinicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -227,7 +230,7 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                     b.HasOne("I3Lab.Clinics.Domain.Doctors.Doctor", null)
                         .WithMany("Clinics")
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
@@ -319,11 +322,6 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
 
                     b.Navigation("PhoneNumber")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("I3Lab.Clinics.Domain.Clinics.Clinic", b =>
-                {
-                    b.Navigation("ClinicDoctors");
                 });
 
             modelBuilder.Entity("I3Lab.Clinics.Domain.Doctors.Doctor", b =>

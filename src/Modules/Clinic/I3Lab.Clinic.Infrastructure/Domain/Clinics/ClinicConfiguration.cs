@@ -10,7 +10,6 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
         {
             builder.HasKey(c => c.Id);
 
-
             builder.OwnsOne(c => c.Address, ca =>
             {
                 ca.Property(c => c.Value).HasColumnName("ClinicAddress").IsRequired();
@@ -26,21 +25,20 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
                 cs.Property(s => s.Value).HasColumnName("ClinicStatus").IsRequired();
             });
 
-            builder.OwnsMany(c => c.ClinicDoctors, b =>
-            {
-                b.ToTable("ClinicDoctors");
-
-                b.HasKey(x => x.DoctorId);
-
-                b.WithOwner().HasForeignKey(x => x.ClinicId);
-
-                b.Property(x => x.AddedAt).IsRequired();
-               
-            });
-
             builder.Property(c => c.CreatedAt)
                    .HasColumnName("CreatedAt")
                    .IsRequired();
+
+            builder.HasMany(c => c.ClinicDoctors)
+                .WithOne()
+                .HasForeignKey(dc => dc.ClinicId);
         }
     }
 }
+//builder.OwnsMany(c => c.ClinicDoctors, b =>
+//{
+//    b.ToTable("ClinicDoctors");
+//    b.HasKey(x => x.DoctorId);
+//    b.WithOwner().HasForeignKey(x => x.ClinicId);
+//    b.Property(x => x.AddedAt).IsRequired();
+//});

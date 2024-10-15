@@ -11,7 +11,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetTreatmentById
             var treatment = await treatmentRepository.GetByIdAsync( new TreatmentId(request.TreatmentId), cancellationToken);
 
             if (treatment == null)
-                return Result.Fail<TreatmentDto>("Treatments not found");
+                return Result.Fail("Treatments not found");
 
             var treatmentDto = new TreatmentDto
             {

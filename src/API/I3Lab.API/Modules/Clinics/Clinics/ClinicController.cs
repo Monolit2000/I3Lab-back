@@ -15,6 +15,10 @@ namespace I3Lab.API.Modules.Clinics.Clinics
         IMediator mediator) : BaseController
     {
 
+        [HttpPost("createClnic")]
+        public async Task<IActionResult> CreateClnic(CreateClnicCommand createClnicCommand)
+            => HandleResult(await mediator.Send(createClnicCommand));
+
         [HttpGet("getAllClinics")]
         public async Task<IActionResult> GetAllClinics()
           => HandleResult(await mediator.Send(new GetAllClnicsQuery()));
@@ -23,10 +27,5 @@ namespace I3Lab.API.Modules.Clinics.Clinics
         [HttpGet("getClinicById")]
         public async Task<IActionResult> GetClnicById([FromQuery] GetClnicByIdQuery getDoctorByIdQuery)
            => HandleResult(await mediator.Send(getDoctorByIdQuery));
-
-
-        [HttpPost("createClnic")]
-        public async Task<IActionResult> CreateClnic(CreateClnicCommand createClnicCommand)
-            => HandleResult(await mediator.Send(createClnicCommand));
     }
 }

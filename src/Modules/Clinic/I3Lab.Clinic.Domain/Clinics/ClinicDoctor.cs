@@ -1,8 +1,9 @@
-﻿using I3Lab.Clinics.Domain.Doctors;
+﻿using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Clinics.Domain.Doctors;
 
 namespace I3Lab.Clinics.Domain.Clinics
 {
-    public class ClinicDoctor
+    public class ClinicDoctor : IAggregateRoot
     {
         public DoctorId DoctorId { get; set; }  
 

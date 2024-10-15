@@ -19,11 +19,11 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId
             {
                 Id = treatment.Id.Value,
                 Title = treatment.Titel.Value,
-                Status = treatment.Status.ToString(),
-                TreatmentDate = treatment.TreatmentDate.TreatmentStarted,
+                Status = treatment.Status.Value,
                 CreatorId = treatment.Creator.Id.Value,
                 PatientId = treatment.Patient.Id.Value,
-                IvniteToken = treatment.InvitationToken?.Token
+                IvniteToken = treatment.InvitationToken?.Token,
+                TreatmentDate = treatment.TreatmentDate.TreatmentStarted
             }).ToList();
         }
     }
