@@ -14,7 +14,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Application\I3Lab.BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\I3Lab.BuildingBlocks.Infrastructure\I3Lab.BuildingBlocks.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Administration\I3Lab.Administration.IntegrationEvents\I3Lab.Administration.IntegrationEvents.csproj" />
     <ProjectReference Include="..\I3Lab.Clinic.Domain\I3Lab.Clinics.Domain.csproj" />
+    <ProjectReference Include="..\I3Lab.Clinic.IntegrationEvents\I3Lab.Clinics.IntegrationEvents.csproj" />
   </ItemGroup>
   
 </Project>

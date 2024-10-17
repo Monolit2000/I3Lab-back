@@ -115,7 +115,5 @@ namespace I3Lab.BuildingBlocks.Domain
 
             return (seed * 23) + currentHash;
         }
-
-
     }
 }

@@ -1,24 +1,26 @@
 using Serilog;
-using I3Lab.Users.Infrastructure.JWT;
-using I3Lab.Users.Infrastructure.Startup;
-using I3Lab.Treatments.Infrastructure.Startup;
-using I3Lab.BuildingBlocks.Infrastructure;
-using I3Lab.Doctors.Infrastructure.Startup;
-using I3Lab.BuildingBlocks.Infrastructure.StartUp;
-using I3Lab.Administration.Infrastructure.StartUp;
-using I3Lab.Users.Infrastructure.Persistence.Extensions;
-using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
-using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
-using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
-using I3Lab.Clinics.Infrastructure.Startup;
-using OpenTelemetry.Resources;
+using Hangfire;
+using Asp.Versioning;
+using Hangfire.PostgreSql;
 using OpenTelemetry.Trace;
 using OpenTelemetry.Metrics;
-using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
-using I3Lab.Modules.BlobFailes.Infrastructure.Startup;
-using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
-using Asp.Versioning;
+using OpenTelemetry.Resources;
 using I3Lab.API.Configuration;
+using I3Lab.Users.Infrastructure.JWT;
+using I3Lab.Users.Infrastructure.Startup;
+using I3Lab.BuildingBlocks.Infrastructure;
+using I3Lab.Clinics.Infrastructure.Startup;
+using I3Lab.Doctors.Infrastructure.Startup;
+using I3Lab.Treatments.Infrastructure.Startup;
+using I3Lab.BuildingBlocks.Infrastructure.StartUp;
+using I3Lab.Administration.Infrastructure.StartUp;
+using I3Lab.Modules.BlobFailes.Infrastructure.Startup;
+using I3Lab.Users.Infrastructure.Persistence.Extensions;
+using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
+using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
+using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
+using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
+using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -94,11 +96,21 @@ builder.Services.ConfigureOptions<ConfigureSwaggerGenOptions>();
 
 builder.Services.AddHttpContextAccessor();
 
+
+builder.Services.AddHangfire(x =>
+x.UseSimpleAssemblyNameTypeSerializer()
+.UseRecommendedSerializerSettings()
+.UsePostgreSqlStorage(options => options.UseNpgsqlConnection(builder.Configuration.GetConnectionString("Database")))
+);
+
+builder.Services.AddHangfireServer(x => x.SchedulePollingInterval = TimeSpan.FromSeconds(2));
+
+
 builder.Services.AddBuildingBlocksModule(builder.Configuration);
 
 builder.Services
     .AddUserModule(builder.Configuration)
-    .AddWorkModule(builder.Configuration)
+    .AddTreatmentModule(builder.Configuration)
     .AddDoctorModule(builder.Configuration)
     .AddAdministrationModule(builder.Configuration)
     .AddClinicModule(builder.Configuration)
@@ -140,6 +152,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyBlobFaileContextMigrations();
 }
 
+
 app.UseHttpsRedirection();
 
 app.MapHealthChecks("health");
@@ -148,6 +161,11 @@ app.UseSerilogRequestLogging();
 
 app.MapControllers();
 
+
+app.UseHangfireDashboard("/hangfire", new DashboardOptions
+{
+    Authorization = [],
+});
 //app.UseAuthentication();
 //app.UseAuthorization();
 

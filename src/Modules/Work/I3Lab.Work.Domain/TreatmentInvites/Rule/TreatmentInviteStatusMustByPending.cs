@@ -19,6 +19,6 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites.Rule
 
         public bool IsBroken() => _currentStatus != TreatmentInviteStatus.Pending;
 
-        public string Message => TreatmentInviteErrors.InvalidInviteStatus().Message;
+        public string Message => TreatmentInviteErrors.InvalidInviteStatus();
     }
 }

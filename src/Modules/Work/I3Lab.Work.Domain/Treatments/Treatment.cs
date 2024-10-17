@@ -4,9 +4,9 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentInvites;
+using I3Lab.Treatments.Domain.Treatments.Rules;
 using I3Lab.Treatments.Domain.Treatments.Errors;
 using I3Lab.Treatments.Domain.Treatments.Events;
-using I3Lab.Treatments.Domain.Treatments.Rules;
 
 namespace I3Lab.Treatments.Domain.Treatments
 {

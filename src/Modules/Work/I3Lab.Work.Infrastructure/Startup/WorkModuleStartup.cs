@@ -25,7 +25,7 @@ namespace I3Lab.Treatments.Infrastructure.Startup
 {
     public static class WorkModuleStartup
     {
-        public static IServiceCollection AddWorkModule(
+        public static IServiceCollection AddTreatmentModule(
          this IServiceCollection services, IConfiguration configuration)
         {
 

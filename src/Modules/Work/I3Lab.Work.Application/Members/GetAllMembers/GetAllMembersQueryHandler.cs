@@ -8,8 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace I3Lab.Treatments.Application.Members.GetAllMembers
 {
     public class GetAllMembersQueryHandler(
-        IMemberRepository memberRepository,
-        IMemoryCache cacheService) : IRequestHandler<GetAllMembersQuery, List<MemberDto>>
+        IMemberRepository memberRepository) : IRequestHandler<GetAllMembersQuery, List<MemberDto>>
     {
         public async Task<List<MemberDto>> Handle(GetAllMembersQuery request, CancellationToken cancellationToken)
         {

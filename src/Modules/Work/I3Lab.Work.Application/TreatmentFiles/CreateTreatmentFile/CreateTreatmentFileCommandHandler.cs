@@ -9,10 +9,10 @@ using I3Lab.Modules.BlobFailes.Api;
 namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
 {
     public class CreateTreatmentFileCommandHandler(
-        ITreatmentStageRepository workRepository,
-        ITreatmentFileRepository blobFileRepository,
         IBlobService blobService,
-        IBlobFilesApi blobFailesApi) : IRequestHandler<CreateTreatmentFileCommand, Result<TreatmentFileDto>>
+        IBlobFilesApi blobFailesApi, 
+        ITreatmentStageRepository workRepository,
+        ITreatmentFileRepository blobFileRepository) : IRequestHandler<CreateTreatmentFileCommand, Result<TreatmentFileDto>>
     {
         public async Task<Result<TreatmentFileDto>> Handle(CreateTreatmentFileCommand request, CancellationToken cancellationToken)
         {

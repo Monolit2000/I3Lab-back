@@ -8,8 +8,8 @@ using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
     public class CreateTreatmentCommandHandler(
-        ITreatmentRepository tretmentRepository,
-        IMemberRepository memberRepository) : IRequestHandler<CreateTreatmentCommand, Result<TreatmentDto>>
+        IMemberRepository memberRepository, 
+        ITreatmentRepository tretmentRepository) : IRequestHandler<CreateTreatmentCommand, Result<TreatmentDto>>
     {
         public async Task<Result<TreatmentDto>> Handle(CreateTreatmentCommand request, CancellationToken cancellationToken)
         {

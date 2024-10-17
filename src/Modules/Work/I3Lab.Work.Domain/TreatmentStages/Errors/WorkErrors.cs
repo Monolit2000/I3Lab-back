@@ -10,9 +10,11 @@ namespace I3Lab.Treatments.Domain.TreatmentStages.Errors
 {
     public static class WorkErrors
     {
-        public static readonly string WorkMemberNotFoundError = "The member adding the new work member is not present in the work TreatmentMembers list";
+        public static string WorkMemberNotFoundError()
+            => "The member adding the new work member is not present in the work TreatmentMembers list";
 
-        public static readonly string MemberNotHaveRequiredRole = "The member does not have the required role";
+        public static string MemberNotHaveRequiredRole() 
+            => "The member does not have the required role";
 
     }
 }

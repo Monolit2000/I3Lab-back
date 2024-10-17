@@ -6,39 +6,22 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites.Errors
 {
     public static class TreatmentInviteErrors
     {
-        public static Error InviteAlreadyExists(Member memberToInvite, Treatment treatment)
-        {
-            return new Error($"An invite already exists for member {memberToInvite.Id} to the treatment {treatment.Id}.")
-                .WithMetadata("MemberId", memberToInvite.Id.ToString())
-                .WithMetadata("TreatmentId", treatment.Id.ToString());
-        }
+        public static string InviteAlreadyExists(Member memberToInvite, Treatment treatment)
+            => $"An invite already exists for member {memberToInvite.Id} to the treatment {treatment.Id}.";
+        
+        public static string InvalidInviteStatus()
+            => "Invalid invite status. Only pending invites can be accepted or rejected.";
 
-        public static Error InvalidInviteStatus()
-        {
-            return new Error("Invalid invite status. Only pending invites can be accepted or rejected.");
-        }
+        public static string MemberNotAuthorized(Member inviter)
+            => $"Member {inviter.Id} is not authorized to invite other members to this treatment.";
 
-        public static Error MemberNotAuthorized(Member inviter)
-        {
-            return new Error($"Member {inviter.Id} is not authorized to invite other members to this treatment.")
-                .WithMetadata("InviterId", inviter.Id.ToString());
-        }
+        public static string InviteNotFound(TreatmentInviteId inviteId)
+            => $"The invite with ID {inviteId} was not found.";
 
-        public static Error InviteNotFound(TreatmentInviteId inviteId)
-            => new Error($"The invite with ID {inviteId} was not found.")
-                .WithMetadata("InviteId", inviteId.ToString());
+        public static string TreatmentNotFound(Treatment treatment)
+            => $"The treatment with ID {treatment.Id} was not found.";
 
-        public static Error TreatmentNotFound(Treatment treatment)
-        {
-            return new Error($"The treatment with ID {treatment.Id} was not found.")
-                .WithMetadata("TreatmentId", treatment.Id.ToString());
-        }
-
-        public static Error InviteCannotBeProcessed(TreatmentInvite invite)
-        {
-            return new Error("This invite cannot be processed due to its current status.")
-                .WithMetadata("InviteId", invite.Id.ToString())
-                .WithMetadata("Status", invite.TreatmentInviteStatus.ToString());
-        }
+        public static string InviteCannotBeProcessed(TreatmentInvite invite)
+            => $"This invite cannot be processed due to its current status. Invite ID: {invite.Id}, Status: {invite.TreatmentInviteStatus}.";
     }
 }

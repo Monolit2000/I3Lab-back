@@ -46,7 +46,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
             TreatmentStageTitel workTitel)
         {
             if (!IsMemberRoleValid(creator))
-                return Task.FromResult(Result.Fail<TreatmentStage>(WorkErrors.MemberNotHaveRequiredRole));
+                return Task.FromResult(Result.Fail<TreatmentStage>(WorkErrors.MemberNotHaveRequiredRole()));
 
             var treatmentStage = new TreatmentStage(creator, treatment, workTitel);
             return Task.FromResult(Result.Ok(treatmentStage));

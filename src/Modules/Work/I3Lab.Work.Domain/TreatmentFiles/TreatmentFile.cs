@@ -38,7 +38,7 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
             CreateDate = DateTime.UtcNow;
             MbSize = mbSize;
 
-            AddDomainEvent(new TreatmentFileCreatedDomainEvent());
+            AddDomainEvent(new TreatmentFileCreatedDomainEvent(TreatmentId, Id));
         }
 
         public static TreatmentFile CreateBaseOnTreatmentStage(TreatmentId treatmentId, TreatmentStageId treatmentStageId, ContentType type, BlobFileUrl url, double mdSize)
