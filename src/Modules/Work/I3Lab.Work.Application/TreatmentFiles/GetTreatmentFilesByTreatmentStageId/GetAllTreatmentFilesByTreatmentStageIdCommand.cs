@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFilesByTreatmentStageId
 {
-    public class GetAllTreatmentFilesByTreatmentStageIdCommand : IRequest<Result<List<BlobFileDto>>>
+    public class GetAllTreatmentFilesByTreatmentStageIdCommand : IRequest<Result<List<TreatmentFileDto>>>
     {
         public Guid WorkId { get; set; }
 
