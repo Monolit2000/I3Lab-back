@@ -2,7 +2,6 @@
 using FluentResults;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
 
-
 namespace I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreationProposal
 {
     public class ConfirmDoctorCreationProposalCommandHandler(
@@ -15,9 +14,9 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreatio
             if (proposal == null)
                 return Result.Fail("Proposal not exist");
 
-            proposal.Confirm();
+            var result = proposal.Confirm();
 
-            return Result.Ok();
+            return result;
         }
     }
 }

@@ -3,12 +3,12 @@ using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using MediatR;
 
-namespace I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByWorkId
+namespace I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFilesByTreatmentStageId
 {
-    public class GetAllBlobFilesByTreatmentStageIdCommandHandler(
-        ITreatmentFileRepository blobFileRepository) : IRequestHandler<GetAllBlobFilesByTreatmentStageIdCommand, Result<List<BlobFileDto>>>
+    public class GetAllTreatmentFilesByTreatmentStageIdCommandHandler(
+        ITreatmentFileRepository blobFileRepository) : IRequestHandler<GetAllTreatmentFilesByTreatmentStageIdCommand, Result<List<BlobFileDto>>>
     {
-        public async Task<Result<List<BlobFileDto>>> Handle(GetAllBlobFilesByTreatmentStageIdCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<BlobFileDto>>> Handle(GetAllTreatmentFilesByTreatmentStageIdCommand request, CancellationToken cancellationToken)
         {
             var files = await blobFileRepository.GetAllByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
 

@@ -1,6 +1,8 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.Doctors;
 using I3Lab.Clinics.Domain.DoctorCreationProposals.Events;
+using FluentResults;
+using System.Diagnostics.Contracts;
 
 namespace I3Lab.Clinics.Domain.DoctorCreationProposals
 {
@@ -48,23 +50,26 @@ namespace I3Lab.Clinics.Domain.DoctorCreationProposals
             return Doctor.CreateBaseOnProposal(Name, Email, PhoneNumber, DoctorAvatar);
         }
 
-        public void Confirm()
+        public Result Confirm()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
-                throw new InvalidOperationException("Proposal cannot be approved.");
+                return Result.Fail("Proposal cannot be approved.");
 
             ConfirmationStatus = ConfirmationStatus.Confirmed;
             AddDomainEvent(new DoctorCreationProposalConfirmedDomainEvent(Id));
+            return Result.Ok();
         }
 
-        public void Reject()
+        public Result Reject()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
-                throw new InvalidOperationException("Proposal cannot be rejected.");
+                return Result.Fail("Proposal cannot be rejected.");
 
             ConfirmationStatus = ConfirmationStatus.Rejected;
 
             AddDomainEvent(new DoctorCreationProposalRejectedDomainEvent(Id));
+
+            return Result.Ok();
         }
     }
 }

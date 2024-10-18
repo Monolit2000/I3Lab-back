@@ -14,9 +14,9 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.RejectDoctorCreation
             if (proposal == null)
                 return Result.Fail("Proposal not exist");
 
-            proposal.Reject();
+            var result =  proposal.Reject();
 
-            return Result.Ok();
+            return result;
         }
     }
 }

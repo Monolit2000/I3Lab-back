@@ -3,7 +3,7 @@ using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
 using I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFile;
 using I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile;
-using I3Lab.Treatments.Application.TreatmentFiles.GetBlobFilesByWorkId;
+using I3Lab.Treatments.Application.TreatmentFiles.GetTreatmentFilesByTreatmentStageId;
 
 namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 {
@@ -54,7 +54,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 
 
         [HttpGet("getAllBlobFilesByWorkId")]
-        public async Task<IActionResult> GetAllTreatmentFilesByTreatmentId(GetAllBlobFilesByTreatmentStageIdCommand getAllBlobFilesByWorkIdCommand) 
+        public async Task<IActionResult> GetAllTreatmentFilesByTreatmentId(GetAllTreatmentFilesByTreatmentStageIdCommand getAllBlobFilesByWorkIdCommand) 
             => HandleResult(await mediator.Send(getAllBlobFilesByWorkIdCommand));
 
     }
