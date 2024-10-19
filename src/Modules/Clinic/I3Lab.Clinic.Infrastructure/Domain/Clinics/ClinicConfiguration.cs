@@ -29,15 +29,15 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
                    .HasColumnName("CreatedAt")
                    .IsRequired();
 
-            builder.HasMany(c => c.ClinicDoctors)
+            builder.HasMany(c => c.Doctors)
                 .WithOne()
                 .HasForeignKey(dc => dc.ClinicId);
         }
     }
 }
-//builder.OwnsMany(c => c.ClinicDoctors, b =>
+//builder.OwnsMany(c => c.Doctors, b =>
 //{
-//    b.ToTable("ClinicDoctors");
+//    b.ToTable("Doctors");
 //    b.HasKey(x => x.DoctorId);
 //    b.WithOwner().HasForeignKey(x => x.ClinicId);
 //    b.Property(x => x.AddedAt).IsRequired();

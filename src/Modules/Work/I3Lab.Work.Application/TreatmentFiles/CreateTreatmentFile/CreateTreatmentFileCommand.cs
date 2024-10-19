@@ -16,7 +16,7 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
         //    string fileName)
         //{
         //    FileName = fileName;
-        //    WorkId = workId;
+        //    TreatmentStageId = workId;
         //}
     }
 }

@@ -1,4 +1,5 @@
-﻿using I3Lab.Treatments.Application.Configuration.Commands;
+﻿using Hangfire;
+using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Users.IntegrationEvents;
 using MassTransit;
 using MediatR;
@@ -15,6 +16,8 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
         {
             logger.LogInformation("{Consumer} : {Message}",
              nameof(NewUserRegisteredIntegrationEventHandler), context.Message.UserId);
+
+           //var jobId = BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget!"));
 
             await commandsScheduler.EnqueueAsync(new CreateMemberCommand(
                 context.Message.UserId,

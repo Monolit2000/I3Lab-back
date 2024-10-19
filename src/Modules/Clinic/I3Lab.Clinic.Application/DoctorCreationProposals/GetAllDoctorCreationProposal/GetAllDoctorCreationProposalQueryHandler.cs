@@ -2,7 +2,7 @@
 using FluentResults;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposal
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.GetAllDoctorCreationProposal
 {
     public class GetAllDoctorCreationProposalQueryHandler(
         IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<GetAllDoctorCreationProposalQuery, Result<List<DoctorCreationProposalDto>>>

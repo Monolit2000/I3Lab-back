@@ -3,7 +3,7 @@ using MediatR;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
 using I3Lab.Clinics.Domain.Doctors;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreationProposal
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.CreateDoctorCreationProposal
 {
     public class CreateDoctorCreationProposalCommandHandler(
         IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<CreateDoctorCreationProposalCommand, Result<DoctorCreationProposalDto>>
@@ -14,7 +14,7 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreation
 
             var isExist = await doctorCreationProposalRepository.ExistByEmailAsync(email, cancellationToken);
             if (isExist)
-                return Result.Fail($"Proposal with this email '{email}' already isExist");
+                return Result.Fail(CreateDoctorCreationProposalError.ProposalAlreadyExist(email.Value));
 
             var doctorCreationProposal = DoctorCreationProposal.CreateNew(
                 DoctorName.Create(request.FirstName, request.LastName),

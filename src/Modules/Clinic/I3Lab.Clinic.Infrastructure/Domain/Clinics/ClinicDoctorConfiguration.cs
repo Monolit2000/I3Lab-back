@@ -14,7 +14,7 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
             builder.HasKey(cd => new { cd.ClinicId, cd.DoctorId });
 
             builder.HasOne<Clinic>()
-                .WithMany(c => c.ClinicDoctors)
+                .WithMany(c => c.Doctors)
                 .HasForeignKey(cd => cd.ClinicId)
                 .OnDelete(DeleteBehavior.Cascade);
 

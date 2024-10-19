@@ -41,10 +41,8 @@ namespace I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals
         public async Task<IEnumerable<DoctorCreationProposal>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             return await _context.DoctorCreationProposals
-                .Where(p => p.ConfirmationStatus == ConfirmationStatus.Validation)
                 .ToListAsync(cancellationToken);
         }
-
 
         public async Task<IEnumerable<DoctorCreationProposal>> GetAllByStatusAsync(ConfirmationStatus status, CancellationToken cancellationToken = default)
         {
@@ -52,8 +50,6 @@ namespace I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals
                 .Where(p => p.ConfirmationStatus == status)
                 .ToListAsync(cancellationToken);
         }
-
-
 
         public async Task<bool> ExistByEmailAsync(Email email, CancellationToken cancellationToken = default)
         {

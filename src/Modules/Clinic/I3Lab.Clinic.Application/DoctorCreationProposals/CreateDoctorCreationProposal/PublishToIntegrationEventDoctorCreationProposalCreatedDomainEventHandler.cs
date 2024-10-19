@@ -3,7 +3,7 @@ using MassTransit;
 using I3Lab.Clinics.IntegrationEvents;
 using I3Lab.Clinics.Domain.DoctorCreationProposals.Events;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.CreateDoctorCreationProposal
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.CreateDoctorCreationProposal
 {
     public class PublishToIntegrationEventDoctorCreationProposalCreatedDomainEventHandler(
         IPublishEndpoint publishEndpoint) : INotificationHandler<DoctorCreationProposalCreatedDomainEvent>

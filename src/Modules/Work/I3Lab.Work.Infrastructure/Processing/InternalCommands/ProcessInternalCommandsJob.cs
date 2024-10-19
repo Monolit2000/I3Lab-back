@@ -10,4 +10,12 @@ namespace I3Lab.Treatments.Infrastructure.Processing.InternalCommands
             await CommandsExecutor.Execute(new ProcessInternalCommandsCommand());
         }
     }
+
+    public class ProcessInternalCommandsHangFireJob
+    {
+        public async Task Execute()
+        {
+            await CommandsExecutor.Execute(new ProcessInternalCommandsCommand());
+        }
+    }
 }

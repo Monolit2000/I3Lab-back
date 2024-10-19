@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using I3Lab.Clinics.Domain.Doctors;
+﻿using Microsoft.EntityFrameworkCore;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals
 {
@@ -15,7 +14,6 @@ namespace I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals
             {
                 avatar.Property(a => a.FirstName);
                 avatar.Property(a => a.LastName);
-                //.IsRequired();
             });
 
             builder.OwnsOne(d => d.PhoneNumber, phoneNumber =>
@@ -25,16 +23,12 @@ namespace I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals
 
             builder.OwnsOne(d => d.Email, a =>
             {
-                a.Property(a => a.Value)
-                      .HasColumnName("Emailll");
-                //.IsRequired();
+                a.Property(a => a.Value).HasColumnName("Emailll");
             });
 
             builder.OwnsOne(d => d.DoctorAvatar, avatar =>
             {
-                avatar.Property(a => a.Url)
-                      .HasColumnName("DoctorAvatarUrl");
-                      //.IsRequired();
+                avatar.Property(a => a.Url).HasColumnName("DoctorAvatarUrl");
             });
 
             builder.Property(p => p.CreatedAt).IsRequired();
@@ -43,12 +37,6 @@ namespace I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals
             {
                 status.Property(s => s.Value).HasColumnName("ConfirmationStatuss").IsRequired();
             });
-
-            //builder.Property(p => p.ConfirmationStatus)
-            //    .HasConversion(
-            //        status => status.ToString(),
-            //        status => (ConfirmationStatus)Enum.Parse(typeof(ConfirmationStatus), status))
-            //    .IsRequired();
         }
     }
 }

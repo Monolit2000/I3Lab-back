@@ -21,6 +21,7 @@ using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
 using I3Lab.Doctors.Infrastructure.Persistence.Extensions;
 using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
+using I3Lab.Treatments.Infrastructure.Processing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -124,6 +125,8 @@ builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
 var app = builder.Build();
 
 ServiceFactory.Configure(app.Services);
+
+//app.UseHangfire();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus
 {
     public class GetAllDoctorCreationProposalByStatusQuery : IRequest<Result<List<DoctorCreationProposalDto>>>
     {

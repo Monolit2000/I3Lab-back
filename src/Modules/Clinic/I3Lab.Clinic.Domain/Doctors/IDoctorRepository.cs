@@ -16,7 +16,7 @@ namespace I3Lab.Clinics.Domain.Doctors
 
         Task DeleteAsync(Doctor doctor);
 
-        Task<List<Doctor>> GetAll();
+        Task<List<Doctor>> GetAllAsync();
 
         //Task<IEnumerable<Doctor>> GetAllByStatusAsync(ConfirmationStatus status);
     }

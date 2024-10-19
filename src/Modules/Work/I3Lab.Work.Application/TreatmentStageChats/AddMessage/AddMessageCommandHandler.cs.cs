@@ -11,7 +11,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
     {
         public async Task<Result> Handle(AddMessageCommand request, CancellationToken cancellationToken)
         {
-            var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
+            var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(new TreatmentStageId(request.TreatmentStageId));
 
             if (treatmentStageChat == null)
                 return Result.Fail("TreatmentStageChat not found");

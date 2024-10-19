@@ -25,7 +25,7 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
             if (patient is null)
                 return Result.Fail(TreatmentError.PatientIsNull);
 
-            var sdf = await AsyncCall(request);
+            //var sdf = await AsyncCall(request);
 
             var treatment = Treatment.CreateNew(
                 creator, 

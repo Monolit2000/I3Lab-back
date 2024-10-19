@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using I3Lab.BuildingBlocks.Application.Cache;
+using MediatR;
+using I3Lab.Treatments.Application.TreatmentStageChats.AddMessage;
 
 namespace I3Lab.API.Modules.Treatments.TreatmentStageChats.Hubs
 {
 
-    public class ChatHub(IInMemoryCacheService cache) : Hub<ITreatmentChatClient>
+    public class ChatHub(
+        IMediator mediator,
+        IInMemoryCacheService cache) : Hub<ITreatmentChatClient>
     {
         public async Task JoinChat(string userName, string GroupId)
         {
@@ -16,9 +20,11 @@ namespace I3Lab.API.Modules.Treatments.TreatmentStageChats.Hubs
 
         }
 
-        public async Task SendMessage(string message)
+        public async Task SendMessage(Guid userId, Guid treatmentSageId, string message)
         {
             var groupName = await cache.GetAsync<string>(Context.ConnectionId);
+
+            var result = await mediator.Send(new AddMessageCommand(treatmentSageId, userId, message));
 
             await Clients.Group(groupName).ReceiveMessage("UserName", message);
         }

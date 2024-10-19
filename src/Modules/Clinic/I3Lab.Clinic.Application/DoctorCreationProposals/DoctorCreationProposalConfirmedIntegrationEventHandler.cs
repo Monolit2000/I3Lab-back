@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using I3Lab.Administration.IntegrationEvents;
 using I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreationProposal;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals
+namespace I3Lab.Clinics.Application.DoctorCreationProposals
 {
     public class DoctorCreationProposalConfirmedIntegrationEventHandler(
         ILogger<DoctorCreationProposalConfirmedIntegrationEventHandler> logger,

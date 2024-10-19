@@ -3,7 +3,7 @@ using FluentResults;
 using I3Lab.Clinics.Domain.Doctors;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus
 {
     public class GetAllDoctorCreationProposalByStatusQueryHandler(
         IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<GetAllDoctorCreationProposalByStatusQuery, Result<List<DoctorCreationProposalDto>>>
@@ -27,7 +27,7 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreation
                 Email = proposal.Email.Value,
                 PhoneNumber = proposal.PhoneNumber.Value,
                 AvatarUrl = proposal.DoctorAvatar.Url,
-                ConfirmationStatus = proposal.ConfirmationStatus.ToString(),
+                ConfirmationStatus = proposal.ConfirmationStatus.Value,
                 CreatedAt = proposal.CreatedAt
             }).ToList();
 

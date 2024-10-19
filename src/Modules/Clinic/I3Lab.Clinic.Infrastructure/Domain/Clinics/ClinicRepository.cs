@@ -10,14 +10,14 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Clinics
         public async Task<Clinic?> GetByIdAsync(ClinicId clinicId)
         {
             return await context.Clinics
-                .Include(c => c.ClinicDoctors) 
+                .Include(c => c.Doctors) 
                 .FirstOrDefaultAsync(c => c.Id == clinicId);
         }
 
         public async Task<List<Clinic>> GetAllAsync()
         {
             return await context.Clinics
-                .Include(c => c.ClinicDoctors)
+                .Include(c => c.Doctors)
                 .ToListAsync();
         }
 

@@ -1,7 +1,7 @@
 ﻿using FluentResults;
 using MediatR;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.RejectDoctorCreationProposal
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.RejectDoctorCreationProposal
 {
     public class RejectDoctorCreationProposalCommand : IRequest<Result>
     {

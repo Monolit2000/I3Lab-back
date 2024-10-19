@@ -30,7 +30,7 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Doctors
             await context.SaveChangesAsync();
         }
 
-        public async Task<List<Doctor>> GetAll()
+        public async Task<List<Doctor>> GetAllAsync()
         {
             return await context.Doctors.ToListAsync();
         }

@@ -8,7 +8,7 @@ namespace I3Lab.Clinics.Domain.Clinics
 {
     public class Clinic : Entity, IAggregateRoot
     {
-        public readonly List<ClinicDoctor> ClinicDoctors  = [];
+        public readonly List<ClinicDoctor> Doctors  = [];
 
         public ClinicId Id { get; private set; }
         public ClinicStatus Status { get; set; }
@@ -52,22 +52,22 @@ namespace I3Lab.Clinics.Domain.Clinics
 
         public Result AddDoctor(DoctorId doctorId)
         {
-            if (ClinicDoctors.Any(d => d.DoctorId == doctorId))
+            if (Doctors.Any(d => d.DoctorId == doctorId))
                 return Result.Fail("Doctor already exists in this clinic.");
 
-            ClinicDoctors.Add(ClinicDoctor.Create(this.Id, doctorId));
+            Doctors.Add(ClinicDoctor.Create(this.Id, doctorId));
             AddDomainEvent(new ClinicDoctorAddedDomainEvent(this.Id, doctorId));
             return Result.Ok(); 
         }
 
         public void RemoveDoctor(DoctorId doctorId)
         {
-            var doctor = ClinicDoctors.FirstOrDefault(d => d.DoctorId == doctorId);
+            var doctor = Doctors.FirstOrDefault(d => d.DoctorId == doctorId);
             if (doctor == null)
                 throw new InvalidOperationException("Doctor does not exist in this clinic.");
 
             AddDomainEvent(new ClinicDoctorRemovedDomainEvent(this.Id, doctorId));
-            ClinicDoctors.Remove(doctor);
+            Doctors.Remove(doctor);
         }
     }
 }

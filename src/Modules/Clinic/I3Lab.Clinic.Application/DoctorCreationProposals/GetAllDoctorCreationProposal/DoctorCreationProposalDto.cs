@@ -1,5 +1,5 @@
 ﻿
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.GetAllDoctorCreationProposal
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.GetAllDoctorCreationProposal
 {
     public class DoctorCreationProposalDto
     {

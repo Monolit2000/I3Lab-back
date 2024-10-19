@@ -2,7 +2,7 @@
 using MediatR;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
 
-namespace I3Lab.Doctors.Application.DoctorCreationProposals.RejectDoctorCreationProposal
+namespace I3Lab.Clinics.Application.DoctorCreationProposals.RejectDoctorCreationProposal
 {
     public class RejectDoctorCreationProposalCommandHandler(
         IDoctorCreationProposalRepository doctorCreationProposalRepository) : IRequestHandler<RejectDoctorCreationProposalCommand, Result>

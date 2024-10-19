@@ -5,16 +5,16 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
 {
     public class AddMessageCommand : IRequest<Result>
     {
-        public Guid WorkId {  get; set; }   
+        public Guid TreatmentStageId {  get; set; }   
         public Guid MemberId { get; set; }  
         public string Message { get; set; }
 
         public AddMessageCommand(
-            Guid workId,
+            Guid treatmentStageIdId,
             Guid memberId, 
             string message)
         {
-            WorkId = workId;
+            TreatmentStageId = treatmentStageIdId;
             MemberId = memberId;    
             Message = message;  
         }
