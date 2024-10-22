@@ -2,7 +2,6 @@
 
 namespace I3Lab.Clinics.Application.Doctors
 {
-
     public class DoctorDto
     {
         public Guid Id { get; set; }

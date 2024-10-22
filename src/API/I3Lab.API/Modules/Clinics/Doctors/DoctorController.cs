@@ -21,7 +21,7 @@ namespace I3Lab.API.Modules.Clinics.Doctors
            => HandleResult(await mediator.Send(getDoctorByIdQuery)); 
 
         [HttpGet("getAllDoctorsByClinicId")]
-        public async Task<IActionResult> GetDoctorById([FromQuery] GetAllDoctorsByClinicIdQuery getAllDoctorsByClinicIdQuery)
+        public async Task<IActionResult> GetDoctorByClinicId([FromQuery] GetAllDoctorsByClinicIdQuery getAllDoctorsByClinicIdQuery)
            => HandleResult(await mediator.Send(getAllDoctorsByClinicIdQuery));
     }
 }

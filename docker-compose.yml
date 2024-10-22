@@ -15,14 +15,19 @@ services:
       - postgres-db
       - rabbitmq
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__Database=Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres
-      - ConnectionStrings__BlobStorage=UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://i3lab-blob-storage;
-      - MessageBroker__HostName=amqp://i3lab-rabbitmq:5672
-      - OTEL_EXPORTER_OTLP_ENDPOINT = http://i3lab-seq:5341/ingest/otlp/vl/traces 
-      - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf 
-      - MessageBroker__UserName=guest
-      - MessageBroker__Password=guest
+       # OTEL_EXPORTER_OTLP_ENDPOINT: http://i3lab-jaeger:4317
+       OTEL_EXPORTER_OTLP_ENDPOINT: http://i3lab-dashboard:18889
+      # - OTEL_EXPORTER_OTLP_ENDPOINT:"http://i3lab.seq:5341/ingest/otlp/vl/traces"
+      # - OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf 
+       ASPNETCORE_ENVIRONMENT: Development
+       ConnectionStrings__Database: Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres
+       ConnectionStrings__BlobStorage: UseDevelopmentStorage=true;DevelopmentStorageProxyUri=http://i3lab-blob-storage;
+       MessageBroker__HostName: amqp://i3lab-rabbitmq:5672
+       MessageBroker__UserName: guest
+       MessageBroker__Password: guest
+    # environment:
+    #     OTEL_EXPORTER_OTLP_ENDPOINT: http://i3lab-jaeger:4317
+
     networks:
       - default
 
@@ -67,6 +72,31 @@ services:
     networks:
       - default
     restart: always
+
+
+
+
+  i3lab-jaeger:
+     image: jaegertracing/all-in-one:latest
+     container_name: i3lab.Jaeger
+     ports:
+       - 4317:4317
+       - 4318:4318
+       - 16686:16686
+
+
+  i3lab-dashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
+    container_name: i3lab.dashboard
+    ports:
+      - 18888:18888
+      # - 4317:18889
+    networks:
+      - default  
+
+
+
+
       
   i3lab-blob-storage:
     image: mcr.microsoft.com/azure-storage/azurite:latest
@@ -116,5 +146,6 @@ volumes:
 networks:
   default:
     name: i3lab-network
+  otel:
 
 

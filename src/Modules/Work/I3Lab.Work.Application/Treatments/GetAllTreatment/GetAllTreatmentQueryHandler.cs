@@ -1,6 +1,6 @@
-﻿using FluentResults;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Treatments.Domain.Treatments;
-using MediatR;
 
 namespace I3Lab.Treatments.Application.Treatments.GetAllTreatment
 {

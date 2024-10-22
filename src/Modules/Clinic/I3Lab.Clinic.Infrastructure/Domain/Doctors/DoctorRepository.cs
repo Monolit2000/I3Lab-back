@@ -1,6 +1,7 @@
 ﻿using I3Lab.Clinics.Domain.Doctors;
 using Microsoft.EntityFrameworkCore;
 using I3Lab.Clinics.Infrastructure.Persistence;
+using I3Lab.Clinics.Domain.Clinics;
 
 namespace I3Lab.Clinics.Infrastructure.Domain.Doctors
 {
@@ -9,8 +10,10 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Doctors
         public async Task<Doctor?> GetByIdAsync(DoctorId id)
         {
             return await context.Doctors
+                .Include(d => d.Clinics)
                 .FirstOrDefaultAsync(d => d.Id == id);
         }
+
 
         public async Task AddAsync(Doctor doctor)
         {
