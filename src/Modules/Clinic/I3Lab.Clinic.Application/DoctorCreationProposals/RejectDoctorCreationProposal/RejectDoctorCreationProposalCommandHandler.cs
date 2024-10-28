@@ -9,12 +9,15 @@ namespace I3Lab.Clinics.Application.DoctorCreationProposals.RejectDoctorCreation
     {
         public async Task<Result> Handle(RejectDoctorCreationProposalCommand request, CancellationToken cancellationToken)
         {
-            var proposal = await doctorCreationProposalRepository.GetByIdAsync(new DoctorCreationProposalId(request.DoctorCreationProposalId));
+            var proposal = await doctorCreationProposalRepository
+                .GetByIdAsync(new DoctorCreationProposalId(request.DoctorCreationProposalId), cancellationToken);
 
             if (proposal == null)
                 return Result.Fail("Proposal not exist");
 
             var result =  proposal.Reject();
+
+            await doctorCreationProposalRepository.SaveChangesAsync(cancellationToken); 
 
             return result;
         }

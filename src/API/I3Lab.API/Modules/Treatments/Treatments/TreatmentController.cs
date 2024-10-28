@@ -2,13 +2,13 @@
 using Asp.Versioning;
 using I3Lab.API.Modules.Base;
 using Microsoft.AspNetCore.Mvc;
-using I3Lab.API.Modules.Treatments.Treatments;
-using I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember;
 using I3Lab.Treatments.Application.Treatments.CreateTreatment;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatment;
+using I3Lab.Treatments.Application.Treatments.CancelTreatment;
 using I3Lab.Treatments.Application.Treatments.FinishTreatment;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentById;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentMembers;
+using I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId;
@@ -29,19 +29,17 @@ namespace I3Lab.API.Modules.Treatments
         public async Task<IActionResult> GetAllTreatment()
             => HandleResult(await mediator.Send(new GetAllTreatmentQuery()));
 
-        [MapToApiVersion(2)]
-        [HttpGet("getAllTreatment")]
-        public IActionResult GetAllTreatmentV2()
-           => Ok("Ok");
-
-
         [HttpPost("сreateTreatment")]
         public async Task<IActionResult> CeateTreatment(CreateTreatmentCommand createTreatmentCommand)
             => HandleResult(await mediator.Send(createTreatmentCommand));
 
         [HttpPut("finishTreatment")]
         public async Task<IActionResult> FinishTreatment(FinishTreatmentCommand finishTreatmentCommand)
-            => HandleResult(await mediator.Send(finishTreatmentCommand));
+            => HandleResult(await mediator.Send(finishTreatmentCommand));    
+        
+        [HttpPut("сancelTreatment")]
+        public async Task<IActionResult> FinishTreatment(CancelTreatmentCommand сancelTreatmentCommand)
+            => HandleResult(await mediator.Send(сancelTreatmentCommand));
 
         [HttpGet("getTreatmentById")]
         public async Task<IActionResult> GetTreatmentById([FromQuery] GetTreatmentByIdQuery getTreatmentByIdQuery)

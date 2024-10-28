@@ -12,7 +12,7 @@ namespace I3Lab.Clinics.Application.Clnics.CreateClnic
             var isClinicExist = await clinicRepository.ExistByName(ClinicName.Create(request.ClinicName));
 
             if (isClinicExist == true)
-                return Result.Fail($"Clinic {request.ClinicName} already exist ");
+                return Result.Fail(ClinicError.ClinicAlreadyExist(request.ClinicName));
 
             var clinic = Clinic.Create(
                 ClinicName.Create(request.ClinicName),

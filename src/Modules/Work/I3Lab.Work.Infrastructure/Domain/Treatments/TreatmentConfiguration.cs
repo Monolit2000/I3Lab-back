@@ -37,6 +37,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Treatments
                 b.ToTable("TreatmentMembers");
 
                 b.WithOwner().HasForeignKey(x => x.TreatmentId);
+
                 b.HasKey(wm => wm.Id);
 
                 b.Property(wm => wm.TreatmentId).IsRequired();

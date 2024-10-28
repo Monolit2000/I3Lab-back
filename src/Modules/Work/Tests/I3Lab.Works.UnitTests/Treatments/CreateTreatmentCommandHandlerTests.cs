@@ -1,124 +1,102 @@
-﻿
-//using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
-//using I3Lab.Treatments.Application.Treatments.CreateTreatment;
-//using I3Lab.Treatments.Domain.Treatments;
-//using FluentAssertions;
-//using NSubstitute;
-//using AutoFixture;
-//using I3Lab.Treatments.Domain.Members;
+﻿using AutoFixture;
+using FluentAssertions;
+using NSubstitute;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Application.Treatments.CreateTreatment;
+using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 
-//namespace I3Lab.Treatments.UnitTests.Treatments
-//{
-//    public class CreateTreatmentCommandHandlerTests
-//    {
-//        private static readonly CreateTreatmentCommand Command = new("TestTreatment");
+namespace I3Lab.Treatments.UnitTests.Treatments
+{
 
-//        private  readonly CreateTreatmentCommandHandler _handler;
-//        private readonly ITretmentRepository _tretmentRepositoryMock;
-//        private readonly IMemberRepository _memberRepository;
+    public class CreateTreatmentCommandHandlerTests
+    {
+        private readonly Fixture _fixture;
+        private readonly IMemberRepository _memberRepositoryMock;
+        private readonly ITreatmentRepository _treatmentRepositoryMock;
+        private readonly CreateTreatmentCommandHandler _handler;
 
-//        public CreateTreatmentCommandHandlerTests()
-//        {
-//            _tretmentRepositoryMock = Substitute.For<ITretmentRepository>();
-//            _memberRepository = Substitute.For<IMemberRepository>();    
-//            _handler = new CreateTreatmentCommandHandler(_tretmentRepositoryMock, _memberRepository);
-//        }
+        public CreateTreatmentCommandHandlerTests()
+        {
+            _fixture = new Fixture();
+            _memberRepositoryMock = Substitute.For<IMemberRepository>();
+            _treatmentRepositoryMock = Substitute.For<ITreatmentRepository>();
+            _handler = new CreateTreatmentCommandHandler(_memberRepositoryMock, _treatmentRepositoryMock);
+        }
 
+        [Fact]
+        public async Task Handle_ShouldReturnError_WhenTreatmentNameIsNotUnique()
+        {
+            // Arrange
+            var command = _fixture.Create<CreateTreatmentCommand>();
+            _treatmentRepositoryMock.IsNameUniqueAsync(command.TreatmentTitel).Returns(false);
 
-//        [Fact]
-//        public async Task Handle_Should_ReturnError_WhenNameIsEmpty()
-//        {
-//            //Arrange 
+            // Act
+            var result = await _handler.Handle(command, CancellationToken.None);
 
-//            var fixture = new Fixture();
+            // Assert
+            result.IsFailed.Should().BeTrue();
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.NotUniqueName);
+        }
 
-//            var command = fixture.Build<CreateTreatmentCommand>()
-//                .With(command => command.TreatmentTitel, string.Empty)
-//                .Create();
+        [Fact]
+        public async Task Handle_ShouldReturnError_WhenCreatorIsNull()
+        {
+            // Arrange
+            var command = _fixture.Create<CreateTreatmentCommand>();
+            _treatmentRepositoryMock.IsNameUniqueAsync(command.TreatmentTitel).Returns(true);
+            _memberRepositoryMock.GetAsync(Arg.Any<MemberId>()).Returns((Member)null);
 
-//            _tretmentRepositoryMock.IsNameUniqueAsync(command.TreatmentTitel)
-//                .Returns(true);
+            // Act
+            var result = await _handler.Handle(command, CancellationToken.None);
 
-//            //Act
-//            var result = await _handler.Handle(command, default);
+            // Assert
+            result.IsFailed.Should().BeTrue();
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.CreatorIsNull);
+        }
 
-//            //Assert
-//            result.Errors.First().Message.Should().Be("Treatments name is Empty");
-//        }
+        [Fact]
+        public async Task Handle_ShouldReturnError_WhenPatientIsNull()
+        {
+            // Arrange
+            var command = _fixture.Create<CreateTreatmentCommand>();
+            var creator = _fixture.Create<Member>();
+            _treatmentRepositoryMock.IsNameUniqueAsync(command.TreatmentTitel).Returns(true);
+            _memberRepositoryMock.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.CreatorId))).Returns(creator);
+            _memberRepositoryMock.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.PatientId))).Returns((Member)null);
 
-//        [Fact]
-//        public async Task Handle_Should_ReturnError_WhenNameIsNotUnique()
-//        {
-//            //Arrange 
-//            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == Command.TreatmentTitel))
-//                .Returns(false);
+            // Act
+            var result = await _handler.Handle(command, CancellationToken.None);
 
-//            //Act
-//            var result = await _handler.Handle(Command, default);
+            // Assert
+            result.IsFailed.Should().BeTrue();
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.PatientIsNull);
+        }
 
-//            //Assert
-//            result.Errors.First().Message.Should().Be(TreatmentsErrors.NotUniqueName);        
-//        }
+        [Fact]
+        public async Task Handle_ShouldReturnTreatmentDto_WhenCommandIsValid()
+        {
+            // Arrange
+            var command = _fixture.Create<CreateTreatmentCommand>();
+            var creator = _fixture.Create<Member>();
+            var patient = _fixture.Create<Member>();
 
-//        [Fact]
-//        public async Task Handle_Should_ReturnSuccess_WhenNameIsUnique()
-//        {
-//            var fixture = new Fixture();
+            _treatmentRepositoryMock.IsNameUniqueAsync(command.TreatmentTitel).Returns(true);
+            _memberRepositoryMock.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.CreatorId))).Returns(creator);
+            _memberRepositoryMock.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.PatientId))).Returns(patient);
 
-//            var command = fixture.Create<CreateTreatmentCommand>();
+            var treatment = Treatment.CreateNew(creator, patient, TreatmentTitel.Create(command.TreatmentTitel));
+            _treatmentRepositoryMock.AddAsync(treatment).Returns(Task.CompletedTask);
+            _treatmentRepositoryMock.SaveChangesAsync().Returns(Task.CompletedTask);
 
-//            //Arrange 
-//            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == command.TreatmentTitel))
-//               .Returns(true);
+            // Act
+            var result = await _handler.Handle(command, CancellationToken.None);
 
-//            //Act
-//            var result = await _handler.Handle(command, default);
+            // Assert
+            result.IsSuccess.Should().BeTrue();
+            result.Value.Id.Should().NotBeEmpty();
+            result.Value.IvniteToken.Should().NotBeNullOrWhiteSpace();
+        }
+    }
 
-//            //Assert
-//            result.IsSuccess.Should().Be(true);
-//        }
-
-
-//        [Fact]
-//        public async Task Handle_Should_CallRepositorySaveChengesAsync_WhenNameIsUnique()
-//        {
-
-//            //Arrange 
-//            var fixture = new Fixture();
-
-//            var command = fixture.Create<CreateTreatmentCommand>();
-
-//            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == command.TreatmentTitel))
-//               .Returns(true);
-
-//            //Act
-//            var result = await _handler.Handle(command, default);
-
-//            //Assert
-//            await _tretmentRepositoryMock.Received(1).SaveChangesAsync();   
-//        }
-
-//        [Fact]
-//        public async Task Handle_Should_CallRepository_WhenNameIsUnique()
-//        {
-//            //Arrange 
-//            var fixture = new Fixture();
-
-//            var command = fixture.Create<CreateTreatmentCommand>();
-
-//            _tretmentRepositoryMock.IsNameUniqueAsync(Arg.Is<string>(e => e == command.TreatmentTitel))
-//               .Returns(true);
-
-//            //Act
-//            var result = await _handler.Handle(command, default);
-
-//            //Assert
-//            await _tretmentRepositoryMock.Received(1).AddAsync(Arg.Any<Treatment>());
-//        }
-//    }
-//}
-////Arrange 
-
-////Act
-
-////Assert
+}

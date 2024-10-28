@@ -3,6 +3,8 @@ using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using Microsoft.Extensions.Logging;
+using FluentResults;
+using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 
 namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageChat
 {
@@ -22,6 +24,11 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageC
                 return;
             }
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
+            if (treatment is null)
+            {
+                logger.LogWarning(TreatmentsErrors.TreatmentNotFound);
+                return;
+            }
 
             var members = treatment.TreatmentMembers.Select(m => m.Member).ToList();
 

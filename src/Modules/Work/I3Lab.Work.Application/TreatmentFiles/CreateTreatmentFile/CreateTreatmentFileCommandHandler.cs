@@ -2,14 +2,12 @@
 using FluentResults;
 using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.TreatmentStages;
-using I3Lab.BuildingBlocks.Application.BlobStorage;
 using I3Lab.Treatments.Application.Configuration.Errors;
 using I3Lab.Modules.BlobFailes.Api;
 
 namespace I3Lab.Treatments.Application.TreatmentFiles.CreateTreatmentFile
 {
     public class CreateTreatmentFileCommandHandler(
-        IBlobService blobService,
         IBlobFilesApi blobFailesApi, 
         ITreatmentStageRepository workRepository,
         ITreatmentFileRepository blobFileRepository) : IRequestHandler<CreateTreatmentFileCommand, Result<TreatmentFileDto>>

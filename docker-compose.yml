@@ -14,6 +14,7 @@ services:
     depends_on:
       - postgres-db
       - rabbitmq
+      # - otel-collector
     environment:
        # OTEL_EXPORTER_OTLP_ENDPOINT: http://i3lab-jaeger:4317
        OTEL_EXPORTER_OTLP_ENDPOINT: http://i3lab-dashboard:18889
@@ -25,8 +26,10 @@ services:
        MessageBroker__HostName: amqp://i3lab-rabbitmq:5672
        MessageBroker__UserName: guest
        MessageBroker__Password: guest
-    # environment:
-    #     OTEL_EXPORTER_OTLP_ENDPOINT: http://i3lab-jaeger:4317
+
+       # Otel__Endpoint: http://prometheus:9090
+
+
 
     networks:
       - default
@@ -61,28 +64,58 @@ services:
     restart: always
 
 
-  i3lab.seq:
-    image: datalust/seq:latest
-    container_name: i3lab-seq
-    environment:
-      - ACCEPT_EULA=Y 
-    ports:
-      - 5341:5341 
-      - 8081:80
-    networks:
-      - default
-    restart: always
+  # otel-collector:
+  #   image: otel/opentelemetry-collector:0.95.0
+  #   command: ["--config=/etc/otel-collector-config.yml"]
+  #   volumes:
+  #     - /mnt/e/I3LAb/config/otlp-collector-config.yml:/etc/otel-collector-config.yml
+  #   ports:
+  #     - "8888:8888" 
+  #     - "8889:8889" 
+  #     - "13133:13133"
+  #     - "4317:4317"
+  #   networks:
+  #     - default
+  
+  # prometheus:
+  #   image: prom/prometheus:latest
+  #   container_name: prometheus
+  #   ports:
+  #     - 9090:9090
+  #   command:
+  #     - '--config.file=/etc/prometheus/prometheus.yml'
+  #   # volumes:
+  #   #   - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+  #   #   - prometheus-data:/prometheus
+  #   restart: unless-stopped
+  #   networks:
+  #     - default
+
+  # grafana:
+  #   image: grafana/grafana-oss:latest
+  #   container_name: grafana
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - grafana-data:/var/lib/grafana
+  #   restart: unless-stopped
+  #   networks:
+  #     - default
+  
+  # node_exporter:
+  #   image: quay.io/prometheus/node-exporter:v1.5.0
+  #   container_name: node_exporter
+  #   command: '--path.rootfs=/host'
+  #   pid: host
+  #   restart: unless-stopped
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /:/rootfs:ro
+  #   networks:
+  #     - default
 
 
-
-
-  i3lab-jaeger:
-     image: jaegertracing/all-in-one:latest
-     container_name: i3lab.Jaeger
-     ports:
-       - 4317:4317
-       - 4318:4318
-       - 16686:16686
 
 
   i3lab-dashboard:
@@ -90,7 +123,6 @@ services:
     container_name: i3lab.dashboard
     ports:
       - 18888:18888
-      # - 4317:18889
     networks:
       - default  
 
@@ -137,11 +169,32 @@ services:
     # - 25:25
 
 
+  # i3lab.seq:
+  #   image: datalust/seq:latest
+  #   container_name: i3lab-seq
+  #   environment:
+  #     - ACCEPT_EULA=Y 
+  #   ports:
+  #     - 5341:5341 
+  #     - 8081:80
+  #   networks:
+  #     - default
+  #   restart: always
+
+  # i3lab-jaeger:
+  #    image: jaegertracing/all-in-one:latest
+  #    container_name: i3lab.Jaeger
+  #    ports:
+  #      - 4317:4317
+  #      - 4318:4318
+  #      - 16686:16686
 
    
 volumes:
   postgres_data:
   rabbitmq_data:
+  prometheus-data:
+  grafana-data:
 
 networks:
   default:

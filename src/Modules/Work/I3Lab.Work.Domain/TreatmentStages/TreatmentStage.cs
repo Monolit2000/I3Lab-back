@@ -52,6 +52,18 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
             return Task.FromResult(Result.Ok(treatmentStage));
         }
 
+        public static Result<TreatmentStage> CreateBasedOnTreatment(
+        Member creator,
+        TreatmentId treatment,
+        TreatmentStageTitel workTitel)
+        {
+            if (!IsMemberRoleValid(creator))
+                return Result.Fail<TreatmentStage>(WorkErrors.MemberNotHaveRequiredRole());
+
+            var treatmentStage = new TreatmentStage(creator, treatment, workTitel);
+            return Result.Ok(treatmentStage);
+        }
+
         public TreatmentFile CreateTreatmentStageFile(BlobFileUrl url, ContentType contentType, BlobFileType fileType) 
             => TreatmentFile.CreateBaseOnTreatmentStage(this.TreatmentId, this.Id, contentType, url, 32);
 

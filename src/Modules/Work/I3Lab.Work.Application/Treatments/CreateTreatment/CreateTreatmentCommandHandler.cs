@@ -4,7 +4,6 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Application.Configuration.Errors;
 using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
-using I3Lab.Treatments.Application.Treatments.TreatmentErrors;
 
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
@@ -19,13 +18,11 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 
             var creator = await memberRepository.GetAsync(new MemberId(request.CreatorId));
             if (creator is null)
-                return Result.Fail(TreatmentError.CreatorIsNull);
+                return Result.Fail(TreatmentsErrors.CreatorIsNull);
 
             var patient = await memberRepository.GetAsync(new MemberId(request.PatientId));
             if (patient is null)
-                return Result.Fail(TreatmentError.PatientIsNull);
-
-            //var sdf = await AsyncCall(request);
+                return Result.Fail(TreatmentsErrors.PatientIsNull);
 
             var treatment = Treatment.CreateNew(
                 creator, 
@@ -45,24 +42,24 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
             return treatmentDto;
         }
 
-        private async Task<Result<(Member, Member)>> AsyncCall(CreateTreatmentCommand request)
-        {
-            var (creatorTask, patientTask) = (
-                memberRepository.GetAsync(new MemberId(request.CreatorId)),
-                memberRepository.GetAsync(new MemberId(request.PatientId)));
+        //private async Task<Result<(Member, Member)>> AsyncCall(CreateTreatmentCommand request)
+        //{
+        //    var (creatorTask, patientTask) = (
+        //        memberRepository.GetAsync(new SenderId(request.CreatorId)),
+        //        memberRepository.GetAsync(new SenderId(request.PatientId)));
 
-            await Task.WhenAll(creatorTask, patientTask);
+        //    await Task.WhenAll(creatorTask, patientTask);
 
-            var creator = await creatorTask;
-            var patient = await patientTask;
+        //    var creator = await creatorTask;
+        //    var patient = await patientTask;
 
-            if (creator is null)
-                return Result.Fail(TreatmentError.CreatorIsNull);
+        //    if (creator is null)
+        //        return Result.Fail(TreatmentError.CreatorIsNull);
 
-            if (patient is null)
-                return Result.Fail(TreatmentError.PatientIsNull);
+        //    if (patient is null)
+        //        return Result.Fail(TreatmentError.PatientIsNull);
 
-            return (creator, patient);
-        }
+        //    return (creator, patient);
+        //}
     }
 }

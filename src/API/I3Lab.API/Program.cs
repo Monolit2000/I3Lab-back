@@ -40,8 +40,12 @@ builder.Services
     .WithMetrics(metrics =>
     {
         metrics
+            .AddMeter("i3labMeter")
             .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation();
+            .AddHttpClientInstrumentation()
+            .AddProcessInstrumentation()
+            .AddRuntimeInstrumentation()
+            .AddPrometheusExporter();
 
         metrics.AddOtlpExporter();
     })
@@ -58,15 +62,9 @@ builder.Services
 builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
 
-
-
-
 builder.Services.AddControllers();
 
-
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
-
-
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -141,6 +139,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
+app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseHttpsRedirection();
 
 app.MapHealthChecks("health");
@@ -150,10 +149,12 @@ app.MapHealthChecks("health");
 app.MapControllers();
 
 
-app.UseHangfireDashboard("/hangfire", new DashboardOptions
-{
-    Authorization = [],
-});
+//app.UseHangfireDashboard("/hangfire", new DashboardOptions
+//{
+//    Authorization = [],
+//});
+
+
 //app.UseAuthentication();
 //app.UseAuthorization();
 

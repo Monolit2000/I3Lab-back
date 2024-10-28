@@ -14,11 +14,13 @@ namespace I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember
         public Guid TreatmentMemberId{ get; }
         public Guid TreatmentRemovingMemberId { get; }
         public RemoveTreatmentMemberCommand(
-            Guid treatmentId, 
-            Guid treatmentMemberId)
+            Guid treatmentId,
+            Guid treatmentMemberId,
+            Guid treatmentRemovingMemberId)
         {
             TreatmentId = treatmentId;
             TreatmentMemberId = treatmentMemberId;
+            TreatmentRemovingMemberId = treatmentRemovingMemberId;
         }
     }
 }

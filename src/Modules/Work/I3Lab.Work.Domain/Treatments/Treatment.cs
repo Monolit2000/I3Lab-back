@@ -54,6 +54,9 @@ namespace I3Lab.Treatments.Domain.Treatments
         public async Task<Result<TreatmentStage>> CreateTreatmentStageAsync(Member creator, TreatmentStageTitel stageTitel)
             => await TreatmentStage.CreateBasedOnTreatmentAsync(creator, this.Id, stageTitel);
 
+         public Result<TreatmentStage> CreateTreatmentStage(Member creator, TreatmentStageTitel stageTitel)
+            =>  TreatmentStage.CreateBasedOnTreatment(creator, this.Id, stageTitel);
+
 
         public Result AddToTreatmentMembers(Member member)
         {
@@ -70,7 +73,6 @@ namespace I3Lab.Treatments.Domain.Treatments
         public Result RemoveTreatmentMember(MemberId memberId, MemberId removingMemberId)
         {
             var treatmentMember = TreatmentMembers.FirstOrDefault(member => member.Member.Id == memberId);
-
             if (treatmentMember == null)
                 return Result.Fail(TreatmentErrors.MemberNotFound);
 

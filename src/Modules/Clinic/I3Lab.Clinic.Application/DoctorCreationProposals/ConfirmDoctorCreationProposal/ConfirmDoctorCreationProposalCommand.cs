@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreationProposal
 {
-    public class ConfirmDoctorCreationProposalCommand : IRequest<Result<DoctorCreationProposalDto>>
+    public class ConfirmDoctorCreationProposalCommand : IRequest<Result>
     {
         public Guid DoctorCreationProposalId { get; set; }
 

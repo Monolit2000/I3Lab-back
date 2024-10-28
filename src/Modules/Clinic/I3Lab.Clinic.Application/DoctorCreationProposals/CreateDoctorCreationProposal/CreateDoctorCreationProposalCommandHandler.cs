@@ -1,7 +1,7 @@
-﻿using FluentResults;
-using MediatR;
-using I3Lab.Clinics.Domain.DoctorCreationProposals;
+﻿using MediatR;
+using FluentResults;
 using I3Lab.Clinics.Domain.Doctors;
+using I3Lab.Clinics.Domain.DoctorCreationProposals;
 
 namespace I3Lab.Clinics.Application.DoctorCreationProposals.CreateDoctorCreationProposal
 {

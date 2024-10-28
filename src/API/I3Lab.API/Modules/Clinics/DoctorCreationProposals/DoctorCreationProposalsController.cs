@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using I3Lab.Clinics.Application.DoctorCreationProposals.CreateDoctorCreationProposal;
 using I3Lab.Clinics.Application.DoctorCreationProposals.GetAllDoctorCreationProposal;
 using I3Lab.Clinics.Application.DoctorCreationProposals.GetAllDoctorCreationProposalByStatus;
+using I3Lab.Doctors.Application.DoctorCreationProposals.ConfirmDoctorCreationProposal;
+using I3Lab.Clinics.Application.DoctorCreationProposals.RejectDoctorCreationProposal;
 
 namespace I3Lab.API.Modules.Clinics.DoctorCreationProposals
 {
@@ -14,7 +16,17 @@ namespace I3Lab.API.Modules.Clinics.DoctorCreationProposals
     {
         [HttpPost("createDoctorCreationProposal")]
         public async Task<IActionResult> CreateDoctorCreationProposal(CreateDoctorCreationProposalCommand createDoctorCreationProposalCommand)
-            => HandleResult(await mediator.Send(createDoctorCreationProposalCommand));
+            => HandleResult(await mediator.Send(createDoctorCreationProposalCommand)); 
+        
+
+        [HttpPost("confirmDoctorCreationProposal")]
+        public async Task<IActionResult> ConfirmDoctorCreationProposal(ConfirmDoctorCreationProposalCommand confirmDoctorCreationProposalCommand)
+            => HandleResult(await mediator.Send(confirmDoctorCreationProposalCommand));   
+        
+
+        [HttpPost("rejectDoctorCreationProposal")]
+        public async Task<IActionResult> RejectDoctorCreationProposal(RejectDoctorCreationProposalCommand confirmDoctorCreationProposalCommand)
+            => HandleResult(await mediator.Send(confirmDoctorCreationProposalCommand));
 
 
         [HttpGet("getAllDoctorCreationProposals")]

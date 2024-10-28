@@ -15,7 +15,3 @@ namespace I3Lab.Treatments.Application.TreatmentFiles.RemoveTreatmentFile
         }
     }
 }
-//var blobFile = await blobFileRepository.GetByIdAsync(new TreatmentFileId(request.TreatmentFileId));
-
-//if (blobFile == null)
-//    return Result.Fail("sad");

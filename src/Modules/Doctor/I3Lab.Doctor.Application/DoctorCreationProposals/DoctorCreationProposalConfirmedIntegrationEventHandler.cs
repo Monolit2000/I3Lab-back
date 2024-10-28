@@ -16,8 +16,8 @@ namespace I3Lab.Doctors.Application.DoctorCreationProposals
             logger.LogInformation("{Consumer} : {Message}",
           nameof(DoctorCreationProposalConfirmedIntegrationEventHandler), context.Message.DoctorCreationProposalId);
 
-            await sender.Send(new ConfirmDoctorCreationProposalCommand(
-                context.Message.DoctorCreationProposalId));
+            //await sender.Send(new ConfirmDoctorCreationProposalCommand(
+            //    context.Message.DoctorCreationProposalId));
         }
     }
 }

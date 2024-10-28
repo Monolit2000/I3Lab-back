@@ -53,15 +53,15 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         }
 
 
-        public Result AddMessage(MemberId senderId, string messageText, MessageId repliedToMessageId = null)
+        public Result AddMessage(MemberId senderId, string messageText)
         {
             var result = CheckRules(
-                new SenderMustBeChatMemberRule(ChatMembers, senderId),
-                new RepliedMessageMustExistRule(Messages, repliedToMessageId));
+                new SenderMustBeChatMemberRule(ChatMembers, senderId));
+                //new RepliedMessageMustExistRule(Messages, repliedToMessageId));
             if (result.IsFailed)
                 return result;
 
-            var newMessage = Message.CreateNew(senderId, messageText, repliedToMessageId);
+            var newMessage = Message.CreateNew(senderId, messageText);
             Messages.Add(newMessage);
 
             return Result.Ok();

@@ -6,7 +6,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
     public class AddMessageCommand : IRequest<Result>
     {
         public Guid TreatmentStageId {  get; set; }   
-        public Guid MemberId { get; set; }  
+        public Guid SenderId { get; set; }  
         public string Message { get; set; }
 
         public AddMessageCommand(
@@ -15,7 +15,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
             string message)
         {
             TreatmentStageId = treatmentStageIdId;
-            MemberId = memberId;    
+            SenderId = memberId;    
             Message = message;  
         }
     }

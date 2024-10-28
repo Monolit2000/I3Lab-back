@@ -16,17 +16,17 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
         [HttpPost("uploadWorkFile")]
         public async Task<IActionResult> UploadTreatmentFile(UploadWorkFileRequest uploadWorkFileRequest)
         {
-            using Stream stream = uploadWorkFileRequest.formFile.OpenReadStream();    
+            using Stream stream = uploadWorkFileRequest.formFile.OpenReadStream();
 
-            var file = stream;
-
-            return HandleResult(await mediator.Send(new CreateTreatmentFileCommand 
-            { 
+            var command = new CreateTreatmentFileCommand
+            {
                 WorkId = uploadWorkFileRequest.TreatmentId,
-                FileName = uploadWorkFileRequest.FileName, 
+                FileName = uploadWorkFileRequest.FileName,
                 Stream = stream,
                 ContentType = uploadWorkFileRequest.formFile.ContentType
-            }));                                                                                                                                             
+            };
+
+            return HandleResult(await mediator.Send(command));                                                                                                                                             
         }
 
         [HttpGet("downloadWorkFile")]
@@ -43,14 +43,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentFiles
 
         [HttpGet("downloadWithDeatelsWorkFile")]
         public async Task<IActionResult> DownloadWithDeatelsTreatmentFile(GetTreatmentFileStreamQuerie getBlobFileStreamQuerie)
-        {
-            var filrResponce = await mediator.Send(getBlobFileStreamQuerie);
-
-            if (filrResponce.IsFailed)
-                return HandleResult(filrResponce);
-
-            return Ok(Results.File(filrResponce.Value.Stream));
-        }
+            => HandleResult( await mediator.Send(getBlobFileStreamQuerie));
 
 
         [HttpGet("getAllBlobFilesByWorkId")]

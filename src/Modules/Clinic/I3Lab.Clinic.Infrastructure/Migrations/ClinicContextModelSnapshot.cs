@@ -74,6 +74,19 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                     b.ToTable("ClinicDoctors", "clinic");
                 });
 
+            modelBuilder.Entity("I3Lab.Clinics.Domain.DoctorCreationProposals.DoctorCreationProposal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DoctorCreationProposals", "clinic");
+                });
+
             modelBuilder.Entity("I3Lab.Clinics.Domain.Doctors.Doctor", b =>
                 {
                     b.Property<Guid>("Id")
@@ -81,7 +94,7 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Doctor", "clinic");
+                    b.ToTable("Doctors", "clinic");
                 });
 
             modelBuilder.Entity("I3Lab.Clinics.Domain.Clinics.Clinic", b =>
@@ -140,14 +153,11 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                                 .HasForeignKey("ClinicId");
                         });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
 
-                    b.Navigation("ClinicName")
-                        .IsRequired();
+                    b.Navigation("ClinicName");
 
-                    b.Navigation("Status")
-                        .IsRequired();
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("I3Lab.Clinics.Domain.Clinics.ClinicCreationProposal", b =>
@@ -206,20 +216,17 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                                 .HasForeignKey("ClinicCreationProposalId");
                         });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
 
-                    b.Navigation("ClinicName")
-                        .IsRequired();
+                    b.Navigation("ClinicName");
 
-                    b.Navigation("ConfirmationStatus")
-                        .IsRequired();
+                    b.Navigation("ConfirmationStatus");
                 });
 
             modelBuilder.Entity("I3Lab.Clinics.Domain.Clinics.ClinicDoctor", b =>
                 {
                     b.HasOne("I3Lab.Clinics.Domain.Clinics.Clinic", null)
-                        .WithMany("ClinicDoctors")
+                        .WithMany("Doctors")
                         .HasForeignKey("ClinicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -231,6 +238,108 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("I3Lab.Clinics.Domain.DoctorCreationProposals.DoctorCreationProposal", b =>
+                {
+                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.DoctorAvatar", "DoctorAvatar", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Url")
+                                .HasColumnType("text")
+                                .HasColumnName("DoctorAvatarUrl");
+
+                            b1.HasKey("DoctorCreationProposalId");
+
+                            b1.ToTable("DoctorCreationProposals", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
+                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.Email", "Email", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .HasColumnType("text")
+                                .HasColumnName("Emailll");
+
+                            b1.HasKey("DoctorCreationProposalId");
+
+                            b1.ToTable("DoctorCreationProposals", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
+                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.DoctorName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("FirstName")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("LastName")
+                                .HasColumnType("text");
+
+                            b1.HasKey("DoctorCreationProposalId");
+
+                            b1.ToTable("DoctorCreationProposals", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
+                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.PhoneNumber", "PhoneNumber", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("PhoneNumber");
+
+                            b1.HasKey("DoctorCreationProposalId");
+
+                            b1.ToTable("DoctorCreationProposals", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
+                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.ConfirmationStatus", "ConfirmationStatus", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorCreationProposalId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("Value")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("ConfirmationStatuss");
+
+                            b1.HasKey("DoctorCreationProposalId");
+
+                            b1.ToTable("DoctorCreationProposals", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorCreationProposalId");
+                        });
+
+                    b.Navigation("ConfirmationStatus");
+
+                    b.Navigation("DoctorAvatar");
+
+                    b.Navigation("Email");
+
+                    b.Navigation("Name");
+
+                    b.Navigation("PhoneNumber");
+                });
+
             modelBuilder.Entity("I3Lab.Clinics.Domain.Doctors.Doctor", b =>
                 {
                     b.OwnsOne("I3Lab.Clinics.Domain.Doctors.DoctorAvatar", "DoctorAvatar", b1 =>
@@ -239,34 +348,12 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Url")
-                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("DoctorAvatarUrl");
 
                             b1.HasKey("DoctorId");
 
-                            b1.ToTable("Doctor", "clinic");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DoctorId");
-                        });
-
-                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.DoctorName", "Name", b1 =>
-                        {
-                            b1.Property<Guid>("DoctorId")
-                                .HasColumnType("uuid");
-
-                            b1.Property<string>("FirstName")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.Property<string>("LastName")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.HasKey("DoctorId");
-
-                            b1.ToTable("Doctor", "clinic");
+                            b1.ToTable("Doctors", "clinic");
 
                             b1.WithOwner()
                                 .HasForeignKey("DoctorId");
@@ -278,13 +365,31 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
                                 .HasColumnType("uuid");
 
                             b1.Property<string>("Value")
-                                .IsRequired()
                                 .HasColumnType("text")
                                 .HasColumnName("Email");
 
                             b1.HasKey("DoctorId");
 
-                            b1.ToTable("Doctor", "clinic");
+                            b1.ToTable("Doctors", "clinic");
+
+                            b1.WithOwner()
+                                .HasForeignKey("DoctorId");
+                        });
+
+                    b.OwnsOne("I3Lab.Clinics.Domain.Doctors.DoctorName", "Name", b1 =>
+                        {
+                            b1.Property<Guid>("DoctorId")
+                                .HasColumnType("uuid");
+
+                            b1.Property<string>("FirstName")
+                                .HasColumnType("text");
+
+                            b1.Property<string>("LastName")
+                                .HasColumnType("text");
+
+                            b1.HasKey("DoctorId");
+
+                            b1.ToTable("Doctors", "clinic");
 
                             b1.WithOwner()
                                 .HasForeignKey("DoctorId");
@@ -302,28 +407,24 @@ namespace I3Lab.Clinics.Infrastructure.Migrations
 
                             b1.HasKey("DoctorId");
 
-                            b1.ToTable("Doctor", "clinic");
+                            b1.ToTable("Doctors", "clinic");
 
                             b1.WithOwner()
                                 .HasForeignKey("DoctorId");
                         });
 
-                    b.Navigation("DoctorAvatar")
-                        .IsRequired();
+                    b.Navigation("DoctorAvatar");
 
-                    b.Navigation("Email")
-                        .IsRequired();
+                    b.Navigation("Email");
 
-                    b.Navigation("Name")
-                        .IsRequired();
+                    b.Navigation("Name");
 
-                    b.Navigation("PhoneNumber")
-                        .IsRequired();
+                    b.Navigation("PhoneNumber");
                 });
 
             modelBuilder.Entity("I3Lab.Clinics.Domain.Clinics.Clinic", b =>
                 {
-                    b.Navigation("ClinicDoctors");
+                    b.Navigation("Doctors");
                 });
 
             modelBuilder.Entity("I3Lab.Clinics.Domain.Doctors.Doctor", b =>

@@ -34,7 +34,7 @@ namespace I3Lab.Treatments.Domain.Treatments
         {
             Random random = new Random();
             //string characters = Guid.NewGuid().ToString("N");
-            string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            string characters = $"{Guid.NewGuid()}ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
             var token = new StringBuilder(length);
             for (int i = 0; i < length; i++)

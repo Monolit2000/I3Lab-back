@@ -1,13 +1,9 @@
 ﻿using FluentResults;
+using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
-using MassTransit;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
 {
@@ -19,7 +15,13 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
+            if (treatment == null)
+                return Result.Fail(TreatmentsErrors.TreatmentNotFound);
+
             var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
+
+            if (member == null)
+                return Result.Fail(TreatmentsErrors.MemberNotFound);
 
             var result = treatment.AddToTreatmentMembers(member);
             if (result.IsFailed)

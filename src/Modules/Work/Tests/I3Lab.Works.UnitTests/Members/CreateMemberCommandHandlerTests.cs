@@ -7,12 +7,12 @@
 //    public class CreateMemberCommandHandlerTests
 //    {
 //        private readonly CreateMemberCommandHandler _handler;
-//        private readonly IMemberRepository _memberRepository;
+//        private readonly IMemberRepository _memberRepositoryMock;
 
 //        public CreateMemberCommandHandlerTests()
 //        {
-//            _memberRepository = Substitute.For<IMemberRepository>();
-//            _handler = new CreateMemberCommandHandler(_memberRepository);
+//            _memberRepositoryMock = Substitute.For<IMemberRepository>();
+//            _handler = new CreateMemberCommandHandler(_memberRepositoryMock);
 //        }
 
 //        [Fact]
@@ -20,7 +20,7 @@
 //        {
 //            // Arrange
 //            var command = new CreateMemberCommand { Email = "test@example.com" };
-//            _memberRepository.IsEmailTakenAsync(command.Email).Returns(true);
+//            _memberRepositoryMock.IsEmailTakenAsync(command.Email).Returns(true);
 
 //            // Act
 //            var result = await _handler.Handle(command, CancellationToken.None);
@@ -35,15 +35,15 @@
 //        {
 //            // Arrange
 //            var command = new CreateMemberCommand { Email = "test@example.com" };
-//            _memberRepository.IsEmailTakenAsync(command.Email).Returns(false);
+//            _memberRepositoryMock.IsEmailTakenAsync(command.Email).Returns(false);
 
 //            // Act
 //            var result = await _handler.Handle(command, CancellationToken.None);
 
 //            // Assert
 //            result.IsSuccess.Should().BeTrue();
-//            await _memberRepository.Received(1).AddAsync(Arg.Any<Member>());
-//            await _memberRepository.Received(1).SaveChangesAsync();
+//            await _memberRepositoryMock.Received(1).AddAsync(Arg.Any<Member>());
+//            await _memberRepositoryMock.Received(1).SaveChangesAsync();
 //        }
 
 //        [Fact]
@@ -51,7 +51,7 @@
 //        {
 //            // Arrange
 //            var command = new CreateMemberCommand { Email = "test@example.com" };
-//            _memberRepository.IsEmailTakenAsync(command.Email).Returns(false);
+//            _memberRepositoryMock.IsEmailTakenAsync(command.Email).Returns(false);
 
 //            // Act
 //            var result = await _handler.Handle(command, CancellationToken.None);
