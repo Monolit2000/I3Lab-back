@@ -36,9 +36,7 @@ namespace I3Lab.BuildingBlocks.Domain
         protected Result CheckRule(IBusinessRule rule)
         {
             if (rule.IsBroken())
-            {
                 return Result.Fail(rule.Message);
-            }
 
             return Result.Ok();
         }
@@ -46,13 +44,12 @@ namespace I3Lab.BuildingBlocks.Domain
         protected Result CheckRules(params IBusinessRule[] rules)
         {
             foreach (var rule in rules)
-                return CheckRule(rule); 
+            {
+                if (rule.IsBroken())
+                    return Result.Fail(rule.Message);
+            }
 
             return Result.Ok();
         }
-        //if (rule.IsBroken())
-        //{
-        //    return Result.Fail(rule.Message);
-        //}
     }
 }
