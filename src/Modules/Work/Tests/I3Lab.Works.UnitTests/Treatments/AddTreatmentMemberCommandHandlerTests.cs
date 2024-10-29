@@ -11,7 +11,7 @@ using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 namespace I3Lab.Treatments.UnitTests.Treatments
 {
 
-    public class AddTreatmentMemberCommandHandlerTests
+    public class AddTreatmentMemberCommandHandlerTests : TreatmentTestsBase
     {
         private readonly Fixture _fixture;
         private readonly IMemberRepository _memberRepository;
@@ -114,9 +114,6 @@ namespace I3Lab.Treatments.UnitTests.Treatments
             _treatmentRepository.GetByIdAsync(Arg.Is<TreatmentId>(id => id == new MemberId(command.TreatmentId)), Arg.Any<CancellationToken>())
                 .Returns(treatment);
             _memberRepository.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.MemberId))).Returns(member);
-
-            //var addResult = Result.Ok();
-            //treatment.AddToTreatmentMembers(member);
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);

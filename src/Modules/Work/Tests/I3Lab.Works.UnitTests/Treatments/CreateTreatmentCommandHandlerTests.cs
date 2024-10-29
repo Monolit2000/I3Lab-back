@@ -9,7 +9,7 @@ using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 namespace I3Lab.Treatments.UnitTests.Treatments
 {
 
-    public class CreateTreatmentCommandHandlerTests
+    public class CreateTreatmentCommandHandlerTests : TreatmentTestsBase
     {
         private readonly Fixture _fixture;
         private readonly IMemberRepository _memberRepositoryMock;

@@ -19,6 +19,8 @@ namespace I3Lab.Treatments.UnitTests
             public Member Patient { get; set; }
             public string Titel { get; set; } = "Test Treatment";
             public List<Member> ChatMembers { get; set; } = new List<Member>();
+
+            public List<Message> ChatMessage { get; set; } = [];
         }
 
         protected class TreatmentTestData
@@ -46,8 +48,9 @@ namespace I3Lab.Treatments.UnitTests
             var treatment = Treatment.CreateNew(creator, patient, TreatmentTitel.Create(options.Titel));
 
             // Створення TreatmentStage
-            var treatmentStageResult = treatment.CreateTreatmentStage(creator, TreatmentStageTitel.Create("Initial Stage"));
-            var treatmentStage = treatmentStageResult.Value;
+            var treatmentStage = treatment
+                .CreateTreatmentStage(creator, TreatmentStageTitel.Create("Initial Stage"))
+                .Value;
 
             // Створення TreatmentFile
             var treatmentFile = TreatmentFile.CreateBaseOnTreatmentStage(treatment.Id, treatmentStage.Id, new ContentType("application/pdf"), BlobFileUrl.Create("http://example.com/file"), 32.0);

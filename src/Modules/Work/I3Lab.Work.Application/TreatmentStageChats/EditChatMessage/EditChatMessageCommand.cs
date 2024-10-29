@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage
     public class EditChatMessageCommand : IRequest<Result>
     {
         public Guid WorkId { get; set; }
-        public Guid ChatMemberId { get; set; }   
+        public Guid EditorId { get; set; }   
         public Guid MessageId { get; set; }  
         public string EditedMessage { get; set; }
 
@@ -27,7 +27,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage
             string editedMessage)
         {
             WorkId = workId;
-            ChatMemberId = chatMemberId;
+            EditorId = chatMemberId;
             EditedMessage = editedMessage;
             MessageId = messageID;
         }

@@ -13,7 +13,7 @@ using I3Lab.Treatments.Domain.Members;
 namespace I3Lab.Treatments.UnitTests.Treatments
 {
 
-    public class FinishTreatmentCommandHandlerTests
+    public class FinishTreatmentCommandHandlerTests : TreatmentTestsBase
     {
         private readonly Fixture _fixture;
         private readonly ITreatmentRepository _treatmentRepository;

@@ -102,7 +102,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
             var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
 
             if (message == null)
-                return Result.Fail("Message not found.");
+                return Result.Fail("Message not found");
 
             Messages.Remove(message);
             return Result.Ok();
@@ -113,7 +113,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
             var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
 
             if (message == null)
-                return Result.Fail("Message not found.");
+                return Result.Fail("Message not found");
 
             message.Edit(newMessage);
 

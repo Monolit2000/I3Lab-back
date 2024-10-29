@@ -103,7 +103,7 @@ namespace I3Lab.Treatments.Domain.Treatments
         public Result Cancel()
         {
             var result = CheckRules(
-              new TreatmentMustNotBeFinishedRule(Status),
+              //new TreatmentMustNotBeFinishedRule(Status),
               new TreatmentMustNotBeCanceledRule(Status));
             if (result.IsFailed)
                 return result;

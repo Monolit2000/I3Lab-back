@@ -84,6 +84,9 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
 
         public Result Close()
         {
+            //if (TreatmentStageStatus == TreatmentStageStatus.Closed)
+            //    return Result.Fail();
+
             TreatmentStageStatus = TreatmentStageStatus.Closed;
 
             AddDomainEvent(new TreatmentStageClosedDomainEvent(Id));

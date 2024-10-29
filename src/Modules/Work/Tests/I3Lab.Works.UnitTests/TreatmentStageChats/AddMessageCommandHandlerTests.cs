@@ -57,14 +57,11 @@ namespace I3Lab.Treatments.UnitTests.TreatmentStageChats
             _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.TreatmentStageId)))
                 .Returns(treatmentStageChat);
 
-            //treatmentStageChat.AddMessage(Arg.Any<SenderId>(), command.Message).Returns(Result.Ok());
-
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
 
             // Assert
             result.IsSuccess.Should().BeTrue();
-            //treatmentStageChat.Received(1).AddMessage(Arg.Is<MemberId>(id => id == new MemberId(command.SenderId)), command.Message);
             await _treatmentStageChatRepository.Received(1).SaveChangesAsync();
         }
     }

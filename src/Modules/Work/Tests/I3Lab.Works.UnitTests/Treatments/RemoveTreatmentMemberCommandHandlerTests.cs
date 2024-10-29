@@ -9,7 +9,7 @@ using NSubstitute;
 
 namespace I3Lab.Treatments.UnitTests.Treatments
 {
-    public class RemoveTreatmentMemberCommandHandlerTests
+    public class RemoveTreatmentMemberCommandHandlerTests : TreatmentTestsBase
     {
         private readonly Fixture _fixture;
         private readonly ITreatmentRepository _treatmentRepository;
