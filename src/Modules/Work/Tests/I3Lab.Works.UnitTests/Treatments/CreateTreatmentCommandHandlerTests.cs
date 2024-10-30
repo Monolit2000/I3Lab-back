@@ -84,9 +84,6 @@ namespace I3Lab.Treatments.UnitTests.Treatments
             _memberRepositoryMock.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.CreatorId))).Returns(creator);
             _memberRepositoryMock.GetAsync(Arg.Is<MemberId>(id => id == new MemberId(command.PatientId))).Returns(patient);
 
-            var treatment = Treatment.CreateNew(creator, patient, TreatmentTitel.Create(command.TreatmentTitel));
-            _treatmentRepositoryMock.AddAsync(treatment).Returns(Task.CompletedTask);
-            _treatmentRepositoryMock.SaveChangesAsync().Returns(Task.CompletedTask);
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);

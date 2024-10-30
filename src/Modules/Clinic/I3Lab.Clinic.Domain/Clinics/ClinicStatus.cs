@@ -11,10 +11,10 @@ namespace I3Lab.Clinics.Domain.Clinics
     public class ClinicStatus : ValueObject
     {
         // Predefined Clinic Statuses
-        internal static ClinicStatus Active => new ClinicStatus(nameof(Active));
-        internal static ClinicStatus Canceled => new ClinicStatus(nameof(Canceled));
-        internal static ClinicStatus Finished => new ClinicStatus(nameof(Finished));
-        internal static ClinicStatus Pending => new ClinicStatus(nameof(Pending));
+        public static ClinicStatus Active => new ClinicStatus(nameof(Active));
+        public static ClinicStatus Canceled => new ClinicStatus(nameof(Canceled));
+        public static ClinicStatus Finished => new ClinicStatus(nameof(Finished));
+        public static ClinicStatus Pending => new ClinicStatus(nameof(Pending));
 
         public string Value { get; }
 

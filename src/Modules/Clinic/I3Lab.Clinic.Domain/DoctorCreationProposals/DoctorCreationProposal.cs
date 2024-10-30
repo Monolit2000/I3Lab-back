@@ -45,10 +45,8 @@ namespace I3Lab.Clinics.Domain.DoctorCreationProposals
         public static DoctorCreationProposal CreateNew(DoctorName name, Email email, PhoneNumber phoneNumber, DoctorAvatar doctorAvatar)
             => new DoctorCreationProposal(name, email, phoneNumber, doctorAvatar);
 
-        public Doctor CreateDoctor()
-        {
-            return Doctor.CreateBaseOnProposal(Name, Email, PhoneNumber, DoctorAvatar);
-        }
+        public Doctor CreateDoctor() 
+            => Doctor.CreateBaseOnProposal(Name, Email, PhoneNumber, DoctorAvatar);
 
         public Result Confirm()
         {
