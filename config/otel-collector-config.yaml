@@ -7,6 +7,10 @@ receivers:
 exporters:
   prometheus:
     endpoint: otel-collector:8889
+  otlp:
+    endpoint: i3lab-dashboard:18889
+    tls:
+      insecure: true
 
 processors:
   batch:
@@ -21,4 +25,12 @@ service:
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [prometheus]
+      exporters: [prometheus, otlp]
+    traces: 
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]
+    logs:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp]  

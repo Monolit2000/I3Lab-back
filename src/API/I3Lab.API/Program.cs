@@ -19,6 +19,7 @@ using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
 using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
 using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers();
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 
 
 //builder.Host.UseSerilog((context, loggerConfig)
@@ -47,24 +51,26 @@ builder.Services
             .AddRuntimeInstrumentation()
             .AddPrometheusExporter();
 
-        metrics.AddOtlpExporter();
+        metrics.AddOtlpExporter(options =>
+         options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
     })
     .WithTracing(tracing =>
     {
         tracing.AddHttpClientInstrumentation()
                .AddAspNetCoreInstrumentation()
+               .AddNpgsql()
                .AddEntityFrameworkCoreInstrumentation()
                .AddSource(MassTransit.Logging.DiagnosticHeaders.DefaultListenerName);
 
-        tracing.AddOtlpExporter();
+        tracing.AddOtlpExporter(options =>
+         options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
     });
 
-builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
+builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter(options
+    => options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"])));
 
 
-builder.Services.AddControllers();
 
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 
 builder.Services.AddApiVersioning(options =>
 {
@@ -104,7 +110,6 @@ builder.Services
     .AddAdministrationModule(builder.Configuration);
 
 builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
-
 
 
 var app = builder.Build();

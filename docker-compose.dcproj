@@ -15,5 +15,7 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="config\otel-collector-config.yaml" />
+    <None Include="config\prometheus.yml" />
   </ItemGroup>
 </Project>
