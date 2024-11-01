@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class wsejkriuh : Migration
+    public partial class sdhjgfjhfdsg : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -154,7 +154,8 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     ContentType = table.Column<string>(type: "text", nullable: true),
                     Url = table.Column<string>(type: "text", nullable: true),
                     MbSize = table.Column<double>(type: "double precision", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreateDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TreatmentId1 = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -162,6 +163,12 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "FK_TreatmentFiles_Treatments_TreatmentId",
                         column: x => x.TreatmentId,
+                        principalSchema: "treatment",
+                        principalTable: "Treatments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TreatmentFiles_Treatments_TreatmentId1",
+                        column: x => x.TreatmentId1,
                         principalSchema: "treatment",
                         principalTable: "Treatments",
                         principalColumn: "Id");
@@ -322,7 +329,13 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 name: "IX_TreatmentFiles_TreatmentId",
                 schema: "treatment",
                 table: "TreatmentFiles",
-                column: "TreatmentId",
+                column: "TreatmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TreatmentFiles_TreatmentId1",
+                schema: "treatment",
+                table: "TreatmentFiles",
+                column: "TreatmentId1",
                 unique: true);
 
             migrationBuilder.CreateIndex(

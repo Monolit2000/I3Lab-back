@@ -5,6 +5,8 @@ using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.BuildingBlocks.Infrastructure.InternalCommands;
+using Microsoft.EntityFrameworkCore.Design;
+using System.Configuration;
 
 namespace I3Lab.Treatments.Infrastructure.Persistence
 {
@@ -47,5 +49,18 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
         }
     }
+
+
+    //public class YourDbContextFactory : IDesignTimeDbContextFactory<TreatmentContext>
+    //{
+    //    public TreatmentContext CreateDbContext(string[] args)
+    //    {
+    //        var optionsBuilder = new DbContextOptionsBuilder<TreatmentContext>();
+    //        optionsBuilder.UseNpgsql("Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres");
+
+    //        return new TreatmentContext(optionsBuilder.Options);
+    //    }
+    //}
+
 }
 

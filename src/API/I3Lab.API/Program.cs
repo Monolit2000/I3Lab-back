@@ -48,28 +48,26 @@ builder.Services
             .AddAspNetCoreInstrumentation()
             .AddHttpClientInstrumentation()
             .AddProcessInstrumentation()
-            .AddRuntimeInstrumentation()
-            .AddPrometheusExporter();
+            .AddRuntimeInstrumentation();
+            //.AddPrometheusExporter();
 
         metrics.AddOtlpExporter(options =>
          options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
     })
     .WithTracing(tracing =>
     {
-        tracing.AddHttpClientInstrumentation()
-               .AddAspNetCoreInstrumentation()
-               .AddNpgsql()
-               .AddEntityFrameworkCoreInstrumentation()
-               .AddSource(MassTransit.Logging.DiagnosticHeaders.DefaultListenerName);
+        tracing
+            .AddHttpClientInstrumentation()
+            .AddAspNetCoreInstrumentation()
+            .AddNpgsql()
+            .AddEntityFrameworkCoreInstrumentation()
+            .AddSource(MassTransit.Logging.DiagnosticHeaders.DefaultListenerName);
 
-        tracing.AddOtlpExporter(options =>
-         options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
+        tracing.AddOtlpExporter(options 
+            => options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
     });
 
-builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter(options
-    => options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"])));
-
-
+builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
 
 
 builder.Services.AddApiVersioning(options =>
@@ -133,18 +131,16 @@ if (app.Environment.IsDevelopment())
         }
     });
 
-    //app.ClearDbContextMigrations();
+    app.ClearDbContextMigrations();
 
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();
-    //app.ApplyDoctorContextMigrations();
     app.ApplyClinicContextMigrations();
-
     app.ApplyBlobFaileContextMigrations();
 }
 
 
-app.UseOpenTelemetryPrometheusScrapingEndpoint();
+//app.UseOpenTelemetryPrometheusScrapingEndpoint();
 app.UseHttpsRedirection();
 
 app.MapHealthChecks("health");

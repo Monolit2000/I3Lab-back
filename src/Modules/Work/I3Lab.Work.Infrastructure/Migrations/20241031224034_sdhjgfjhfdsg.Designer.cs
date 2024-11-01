@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     [DbContext(typeof(TreatmentContext))]
-    [Migration("20241013074206_wsejkriuh")]
-    partial class wsejkriuh
+    [Migration("20241031224034_sdhjgfjhfdsg")]
+    partial class sdhjgfjhfdsg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("treatment")
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -90,12 +90,17 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                     b.Property<Guid?>("TreatmentId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid?>("TreatmentId1")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("TreatmentStageId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TreatmentId")
+                    b.HasIndex("TreatmentId");
+
+                    b.HasIndex("TreatmentId1")
                         .IsUnique();
 
                     b.ToTable("TreatmentFiles", "treatment");
@@ -219,8 +224,12 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentFiles.TreatmentFile", b =>
                 {
                     b.HasOne("I3Lab.Treatments.Domain.Treatments.Treatment", null)
+                        .WithMany()
+                        .HasForeignKey("TreatmentId");
+
+                    b.HasOne("I3Lab.Treatments.Domain.Treatments.Treatment", null)
                         .WithOne("TreatmentPreview")
-                        .HasForeignKey("I3Lab.Treatments.Domain.TreatmentFiles.TreatmentFile", "TreatmentId");
+                        .HasForeignKey("I3Lab.Treatments.Domain.TreatmentFiles.TreatmentFile", "TreatmentId1");
 
                     b.OwnsOne("I3Lab.Treatments.Domain.TreatmentFiles.BlobFilePath", "BlobFilePath", b1 =>
                         {

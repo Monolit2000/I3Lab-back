@@ -14,6 +14,7 @@ namespace I3Lab.Modules.BlobFailes.Infrastructure.Domain.BlobFiles
 
             builder.Property(bf => bf.CreateDate).IsRequired();
 
+            //builder.Property(bf => bf.BlobFileGroupId).IsRequired(false);
 
             builder.OwnsOne(bf => bf.Path);
 

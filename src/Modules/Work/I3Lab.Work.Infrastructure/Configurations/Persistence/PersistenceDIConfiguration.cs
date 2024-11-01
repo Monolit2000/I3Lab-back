@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using I3Lab.BuildingBlocks.Infrastructure.Domain;
 
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using MassTransit.Courier.Contracts;
 
 namespace I3Lab.Treatments.Infrastructure.Configurations.Persistence
 {
@@ -26,7 +25,7 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Persistence
                 options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             });
 
-            // services.AddScoped<TreatmentContext>();
+             //services.AddScoped<TreatmentContext>();
 
             return services;
         }

@@ -15,8 +15,6 @@ namespace I3Lab.Treatments.Domain.Treatments
           
         public TreatmentMemberRole Role { get; private set; }
         public TreatmentMemberAccessibilityType AccessibilityType { get; private set; }
-
-        //public Member AddedBy { get; private set; }
         public DateTime JoinDate { get; private set; }
         public DateTime LeaveDate { get; private set; }
 
@@ -33,7 +31,9 @@ namespace I3Lab.Treatments.Domain.Treatments
             JoinDate = DateTime.UtcNow;
             Role = treatmentMemberRole;
 
-            AddDomainEvent(new TreatmentMemberAddedDomainEvent(treatmentId, member.Id));
+            AddDomainEvent(new TreatmentMemberAddedDomainEvent(
+                treatmentId, 
+                member.Id));
         }
 
         public static TreatmentMember CreateNew(
@@ -55,7 +55,10 @@ namespace I3Lab.Treatments.Domain.Treatments
 
             AccessibilityType = newAccessibilityType;
 
-            AddDomainEvent(new TreatmentMemberAccessibilityTypeChangedDomainEvent(TreatmentId, Member, newAccessibilityType));
+            AddDomainEvent(new TreatmentMemberAccessibilityTypeChangedDomainEvent(
+                TreatmentId, 
+                Member, 
+                newAccessibilityType));
 
             return Result.Ok();
         }

@@ -19,7 +19,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("treatment")
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -222,8 +222,7 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
                 {
                     b.HasOne("I3Lab.Treatments.Domain.Treatments.Treatment", null)
                         .WithMany()
-                        .HasForeignKey("TreatmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .HasForeignKey("TreatmentId");
 
                     b.HasOne("I3Lab.Treatments.Domain.Treatments.Treatment", null)
                         .WithOne("TreatmentPreview")

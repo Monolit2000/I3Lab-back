@@ -6,7 +6,7 @@ namespace I3Lab.Modules.BlobFailes.Domain.BlobFiles
     public class BlobFile : Entity, IAggregateRoot
     {
         public BlobFileId Id { get; private set; }
-        //public Guid BlobFileGroupId { get; set; }
+        //public BlobFileGroupId BlobFileGroupId { get; set; }
         public ContentType ContentType { get; private set; }
         public Accessibilitylevel Accessibilitylevel { get; private set; }
         public BlobFileUrl Url { get; private set; }
