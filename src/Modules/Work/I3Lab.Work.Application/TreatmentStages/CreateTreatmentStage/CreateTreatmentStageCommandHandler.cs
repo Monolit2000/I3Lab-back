@@ -16,7 +16,7 @@
 //            if (creator == null)
 //                return;
 
-//            var treatment = Treatment.CreateNew();
+//            var treatment = Treatment.Create();
 
 //            throw new NotImplementedException();
 //        }

@@ -91,7 +91,7 @@ namespace I3Lab.Treatments.UnitTests.Treatments
             // Assert
             result.IsSuccess.Should().BeTrue();
             result.Value.Id.Should().NotBeEmpty();
-            result.Value.IvniteToken.Should().NotBeNullOrWhiteSpace();
+            result.Value.InviteToken.Should().NotBeNullOrWhiteSpace();
         }
     }
 

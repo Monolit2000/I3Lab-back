@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
             if (await memberRepository.IsEmailTakenAsync(request.Email))
                 return Result.Fail("Email is already taken");
 
-            var newMember = Member.CreateNew(
+            var newMember = Member.Create(
                 new MemberId(request.UserId),
                 request.Email); 
 

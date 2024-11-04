@@ -22,7 +22,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId
                 Status = treatment.Status.Value,
                 CreatorId = treatment.Creator.Id.Value,
                 PatientId = treatment.Patient.Id.Value,
-                IvniteToken = treatment.InvitationToken?.Token,
+                InviteToken = treatment.InvitationToken?.Token,
                 TreatmentDate = treatment.TreatmentDate.TreatmentStarted
             }).ToList();
         }

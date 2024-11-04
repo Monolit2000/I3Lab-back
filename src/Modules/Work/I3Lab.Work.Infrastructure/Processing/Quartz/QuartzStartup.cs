@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Infrastructure.Processing.Quartz
             //logger.LogInformation("Quartz starting...");
 
             var schedulerConfiguration = new NameValueCollection();
-            schedulerConfiguration.Add("quartz.scheduler.instanceName", "Meetings");
+            //schedulerConfiguration.Add("quartz.scheduler.instanceName", "Treatmens");
 
             ISchedulerFactory schedulerFactory = new StdSchedulerFactory(schedulerConfiguration);
             _scheduler = schedulerFactory.GetScheduler().GetAwaiter().GetResult();

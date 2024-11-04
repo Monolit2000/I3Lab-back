@@ -10,15 +10,15 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWo
 {
     public class GetAllChatMessageByTreatmentStageIdQuery : IRequest<Result<List<ChatMessageDto>>>
     {
-        public Guid WorkId { get; set; }
+        public Guid TreatmentStageId { get; set; }
 
         public GetAllChatMessageByTreatmentStageIdQuery()
         {
                 
         }
-        public GetAllChatMessageByTreatmentStageIdQuery(Guid workId)
+        public GetAllChatMessageByTreatmentStageIdQuery(Guid treatmentStageId)
         {
-            WorkId = workId;
+            TreatmentStageId = treatmentStageId;
         }
 
     }

@@ -14,7 +14,7 @@ namespace I3lab.Users.IntegrationTests.Abstraction
     public class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>, IDisposable
     {
 
-        private readonly IServiceScope _scope;
+        protected readonly IServiceScope _scope;
         protected readonly ISender Sender;
         protected readonly UserContext DbContext;
         protected Faker Faker;

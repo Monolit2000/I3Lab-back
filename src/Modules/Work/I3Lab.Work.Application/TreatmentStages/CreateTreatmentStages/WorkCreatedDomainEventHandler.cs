@@ -12,12 +12,12 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
 {
     public class WorkCreatedDomainEventHandler(
         ISender sender,
-        ICommandsScheduler commandsScheduler) : INotificationHandler<WorkCreatedDomainEvent>
+        IHangFireCommandsScheduler hangFireCommandsScheduler) : INotificationHandler<WorkCreatedDomainEvent>
     {
         public async Task Handle(WorkCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
 
-            await commandsScheduler.EnqueueAsync(new CreateTreatmentStageChatCommand(
+            await hangFireCommandsScheduler.EnqueueAsync(new CreateTreatmentStageChatCommand(
                 notification.WorkId.Value,
                 notification.TreatmentId.Value));
 

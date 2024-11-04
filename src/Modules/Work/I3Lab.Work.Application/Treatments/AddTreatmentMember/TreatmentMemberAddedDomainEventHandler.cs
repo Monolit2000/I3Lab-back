@@ -7,11 +7,11 @@ using MediatR;
 namespace I3Lab.TreatmentStages.Application.Treatments.AddTreatmentMember
 {
     public class TreatmentMemberAddedDomainEventHandler(
-        ICommandsScheduler commandsScheduler) : INotificationHandler<TreatmentMemberAddedDomainEvent>
+        IHangFireCommandsScheduler hangFireCommandsScheduler) : INotificationHandler<TreatmentMemberAddedDomainEvent>
     {
         public async Task Handle(TreatmentMemberAddedDomainEvent notification, CancellationToken cancellationToken)
         {
-            await commandsScheduler.EnqueueAsync(new AddChatMemberToAllTreatmentStageChatsByTreatmentIdCommand(
+            await hangFireCommandsScheduler.EnqueueAsync(new AddChatMemberToAllTreatmentStageChatsByTreatmentIdCommand(
                 notification.MemberId, 
                 notification.TreatmentId));
         }

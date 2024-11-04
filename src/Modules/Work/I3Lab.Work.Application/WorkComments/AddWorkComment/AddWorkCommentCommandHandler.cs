@@ -13,7 +13,7 @@ namespace I3Lab.Treatments.Application.WorkComments.AddWorkComment
     //    {
     //        var workComment = WorkComment.CreateBaseOnTreatmentStage(
     //            new TreatmentId(request.TreatmentId),
-    //            new MemberToInvite(request.AuthorId),
+    //            new InvitedMember(request.AuthorId),
     //            request.Content);
 
     //        await workCommentRepository.AddAsync(workComment);

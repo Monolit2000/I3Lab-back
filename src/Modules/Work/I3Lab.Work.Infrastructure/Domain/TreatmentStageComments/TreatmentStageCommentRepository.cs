@@ -62,7 +62,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkComments
         //    }
         //}
 
-        //public async Task<WorkComment?> GetByMemberIdAsync(MemberToInvite memberId)
+        //public async Task<WorkComment?> GetByMemberIdAsync(InvitedMember memberId)
         //{
         //    return await _context.TreatmentStageComments.FindAsync(memberId);
         //}

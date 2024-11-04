@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace I3lab.Works.IntegrationTests.Abstraction
 {
-    internal class IntegrationTestCollection
-    {
-    }
+    [CollectionDefinition(nameof(IntegrationTestCollection))]
+    public class IntegrationTestCollection : ICollectionFixture<IntegrationTestWebAppFactory>;
 }

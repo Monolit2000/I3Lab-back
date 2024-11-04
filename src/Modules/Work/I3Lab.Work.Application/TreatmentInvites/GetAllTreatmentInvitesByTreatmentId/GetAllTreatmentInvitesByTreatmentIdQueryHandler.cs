@@ -14,8 +14,8 @@ namespace I3Lab.Treatments.Application.TreatmentInvites.GetAllTreatmentInvitesBy
             var treatmentInviteDtos = treatmentInvites.Select(invite => new TreatmentInviteDto
             {
                 Id = invite.Id.Value,
-                MemberToInviteEmail = invite.MemberToInvite.Email, 
-                InviterEmail = invite.Inviter.Email, 
+                MemberToInviteEmail = invite.InvitedMember.Email, 
+                InviterEmail = invite.InviterMember.Email, 
                 Status = invite.TreatmentInviteStatus.Value,
                 OcurredOn = invite.OcurredOn,
                 //TreatmentInviteLink = invite.GenerateInviteLink(),

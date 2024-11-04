@@ -24,7 +24,6 @@ namespace I3Lab.Treatments.Domain.Treatments
 
         public static InvitationToken Generate(TimeSpan tokenLifetime = default)
         {
-            //var token = Guid.NewGuid().ToString();
             var token = GenerateRandomToken(7);
             var expiryDate = DateTime.UtcNow.Add(tokenLifetime == default ? TimeSpan.FromHours(24) : tokenLifetime);
             return new InvitationToken(token, expiryDate);

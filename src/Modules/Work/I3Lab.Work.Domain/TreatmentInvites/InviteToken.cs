@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using FluentResults;
+using I3Lab.Treatments.Domain.TreatmentInvites.Errors;
 
 namespace I3Lab.Treatments.Domain.TreatmentInvites
 {
@@ -26,7 +27,7 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
         public Result<InviteToken> Refresh(TimeSpan tokenLifetime)
         {
             if (!IsExpired())
-                return Result.Fail<InviteToken>("Cannot refresh a token that has not expired.");
+                return Result.Fail("Cannot refresh a token that has not expired.");
 
            // ExpiryDate = DateTime.UtcNow.Add(tokenLifetime);
 
@@ -40,10 +41,10 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
         public Result Validate(string token)
         {
             if (Token != token)
-                return Result.Fail("Invalid token.");
+                return Result.Fail(InviteTokenErrors.InvalidToken);
 
             if (IsExpired())
-                return Result.Fail("Token has expired.");
+                return Result.Fail(InviteTokenErrors.ExpiredToken);
 
             return Result.Ok();
         }
@@ -51,7 +52,7 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
         public static Result<InviteToken> Create(string token, DateTime expiryDate)
         {
             if (expiryDate <= DateTime.UtcNow)
-                return Result.Fail<InviteToken>("Token expiry date must be in the future.");
+                return Result.Fail("Token expiry date must be in the future.");
 
             return new InviteToken(token, expiryDate);
         }

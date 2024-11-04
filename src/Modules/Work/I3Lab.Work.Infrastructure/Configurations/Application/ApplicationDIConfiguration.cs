@@ -20,6 +20,7 @@ using I3Lab.Treatments.Infrastructure.Cache;
 using I3Lab.BuildingBlocks.Infrastructure.PublishStrategies;
 using Scrutor;
 using I3Lab.Treatments.Infrastructure.Pipelines;
+using I3Lab.Treatments.Infrastructure.Processing.Hangfire;
 
 namespace I3Lab.Treatments.Infrastructure.Configurations.Application
 {
@@ -33,7 +34,8 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Application
             {
                 cfg.RegisterServicesFromAssembly(typeof(WorkModule).Assembly);
                 cfg.RegisterServicesFromAssembly(typeof(ProcessInternalCommandsCommandHandler).Assembly);
-                cfg.NotificationPublisher = new ParallelNoWaitPublisher();
+                //cfg.NotificationPublisher = new ParallelNoWaitPublisher();
+                cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
 
             });
 
@@ -42,6 +44,8 @@ namespace I3Lab.Treatments.Infrastructure.Configurations.Application
 
             services.AddScoped<ICommandsScheduler, CommandsScheduler>();
             services.AddScoped<IDistributedCacheService, DistributedCacheService>();
+
+            services.AddScoped<IHangFireCommandsScheduler, HangFireCommandsScheduler>();
 
             services.AddScoped<IMemberContext, MemberContext>();
 

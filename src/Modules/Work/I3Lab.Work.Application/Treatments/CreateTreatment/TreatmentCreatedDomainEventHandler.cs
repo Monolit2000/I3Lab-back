@@ -1,4 +1,5 @@
-﻿using I3Lab.Treatments.Application.Configuration.Commands;
+﻿using Hangfire;
+using I3Lab.Treatments.Application.Configuration.Commands;
 using I3Lab.Treatments.Application.Works.CreateWorks;
 using I3Lab.Treatments.Domain.Treatments.Events;
 using MediatR;
@@ -7,17 +8,23 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {
     public class TreatmentCreatedDomainEventHandler(
         ISender sender, 
-        ICommandsScheduler commandsScheduler) : INotificationHandler<TreatmentCreatedDomainEvent>
+        IHangFireCommandsScheduler hangFireCommandsScheduler) : INotificationHandler<TreatmentCreatedDomainEvent>
     {
         public async Task Handle(TreatmentCreatedDomainEvent notification, CancellationToken cancellationToken)
         {
-            await commandsScheduler.EnqueueAsync(new CreateWorksCommand(
+            await hangFireCommandsScheduler.EnqueueAsync(new CreateWorksCommand(
                 notification.TreatmentId,
                 notification.CreatorId));
 
-            //await sender.Send(new CreateWorksCommand(
-            //        notification.TreatmentId,
-            //        notification.CreatorId));
+            //await commandsScheduler.EnqueueAsync(new CreateWorksCommand(
+            //    notification.TreatmentId,
+            //    notification.CreatorId));
+
+            //await sender.Send(new CreateWorksCommand(    
+            //        notification.TreatmentId,            
+            //        notification.CreatorId));            
         }
+
+       
     }
 }

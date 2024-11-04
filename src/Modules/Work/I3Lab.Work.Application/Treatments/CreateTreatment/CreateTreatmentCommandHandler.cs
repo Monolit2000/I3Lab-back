@@ -36,30 +36,10 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
             var treatmentDto = new TreatmentDto()
             {
                 Id = treatment.Id.Value,
-                IvniteToken = treatment.GetInvitationToken()
+                InviteToken = treatment.GetInvitationToken()
             };
 
             return treatmentDto;
         }
-
-        //private async Task<Result<(Member, Member)>> AsyncCall(CreateTreatmentCommand request)
-        //{
-        //    var (creatorTask, patientTask) = (
-        //        memberRepository.GetAsync(new SenderId(request.CreatorId)),
-        //        memberRepository.GetAsync(new SenderId(request.PatientId)));
-
-        //    await Task.WhenAll(creatorTask, patientTask);
-
-        //    var creator = await creatorTask;
-        //    var patient = await patientTask;
-
-        //    if (creator is null)
-        //        return Result.Fail(TreatmentError.CreatorIsNull);
-
-        //    if (patient is null)
-        //        return Result.Fail(TreatmentError.PatientIsNull);
-
-        //    return (creator, patient);
-        //}
     }
 }

@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWo
         public async Task<Result<List<ChatMessageDto>>> Handle(GetAllChatMessageByTreatmentStageIdQuery request, CancellationToken cancellationToken)
         {
             var treatmentStageChat = await _treatmentStageChatRepository
-                .GetByTreatmentStageIdAsync(new TreatmentStageId(request.WorkId));
+                .GetByTreatmentStageIdAsync(new TreatmentStageId(request.TreatmentStageId));
 
             if (treatmentStageChat == null)
                 return Result.Fail<List<ChatMessageDto>>("Chat not found.");

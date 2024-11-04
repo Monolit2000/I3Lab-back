@@ -6,16 +6,9 @@ namespace I3Lab.Treatments.Infrastructure
 {
     internal static class CommandsExecutor
     {
-        private static IServiceProvider _serviceProvider;
-        public static void Initialize(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
-
         internal static async Task Execute(ICommand command)
         {
             var mediator = ServiceFactory.GetScopedService<IMediator>();
-
             await mediator.Send(command);
         }
 

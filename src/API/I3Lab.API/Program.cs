@@ -1,3 +1,5 @@
+using Npgsql;
+using Serilog;
 using Hangfire;
 using Asp.Versioning;
 using OpenTelemetry.Logs;
@@ -6,6 +8,7 @@ using Hangfire.PostgreSql;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using I3Lab.API.Configuration;
+using Serilog.Sinks.OpenTelemetry;
 using I3Lab.Users.Infrastructure.JWT;
 using I3Lab.Users.Infrastructure.Startup;
 using I3Lab.BuildingBlocks.Infrastructure;
@@ -19,7 +22,8 @@ using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
 using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
 using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
-using Npgsql;
+using Serilog.Filters;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,13 +35,6 @@ builder.Services.AddControllers();
 
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection(nameof(JwtOptions)));
 
-
-//builder.Host.UseSerilog((context, loggerConfig)
-//    => loggerConfig.ReadFrom.Configuration(context.Configuration));
-
-//builder.Logging.AddSerilog();
-
-
 builder.Services
     .AddOpenTelemetry()
     .ConfigureResource(builder => builder.AddService(serviceName: "i3lab-api"))
@@ -45,29 +42,52 @@ builder.Services
     {
         metrics
             .AddMeter("i3labMeter")
-            .AddAspNetCoreInstrumentation()
-            .AddHttpClientInstrumentation()
-            .AddProcessInstrumentation()
-            .AddRuntimeInstrumentation();
             //.AddPrometheusExporter();
+            .AddProcessInstrumentation()
+            .AddRuntimeInstrumentation()
+            .AddAspNetCoreInstrumentation()
+            .AddHttpClientInstrumentation();
 
         metrics.AddOtlpExporter(options =>
-         options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
+        options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
     })
     .WithTracing(tracing =>
     {
         tracing
+            .AddNpgsql()
             .AddHttpClientInstrumentation()
             .AddAspNetCoreInstrumentation()
-            .AddNpgsql()
-            .AddEntityFrameworkCoreInstrumentation()
+            //.AddEntityFrameworkCoreInstrumentation()
             .AddSource(MassTransit.Logging.DiagnosticHeaders.DefaultListenerName);
 
-        tracing.AddOtlpExporter(options 
-            => options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
+        tracing.AddOtlpExporter(options => 
+        options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"]));
     });
 
-builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter());
+//builder.Logging.AddOpenTelemetry(logging => logging.AddOtlpExporter(options =>
+//        options.Endpoint = new Uri(builder.Configuration["Otel:Endpoint"])));
+
+
+// Настройка Serilog
+builder.Host.UseSerilog((context, configuration) =>
+{
+    configuration
+        .ReadFrom.Configuration(context.Configuration)
+            // .Filter.ByExcluding(logEvent =>
+            //logEvent.MessageTemplate.Text.Contains("Request starting"))
+        .WriteTo.OpenTelemetry(options =>
+        {
+            options.Endpoint = context.Configuration["Otel:Endpoint"];
+            options.Protocol = OtlpProtocol.Grpc;
+            options.ResourceAttributes = new Dictionary<string, object>
+            {
+                ["service.name"] = "i3lab-api"
+            };
+        })
+        .WriteTo.Console(); 
+});
+
+
 
 
 builder.Services.AddApiVersioning(options =>
@@ -75,10 +95,9 @@ builder.Services.AddApiVersioning(options =>
 
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.DefaultApiVersion = ApiVersion.Default;  /*new ApiVersion(1);*/
-
+                                    
     options.ApiVersionReader = new UrlSegmentApiVersionReader();
-})
-    .AddApiExplorer(options =>
+}).AddApiExplorer(options =>
     {
         options.GroupNameFormat = "'v'V";
         options.SubstituteApiVersionInUrl = true;
@@ -100,7 +119,7 @@ builder.Services.AddHangfireServer(x => x.SchedulePollingInterval = TimeSpan.Fro
 
 builder.Services.AddBuildingBlocksModule(builder.Configuration);
 
-builder.Services
+ builder.Services
     .AddUserModule(builder.Configuration)
     .AddClinicModule(builder.Configuration)
     .AddBlobFileModule(builder.Configuration)
@@ -139,8 +158,8 @@ if (app.Environment.IsDevelopment())
     app.ApplyBlobFaileContextMigrations();
 }
 
-
 //app.UseOpenTelemetryPrometheusScrapingEndpoint();
+
 app.UseHttpsRedirection();
 
 app.MapHealthChecks("health");
@@ -149,17 +168,13 @@ app.MapHealthChecks("health");
 
 app.MapControllers();
 
-
-//app.UseHangfireDashboard("/hangfire", new DashboardOptions
-//{
-//    Authorization = [],
-//});
-
-
-//app.UseAuthentication();
-//app.UseAuthorization();
-
-//app.MapIdentityApi<User>();
+app.UseHangfireDashboard("/hangfire", new DashboardOptions
+{
+    Authorization = [],
+});
 
 app.Run();
+
+
+
 

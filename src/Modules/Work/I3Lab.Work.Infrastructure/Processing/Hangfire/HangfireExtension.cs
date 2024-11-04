@@ -7,7 +7,6 @@ namespace I3Lab.Treatments.Infrastructure.Processing.Hangfire
 {
     public static class HangfireExtension
     {
-
         public static IApplicationBuilder UseHangfire(this WebApplication app)
         {
             app.Services

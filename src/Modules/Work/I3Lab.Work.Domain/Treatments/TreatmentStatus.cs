@@ -6,10 +6,10 @@ namespace I3Lab.Treatments.Domain.Treatments
     public class TreatmentStatus : ValueObject
     {
         // Predefined Treatment Statuses
-        internal static TreatmentStatus Active => new TreatmentStatus(nameof(Active));
-        internal static TreatmentStatus Canceled => new TreatmentStatus(nameof(Canceled));
-        internal static TreatmentStatus Finished => new TreatmentStatus(nameof(Finished));
-        internal static TreatmentStatus Pending => new TreatmentStatus(nameof(Pending));
+        public static TreatmentStatus Active => new TreatmentStatus(nameof(Active));
+        public static TreatmentStatus Canceled => new TreatmentStatus(nameof(Canceled));
+        public static TreatmentStatus Finished => new TreatmentStatus(nameof(Finished));
+        public static TreatmentStatus Pending => new TreatmentStatus(nameof(Pending));
 
         public string Value { get; }
 

@@ -10,8 +10,8 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
     public class TreatmentInvite : Entity, IAggregateRoot
     {
         public Treatment Treatment { get; private set; }
-        public Member MemberToInvite { get; private set; }
-        public Member Inviter { get; private set; }
+        public Member InvitedMember { get; private set; }
+        public Member InviterMember { get; private set; }
 
         public TreatmentInviteId Id { get; private set; }
         public TreatmentInviteStatus TreatmentInviteStatus { get; private set; }
@@ -24,8 +24,8 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
         {
             Id = new TreatmentInviteId(Guid.NewGuid());
             Treatment = treatment;
-            MemberToInvite = memberToInvite;
-            Inviter = inviter;
+            InvitedMember = memberToInvite;
+            InviterMember = inviter;
             OcurredOn = DateTime.UtcNow;
             TreatmentInviteStatus = TreatmentInviteStatus.Pending;
 
@@ -33,8 +33,8 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
 
             AddDomainEvent(new TreatmentInviteCreatedDomainEvent(
                 this.Treatment, 
-                this.MemberToInvite,
-                this.Inviter));
+                this.InvitedMember,
+                this.InviterMember));
         }
 
         public static Result<TreatmentInvite> InviteBasedOnTreatment(
@@ -55,7 +55,7 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
                 return result;
 
             TreatmentInviteStatus = TreatmentInviteStatus.Accepted;
-            AddDomainEvent(new TreatmentInviteAcceptedDomainEvent(Treatment.Id, MemberToInvite.Id, Inviter.Id));
+            AddDomainEvent(new TreatmentInviteAcceptedDomainEvent(Treatment.Id, InvitedMember.Id, InviterMember.Id));
             return Result.Ok();
         }
 
@@ -70,21 +70,22 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
             return Result.Ok();
         }
 
-        public Result GenerateInviteToken(TimeSpan tokenLifetime)
-        {
-            if (InviteToken != null && !InviteToken.IsExpired())
-                return Result.Fail("An active invite link already exists.");
+        //public Result GenerateInviteToken(TimeSpan tokenLifetime)
+        //{
+        //    if (InviteToken != null && !InviteToken.IsExpired())
+        //        return Result.Fail("An active invite link already exists.");
 
-            InviteToken = InviteToken.Generate(tokenLifetime);
-            return Result.Ok();
-        }
+        //    InviteToken = InviteToken.Generate(tokenLifetime);
+        //    return Result.Ok();
+        //}
 
-        public string GenerateInviteLink()
+        public string GenerateInviteLink(string link)
         {
             if (InviteToken == null || InviteToken.IsExpired())
                 InviteToken = InviteToken.Generate(TimeSpan.FromHours(24));
 
-            var inviteLink = $"/join-invite?token={InviteToken.Token}";
+            //var inviteLink = $"/join-invite?token={InviteToken.Token}";
+            var inviteLink = $"{link}={InviteToken.Token}";
 
             return inviteLink;
         }

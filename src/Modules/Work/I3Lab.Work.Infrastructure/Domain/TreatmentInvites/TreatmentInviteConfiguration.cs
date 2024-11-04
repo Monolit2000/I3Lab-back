@@ -23,12 +23,12 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
                     .HasColumnName("InviteTokenExpiryDate");
             });
 
-            builder.HasOne(e => e.MemberToInvite)
+            builder.HasOne(e => e.InvitedMember)
                    .WithMany()
                    .HasForeignKey("MemberToInviteId") 
                    .IsRequired();
 
-            builder.HasOne(e => e.Inviter)
+            builder.HasOne(e => e.InviterMember)
                    .WithMany()
                    .HasForeignKey("InviterId") 
                    .IsRequired();

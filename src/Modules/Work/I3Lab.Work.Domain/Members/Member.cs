@@ -25,7 +25,7 @@ namespace I3Lab.Treatments.Domain.Members
             Email = email;
         }
 
-        public static Member CreateNew(
+        public static Member Create(
             MemberId memberId, string email)
         {
             return new Member(memberId, email);

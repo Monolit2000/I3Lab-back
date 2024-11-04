@@ -21,7 +21,7 @@
 //            TreatmentId = treatmentId;
 //        }
 
-//        public static TreatmentStage CreateNew(
+//        public static TreatmentStage Create(
 //            TreatmentId treatmentId,
 //            TreatmentStageId workId)
 //        {

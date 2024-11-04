@@ -10,7 +10,7 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
     public class NewUserRegisteredIntegrationEventHandler(
         ILogger<NewUserRegisteredIntegrationEventHandler> logger,
         IMediator mediator,
-        ICommandsScheduler commandsScheduler) : IConsumer<UserRegisteredIntegretionEvent>
+        IHangFireCommandsScheduler hangFireCommandsScheduler) : IConsumer<UserRegisteredIntegretionEvent>
     {
         public async Task Consume(ConsumeContext<UserRegisteredIntegretionEvent> context)
         {
@@ -19,7 +19,7 @@ namespace I3Lab.Treatments.Application.Members.CreateMember
 
            //var jobId = BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget!"));
 
-            await commandsScheduler.EnqueueAsync(new CreateMemberCommand(
+            await hangFireCommandsScheduler.EnqueueAsync(new CreateMemberCommand(
                 context.Message.UserId,
                 context.Message.Email));
 

@@ -7,11 +7,11 @@ using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMemberWithAllCh
 namespace I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember
 {
     public class TreatmentMemberRemovedDomainEventHendler(
-        ICommandsScheduler commandsScheduler) : INotificationHandler<MemberRemovedFromTreatmentDomainEvent>
+        IHangFireCommandsScheduler hangFireCommandsScheduler) : INotificationHandler<MemberRemovedFromTreatmentDomainEvent>
     {
         public async Task Handle(MemberRemovedFromTreatmentDomainEvent notification, CancellationToken cancellationToken)
         {
-            await commandsScheduler.EnqueueAsync(
+            await hangFireCommandsScheduler.EnqueueAsync(
                 new RemoveChatMemberFromAllTreatmentStageChatsCommand(
                     notification.MemberId,
                     notification.TreatmentId));

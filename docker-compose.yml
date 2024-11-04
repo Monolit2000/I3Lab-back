@@ -168,17 +168,17 @@ services:
     # - 25:25
 
 
-  # i3lab.seq:
-  #   image: datalust/seq:latest
-  #   container_name: i3lab-seq
-  #   environment:
-  #     - ACCEPT_EULA=Y 
-  #   ports:
-  #     - 5341:5341 
-  #     - 8081:80
-  #   networks:
-  #     - default
-  #   restart: always
+  i3lab.seq:
+    image: datalust/seq:latest
+    container_name: i3lab-seq
+    environment:
+      - ACCEPT_EULA=Y 
+    ports:
+      - 5341:5341 
+      - 8081:80
+    networks:
+      - default
+    restart: always
 
  
 

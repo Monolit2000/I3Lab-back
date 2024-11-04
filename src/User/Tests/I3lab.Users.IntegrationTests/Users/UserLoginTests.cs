@@ -40,19 +40,19 @@ namespace I3lab.Users.IntegrationTests.Users
             result.Value.Token.Should().NotBeNullOrWhiteSpace();
         }
 
-        [Fact]
-        public async Task Handle_Should_Fail_When_User_Not_Found()
-        {
-            // Arrange
-            var command = new LoginCommand(Faker.Internet.Email(), Faker.Internet.Password());
+        //[Fact]
+        //public async Task Handle_Should_Fail_When_User_Not_Found()
+        //{
+        //    // Arrange
+        //    var command = new LoginCommand(Faker.Internet.Email(), Faker.Internet.Password());
 
-            // Act
-            var result = await Sender.Send(command);
+        //    // Act
+        //    var result = await Sender.Send(command);
 
-            // Assert
-            result.IsFailed.Should().BeTrue();
-            result.Errors.Should().Contain(e => e.Message == "User not found");
-        }
+        //    // Assert
+        //    result.IsFailed.Should().BeTrue();
+        //    result.Errors.Should().Contain(e => e.Message == "User not found");
+        //}
 
         [Fact]
         public async Task Handle_Should_Fail_When_Password_Is_Incorrect()

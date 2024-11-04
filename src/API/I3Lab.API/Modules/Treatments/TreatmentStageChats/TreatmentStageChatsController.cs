@@ -6,6 +6,7 @@ using I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMessage;
 using I3Lab.Treatments.Application.TreatmentStageChats.EditChatMessage;
 using I3Lab.Treatments.Application.TreatmentStageChats.GetAllChatMessageByWorkId;
 using Asp.Versioning;
+using I3Lab.Treatments.Application.TreatmentStageChats.GetTreatmentStageChatByTreatmentId;
 
 namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 {
@@ -30,6 +31,13 @@ namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
             _logger = logger;
         }
 
+
+
+        [HttpGet("GetTreatmentStageChatByTreatmentId")]
+        public async Task<IActionResult> GetTreatmentStageChatByTreatmentId([FromQuery] GetTreatmentStageChatByTreatmentIdQuery getTreatmentStageChatByTreatmentIdQuery)
+            => HandleResult(await _mediator.Send(getTreatmentStageChatByTreatmentIdQuery));
+
+
         [MapToApiVersion(1)]
         [HttpPost("addMessage")]
         public async Task<IActionResult> AddMessage(AddMessageCommand addMessageCommand)
@@ -53,7 +61,7 @@ namespace I3Lab.API.Modules.Treatments.TreatmentStageChats
 
 
         [HttpGet("getAllChatMessageByWorkId")]
-        public async Task<IActionResult> GetAllChatMessageByWorkId([FromQuery] GetAllChatMessageByTreatmentStageIdQuery getAllChatMessageByWorkIdQuery)
+        public async Task<IActionResult> GetAllChatMessageByTreatmentStageId([FromQuery] GetAllChatMessageByTreatmentStageIdQuery getAllChatMessageByWorkIdQuery)
             => HandleResult(await _mediator.Send(getAllChatMessageByWorkIdQuery));
     }
 }

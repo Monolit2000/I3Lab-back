@@ -10,6 +10,6 @@ namespace I3Lab.Treatments.Domain.Treatments.Errors
     {
         public static string MemberNotFound = "Member not found in treatment";
 
-        public static string MemberAlreadyAdded = "The member has already been added for treatment";
+        public static string MemberAlreadyAdded = "Member is already in treatment";
     }
 }

@@ -18,8 +18,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
         {
             return await _context.TreatmentInvites
                 .Include(x => x.Treatment)
-                .Include(x => x.MemberToInvite)
-                .Include(x => x.Inviter)
+                .Include(x => x.InvitedMember)
+                .Include(x => x.InviterMember)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -62,8 +62,8 @@ namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentInvites
             return await _context.TreatmentInvites
                 .Where(invite => invite.Treatment.Id == treatmentId)
                 .Include(x => x.Treatment)
-                .Include(x => x.MemberToInvite)
-                .Include(x => x.Inviter)
+                .Include(x => x.InvitedMember)
+                .Include(x => x.InviterMember)
                 .ToListAsync();
         }
     }

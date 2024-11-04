@@ -10,6 +10,6 @@ namespace I3Lab.Treatments.Application.Treatments
         public Guid CreatorId { get; set; }
         public Guid PatientId { get; set; }
 
-        public string IvniteToken { get; set; }
+        public string InviteToken { get; set; }
     }
 }
