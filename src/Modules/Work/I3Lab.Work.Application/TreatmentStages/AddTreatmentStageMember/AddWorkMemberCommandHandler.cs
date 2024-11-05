@@ -12,10 +12,10 @@ namespace I3Lab.Treatments.Application.Works.AddWorkMember
 {
     //public class AddWorkMemberCommandHandler(
     //    IWorkRepository workRepository,
-    //    IMemberRepository memberRepository) : IRequestHandler<AddWorkMemberCommand, Result<WorkMemberDto>>
+    //    IMemberRepository memberRepository) : IRequestHandler<AddWorkMemberCommand, Result<TreatmentMemberDto>>
     //{
       
-    //    public async Task<Result<WorkMemberDto>> Handle(AddWorkMemberCommand request, CancellationToken cancellationToken)
+    //    public async Task<Result<TreatmentMemberDto>> Handle(AddWorkMemberCommand request, CancellationToken cancellationToken)
     //    {
     //        var work = await workRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
 
@@ -31,7 +31,7 @@ namespace I3Lab.Treatments.Application.Works.AddWorkMember
 
     //        await workRepository.SaveChangesAsync();
 
-    //        return new WorkMemberDto(work.Id.Value, request.SenderId);
+    //        return new TreatmentMemberDto(work.Id.Value, request.SenderId);
     //    }
     //}
 }

@@ -6,12 +6,12 @@ namespace I3Lab.Treatments.Domain.TreatmentStages.Events
 {
     public class WorkCreatedDomainEvent : DomainEventBase
     {
-        public TreatmentStageId WorkId { get; }
+        public TreatmentStageId TreatmentStageId { get; }
         public TreatmentId TreatmentId { get; }
 
         public WorkCreatedDomainEvent(TreatmentStageId workId, TreatmentId treatmentId)
         {
-            WorkId = workId;
+            TreatmentStageId = workId;
             TreatmentId = treatmentId;  
         }
     }

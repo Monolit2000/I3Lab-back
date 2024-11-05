@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Works.CreateWorks
 {
-    public class WorkCreatedDomainEventHandler(
+    public class TreatmentStageCreatedDomainEventHandler(
         ISender sender,
         IHangFireCommandsScheduler hangFireCommandsScheduler) : INotificationHandler<WorkCreatedDomainEvent>
     {
@@ -18,12 +18,12 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
         {
 
             await hangFireCommandsScheduler.EnqueueAsync(new CreateTreatmentStageChatCommand(
-                notification.WorkId.Value,
+                notification.TreatmentStageId.Value,
                 notification.TreatmentId.Value));
 
 
             //await sender.Send(new CreateTreatmentStageChatCommand(
-            //    notification.TreatmentStageId.Value, 
+            //    notification.TreatmentStageId.Value,
             //    notification.TreatmentId.Value));
         }
     }

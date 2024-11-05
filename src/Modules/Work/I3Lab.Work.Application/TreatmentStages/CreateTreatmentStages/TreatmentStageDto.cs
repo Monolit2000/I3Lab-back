@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Works.CreateWorks
 {
-    public class WorkDto
+    public class TreatmentStageDto
     {
         public Guid Id { get; set; }
         public Guid TreatmentId { get; set; }
@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
         public Guid? CustomerId { get; set; }
         public string WorkAvatarImageUrl { get; set; }
 
-        //public List<WorkMemberDto> TreatmentAccebilityMembers { get; set; } = new List<WorkMemberDto>();
+        //public List<TreatmentMemberDto> TreatmentAccebilityMembers { get; set; } = new List<TreatmentMemberDto>();
         //public List<TreatmentStageFileDto> TreatmentStageFiles { get; set; } = new List<TreatmentStageFileDto>();
     }
 }

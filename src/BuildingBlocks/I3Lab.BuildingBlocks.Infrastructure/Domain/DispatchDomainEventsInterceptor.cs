@@ -15,12 +15,12 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Domain
             _mediator = mediator;
         }
 
-        public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
-        {
-            DispatchDomainEvents(eventData.Context).GetAwaiter().GetResult();
+        //public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+        //{
+        //    DispatchDomainEvents(eventData.Context).GetAwaiter().GetResult();
 
-            return base.SavingChanges(eventData, result);
-        }
+        //    return base.SavingChanges(eventData, result);
+        //}
 
 
 
@@ -146,13 +146,14 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Domain
             var entities = context.ChangeTracker
                 .Entries<Entity>()
                 .Where(e => e.Entity.DomainEvents.Any())
-                .Select(e => e.Entity);
+                .Select(e => e.Entity)
+                .ToList(); 
 
             var domainEvents = entities
                 .SelectMany(e => e.DomainEvents)
-                .ToList();
+                .ToList(); 
 
-            entities.ToList().ForEach(e => e.ClearDomainEvents());
+            entities.ForEach(e => e.ClearDomainEvents());
 
             foreach (var domainEvent in domainEvents)
                 await _mediator.Publish(domainEvent);

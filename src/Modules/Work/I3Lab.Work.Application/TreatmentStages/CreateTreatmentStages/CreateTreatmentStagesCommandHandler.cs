@@ -7,23 +7,15 @@ using TreatmentStage = I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage;
 
 namespace I3Lab.Treatments.Application.Works.CreateWorks
 {
-    public class CreateWorksCommandHandler(
+    public class CreateTreatmentStagesCommandHandler(
         IMemberRepository memberRepository,
-        ITreatmentRepository treatmentRepository,
         ITreatmentStageRepository workRepository,
-        ILogger<CreateWorksCommandHandler> logger) : IRequestHandler<CreateWorksCommand>
+        ILogger<CreateTreatmentStagesCommandHandler> logger) : IRequestHandler<CreateTreatmentStagesCommand>
     {
-        private List<string> BaseWorkTitles = new List<string>() { "1", "2", "3", "4" };
+        private List<string> BaseWorkTitles = ["1", "2", "3", "4"];
 
-        public async Task Handle(CreateWorksCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateTreatmentStagesCommand request, CancellationToken cancellationToken)
         {
-            //var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
-            //if (treatment == null)
-            //{
-            //    logger.LogWarning("Treatment with ID {TreatmentId} not found.", request.TreatmentId);
-            //    return;
-            //}
-
             var creator = await memberRepository.GetAsync(new MemberId(request.CreatorId));
             if (creator == null)
             {
@@ -31,10 +23,8 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
                 return;
             }
 
-            var tasks = BaseWorkTitles.Select(async title =>
+            foreach (var title in BaseWorkTitles)
             {
-                logger.LogDebug("Creating work for title: {Title}", title);
-
                 var workResult = await TreatmentStage.CreateBasedOnTreatmentAsync(
                     creator,
                     new TreatmentId(request.TreatmentId),
@@ -42,24 +32,48 @@ namespace I3Lab.Treatments.Application.Works.CreateWorks
 
                 if (workResult.IsFailed)
                 {
-                    logger.LogError("Failed to create work for title: {Title}. Error: {Error}", title, workResult.Errors.FirstOrDefault()?.Message);
-                    return null;
+                    logger.LogError(
+                        "Failed to create work for title: {Title}. Error: {Error}", 
+                        title, 
+                        workResult.Errors.FirstOrDefault()?.Message);
+
+                    continue;
                 }
 
                 var work = workResult.Value;
                 await workRepository.AddAsync(work);
-
-                return work;
-            }).ToList();
-
-            var results = await Task.WhenAll(tasks);
+            }
 
             await workRepository.SaveChangesAsync();
-            logger.LogInformation("Changes saved to the repository for TreatmentId: {TreatmentId}", request.TreatmentId);
         }
     }
 }
 
+
+
+
+//var tasks = BaseWorkTitles.Select(async title =>
+//{
+//    logger.LogDebug("Creating work for title: {Title}", title);
+
+//    var workResult = await TreatmentStage.CreateBasedOnTreatmentAsync(
+//        creator,
+//        new TreatmentId(request.TreatmentId),
+//        TreatmentStageTitel.Create(title));
+
+//    if (workResult.IsFailed)
+//    {
+//        logger.LogError("Failed to create work for title: {Title}. Error: {Error}", title, workResult.Errors.FirstOrDefault()?.Message);
+//        return null;
+//    }
+
+//    var work = workResult.Value;
+//    await workRepository.AddAsync(work);
+
+//    return work;
+//}).ToList();
+
+//var results = await Task.WhenAll(tasks);
 
 
 //foreach (var titel in BaseWorkTitels)
