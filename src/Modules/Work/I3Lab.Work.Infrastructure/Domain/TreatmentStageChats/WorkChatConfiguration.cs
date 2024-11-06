@@ -73,7 +73,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 
 //b.ToTable("Messages");
 
-//b.HasKey(wc => wc.Id);
+//b.HasKey(wc => wc.TreatmentId);
 
 //b.Property(cm => cm.MessageText)
 //  .IsRequired()

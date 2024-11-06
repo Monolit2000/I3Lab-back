@@ -3,6 +3,7 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.Treatments.Events;
 using I3Lab.Treatments.Domain.Treatments.Errors;
+using I3Lab.Treatments.Domain.WorkAccebilitys;
 
 
 namespace I3Lab.Treatments.UnitTests.Domain.Treatments
@@ -144,6 +145,27 @@ namespace I3Lab.Treatments.UnitTests.Domain.Treatments
             result.IsSuccess.Should().BeTrue();
             treatment.Status.Should().Be(TreatmentStatus.Finished);
             treatment.DomainEvents.Should().ContainSingle(e => e is TreatmentFinishedDomainEvent);
+        }
+
+
+        [Fact]
+        public void SetAccessibilityTypeAsEdit_ShouldSetAccessibilityTypeToEdit()
+        {
+            // Arrange
+            var treatment = Treatment.CreateNew(_creator, _patient, _titel);
+            var member = Member.Create(new MemberId(Guid.NewGuid()), "testEmail@gmail.com");
+
+            // Добавляем участника к лечению
+            treatment.AddToTreatmentMembers(member);
+
+            // Act
+            var result = treatment.SetAccessibilityTypeAsEdit(member.Id);
+
+            // Assert
+            result.IsSuccess.Should().BeTrue();
+            var updatedMember = treatment.TreatmentMembers.SingleOrDefault(m => m.Member.Id == member.Id);
+            updatedMember.Should().NotBeNull();
+            updatedMember.AccessibilityType.Value.Should().Be(AccessibilityType.Edit.Value);
         }
 
         //[Fact]

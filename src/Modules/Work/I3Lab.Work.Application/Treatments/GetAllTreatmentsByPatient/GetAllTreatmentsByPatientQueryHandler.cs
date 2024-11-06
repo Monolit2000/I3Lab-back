@@ -18,7 +18,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient
 
             var treatmentDtos = treatments.Select(t => new TreatmentDto
             {
-                Id = t.Id.Value,
+                TreatmentId = t.Id.Value,
                 Title = t.Titel.Value,
                 Status = t.Status.Value,
                 CreatorId = t.Creator.Id.Value,

@@ -56,7 +56,7 @@ namespace I3Lab.API.Configuration
     //                    Reference = new OpenApiReference
     //                    {
     //                        Type = ReferenceType.SecurityScheme,
-    //                        Id = "Bearer"
+    //                        TreatmentId = "Bearer"
     //                    }
     //                },
     //                Array.Empty<string>()

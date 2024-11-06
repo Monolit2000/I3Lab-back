@@ -38,7 +38,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTre
 
             //var tasks = treatmentStages.Select(async treatmentStage =>
             //{
-            //    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.Id, cancellationToken);
+            //    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.TreatmentId, cancellationToken);
             //    treatmentStageChat?.AddChatMember(member);
             //    await treatmentStageRepository.SaveChangesAsync(cancellationToken);
 

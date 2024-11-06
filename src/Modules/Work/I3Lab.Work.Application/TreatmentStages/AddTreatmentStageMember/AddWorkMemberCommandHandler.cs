@@ -31,7 +31,7 @@ namespace I3Lab.Treatments.Application.Works.AddWorkMember
 
     //        await workRepository.SaveChangesAsync();
 
-    //        return new TreatmentMemberDto(work.Id.Value, request.SenderId);
+    //        return new TreatmentMemberDto(work.TreatmentId.Value, request.SenderId);
     //    }
     //}
 }

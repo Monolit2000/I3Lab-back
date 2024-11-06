@@ -3,7 +3,7 @@ namespace I3Lab.Treatments.Application.Treatments
 {
     public class TreatmentDto
     {
-        public Guid Id { get; set; }
+        public Guid TreatmentId { get; set; }
         public string Title { get; set; }
         public string Status { get; set; }
         public DateTime TreatmentDate { get; set; }

@@ -1,8 +1,11 @@
-﻿using I3Lab.Treatments.Domain.Members;
+﻿using Bogus;
+using Hangfire.Dashboard;
+using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentFiles;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.TreatmentStages;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,6 +62,12 @@ namespace I3Lab.Treatments.UnitTests
             var treatmentStageChat = TreatmentStageChat.CreateBaseOnTreatmentStage(treatment.Id, treatmentStage.Id, options.ChatMembers);
 
             return new TreatmentTestData(treatment, treatmentStage, treatmentFile, treatmentStageChat);
+        }
+
+        protected Member CreateMember()
+        {
+            var member = Member.Create(new MemberId(Guid.NewGuid()), $"TestEmail{Guid.NewGuid().ToString()}@gmail.com");
+            return member;
         }
     }
 }

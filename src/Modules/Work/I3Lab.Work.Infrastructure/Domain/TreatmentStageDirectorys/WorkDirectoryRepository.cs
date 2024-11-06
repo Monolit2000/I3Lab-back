@@ -18,7 +18,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkDirectorys
         //    var workDirectory = await _context.WorkDirectories
         //        .Include(wd => wd.Files3Ds)
         //        .Include(wd => wd.OtherFiles)
-        //        .FirstOrDefaultAsync(wd => wd.Id == id);
+        //        .FirstOrDefaultAsync(wd => wd.TreatmentId == id);
 
         //    return workDirectory;
         //}

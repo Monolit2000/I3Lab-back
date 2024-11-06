@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
 
             builder.HasKey(e => e.Id);
 
-            //builder.Property(e => e.Id).HasConversion<WorkIdConverter>();
+            //builder.Property(e => e.TreatmentId).HasConversion<WorkIdConverter>();
 
             //builder.Property(e => e.Creator).IsRequired();
 

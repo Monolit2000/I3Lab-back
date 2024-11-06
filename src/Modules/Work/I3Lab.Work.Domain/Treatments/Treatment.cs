@@ -72,7 +72,7 @@ namespace I3Lab.Treatments.Domain.Treatments
 
         public Result RemoveTreatmentMember(MemberId memberId, MemberId removingMemberId)
         {
-            var treatmentMember = TreatmentMembers.FirstOrDefault(member => member.Member.Id == memberId);
+            var treatmentMember = GetTreatmentMember(memberId);
             if (treatmentMember == null)
                 return Result.Fail(TreatmentErrors.MemberNotFound);
 
@@ -130,10 +130,25 @@ namespace I3Lab.Treatments.Domain.Treatments
             return Result.Ok();
         }
 
+        public Result SetAccessibilityTypeAsEdit(MemberId memberId)
+        {
+            var member = GetTreatmentMember(memberId);
+
+            member.SetAccessibilityTypeAsEdit();
+
+            return Result.Ok();
+        }
+
         public void AddPreview(TreatmentFile fileId)
         {
             TreatmentPreview = fileId;
         }
+
+        private TreatmentMember GetTreatmentMember(MemberId memberId)
+        {
+            return TreatmentMembers.SingleOrDefault(x => x.IsActiveTreatmentMember(memberId));
+        }
+
     }
 }
 

@@ -13,7 +13,7 @@
 //    {
 //        public void Configure(EntityTypeBuilder<TreatmentStageComment> builder)
 //        {
-//            builder.HasKey(e => e.Id); 
+//            builder.HasKey(e => e.TreatmentId); 
 
 //            builder.Property(e => e.Content)
 //                .IsRequired(); 

@@ -2,6 +2,7 @@
 using FluentResults;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments.Errors;
 
 namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink
 {
@@ -14,13 +15,16 @@ namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLin
             var treatment = await treatmentRepository.GetByTokenAsync(request.Token);
 
             if (treatment == null)
-                return Result.Fail("Invalid invite link");
+                return Result.Fail(TreatmentErrors.InvalidInviteLink);
 
             var validateResult = treatment.ValidateInviteToken(request.Token);
             if (validateResult.IsFailed)
                 return validateResult;
 
             var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
+            if (member is null)
+                return Result.Fail(TreatmentErrors.MemberNotFound);
+
 
             var result = treatment.AddToTreatmentMembers(member);
 

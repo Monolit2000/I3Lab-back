@@ -7,6 +7,7 @@ using I3Lab.Clinics.Infrastructure.Domain.Clinics;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
 using I3Lab.Clinics.Infrastructure.Domain.Doctors;
 using I3Lab.Clinics.Infrastructure.Domain.DoctorCreationProposals;
+using I3Lab.Clinics.Infrastructure.Processing.Hangfire;
 
 namespace I3Lab.Clinics.Infrastructure.Configurations.Application
 {
@@ -25,6 +26,7 @@ namespace I3Lab.Clinics.Infrastructure.Configurations.Application
 
             services.AddScoped<IClinicRepository, ClinicRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<IHangFireCommandsScheduler, HangFireCommandsScheduler>();
             services.AddScoped<IDoctorCreationProposalRepository, DoctorCreationProposalRepository>();
 
             return services;

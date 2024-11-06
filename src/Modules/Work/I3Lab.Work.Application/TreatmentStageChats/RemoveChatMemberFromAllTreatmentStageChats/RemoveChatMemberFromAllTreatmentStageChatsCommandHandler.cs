@@ -30,7 +30,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.RemoveChatMemberWithA
 
 //await Parallel.ForEachAsync(treatmentStages, async(treatmentStage, cancellationToken) =>
 //{
-//    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.Id, cancellationToken);
+//    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.TreatmentId, cancellationToken);
 
 //    treatmentStageChat.RemoveChatMember(request.SenderId);
 //});

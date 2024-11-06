@@ -15,7 +15,10 @@ namespace I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember
             if (treatment == null)
                 return Result.Fail(TreatmentsErrors.TreatmentNotFound);
 
-            var result = treatment.RemoveTreatmentMember(new MemberId(request.TreatmentMemberId), new MemberId(request.TreatmentRemovingMemberId));
+            var result = treatment.RemoveTreatmentMember(
+                new MemberId(request.TreatmentMemberId), 
+                new MemberId(request.TreatmentRemovingMemberId));
+
             if (result.IsFailed)
                 return result;
 

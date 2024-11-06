@@ -35,7 +35,7 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 
             var treatmentDto = new TreatmentDto()
             {
-                Id = treatment.Id.Value,
+                TreatmentId = treatment.Id.Value,
                 InviteToken = treatment.GetInvitationToken()
             };
 

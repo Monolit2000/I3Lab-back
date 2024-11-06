@@ -20,7 +20,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkComments
         //{
         //    var workComment = await _context.TreatmentStageComments
         //        .Include(wc => wc.PinedFiles)
-        //        .FirstOrDefaultAsync(wc => wc.Id == id);
+        //        .FirstOrDefaultAsync(wc => wc.TreatmentId == id);
 
         //    return workComment;
         //}

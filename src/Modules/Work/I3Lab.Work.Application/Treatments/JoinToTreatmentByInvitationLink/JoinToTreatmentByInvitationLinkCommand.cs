@@ -10,7 +10,7 @@ namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLin
 {
     public class JoinToTreatmentByInvitationLinkCommand : IRequest<Result>
     {
-        public string Token {  get; set; }
+        public string Token { get; set; }
 
         public Guid MemberId { get; set; }    
 

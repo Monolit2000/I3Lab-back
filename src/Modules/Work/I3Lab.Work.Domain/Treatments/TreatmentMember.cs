@@ -36,6 +36,16 @@ namespace I3Lab.Treatments.Domain.Treatments
                 member.Id));
         }
 
+
+        public Result SetAccessibilityTypeAsEdit()
+        {
+            AccessibilityType = TreatmentMemberAccessibilityType.Edit;
+
+            AddDomainEvent(new TreatmentMemberAccessibilityTypeSetAsEdit(this.TreatmentId, this.Member.Id));
+            return Result.Ok();
+        }
+
+
         public static TreatmentMember CreateNew(
             TreatmentId treatmentId,
             Member memberId,
@@ -61,6 +71,11 @@ namespace I3Lab.Treatments.Domain.Treatments
                 newAccessibilityType));
 
             return Result.Ok();
+        }
+
+        public bool IsActiveTreatmentMember(MemberId memberId)
+        {
+            return Member.Id == memberId;
         }
     }
 }

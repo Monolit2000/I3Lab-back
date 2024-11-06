@@ -8,7 +8,7 @@
 //    {
 //        public void Configure(EntityTypeBuilder<WorkDirectory> builder)
 //        {
-//            builder.HasKey(e => e.Id);
+//            builder.HasKey(e => e.TreatmentId);
 
 //            //builder.HasMany(e => e.Files3Ds)
 //            //    .WithOne()

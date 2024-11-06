@@ -12,7 +12,7 @@
 //            builder.ToTable("ChatMessages");
 
 
-//            builder.HasKey(cm => cm.Id);
+//            builder.HasKey(cm => cm.TreatmentId);
 
 
 //            builder.Property(cm => cm.MessageText)

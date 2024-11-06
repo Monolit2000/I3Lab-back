@@ -16,7 +16,7 @@ namespace I3Lab.Treatments.Application.Treatments.GetAllTreatment
 
             return treatmens.Select(treatment => new TreatmentDto
             {
-                Id = treatment.Id.Value,
+                TreatmentId = treatment.Id.Value,
                 Title = treatment.Titel.Value,
                 Status = treatment.Status.Value,
                 TreatmentDate = treatment.TreatmentDate.TreatmentStarted,

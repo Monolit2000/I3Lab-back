@@ -17,28 +17,28 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
 
         public async Task<TreatmentStage> GetByIdAsync(TreatmentStageId id, CancellationToken cancellationToken = default)
         {
-            return await _context.Works
+            return await _context.TreatmentStages
                 .Include(w => w.TreatmentStageFiles)
                 .FirstOrDefaultAsync(w => w.Id == id);
         }
 
         public async Task<IEnumerable<TreatmentStage>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.Works
+            return await _context.TreatmentStages
                 .Include(w => w.TreatmentStageFiles)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<TreatmentStage>> GetAllByMemberIdAsync(MemberId id, CancellationToken cancellationToken = default)
         {
-            return await _context.Works
+            return await _context.TreatmentStages
                 .Include(w => w.TreatmentStageFiles)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<TreatmentStage>> GetAllByTreatmentIdAsync(TreatmentId id, CancellationToken cancellationToken = default)
         {
-            return await _context.Works
+            return await _context.TreatmentStages
                 .Include(w => w.TreatmentStageFiles)
                 .Where(x => x.TreatmentId == id)
                 .ToListAsync();
@@ -46,13 +46,13 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
 
         public async Task AddAsync(TreatmentStage work, CancellationToken cancellationToken = default)
         {
-            await _context.Works.AddAsync(work);
+            await _context.TreatmentStages.AddAsync(work);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateAsync(TreatmentStage work, CancellationToken cancellationToken = default)
         {
-            _context.Works.Update(work);
+            _context.TreatmentStages.Update(work);
             await _context.SaveChangesAsync();
         }
 
@@ -61,7 +61,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.Works
             var work = await GetByIdAsync(id);
             if (work != null)
             {
-                _context.Works.Remove(work);
+                _context.TreatmentStages.Remove(work);
                 await _context.SaveChangesAsync();
             }
         }

@@ -16,6 +16,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStages
         public TreatmentId TreatmentId { get; private set; }
         public Member Creator { get; private set; }
 
+
         public readonly List<TreatmentStageFile> TreatmentStageFiles = [];
         public TreatmentStageId Id { get; private set; }
         public TreatmentStageTitel Titel { get; private set; }

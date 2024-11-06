@@ -32,10 +32,17 @@ namespace I3lab.Works.IntegrationTests.Treatments
             // Act
             var result = await Sender.Send(command);
 
+            var defaultTreatmentStages = await DbContext.TreatmentStages
+                .Where(x => x.TreatmentId == new TreatmentId(result.Value.TreatmentId))
+                .ToListAsync();
+
             // Assert
             result.IsSuccess.Should().BeTrue();
             result.Value.Should().NotBeNull();
             result.Value.InviteToken.Should().NotBeNullOrEmpty();
+
+            defaultTreatmentStages.Should().NotBeEmpty();
+            defaultTreatmentStages.Should().HaveCount(4);
         }
 
         [Fact]
@@ -48,14 +55,14 @@ namespace I3lab.Works.IntegrationTests.Treatments
             {
                 CreatorId = creatorId.Value,
                 PatientId = patientId.Value,
-                TreatmentTitel = "New Treatment"
+                TreatmentTitel = Faker.Lorem.Sentence(3)
             };
 
             // Act
             var result = await Sender.Send(command);
 
             // Assert
-            var treatment = await DbContext.Treatments.FirstOrDefaultAsync(t => t.Id == new TreatmentId (result.Value.Id));
+            var treatment = await DbContext.Treatments.FirstOrDefaultAsync(t => t.Id == new TreatmentId(result.Value.TreatmentId));
             treatment.Should().NotBeNull();
             treatment.Titel.Value.Should().Be(command.TreatmentTitel);
             treatment.Creator.Id.Value.Should().Be(creatorId.Value);
