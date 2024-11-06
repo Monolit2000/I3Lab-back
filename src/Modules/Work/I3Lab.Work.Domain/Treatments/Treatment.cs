@@ -139,6 +139,15 @@ namespace I3Lab.Treatments.Domain.Treatments
             return Result.Ok();
         }
 
+        public Result SetAccessibilityTypeAsReadOnly(MemberId memberId)
+        {
+            var member = GetTreatmentMember(memberId);
+
+            member.SetAccessibilityTypeAsReadOnly();
+
+            return Result.Ok();
+        }
+
         public void AddPreview(TreatmentFile fileId)
         {
             TreatmentPreview = fileId;

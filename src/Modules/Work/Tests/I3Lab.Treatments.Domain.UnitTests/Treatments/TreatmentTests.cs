@@ -166,6 +166,27 @@ namespace I3Lab.Treatments.UnitTests.Domain.Treatments
             var updatedMember = treatment.TreatmentMembers.SingleOrDefault(m => m.Member.Id == member.Id);
             updatedMember.Should().NotBeNull();
             updatedMember.AccessibilityType.Value.Should().Be(AccessibilityType.Edit.Value);
+        }  
+        
+        
+        [Fact]
+        public void SetAccessibilityTypeAsEdit_ShouldSetAccessibilityTypeToReadOnly()
+        {
+            // Arrange
+            var treatment = Treatment.CreateNew(_creator, _patient, _titel);
+            var member = Member.Create(new MemberId(Guid.NewGuid()), "testEmail@gmail.com");
+
+            // Добавляем участника к лечению
+            treatment.AddToTreatmentMembers(member);
+
+            // Act
+            var result = treatment.SetAccessibilityTypeAsReadOnly(member.Id);
+
+            // Assert
+            result.IsSuccess.Should().BeTrue();
+            var updatedMember = treatment.TreatmentMembers.SingleOrDefault(m => m.Member.Id == member.Id);
+            updatedMember.Should().NotBeNull();
+            updatedMember.AccessibilityType.Value.Should().Be(AccessibilityType.ReadOnly.Value);
         }
 
         //[Fact]

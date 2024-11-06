@@ -1,8 +1,8 @@
-﻿using Hangfire;
-using I3Lab.Treatments.Application.Configuration.Commands;
-using I3Lab.Treatments.Application.Works.CreateWorks;
+﻿using MediatR;
+using Hangfire;
 using I3Lab.Treatments.Domain.Treatments.Events;
-using MediatR;
+using I3Lab.Treatments.Application.Works.CreateWorks;
+using I3Lab.Treatments.Application.Configuration.Commands;
 
 namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
 {

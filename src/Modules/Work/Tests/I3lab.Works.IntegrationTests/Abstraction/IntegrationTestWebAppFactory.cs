@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 using Testcontainers.PostgreSql;
 
+
 namespace I3lab.Works.IntegrationTests.Abstraction
 {
     public class IntegrationTestWebAppFactory : WebApplicationFactory<I3Lab.API.Configuration.Program>, IAsyncLifetime
@@ -20,8 +21,10 @@ namespace I3lab.Works.IntegrationTests.Abstraction
         private readonly PostgreSqlContainer _dbContainer = new PostgreSqlBuilder()
             .WithImage("postgres:latest")
             .WithDatabase("SturtUp")
-            .WithUsername("postgress")
-            .WithPassword("postgresss")
+            .WithUsername("postgres")
+            .WithPassword("postgres")
+            //.WithExposedPort(5432) // Убедитесь, что порт открыт
+            //.WithCommand("postgres", "-c", "max_connections=1000")
             .Build();
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -30,10 +33,13 @@ namespace I3lab.Works.IntegrationTests.Abstraction
             {
                 services.RemoveAll(typeof(DbContextOptions<UserContext>));
 
-                services.AddDbContext<UserContext>(options =>
-                options
-                    .UseNpgsql(_dbContainer.GetConnectionString())
-                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                services.AddDbContext<UserContext>((sp, options) =>
+                {
+                    options.ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
+                    options.UseNpgsql(_dbContainer.GetConnectionString());
+                    options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
+                    //options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                });
 
 
                 //TreatmentContext//////////////////////////////////////////////////////////////////////
@@ -54,16 +60,18 @@ namespace I3lab.Works.IntegrationTests.Abstraction
 
 
                 services.RemoveAll(typeof(DbContextOptions<DoctorContext>));
-                services.AddDbContext<DoctorContext>(options =>
-                options
-                     .UseNpgsql(_dbContainer.GetConnectionString())
-                     .ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>());
+                services.AddDbContext<DoctorContext>((sp, options) =>
+                {
+                    options.UseNpgsql(_dbContainer.GetConnectionString());
+                    options.ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
+                });
             });
         }
 
         public async Task InitializeAsync()
         {
             await _dbContainer.StartAsync();
+
         }
 
         public new async Task DisposeAsync()

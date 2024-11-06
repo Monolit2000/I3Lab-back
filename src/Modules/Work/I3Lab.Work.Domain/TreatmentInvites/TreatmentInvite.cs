@@ -48,6 +48,12 @@ namespace I3Lab.Treatments.Domain.TreatmentInvites
                 inviter);
         }
 
+        public bool IsAccepted()
+            => TreatmentInviteStatus == TreatmentInviteStatus.Accepted;
+
+        public bool IsRejected()
+            => TreatmentInviteStatus == TreatmentInviteStatus.Rejected;
+
         public Result Accept()
         {
             var result = CheckRule(new TreatmentInviteStatusMustByPending(TreatmentInviteStatus));

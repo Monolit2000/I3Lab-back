@@ -1,19 +1,15 @@
 ﻿using Bogus;
+using I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite;
 using I3Lab.Treatments.Application.Treatments.CreateTreatment;
-using I3Lab.Treatments.Application.TreatmentStages.CloseTreatmentStage;
 using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentInvites;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Infrastructure.Persistence;
-using I3Lab.Users.Infrastructure.Persistence;
 using MediatR;
-using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace I3lab.Works.IntegrationTests.Abstraction
 {
@@ -55,15 +51,15 @@ namespace I3lab.Works.IntegrationTests.Abstraction
             return stage;
         }
 
-        internal async Task<TreatmentId> CreateTreatmentAsync(Member creator = default)
+        internal async Task<TreatmentId> CreateTreatmentAsync(Member newMember = default)
         {
-            var creatord = creator ?? await CreateMemberAsync();
+            var member = newMember ?? await CreateMemberAsync();
             var patient = await CreateMemberAsync();
             var command = new CreateTreatmentCommand
             {
-                CreatorId = creatord.Id.Value,
+                CreatorId = member.Id.Value,
                 PatientId = patient.Id.Value,
-                TreatmentTitel = Faker.Commerce.ProductName()
+                TreatmentTitel = Guid.NewGuid().ToString()
             };
 
             var result = await Sender.Send(command);
@@ -76,6 +72,40 @@ namespace I3lab.Works.IntegrationTests.Abstraction
             await DbContext.Members.AddAsync(member);
             await DbContext.SaveChangesAsync();
             return member;
+        }
+
+        internal async Task<TreatmentInvite> CreateTreatmentInviteAsync(MemberId creator, MemberId invitee)
+        {
+            var createTreatmentcommand = new CreateTreatmentCommand
+            {
+                CreatorId = creator.Value,
+                PatientId = invitee.Value,
+                TreatmentTitel = Faker.Name.JobTitle()
+            };
+
+            var treatment = Treatment.CreateNew(
+                await CreateMemberAsync(),
+                await CreateMemberAsync(),
+                TreatmentTitel.Create(Faker.Commerce.ProductName()));
+
+            await DbContext.Treatments.AddAsync(treatment);
+            await DbContext.SaveChangesAsync();
+
+            //var result = await Sender.Send(createTreatmentcommand);
+
+            var treatmentId = treatment.Id; /*new TreatmentId(result.Value.TreatmentId);*/
+
+
+            var command = new CreateTreatmentInviteCommand
+            {
+                TreatmentId = treatmentId.Value,
+                MemberToInviteId = invitee.Value,
+                InviterId = creator.Value
+            };
+            var inviteResult = await Sender.Send(command);
+            return await DbContext.TreatmentInvites
+                .Where(ti => ti.Treatment.Id == treatmentId)
+                .FirstOrDefaultAsync();
         }
 
     }

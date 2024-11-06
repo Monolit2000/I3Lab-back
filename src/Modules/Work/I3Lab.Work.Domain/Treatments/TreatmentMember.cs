@@ -45,6 +45,14 @@ namespace I3Lab.Treatments.Domain.Treatments
             return Result.Ok();
         }
 
+        public Result SetAccessibilityTypeAsReadOnly()
+        {
+            AccessibilityType = TreatmentMemberAccessibilityType.ReadOnly;
+
+            AddDomainEvent(new TreatmentMemberAccessibilityTypeSetAsEdit(this.TreatmentId, this.Member.Id));
+            return Result.Ok();
+        }
+
 
         public static TreatmentMember CreateNew(
             TreatmentId treatmentId,

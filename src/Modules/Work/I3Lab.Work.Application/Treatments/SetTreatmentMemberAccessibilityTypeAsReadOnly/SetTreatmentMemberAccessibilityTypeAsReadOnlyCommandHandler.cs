@@ -4,24 +4,23 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 
-namespace I3Lab.Treatments.Application.Treatments.SetTreatmentMemberAccessibilityTypeAsEdit
+namespace I3Lab.Treatments.Application.Treatments.SetTreatmentMemberAccessibilityTypeAsReadOnly
 {
-    public class SetTreatmentMemberAccessibilityTypeAsEditCommandHandler(
+    public class SetTreatmentMemberAccessibilityTypeAsReadOnlyCommandHandler(
         IMemberRepository memberRepository,
-        ITreatmentRepository treatmentRepository) : IRequestHandler<SetTreatmentMemberAccessibilityTypeAsEditCommand, Result>
+        ITreatmentRepository treatmentRepository) : IRequestHandler<SetTreatmentMemberAccessibilityTypeAsReadOnlyCommand, Result>
     {
-        public async Task<Result> Handle(SetTreatmentMemberAccessibilityTypeAsEditCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(SetTreatmentMemberAccessibilityTypeAsReadOnlyCommand request, CancellationToken cancellationToken)
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
             if (treatment is null)
                 return Result.Fail(TreatmentsErrors.TreatmentNotFound);
 
             var member = await memberRepository.GetAsync(new MemberId(request.TreatmentMemberId));
-
             if (member == null)
                 return Result.Fail(TreatmentsErrors.MemberNotFound);
 
-            var result = treatment.SetAccessibilityTypeAsEdit(member.Id);
+            var result = treatment.SetAccessibilityTypeAsReadOnly(member.Id);
             if (result.IsFailed)
                 return result;
 

@@ -6,7 +6,6 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace I3lab.Works.IntegrationTests.Treatments
 {
     public class CreateTreatmentTests : BaseIntegrationTest
@@ -31,6 +30,8 @@ namespace I3lab.Works.IntegrationTests.Treatments
 
             // Act
             var result = await Sender.Send(command);
+
+            //await Task.Delay(TimeSpan.FromSeconds(1));
 
             var defaultTreatmentStages = await DbContext.TreatmentStages
                 .Where(x => x.TreatmentId == new TreatmentId(result.Value.TreatmentId))
@@ -77,7 +78,6 @@ namespace I3lab.Works.IntegrationTests.Treatments
             var patientId = await CreateMemberAsync();
             var existingTitle = "Existing Treatment";
 
-            // First, create a treatment with the existing title
             await Sender.Send(new CreateTreatmentCommand
             {
                 CreatorId = creatorId.Value,
@@ -85,7 +85,6 @@ namespace I3lab.Works.IntegrationTests.Treatments
                 TreatmentTitel = existingTitle
             });
 
-            // Now try to create another treatment with the same title
             var command = new CreateTreatmentCommand
             {
                 CreatorId = creatorId.Value,

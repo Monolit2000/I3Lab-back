@@ -10,16 +10,20 @@ namespace I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentIInviteBy
         public async Task<Result> Handle(AcceptTreatmentIInviteByLinkCommand request, CancellationToken cancellationToken)
         {
             var invite = await treatmentInviteRepository.GetByTokenAsync(request.Token);
-
-            if (invite == null)
+            if (invite is null)
                 return Result.Fail("Invalid invite link.");
 
             var result = invite.ValidateInviteToken(request.Token);
-
             if (result.IsFailed)
                 return result;
 
-            return invite.Accept();
+            var accptResult = invite.Accept();
+            if (accptResult.IsFailed)
+                return accptResult;
+
+            await treatmentInviteRepository.SaveChangesAsync();
+
+            return accptResult;
         }
     }
 }

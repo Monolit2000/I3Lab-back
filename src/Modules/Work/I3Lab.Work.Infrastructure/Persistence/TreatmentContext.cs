@@ -32,35 +32,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TreatmentContext).Assembly);
 
-
-            //modelBuilder.ApplyConfiguration(new MemberConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new TreatmentStageConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new WorkChatConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new TreatmentFileConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new TreatmentStageFileConfiguration());
-
-            //modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
-            
-            //modelBuilder.ApplyConfiguration(new TreatmentInviteConfiguration());
-
         }
     }
-
-
-    //public class YourDbContextFactory : IDesignTimeDbContextFactory<TreatmentContext>
-    //{
-    //    public TreatmentContext CreateDbContext(string[] args)
-    //    {
-    //        var optionsBuilder = new DbContextOptionsBuilder<TreatmentContext>();
-    //        optionsBuilder.UseNpgsql("Host=postgres-db;Port=5432;Database=identity;Username=postgres;Password=postgres");
-
-    //        return new TreatmentContext(optionsBuilder.Options);
-    //    }
-    //}
-
 }
 

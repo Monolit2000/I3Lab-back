@@ -13,6 +13,8 @@ using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByPatient;
 using I3Lab.Treatments.Application.Treatments.GetTreatmentInvitationLink;
 using I3Lab.Treatments.Application.Treatments.GetAllTreatmentsByMemberId;
 using I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink;
+using I3Lab.Treatments.Application.Treatments.SetTreatmentMemberAccessibilityTypeAsReadOnly;
+using I3Lab.Treatments.Application.Treatments.SetTreatmentMemberAccessibilityTypeAsEdit;
 
 namespace I3Lab.API.Modules.Treatments
 {
@@ -72,5 +74,15 @@ namespace I3Lab.API.Modules.Treatments
         [HttpPut("joinToTreatmentByInvitationLink")]
         public async Task<IActionResult> JoinToTreatmentByInvitationLink(JoinToTreatmentByInvitationLinkCommand joinToTreatmentByInvitationLinkCommand)
             => HandleResult(await mediator.Send(joinToTreatmentByInvitationLinkCommand));
+
+        [HttpPut("SetTreatmentMemberAccessibilityTypeAsReadOnly")]
+        public async Task<IActionResult> SetTreatmentMemberAccessibilityTypeAsReadOnly(
+            SetTreatmentMemberAccessibilityTypeAsReadOnlyCommand setTreatmentMemberAccessibilityTypeAsReadOnlyCommand)
+            => HandleResult(await mediator.Send(setTreatmentMemberAccessibilityTypeAsReadOnlyCommand));
+
+        [HttpPut("SetTreatmentMemberAccessibilityTypeAsEdit")]
+        public async Task<IActionResult> SetTreatmentMemberAccessibilityTypeAsReadOnly(
+            SetTreatmentMemberAccessibilityTypeAsEditCommand setTreatmentMemberAccessibilityTypeAsEditCommand)
+            => HandleResult(await mediator.Send(setTreatmentMemberAccessibilityTypeAsEditCommand));
     }
 }
