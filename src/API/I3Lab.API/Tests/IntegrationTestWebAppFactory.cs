@@ -7,21 +7,19 @@ using I3Lab.Doctors.Infrastructure.Persistence;
 using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
 using I3Lab.Treatments.Infrastructure.Persistence;
 using I3Lab.Users.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Net.Sockets;
 using System.Net;
 using Testcontainers.PostgreSql;
-using Hangfire.MemoryStorage;
+using Xunit;
 
 
-namespace I3lab.Works.IntegrationTests.Abstraction
+namespace I3Lab.API.Tests
 {
     public class IntegrationTestWebAppFactory : WebApplicationFactory<I3Lab.API.Configuration.Program>, IAsyncLifetime
     {
@@ -82,9 +80,9 @@ namespace I3lab.Works.IntegrationTests.Abstraction
                 {
                     options.UseNpgsql(constr);
                     options.ReplaceService<IValueConverterSelector, StronglyTypedIdValueConverterSelector>();
-                });   
-                
-                
+                });
+
+
                 services.RemoveAll(typeof(DbContextOptions<BlobFileContext>));
                 services.AddDbContext<BlobFileContext>((sp, options) =>
                 {
@@ -97,8 +95,7 @@ namespace I3lab.Works.IntegrationTests.Abstraction
                 services.AddHangfire(x =>
                     x.UseSimpleAssemblyNameTypeSerializer()
                     .UseRecommendedSerializerSettings()
-                    .UseMemoryStorage());
-                    //.UsePostgreSqlStorage(options => options.UseNpgsqlConnection(_dbContainer.GetConnectionString())));
+                    .UsePostgreSqlStorage(options => options.UseNpgsqlConnection(_dbContainer.GetConnectionString())));
 
             });
         }
@@ -106,6 +103,9 @@ namespace I3lab.Works.IntegrationTests.Abstraction
         public async Task InitializeAsync()
         {
             await _dbContainer.StartAsync();
+
+
+
         }
 
         public new async Task DisposeAsync()

@@ -1,6 +1,7 @@
-﻿using FluentResults;
+﻿
 using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.TreatmentStageChats.Errors;
 
 namespace I3Lab.Treatments.Domain.TreatmentStageChats.Rules
 {
@@ -20,6 +21,6 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats.Rules
             return _chatMembers.All(m => m.MemberId != _senderId);
         }
 
-        public string Message => "Sender is not a member in the chat.";
+        public string Message => TreatmentStageChatsDomainErrors.SenderNotInChat;
     }
 }

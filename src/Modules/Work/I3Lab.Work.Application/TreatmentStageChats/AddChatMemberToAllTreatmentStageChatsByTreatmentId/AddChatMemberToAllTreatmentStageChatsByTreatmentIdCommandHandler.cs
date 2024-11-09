@@ -13,33 +13,37 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTre
         public async Task Handle(AddChatMemberToAllTreatmentStageChatsByTreatmentIdCommand request, CancellationToken cancellationToken)
         {
             var treatmentStages = await treatmentStageRepository.GetAllByTreatmentIdAsync(request.TreatmentId);
-
             if (treatmentStages.Any() is false)
                 return;
 
             var member = await memberRepository.GetAsync(request.MemberId);
-
             if (member is null)
                 return;
 
             var treatmentStageChats = await treatmentStageChatRepository.GetAllByTreatmentIdAsync(request.TreatmentId);
 
-            var tasks = treatmentStageChats.Select(async treatmentStageChat =>
+            foreach(var chat in treatmentStageChats)
             {
-                treatmentStageChat?.AddChatMember(member);
+                chat.AddChatMember(member);
                 await treatmentStageRepository.SaveChangesAsync(cancellationToken);
-            });
-
-            await Task.WhenAll(tasks);
+            }
         }
     }
 }
 
 
-            //var tasks = treatmentStages.Select(async treatmentStage =>
-            //{
-            //    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.TreatmentId, cancellationToken);
-            //    treatmentStageChat?.AddChatMember(member);
-            //    await treatmentStageRepository.SaveChangesAsync(cancellationToken);
+//var tasks = treatmentStageChats.Select(async treatmentStageChat =>
+//{
+//    treatmentStageChat?.AddChatMember(member);
+//    await treatmentStageRepository.SaveChangesAsync(cancellationToken);
+//});
 
-            //}).ToList();
+//await Task.WhenAll(tasks);
+
+//var tasks = treatmentStages.Select(async treatmentStage =>
+//{
+//    var treatmentStageChat = await treatmentStageChatRepository.GetByTreatmentStageIdAsync(treatmentStage.TreatmentId, cancellationToken);
+//    treatmentStageChat?.AddChatMember(member);
+//    await treatmentStageRepository.SaveChangesAsync(cancellationToken);
+
+//}).ToList();

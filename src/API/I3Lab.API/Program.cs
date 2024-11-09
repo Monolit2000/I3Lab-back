@@ -23,6 +23,7 @@ using I3Lab.Clinics.Infrastructure.Persistence.Extensions;
 using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 using Serilog.Filters;
+using I3Lab.Treatments.Infrastructure.Processing.Hangfire;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -88,8 +89,6 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 
-
-
 builder.Services.AddApiVersioning(options =>
 {
 
@@ -111,8 +110,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHangfire(x =>
 x.UseSimpleAssemblyNameTypeSerializer()
 .UseRecommendedSerializerSettings()
-.UsePostgreSqlStorage(options => options.UseNpgsqlConnection(builder.Configuration.GetConnectionString("Database")))
-);
+.UsePostgreSqlStorage(options => options.UseNpgsqlConnection(builder.Configuration.GetConnectionString("Database"))));
 
 builder.Services.AddHangfireServer(x => x.SchedulePollingInterval = TimeSpan.FromSeconds(2));
 
@@ -120,19 +118,20 @@ builder.Services.AddHangfireServer(x => x.SchedulePollingInterval = TimeSpan.Fro
 builder.Services.AddBuildingBlocksModule(builder.Configuration);
 
  builder.Services
-    .AddUserModule(builder.Configuration)
+    .AddTreatmentModule(builder.Configuration)
     .AddClinicModule(builder.Configuration)
     .AddBlobFileModule(builder.Configuration)
-    .AddTreatmentModule(builder.Configuration)
+    .AddUserModule(builder.Configuration)
     .AddAdministrationModule(builder.Configuration);
 
-builder.Services.AddMassTransitRabbitMqEventBus(builder.Configuration);
+builder.Services.AddMassTransitInMemoryEventBus(builder.Configuration);
 
 
 var app = builder.Build();
 
 ServiceFactory.Configure(app.Services);
 
+//app.UseHangfire();
 
 if (app.Environment.IsDevelopment())
 {
@@ -151,6 +150,7 @@ if (app.Environment.IsDevelopment())
     });
 
     //app.ClearDbContextMigrations();
+
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();
     app.ApplyClinicContextMigrations();
@@ -167,10 +167,10 @@ app.MapHealthChecks("health");
 
 app.MapControllers();
 
-app.UseHangfireDashboard("/hangfire", new DashboardOptions
-{
-    Authorization = [],
-});
+//app.UseHangfireDashboard("/hangfire", new DashboardOptions
+//{
+//    Authorization = [],
+//});
 
 app.Run();
 

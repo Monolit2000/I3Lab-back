@@ -9,7 +9,7 @@ namespace I3lab.Users.IntegrationTests.Users
 {
     public class CreateUserTests : BaseIntegrationTest
     {
-        public CreateUserTests(IntegrationTestWebAppFactory factory) 
+        public CreateUserTests(IntegrationTestWebAppFactory factory)
             : base(factory)
         {
         }
@@ -19,8 +19,8 @@ namespace I3lab.Users.IntegrationTests.Users
         {
             // Arrange 
             var command = new RegisterUserCommand(
-                Faker.Internet.Email(), 
-                Faker.Internet.Password(), 
+                Faker.Internet.Email(),
+                Faker.Internet.Password(),
                 Faker.Internet.Avatar());
 
             //Act

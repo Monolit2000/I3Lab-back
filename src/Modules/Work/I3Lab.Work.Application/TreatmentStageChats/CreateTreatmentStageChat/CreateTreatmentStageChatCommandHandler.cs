@@ -1,9 +1,8 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
-using Microsoft.Extensions.Logging;
-using FluentResults;
 using I3Lab.Treatments.Application.Treatments.ApplicationErrors;
 
 namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageChat
@@ -30,7 +29,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageC
                 return;
             }
 
-            var members = treatment.TreatmentMembers.Select(m => m.Member).ToList();
+            var members = treatment.GetActiveTreatmentMembers();
 
             var treatmentStageChat = treatmentStage.CreateTreatmentStageChat(members);
 

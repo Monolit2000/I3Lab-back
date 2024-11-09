@@ -17,7 +17,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 
         public async Task<TreatmentStageChat> GetByIdAsync(TreatmentStageChatId id, CancellationToken cancellationToken = default)
         {
-            return await _context.WorkChats
+            return await _context.TreatmentStageChats
                 .AsSplitQuery() 
                 .Include(wc => wc.Messages)
                 .Include(wc => wc.ChatMembers)
@@ -26,7 +26,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 
         public async Task<TreatmentStageChat> GetByTreatmentStageIdAsync(TreatmentStageId workId, CancellationToken cancellationToken = default)
         {
-            return await _context.WorkChats
+            return await _context.TreatmentStageChats
                 .AsSplitQuery() 
                 .Include(wc => wc.Messages)
                 .Include(wc => wc.ChatMembers)
@@ -35,7 +35,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 
         public async Task<List<TreatmentStageChat>> GetAllByTreatmentStageId(TreatmentStageId treatmentStageId, CancellationToken cancellationToken = default)
         {
-            return await _context.WorkChats
+            return await _context.TreatmentStageChats
                 .AsSplitQuery() 
                 .Include(wc => wc.Messages)
                 .Include(wc => wc.ChatMembers)
@@ -44,7 +44,7 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
         }
         public async Task<List<TreatmentStageChat>> GetAllByTreatmentIdAsync(TreatmentId treatmentId, CancellationToken cancellationToken = default)
         {
-            return await _context.WorkChats
+            return await _context.TreatmentStageChats
                   .AsSplitQuery()
                   .Include(wc => wc.Messages)
                   .Include(wc => wc.ChatMembers)
@@ -54,18 +54,18 @@ namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
 
         public async Task AddAsync(TreatmentStageChat workChat, CancellationToken cancellationToken = default)
         {
-            await _context.WorkChats.AddAsync(workChat, cancellationToken);
+            await _context.TreatmentStageChats.AddAsync(workChat, cancellationToken);
         }
 
         public Task UpdateAsync(TreatmentStageChat workChat, CancellationToken cancellationToken = default)
         {
-            _context.WorkChats.Update(workChat);
+            _context.TreatmentStageChats.Update(workChat);
             return Task.CompletedTask;
         }
 
         public Task RemoveAsync(TreatmentStageChat workChat, CancellationToken cancellationToken = default)
         {
-            _context.WorkChats.Remove(workChat);
+            _context.TreatmentStageChats.Remove(workChat);
             return Task.CompletedTask;
         }
 

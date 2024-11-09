@@ -1,11 +1,15 @@
 ﻿using Hangfire;
-using I3Lab.Treatments.Application.Configuration.Commands;
-using I3Lab.Treatments.Application.Contract;
+using I3Lab.Users.Application.Contract;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace I3Lab.Treatments.Infrastructure.Processing.Hangfire
+namespace I3Lab.Users.Infrastructure.Processing.Hangfire
 {
-    public class HangFireCommandsScheduler( 
+    public class HangFireCommandsScheduler(
         ISender sender,
         IBackgroundJobClient _backgroundJobClient) : IHangFireCommandsScheduler
     {
@@ -24,7 +28,7 @@ namespace I3Lab.Treatments.Infrastructure.Processing.Hangfire
         //[AutomaticRetry(Attempts = 3)]
         public Task ExecuteCommand(IRequest command)
         {
-             return sender.Send(command);
+            return sender.Send(command);
         }
 
         //[AutomaticRetry(Attempts = 3)]

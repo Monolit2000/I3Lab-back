@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System.Data.Entity;
 
 
 namespace I3Lab.Users.Infrastructure.Persistence.Extensions

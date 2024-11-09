@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace I3Lab.Users.Infrastructure.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20240821214401_NewUserMigrationRefrashTokenDeletedRequired")]
-    partial class NewUserMigrationRefrashTokenDeletedRequired
+    [Migration("20241108034529_newjfhgjdfg")]
+    partial class newjfhgjdfg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace I3Lab.Users.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("User")
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -41,7 +41,7 @@ namespace I3Lab.Users.Infrastructure.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
-                    b.Property<string>("TreatmentTitel")
+                    b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<string>("PasswordHash")

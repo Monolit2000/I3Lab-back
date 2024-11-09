@@ -18,6 +18,7 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         public List<ChatMember> ChatMembers { get; private set; } = [];
 
         public TreatmentStageChatId Id { get; private set; }
+
         private TreatmentStageChat() { } // For EF Core
 
         private TreatmentStageChat(

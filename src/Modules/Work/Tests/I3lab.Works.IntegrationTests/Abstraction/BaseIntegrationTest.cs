@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace I3lab.Works.IntegrationTests.Abstraction
 {
-    public class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>, IDisposable
+    public class BaseIntegrationTest : IClassFixture< IntegrationTestWebAppFactory>, IDisposable
     {
 
         protected readonly IServiceScope _scope;
@@ -35,11 +35,11 @@ namespace I3lab.Works.IntegrationTests.Abstraction
             DbContext?.Dispose();
         }
 
-        internal async Task<TreatmentStage> CreateTreatmentStageAsync()
+        internal async Task<TreatmentStage> CreateTreatmentStageAsync(TreatmentId newTreatmentId = default)
         {
             var creator = await CreateMemberAsync();
 
-            var treatmentId = await CreateTreatmentAsync(creator);
+            var treatmentId = newTreatmentId ?? await CreateTreatmentAsync(creator);
 
             var stage = TreatmentStage.CreateBasedOnTreatment(
                 creator,
@@ -66,6 +66,23 @@ namespace I3lab.Works.IntegrationTests.Abstraction
             return new TreatmentId(result.Value.TreatmentId);
         }
 
+
+        internal async Task<Treatment> CreateTreatmentDbAsync (Member newMember = default, Member creator = default, Member patient = default)
+        {
+            var treatment = Treatment.CreateNew(
+                creator ?? await CreateMemberAsync(),
+                patient ?? await CreateMemberAsync(),
+                TreatmentTitel.Create(Faker.Commerce.ProductName()));
+
+            treatment.AddToTreatmentMembers(newMember ?? await CreateMemberAsync());
+
+            await DbContext.Treatments.AddAsync(treatment);
+            await DbContext.SaveChangesAsync();
+
+            return treatment;
+        }
+
+
         internal async Task<Member> CreateMemberAsync()
         {
             var member = Member.Create(new MemberId(Guid.NewGuid()), Faker.Internet.Email());
@@ -76,25 +93,9 @@ namespace I3lab.Works.IntegrationTests.Abstraction
 
         internal async Task<TreatmentInvite> CreateTreatmentInviteAsync(MemberId creator, MemberId invitee)
         {
-            var createTreatmentcommand = new CreateTreatmentCommand
-            {
-                CreatorId = creator.Value,
-                PatientId = invitee.Value,
-                TreatmentTitel = Faker.Name.JobTitle()
-            };
+            var treatment = await CreateTreatmentDbAsync();
 
-            var treatment = Treatment.CreateNew(
-                await CreateMemberAsync(),
-                await CreateMemberAsync(),
-                TreatmentTitel.Create(Faker.Commerce.ProductName()));
-
-            await DbContext.Treatments.AddAsync(treatment);
-            await DbContext.SaveChangesAsync();
-
-            //var result = await Sender.Send(createTreatmentcommand);
-
-            var treatmentId = treatment.Id; /*new TreatmentId(result.Value.TreatmentId);*/
-
+            var treatmentId = treatment.Id; 
 
             var command = new CreateTreatmentInviteCommand
             {
@@ -103,6 +104,7 @@ namespace I3lab.Works.IntegrationTests.Abstraction
                 InviterId = creator.Value
             };
             var inviteResult = await Sender.Send(command);
+
             return await DbContext.TreatmentInvites
                 .Where(ti => ti.Treatment.Id == treatmentId)
                 .FirstOrDefaultAsync();
@@ -110,3 +112,16 @@ namespace I3lab.Works.IntegrationTests.Abstraction
 
     }
 }
+
+
+//var createTreatmentcommand = new CreateTreatmentCommand
+//{
+//    CreatorId = creator.Value,
+//    PatientId = invitee.Value,
+//    TreatmentTitel = Faker.Name.JobTitle()
+//};
+
+//var result = await Sender.Send(createTreatmentcommand);
+
+
+//new TreatmentId(result.Value.TreatmentId);

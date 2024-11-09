@@ -17,6 +17,8 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.AddMessage
                 return Result.Fail("TreatmentStageChat not found");
 
             var result = treatmentStageChat.AddMessage(new MemberId(request.SenderId), request.Message);
+            if (result.IsFailed)
+                return result;
 
             await treatmentStageChatRepository.SaveChangesAsync();
 

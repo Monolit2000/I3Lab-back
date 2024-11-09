@@ -3,7 +3,7 @@
 //using Microsoft.EntityFrameworkCore;
 //using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-//namespace I3Lab.Treatments.Infrastructure.Domain.WorkChats
+//namespace I3Lab.Treatments.Infrastructure.Domain.TreatmentStageChats
 //{
 //    public class ChatMessageConfiguration : IEntityTypeConfiguration<Message>
 //    {

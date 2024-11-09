@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using I3Lab.BuildingBlocks.Infrastructure.Domain;
 using I3Lab.BuildingBlocks.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using I3Lab.Users.Infrastructure.Processing.Hangfire;
 
 namespace I3Lab.Users.Infrastructure.Startup
 {
@@ -43,6 +44,7 @@ namespace I3Lab.Users.Infrastructure.Startup
            .AddFluentEmail(configuration["Email:SenderEmail"], configuration["Email:Sender"])
            .AddSmtpSender(configuration["Email:Host"], configuration.GetValue<int>("Email:Port"), configuration["Email:Username"], configuration["Email:Password"]);
 
+            services.AddScoped<IHangFireCommandsScheduler, HangFireCommandsScheduler>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<IUserRepository, UserRepository>();

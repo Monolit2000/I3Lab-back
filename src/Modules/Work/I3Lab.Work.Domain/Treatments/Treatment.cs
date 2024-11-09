@@ -153,6 +153,13 @@ namespace I3Lab.Treatments.Domain.Treatments
             TreatmentPreview = fileId;
         }
 
+        public List<Member> GetActiveTreatmentMembers()
+        {
+            return TreatmentMembers
+                .Select(m => m.Member)
+                .ToList();
+        }
+
         private TreatmentMember GetTreatmentMember(MemberId memberId)
         {
             return TreatmentMembers.SingleOrDefault(x => x.IsActiveTreatmentMember(memberId));

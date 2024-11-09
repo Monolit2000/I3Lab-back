@@ -19,7 +19,7 @@ namespace I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus
             });
 
 
-            services.AddHostedService<MassageLoopPublisher>();
+            //services.AddHostedService<MassageLoopPublisher>();
 
             return services;
         }

@@ -14,7 +14,7 @@ namespace I3Lab.Treatments.Infrastructure.Persistence
     {
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<TreatmentFile> TreatmentFiles { get; set; }
-        public DbSet<TreatmentStageChat> WorkChats { get; set; }
+        public DbSet<TreatmentStageChat> TreatmentStageChats { get; set; }
         public DbSet<TreatmentInvite> TreatmentInvites { get; set; }
         public DbSet<InternalCommand> InternalCommands { get; set; }
         public DbSet<Treatments.Domain.TreatmentStages.TreatmentStage> TreatmentStages { get; set; }

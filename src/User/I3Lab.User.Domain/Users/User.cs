@@ -1,7 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Users.Domain.Users.Events;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
+
 
 namespace I3Lab.Users.Domain.Users
 {

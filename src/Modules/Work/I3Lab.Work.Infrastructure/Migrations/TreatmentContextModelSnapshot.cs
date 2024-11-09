@@ -333,13 +333,13 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
             modelBuilder.Entity("I3Lab.Treatments.Domain.TreatmentInvites.TreatmentInvite", b =>
                 {
-                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "Inviter")
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "InviterMember")
                         .WithMany()
                         .HasForeignKey("InviterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "MemberToInvite")
+                    b.HasOne("I3Lab.Treatments.Domain.Members.Member", "InvitedMember")
                         .WithMany()
                         .HasForeignKey("MemberToInviteId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -392,9 +392,9 @@ namespace I3Lab.Treatments.Infrastructure.Migrations
 
                     b.Navigation("InviteToken");
 
-                    b.Navigation("Inviter");
+                    b.Navigation("InvitedMember");
 
-                    b.Navigation("MemberToInvite");
+                    b.Navigation("InviterMember");
 
                     b.Navigation("Treatment");
 

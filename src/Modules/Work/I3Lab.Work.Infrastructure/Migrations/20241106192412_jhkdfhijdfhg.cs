@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace I3Lab.Treatments.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class sdhjgfjhfdsg : Migration
+    public partial class jhkdfhijdfhg : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
