@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Clinics.Application.DoctorCreationProposals
 {
-    public static class CreateDoctorCreationProposalError
+    public static class DoctorCreationProposalApplicationErrors
     {
         public static string ProposalAlreadyExist(string email) 
             => $"Proposal with this email '{email}' already isExist";
+        public static string ProposalNotExist => "Proposal not exist";
+
     }
 }

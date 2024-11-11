@@ -15,7 +15,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreateMessageResponce
 
             if (chat is null)
                 return Result.Fail("Chat not faund");
-
+            
             var result = chat.AddReplyToMessage(
                 new MemberId(request.SenderId),
                 new MessageId(request.MessageId),

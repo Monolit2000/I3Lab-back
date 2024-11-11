@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace I3Lab.Clinics.Application.Clnics
+namespace I3Lab.Clinics.Application.Clnics.GetAllClnicsByDoctorId
 {
-    public class ClnicDto
+    public class ClinicDto
     {
+       public Guid Id { get; set; }   
     }
 }

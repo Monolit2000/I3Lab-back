@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using I3lab.Works.IntegrationTests.Abstraction;
 using I3Lab.Treatments.Application.TreatmentInvites;
-using I3Lab.Treatments.Application.TreatmentInvites.AcceptTreatmentInvite;
 using I3Lab.Treatments.Application.TreatmentInvites.RejectTreatmentInvite;
 using Microsoft.EntityFrameworkCore;
 

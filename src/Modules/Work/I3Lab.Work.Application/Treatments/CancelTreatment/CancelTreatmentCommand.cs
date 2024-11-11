@@ -11,7 +11,6 @@ namespace I3Lab.Treatments.Application.Treatments.CancelTreatment
 
         public CancelTreatmentCommand()
         {
-                
         }
 
         public CancelTreatmentCommand(

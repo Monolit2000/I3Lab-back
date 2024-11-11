@@ -14,7 +14,7 @@ namespace I3Lab.Clinics.Application.DoctorCreationProposals.CreateDoctorCreation
 
             var isExist = await doctorCreationProposalRepository.ExistByEmailAsync(email, cancellationToken);
             if (isExist)
-                return Result.Fail(CreateDoctorCreationProposalError.ProposalAlreadyExist(email.Value));
+                return Result.Fail(DoctorCreationProposalApplicationErrors.ProposalAlreadyExist(email.Value));
 
             var doctorCreationProposal = DoctorCreationProposal.CreateNew(
                 DoctorName.Create(request.FirstName, request.LastName),

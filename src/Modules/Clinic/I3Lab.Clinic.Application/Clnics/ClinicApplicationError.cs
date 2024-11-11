@@ -10,5 +10,9 @@ namespace I3Lab.Clinics.Application.Clnics
     {
         public static string ClinicAlreadyExist(string clinicName)
             => $"Clinic {clinicName} already exist";
+
+        public static string ClinicNotFound=> "Clinic not found";
+
+
     }
 }

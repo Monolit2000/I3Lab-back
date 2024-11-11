@@ -18,6 +18,8 @@ namespace I3Lab.Clinics.Domain.Doctors
 
         Task<List<Doctor>> GetAllAsync();
 
+        Task SaveChangesAsync(CancellationToken cancellationToken = default);
+
         //Task<IEnumerable<Doctor>> GetAllByStatusAsync(ConfirmationStatus status);
     }
 }

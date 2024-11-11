@@ -6,6 +6,7 @@ using I3lab.Works.IntegrationTests.Abstraction;
 using I3Lab.Treatments.Domain.Treatments.Errors;
 using I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLink;
 
+
 namespace I3lab.Works.IntegrationTests.Treatments
 {
     public class JoinToTreatmentByInvitationLinkTests : BaseIntegrationTest

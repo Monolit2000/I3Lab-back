@@ -14,15 +14,15 @@ namespace I3Lab.Treatments.Application.Treatments.CreateTreatment
         public async Task<Result<TreatmentDto>> Handle(CreateTreatmentCommand request, CancellationToken cancellationToken)
         {
             if (!await tretmentRepository.IsNameUniqueAsync(request.TreatmentTitel))
-                return Result.Fail(StatusCodeErrors.NotUnique(TreatmentsErrors.NotUniqueName));
+                return Result.Fail(StatusCodeErrors.NotUnique(TreatmentApplicationErrors.NotUniqueName));
 
             var creator = await memberRepository.GetAsync(new MemberId(request.CreatorId));
             if (creator is null)
-                return Result.Fail(TreatmentsErrors.CreatorIsNull);
+                return Result.Fail(TreatmentApplicationErrors.CreatorIsNull);
 
             var patient = await memberRepository.GetAsync(new MemberId(request.PatientId));
             if (patient is null)
-                return Result.Fail(TreatmentsErrors.PatientIsNull);
+                return Result.Fail(TreatmentApplicationErrors.PatientIsNull);
 
             var treatment = Treatment.CreateNew(
                 creator, 

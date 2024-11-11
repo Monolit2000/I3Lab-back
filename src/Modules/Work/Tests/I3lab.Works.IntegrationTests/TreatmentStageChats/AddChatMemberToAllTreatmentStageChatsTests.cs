@@ -1,12 +1,8 @@
-﻿using Azure.Storage.Blobs.Models;
-using Castle.Core.Resource;
-using FluentAssertions;
+﻿using FluentAssertions;
 using I3lab.Works.IntegrationTests.Abstraction;
-using I3Lab.Clinics.Domain.Patients;
 using I3Lab.Treatments.Application.TreatmentStageChats.AddChatMemberToAllTreatmentStageChatsByTreatmentId;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using I3Lab.Clinics.Domain.DoctorCreationProposals;
+using I3Lab.Clinics.Domain.DoctorCreationProposals.Errors;
 using I3Lab.Clinics.Domain.Doctors;
 
 namespace I3Lab.Clinics.Domain.UnitTests.DoctorCreationProposals
@@ -44,7 +45,7 @@ namespace I3Lab.Clinics.Domain.UnitTests.DoctorCreationProposals
             var result = proposal.Confirm();
 
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == "Proposal cannot be approved.");
+            result.Errors.Should().ContainSingle(e => e.Message == DoctorCreationProposalsDomainErrors.ProposalCannotBeApproved);
         }
 
         [Fact]
@@ -67,7 +68,7 @@ namespace I3Lab.Clinics.Domain.UnitTests.DoctorCreationProposals
             var result = proposal.Reject();
 
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == "Proposal cannot be rejected.");
+            result.Errors.Should().ContainSingle(e => e.Message == DoctorCreationProposalsDomainErrors.ProposalCannotBeRejected);
         }
     }
 }

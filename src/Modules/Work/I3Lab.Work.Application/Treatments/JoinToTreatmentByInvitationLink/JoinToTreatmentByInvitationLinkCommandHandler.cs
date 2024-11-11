@@ -25,7 +25,6 @@ namespace I3Lab.Treatments.Application.Treatments.JoinToTreatmentByInvitationLin
             if (member is null)
                 return Result.Fail(TreatmentErrors.MemberNotFound);
 
-
             var result = treatment.AddToTreatmentMembers(member);
 
             if (result.IsFailed)

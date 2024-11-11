@@ -88,7 +88,7 @@ namespace I3lab.Treatments.IntegrationTests.Treatments
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.MemberNotFound);
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentApplicationErrors.MemberNotFound);
         }
 
         [Fact]
@@ -105,7 +105,7 @@ namespace I3lab.Treatments.IntegrationTests.Treatments
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.TreatmentNotFound);
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentApplicationErrors.TreatmentNotFound);
         }
     }
 }

@@ -37,5 +37,10 @@ namespace I3Lab.Clinics.Infrastructure.Domain.Doctors
         {
             return await context.Doctors.ToListAsync();
         }
+
+        public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -4,10 +4,10 @@ using I3Lab.Clinics.Domain.Clinics;
 
 namespace I3Lab.Clinics.Application.Clnics.CreateClnic
 {
-    public class CreateClnicCommandHandler(
-        IClinicRepository clinicRepository) : IRequestHandler<CreateClnicCommand, Result<ClnicDto>>
+    public class CreateCilnicCommandHandler(
+        IClinicRepository clinicRepository) : IRequestHandler<CreateClinicCommand, Result<ClinicDto>>
     {
-        public async Task<Result<ClnicDto>> Handle(CreateClnicCommand request, CancellationToken cancellationToken)
+        public async Task<Result<ClinicDto>> Handle(CreateClinicCommand request, CancellationToken cancellationToken)
         {
             var isClinicExist = await clinicRepository.ExistByName(ClinicName.Create(request.ClinicName));
 
@@ -22,7 +22,7 @@ namespace I3Lab.Clinics.Application.Clnics.CreateClnic
 
             await clinicRepository.SaveChangesAsync();
 
-            return new ClnicDto();
+            return new ClinicDto();
         }
     }
 }

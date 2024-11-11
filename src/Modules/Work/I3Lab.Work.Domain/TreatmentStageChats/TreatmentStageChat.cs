@@ -112,14 +112,36 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
         public Result EditMessage(MessageId chatMessageId, string newMessage)
         {
             var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
-
             if (message == null)
                 return Result.Fail("Message not found");
+
+            //var result = CheckRules(new MemberMustBeInChatRule(ChatMembers, member.Id));
+            //if (result.IsFailed)
+            //    return result;
 
             message.Edit(newMessage);
 
             return Result.Ok();
         }
+
+
+        public Result EditMessage(MessageId chatMessageId, MemberId editorId, string newMessage)
+        {
+            var message = Messages.FirstOrDefault(p => p.Id == chatMessageId);
+            if (message == null)
+                return Result.Fail("Message not found");
+
+            var result = CheckRules(
+                new MemberMustBeInChatRule(ChatMembers, editorId),
+                new MemberMustBeMessageOwnerRule(message, editorId));
+            if (result.IsFailed)
+                return result;
+
+            message.Edit(newMessage);
+
+            return Result.Ok();
+        }
+
 
         public Result AddChatMember(Member member)
         {

@@ -149,7 +149,7 @@ if (app.Environment.IsDevelopment())
         }
     });
 
-    //app.ClearDbContextMigrations();
+    app.ClearDbContextMigrations();
 
     app.ApplyUserContextMigrations();
     app.ApplyWorkContextMigrations();

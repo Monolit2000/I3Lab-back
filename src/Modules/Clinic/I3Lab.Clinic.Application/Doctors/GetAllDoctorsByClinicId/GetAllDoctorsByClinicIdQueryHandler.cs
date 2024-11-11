@@ -14,11 +14,13 @@ namespace I3Lab.Clinics.Application.Doctors.GetAllDoctorsByClinicId
             var clinic = await clinicRepository.GetByIdAsync(new ClinicId(request.ClinicId));
 
             if (clinic == null)
-                return Result.Fail(DoctorErrors.ClinicNotFaund);
+                return Result.Fail(DoctorApplicationErrors.ClinicNotFaund);
 
-            var doctorsDtoTasks = clinic.Doctors.Select(async x => {
+            var doctorsDtoTasks = clinic.Doctors.Select(async x => 
+            {
                 var doctor = await doctorRepository.GetByIdAsync(x.DoctorId);
                 return new DoctorDto(doctor);
+
             }).ToList();
 
             var doctorsDto = (await Task.WhenAll(doctorsDtoTasks)).ToList();

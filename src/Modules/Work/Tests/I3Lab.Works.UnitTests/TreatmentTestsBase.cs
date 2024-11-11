@@ -46,8 +46,10 @@ namespace I3Lab.Treatments.UnitTests
             }
         }
 
-        protected TreatmentTestData CreateTreatmentTestData(TreatmentTestDataOptions options)
+        protected TreatmentTestData CreateTreatmentTestData(TreatmentTestDataOptions options = null)
         {
+            options ??= new TreatmentTestDataOptions();
+
             // Treatment
             var creator = options.Creator ?? Member.Create(new MemberId(Guid.NewGuid()), "Doctor");
             var patient = options.Patient ?? Member.Create(new MemberId(Guid.NewGuid()), "Patient");

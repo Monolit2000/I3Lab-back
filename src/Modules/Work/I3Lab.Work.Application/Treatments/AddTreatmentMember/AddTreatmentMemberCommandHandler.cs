@@ -16,12 +16,12 @@ namespace I3Lab.Treatments.Application.Treatments.AddTreatmentMember
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
 
             if (treatment == null)
-                return Result.Fail(TreatmentsErrors.TreatmentNotFound);
+                return Result.Fail(TreatmentApplicationErrors.TreatmentNotFound);
 
             var member = await memberRepository.GetAsync(new MemberId(request.MemberId));
 
             if (member == null)
-                return Result.Fail(TreatmentsErrors.MemberNotFound);
+                return Result.Fail(TreatmentApplicationErrors.MemberNotFound);
 
             var result = treatment.AddToTreatmentMembers(member);
             if (result.IsFailed)

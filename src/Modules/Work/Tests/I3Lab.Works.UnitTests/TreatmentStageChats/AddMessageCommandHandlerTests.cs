@@ -5,6 +5,7 @@ using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using I3Lab.Treatments.Domain.TreatmentStageChats;
 using NSubstitute;
+using I3Lab.Treatments.Application.TreatmentStageChats;
 
 namespace I3Lab.Treatments.UnitTests.TreatmentStageChats
 {
@@ -34,7 +35,7 @@ namespace I3Lab.Treatments.UnitTests.TreatmentStageChats
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == "TreatmentStageChat not found");
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentStageChatsApplicationErrors.TreatmentStageChatNotFound);
             await _treatmentStageChatRepository.DidNotReceive().SaveChangesAsync();
         }
 

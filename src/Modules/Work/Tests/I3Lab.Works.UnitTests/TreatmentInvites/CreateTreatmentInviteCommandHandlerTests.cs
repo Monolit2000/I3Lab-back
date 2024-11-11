@@ -45,7 +45,7 @@ namespace I3Lab.Treatments.UnitTests.TreatmentInvites
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.TreatmentNotFound);
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentApplicationErrors.TreatmentNotFound);
         }
 
         [Fact]

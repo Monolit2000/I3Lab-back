@@ -25,7 +25,7 @@ namespace I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageC
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
             if (treatment is null)
             {
-                logger.LogWarning(TreatmentsErrors.TreatmentNotFound);
+                logger.LogWarning(TreatmentApplicationErrors.TreatmentNotFound);
                 return;
             }
 

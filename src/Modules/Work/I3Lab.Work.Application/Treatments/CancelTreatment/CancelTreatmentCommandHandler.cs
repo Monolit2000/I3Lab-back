@@ -12,7 +12,7 @@ namespace I3Lab.Treatments.Application.Treatments.CancelTreatment
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
             if (treatment is null)
-                return Result.Fail(TreatmentsErrors.TreatmentNotFound);
+                return Result.Fail(TreatmentApplicationErrors.TreatmentNotFound);
 
             var result = treatment.Cancel();
             if (result.IsFailed)

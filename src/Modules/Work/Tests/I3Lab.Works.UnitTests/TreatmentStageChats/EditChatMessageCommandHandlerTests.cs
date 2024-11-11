@@ -45,7 +45,7 @@ namespace I3Lab.Treatments.UnitTests.TreatmentStageChats
                 .With(x => x.EditedMessage, "EditedText")
                 .Create();
 
-            _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.WorkId)))
+            _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.TreatmentStageId)))
                 .Returns(chat);
 
             // Act
@@ -80,7 +80,7 @@ namespace I3Lab.Treatments.UnitTests.TreatmentStageChats
             var command = _fixture.Create<EditChatMessageCommand>();
             var chat = CreateTreatmentTestData(new TreatmentTestDataOptions()).TreatmentStageChat;
 
-            _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.WorkId)))
+            _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.TreatmentStageId)))
                 .Returns(chat);
 
             // Act
@@ -100,7 +100,7 @@ namespace I3Lab.Treatments.UnitTests.TreatmentStageChats
             var command = _fixture.Create<EditChatMessageCommand>();
             var chat = CreateTreatmentTestData(new TreatmentTestDataOptions()).TreatmentStageChat;
 
-            _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.WorkId)))
+            _treatmentStageChatRepository.GetByTreatmentStageIdAsync(Arg.Is<TreatmentStageId>(id => id == new TreatmentStageId(command.TreatmentStageId)))
                 .Returns(chat);
 
             // Act

@@ -16,7 +16,7 @@ namespace I3Lab.API.Modules.Clinics.Clinics
     {
 
         [HttpPost("createClnic")]
-        public async Task<IActionResult> CreateClnic(CreateClnicCommand createClnicCommand)
+        public async Task<IActionResult> CreateClnic(CreateClinicCommand createClnicCommand)
             => HandleResult(await mediator.Send(createClnicCommand));
 
         [HttpGet("getAllClinics")]

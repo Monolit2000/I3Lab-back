@@ -14,7 +14,7 @@ namespace I3Lab.Clinics.Application.Clnics.AddClinicDoctor
             var clinic = await clinicRepository.GetByIdAsync(new ClinicId(request.ClinicId));
 
             if (clinic is null)
-                return Result.Fail("Clinic not found");
+                return Result.Fail(ClinicApplicationError.ClinicNotFound);
 
             var result = clinic.AddDoctor(new DoctorId(request.DoctorId));
             if (result.IsFailed)

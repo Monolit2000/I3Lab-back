@@ -3,6 +3,7 @@ using I3Lab.Clinics.Domain.Doctors;
 using I3Lab.Clinics.Domain.DoctorCreationProposals.Events;
 using FluentResults;
 using System.Diagnostics.Contracts;
+using I3Lab.Clinics.Domain.DoctorCreationProposals.Errors;
 
 namespace I3Lab.Clinics.Domain.DoctorCreationProposals
 {
@@ -51,7 +52,7 @@ namespace I3Lab.Clinics.Domain.DoctorCreationProposals
         public Result Confirm()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
-                return Result.Fail("Proposal cannot be approved.");
+                return Result.Fail(DoctorCreationProposalsDomainErrors.ProposalCannotBeApproved);
 
             ConfirmationStatus = ConfirmationStatus.Confirmed;
             AddDomainEvent(new DoctorCreationProposalConfirmedDomainEvent(Id));
@@ -61,7 +62,7 @@ namespace I3Lab.Clinics.Domain.DoctorCreationProposals
         public Result Reject()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
-                return Result.Fail("Proposal cannot be rejected.");
+                return Result.Fail(DoctorCreationProposalsDomainErrors.ProposalCannotBeRejected);
 
             ConfirmationStatus = ConfirmationStatus.Rejected;
 

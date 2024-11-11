@@ -13,7 +13,7 @@ namespace I3Lab.Treatments.Application.Treatments.RemoveTreatmentMember
         {
             var treatment = await tretmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId), cancellationToken);
             if (treatment == null)
-                return Result.Fail(TreatmentsErrors.TreatmentNotFound);
+                return Result.Fail(TreatmentApplicationErrors.TreatmentNotFound);
 
             var result = treatment.RemoveTreatmentMember(
                 new MemberId(request.TreatmentMemberId), 

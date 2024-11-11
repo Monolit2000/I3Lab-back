@@ -148,6 +148,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3Lab.Treatments.Domain.Uni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "I3lab.Treatments.IntegrationTests", "src\Modules\Work\Tests\I3lab.Works.IntegrationTests\I3lab.Treatments.IntegrationTests.csproj", "{F619179D-7F69-402B-832B-5C77FA7EFBDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I3Lab.BuildingBlocks.TestInfrastructure", "src\BuildingBlocks\Tests\I3Lab.BuildingBlocks.TestInfrastructure\I3Lab.BuildingBlocks.TestInfrastructure\I3Lab.BuildingBlocks.TestInfrastructure.csproj", "{3BA773B3-3E94-4018-97B2-77962716E4E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -350,6 +352,10 @@ Global
 		{F619179D-7F69-402B-832B-5C77FA7EFBDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F619179D-7F69-402B-832B-5C77FA7EFBDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F619179D-7F69-402B-832B-5C77FA7EFBDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BA773B3-3E94-4018-97B2-77962716E4E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA773B3-3E94-4018-97B2-77962716E4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA773B3-3E94-4018-97B2-77962716E4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA773B3-3E94-4018-97B2-77962716E4E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -424,6 +430,7 @@ Global
 		{20E3A285-D765-4C15-8070-F03399B41D64} = {F74B9EB4-3AD9-438D-BD69-1B3E702016B1}
 		{3A2F5289-FD78-4DE6-95CF-878515534A68} = {CD76A713-83ED-46FB-8E3C-5720C1185163}
 		{F619179D-7F69-402B-832B-5C77FA7EFBDD} = {CD76A713-83ED-46FB-8E3C-5720C1185163}
+		{3BA773B3-3E94-4018-97B2-77962716E4E7} = {8A1C189E-3C5C-4C5F-BC92-3B71216E7E95}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E875D627-79AF-42D9-94D0-FD78D037AD2C}

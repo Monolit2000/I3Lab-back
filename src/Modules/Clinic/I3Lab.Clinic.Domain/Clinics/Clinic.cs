@@ -1,5 +1,6 @@
 ﻿using FluentResults;
 using I3Lab.BuildingBlocks.Domain;
+using I3Lab.Clinics.Domain.Clinics.Errors;
 using I3Lab.Clinics.Domain.Clinics.Events;
 using I3Lab.Clinics.Domain.Doctors;
 using System.Net.Http.Headers;
@@ -53,7 +54,7 @@ namespace I3Lab.Clinics.Domain.Clinics
         public Result AddDoctor(DoctorId doctorId)
         {
             if (Doctors.Any(d => d.DoctorId == doctorId))
-                return Result.Fail("Doctor already exists in this clinic.");
+                return Result.Fail(ClinicDomainErrors.DoctorAlreadyAdded);
 
             Doctors.Add(ClinicDoctor.Create(this.Id, doctorId));
             AddDomainEvent(new ClinicDoctorAddedDomainEvent(this.Id, doctorId));

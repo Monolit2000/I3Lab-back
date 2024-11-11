@@ -17,7 +17,6 @@ namespace I3Lab.Clinics.Domain.Doctors
 
         private Doctor() { }
 
-
         private Doctor(
             DoctorName name,
             Email email,

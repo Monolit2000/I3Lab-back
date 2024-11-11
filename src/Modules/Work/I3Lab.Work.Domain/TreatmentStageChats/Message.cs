@@ -10,8 +10,9 @@ namespace I3Lab.Treatments.Domain.TreatmentStageChats
     {
         public TreatmentStageChatId WorkChatId { get; private set; }
         public MemberId SenderId { get; private set; }
-        public TreatmentFile FileResponceId { get; private set; }
+
         public MessageId Id { get; private set; }
+        public TreatmentFile FileResponceId { get; private set; }
         public string MessageText { get; private set; }
         public bool IsEdited { get; private set; }
         public DateTime SentDate { get; private set; }

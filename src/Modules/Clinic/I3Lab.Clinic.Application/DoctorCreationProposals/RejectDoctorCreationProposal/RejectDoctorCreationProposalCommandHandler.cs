@@ -13,7 +13,7 @@ namespace I3Lab.Clinics.Application.DoctorCreationProposals.RejectDoctorCreation
                 .GetByIdAsync(new DoctorCreationProposalId(request.DoctorCreationProposalId), cancellationToken);
 
             if (proposal == null)
-                return Result.Fail("Proposal not exist");
+                return Result.Fail(DoctorCreationProposalApplicationErrors.ProposalNotExist);
 
             var result =  proposal.Reject();
 

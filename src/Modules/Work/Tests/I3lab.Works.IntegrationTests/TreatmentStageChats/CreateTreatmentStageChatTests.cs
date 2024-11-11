@@ -4,6 +4,7 @@ using I3Lab.Treatments.Application.TreatmentStageChats.CreatetreatmentStageChat;
 using I3Lab.Treatments.Domain.TreatmentStages;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace I3lab.Works.IntegrationTests.TreatmentStageChats
 {
     public class CreateTreatmentStageChatTests : BaseIntegrationTest
@@ -20,7 +21,7 @@ namespace I3lab.Works.IntegrationTests.TreatmentStageChats
             var creator = await CreateMemberAsync();
             var patient = await CreateMemberAsync();
             var treatment = await CreateTreatmentDbAsync(creator);
-            var stage = await CreateTreatmentStageAsync();
+            var stage = await CreateTreatmentStageAsync(treatment.Id);
 
             var command = new CreateTreatmentStageChatCommand(stage.Id.Value, treatment.Id.Value);
 

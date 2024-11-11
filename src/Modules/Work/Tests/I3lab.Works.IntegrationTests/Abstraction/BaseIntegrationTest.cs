@@ -1,21 +1,19 @@
 ﻿using Bogus;
-using I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite;
-using I3Lab.Treatments.Application.Treatments.CreateTreatment;
-using I3Lab.Treatments.Domain.Members;
-using I3Lab.Treatments.Domain.TreatmentInvites;
-using I3Lab.Treatments.Domain.Treatments;
-using I3Lab.Treatments.Domain.TreatmentStages;
-using I3Lab.Treatments.Infrastructure.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using I3Lab.Treatments.Domain.Members;
+using I3Lab.Treatments.Domain.Treatments;
+using I3Lab.Treatments.Domain.TreatmentStages;
 using Microsoft.Extensions.DependencyInjection;
-
+using I3Lab.Treatments.Domain.TreatmentInvites;
+using I3Lab.Treatments.Infrastructure.Persistence;
+using I3Lab.Treatments.Application.Treatments.CreateTreatment;
+using I3Lab.Treatments.Application.TreatmentInvites.CreateTreatmentInvite;
 
 namespace I3lab.Works.IntegrationTests.Abstraction
 {
-    public class BaseIntegrationTest : IClassFixture< IntegrationTestWebAppFactory>, IDisposable
+    public class BaseIntegrationTest : IClassFixture<IntegrationTestWebAppFactory>, IDisposable
     {
-
         protected readonly IServiceScope _scope;
         protected readonly ISender Sender;
         protected readonly TreatmentContext DbContext;

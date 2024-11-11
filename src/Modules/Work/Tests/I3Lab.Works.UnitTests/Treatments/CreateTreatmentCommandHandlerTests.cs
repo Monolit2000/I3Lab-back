@@ -35,7 +35,7 @@ namespace I3Lab.Treatments.UnitTests.Treatments
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.NotUniqueName);
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentApplicationErrors.NotUniqueName);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace I3Lab.Treatments.UnitTests.Treatments
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.CreatorIsNull);
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentApplicationErrors.CreatorIsNull);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace I3Lab.Treatments.UnitTests.Treatments
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == TreatmentsErrors.PatientIsNull);
+            result.Errors.Should().ContainSingle(e => e.Message == TreatmentApplicationErrors.PatientIsNull);
         }
 
         [Fact]

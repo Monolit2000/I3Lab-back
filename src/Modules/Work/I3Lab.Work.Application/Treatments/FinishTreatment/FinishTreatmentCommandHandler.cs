@@ -14,7 +14,7 @@ namespace I3Lab.Treatments.Application.Treatments.FinishTreatment
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
 
             if (treatment is null)
-                return Result.Fail(TreatmentsErrors.TreatmentNotFound);
+                return Result.Fail(TreatmentApplicationErrors.TreatmentNotFound);
 
             var result = treatment.Finish();
             if (result.IsFailed)

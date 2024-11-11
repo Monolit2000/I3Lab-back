@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace I3Lab.Treatments.Application.Treatments.ApplicationErrors
 {
-    public static class TreatmentsErrors
+    public static class TreatmentApplicationErrors
     {
         public static string NotUniqueName = "Treatments name is not unique";
 

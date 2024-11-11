@@ -12,10 +12,13 @@ namespace I3Lab.Clinics.Application.Doctors.CreateDoctor
         public async Task<Result<DoctorDto>> Handle(CreateDoctorCommand request, CancellationToken cancellationToken)
         {
             var propose = await doctorCreationProposalRepository.GetByIdAsync(request.DoctorCreationProposalId);
+            if (propose is null)
+                return Result.Fail(DoctorApplicationErrors.DoctorCreationProposalNotFound);
 
             var doctor = propose.CreateDoctor();
 
             await doctorRepository.AddAsync(doctor);
+            await doctorRepository.SaveChangesAsync();
 
             return new DoctorDto();
         }

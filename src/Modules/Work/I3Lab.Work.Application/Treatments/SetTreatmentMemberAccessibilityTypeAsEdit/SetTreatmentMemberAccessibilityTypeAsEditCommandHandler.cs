@@ -14,12 +14,12 @@ namespace I3Lab.Treatments.Application.Treatments.SetTreatmentMemberAccessibilit
         {
             var treatment = await treatmentRepository.GetByIdAsync(new TreatmentId(request.TreatmentId));
             if (treatment is null)
-                return Result.Fail(TreatmentsErrors.TreatmentNotFound);
+                return Result.Fail(TreatmentApplicationErrors.TreatmentNotFound);
 
             var member = await memberRepository.GetAsync(new MemberId(request.TreatmentMemberId));
 
             if (member == null)
-                return Result.Fail(TreatmentsErrors.MemberNotFound);
+                return Result.Fail(TreatmentApplicationErrors.MemberNotFound);
 
             var result = treatment.SetAccessibilityTypeAsEdit(member.Id);
             if (result.IsFailed)

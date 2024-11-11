@@ -113,7 +113,7 @@ namespace I3Lab.Treatments.Domain.UnitTests.TreatmentStageChats
             var newText = "Edited Message";
 
             // Act
-            var result = chat.EditMessage(message.Id, newText);
+            var result = chat.EditMessage(message.Id, sender, newText);
 
             // Assert
             result.IsSuccess.Should().BeTrue();
