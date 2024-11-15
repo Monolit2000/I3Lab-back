@@ -41,8 +41,18 @@ namespace I3Lab.Treatments.Domain.TreatmentFiles
             AddDomainEvent(new TreatmentFileCreatedDomainEvent(TreatmentId, Id));
         }
 
-        public static TreatmentFile CreateBaseOnTreatmentStage(TreatmentId treatmentId, TreatmentStageId treatmentStageId, ContentType type, BlobFileUrl url, double mdSize)
-            => new TreatmentFile(treatmentId, treatmentStageId, type, url, mdSize);
+        public static TreatmentFile CreateBaseOnTreatmentStage(
+            TreatmentId treatmentId, 
+            TreatmentStageId treatmentStageId, 
+            ContentType type, 
+            BlobFileUrl url, 
+            double mdSize)
+            => new TreatmentFile(
+                treatmentId, 
+                treatmentStageId, 
+                type, 
+                url, 
+                mdSize);
 
     }
 }

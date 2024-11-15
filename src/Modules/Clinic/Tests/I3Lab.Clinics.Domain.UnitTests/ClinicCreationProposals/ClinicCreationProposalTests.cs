@@ -2,6 +2,7 @@
 using I3Lab.Clinics.Domain.Clinics;
 using I3Lab.Clinics.Domain.ClinicCreationProposals;
 using I3Lab.Clinics.Domain.ClinicCreationProposals.Events;
+using I3Lab.Clinics.Domain.ClinicCreationProposals.Errors;
 
 
 namespace I3Lab.Clinics.Domain.UnitTests.ClinicCreationProposals
@@ -54,7 +55,7 @@ namespace I3Lab.Clinics.Domain.UnitTests.ClinicCreationProposals
 
             // Assert
             act.Should().Throw<InvalidOperationException>()
-                .WithMessage("Proposal cannot be confirmed.");
+                .WithMessage(ClinicCreationProposalDomainErrors.ProposalCannotBeConfirmed);
         }
 
         [Fact]
@@ -83,7 +84,7 @@ namespace I3Lab.Clinics.Domain.UnitTests.ClinicCreationProposals
 
             // Assert
             act.Should().Throw<InvalidOperationException>()
-                .WithMessage("Proposal cannot be rejected.");
+                .WithMessage(ClinicCreationProposalDomainErrors.ProposalCannotBeRejected);
         }
 
         [Fact]

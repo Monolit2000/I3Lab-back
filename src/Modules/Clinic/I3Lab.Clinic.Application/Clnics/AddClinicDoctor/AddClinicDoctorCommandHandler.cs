@@ -2,7 +2,6 @@
 using FluentResults;
 using I3Lab.Clinics.Domain.Clinics;
 using I3Lab.Clinics.Domain.Doctors;
-using MassTransit;
 
 namespace I3Lab.Clinics.Application.Clnics.AddClinicDoctor
 {

@@ -1,5 +1,6 @@
 ﻿using I3Lab.BuildingBlocks.Domain;
 using I3Lab.Clinics.Domain.ClinicCreationProposals;
+using I3Lab.Clinics.Domain.ClinicCreationProposals.Errors;
 using I3Lab.Clinics.Domain.ClinicCreationProposals.Events;
 
 namespace I3Lab.Clinics.Domain.Clinics
@@ -42,7 +43,7 @@ namespace I3Lab.Clinics.Domain.Clinics
         public void Confirm()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
-                throw new InvalidOperationException("Proposal cannot be confirmed.");
+                throw new InvalidOperationException(ClinicCreationProposalDomainErrors.ProposalCannotBeConfirmed);
 
             ConfirmationStatus = ConfirmationStatus.Confirmed;
 
@@ -52,7 +53,7 @@ namespace I3Lab.Clinics.Domain.Clinics
         public void Reject()
         {
             if (ConfirmationStatus != ConfirmationStatus.Validation)
-                throw new InvalidOperationException("Proposal cannot be rejected.");
+                throw new InvalidOperationException(ClinicCreationProposalDomainErrors.ProposalCannotBeRejected);
 
             ConfirmationStatus = ConfirmationStatus.Rejected;
 

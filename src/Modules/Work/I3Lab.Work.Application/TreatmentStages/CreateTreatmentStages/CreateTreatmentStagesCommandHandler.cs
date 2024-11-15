@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using I3Lab.Treatments.Domain.Members;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages;
-using TreatmentStage = I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage;
+//using TreatmentStage = I3Lab.Treatments.Domain.TreatmentStages.TreatmentStage;
 
 namespace I3Lab.Treatments.Application.Works.CreateWorks
 {

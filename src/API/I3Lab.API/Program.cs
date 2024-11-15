@@ -24,6 +24,7 @@ using I3Lab.Treatments.Infrastructure.Persistence.Extensions;
 using I3Lab.BuildingBlocks.Infrastructure.Configurations.EventBus;
 using Serilog.Filters;
 using I3Lab.Treatments.Infrastructure.Processing.Hangfire;
+using I3Lab.API.Modules.Treatments.TreatmentStageChats.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -164,6 +165,8 @@ app.UseHttpsRedirection();
 app.MapHealthChecks("health");
 
 //app.UseSerilogRequestLogging();
+
+//app.MapHub<TreatmentStageChatHub>("/treatmentStageChatHub");
 
 app.MapControllers();
 

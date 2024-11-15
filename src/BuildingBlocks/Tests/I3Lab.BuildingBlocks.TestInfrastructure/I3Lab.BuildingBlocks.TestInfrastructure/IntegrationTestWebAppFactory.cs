@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using Xunit;
+using Hangfire;
 using Hangfire.MemoryStorage;
 using Testcontainers.PostgreSql;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,6 @@ using I3Lab.Treatments.Infrastructure.Persistence;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using I3Lab.Modules.BlobFailes.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Xunit;
 
 
 namespace I3Lab.BuildingBlocks.TestInfrastructure

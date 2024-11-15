@@ -5,8 +5,7 @@ using I3Lab.Treatments.Application.TreatmentStageChats.AddMessage;
 
 namespace I3Lab.API.Modules.Treatments.TreatmentStageChats.Hubs
 {
-
-    public class ChatHub(
+    public class TreatmentStageChatHub(
         IMediator mediator,
         IInMemoryCacheService cache) : Hub<ITreatmentChatClient>
     {
@@ -17,7 +16,6 @@ namespace I3Lab.API.Modules.Treatments.TreatmentStageChats.Hubs
             await cache.SetAsync(Context.ConnectionId, GroupId);
 
             await Clients.Group(GroupId).ReceiveMessage("Admin", $"{userName} joined to chat");
-
         }
 
         public async Task SendMessage(Guid userId, Guid treatmentSageId, string message)

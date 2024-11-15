@@ -6,8 +6,6 @@ using I3Lab.Treatments.Domain.TreatmentStageChats;
 using I3Lab.Treatments.Domain.Treatments;
 using I3Lab.Treatments.Domain.TreatmentStages.Errors;
 using I3Lab.Treatments.Domain.TreatmentStages.Events;
-using I3Lab.Treatments.Domain.TreatmentStages;
-using System.Data;
 
 namespace I3Lab.Treatments.Domain.TreatmentStages
 {

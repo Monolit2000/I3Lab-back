@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using I3Lab.Clinics.Domain.Clinics;
+using I3Lab.Clinics.Domain.Clinics.Errors;
 using I3Lab.Clinics.Domain.Clinics.Events;
 using I3Lab.Clinics.Domain.Doctors;
 
@@ -57,7 +58,7 @@ namespace I3Lab.Clinics.Domain.UnitTests.Clinics
 
             // Assert
             result.IsFailed.Should().BeTrue();
-            result.Errors.Should().ContainSingle(e => e.Message == "Doctor already exists in this clinic.");
+            result.Errors.Should().ContainSingle(e => e.Message == ClinicDomainErrors.DoctorAlreadyAdded);
         }
 
         [Fact]
